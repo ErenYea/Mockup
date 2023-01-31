@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PageTitle from "components/UiElements/PageTitle/PageTitle";
 import Container from "components/UiElements/Container/Container";
 import { Grid, Cell } from "baseui/layout-grid";
+import ApexCharts from "./boxPlot";
 type Props = {};
 import { Block } from "baseui/block";
 // import InformationBox from "pages/workshop/informationBoxv2";
@@ -134,6 +135,7 @@ const index = (props: Props) => {
             <InformationBox args={jsonData[Index]} />
           </div>
           <Pie args={jsonData[Index]} />
+          <ApexCharts args={jsonData[Index]} />
         </Block>
         {/* <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
           <Cell span={12}>
