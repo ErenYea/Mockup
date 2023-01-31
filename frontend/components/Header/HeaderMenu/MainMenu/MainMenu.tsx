@@ -11,7 +11,7 @@ const menuItems = [
   {
     id: 2,
     label: "Workflow Optimizer",
-    path: "/apps",
+    path: "/workflowoptimizer",
   },
   {
     id: 3,
@@ -41,12 +41,12 @@ const menuItems = [
   {
     id: 7,
     label: "UI Elements",
-    path: "/workflowoptimizer",
+    path: "/uielements",
   },
   {
     id: 8,
-    label: "Pricing",
-    path: "/pricing",
+    label: "Demand Forcasting",
+    path: "/demandforcasting",
   },
   {
     id: 9,
