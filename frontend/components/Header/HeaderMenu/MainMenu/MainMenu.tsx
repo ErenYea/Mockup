@@ -41,7 +41,7 @@ const menuItems = [
   {
     id: 7,
     label: "UI Elements",
-    path: "/uielements",
+    path: "/workflowoptimizer",
   },
   {
     id: 8,
