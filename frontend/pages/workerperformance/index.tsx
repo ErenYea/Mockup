@@ -8,6 +8,7 @@ import { Block } from "baseui/block";
 // import InformationBox from "pages/workshop/informationBoxv2";
 import InformationBox from "./informationBox";
 import Pie from "pages/charts/pie";
+import { LineChart } from "pages/workshop/lineChart";
 
 const index = (props: Props) => {
   const jsonData = [
@@ -130,12 +131,19 @@ const index = (props: Props) => {
             /> */}
           </div>
         </Block>
-        <Block>
+        <Block paddingBottom="20px">
           <div className="pt-6 flex w-full bg-white justify-center items-center border-white-200 rounded-lg mx-auto">
             <InformationBox args={jsonData[Index]} />
           </div>
+        </Block>
+        <Block paddingBottom="20px">
           <Pie args={jsonData[Index]} />
+        </Block>
+        <Block paddingBottom="20px">
           <ApexCharts args={jsonData[Index]} />
+        </Block>
+        <Block paddingBottom="20px">
+          <LineChart args={jsonData[Index]} />
         </Block>
         {/* <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
           <Cell span={12}>
