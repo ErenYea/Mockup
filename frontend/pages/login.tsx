@@ -1,10 +1,10 @@
-import { NextPage } from 'next';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { IoLogoFacebook, IoLogoTwitter } from 'react-icons/io';
-import { Block } from 'baseui/block';
-import { Button } from 'baseui/button';
-import Container from '../components/UiElements/Container/Container';
+import { NextPage } from "next";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { IoLogoFacebook, IoLogoTwitter } from "react-icons/io";
+import { Block } from "baseui/block";
+import { Button } from "baseui/button";
+import Container from "../components/UiElements/Container/Container";
 
 const Login: NextPage<{}> = () => {
   const router = useRouter();
@@ -21,11 +21,11 @@ const Login: NextPage<{}> = () => {
           overrides={{
             Block: {
               style: {
-                minHeight: 'calc(100vh - 213px)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
+                minHeight: "calc(100vh - 213px)",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
               },
             },
           }}
@@ -38,7 +38,7 @@ const Login: NextPage<{}> = () => {
                   return {
                     ...$theme.typography.font1250,
                     fontWeight: 700,
-                    marginBottom: '30px',
+                    marginBottom: "30px",
                   };
                 },
               },
@@ -48,27 +48,30 @@ const Login: NextPage<{}> = () => {
           </Block>
 
           <Button
-            onClick={() => router.push('/')}
+            onClick={() => {
+              sessionStorage.setItem("user", "1");
+              router.push("/");
+            }}
             startEnhancer={() => <IoLogoFacebook size="1.25rem" />}
             overrides={{
               BaseButton: {
                 style: ({ $theme }) => {
                   return {
                     ...$theme.typography.font250,
-                    width: '100%',
-                    maxWidth: '260px',
-                    borderTopLeftRadius: '4px',
-                    borderTopRightRadius: '4px',
-                    borderBottomLeftRadius: '4px',
-                    borderBottomRightRadius: '4px',
-                    marginTop: '10px',
-                    justifyContent: 'flex-start',
-                    paddingLeft: '25px',
-                    paddingRight: '25px',
-                    backgroundColor: '#4267B2',
-                    transition: 'all 0.3s ease',
-                    ':hover': {
-                      backgroundColor: '#4267B2',
+                    width: "100%",
+                    maxWidth: "260px",
+                    borderTopLeftRadius: "4px",
+                    borderTopRightRadius: "4px",
+                    borderBottomLeftRadius: "4px",
+                    borderBottomRightRadius: "4px",
+                    marginTop: "10px",
+                    justifyContent: "flex-start",
+                    paddingLeft: "25px",
+                    paddingRight: "25px",
+                    backgroundColor: "#4267B2",
+                    transition: "all 0.3s ease",
+                    ":hover": {
+                      backgroundColor: "#4267B2",
                       opacity: 0.95,
                     },
                   };
@@ -80,26 +83,26 @@ const Login: NextPage<{}> = () => {
           </Button>
 
           <Button
-            onClick={() => router.push('/')}
+            onClick={() => router.push("/")}
             startEnhancer={() => <IoLogoTwitter size="1.25rem" />}
             overrides={{
               BaseButton: {
                 style: ({ $theme }) => {
                   return {
                     ...$theme.typography.font250,
-                    backgroundColor: '#1DA1F2',
-                    width: '100%',
-                    maxWidth: '260px',
-                    borderTopLeftRadius: '4px',
-                    borderTopRightRadius: '4px',
-                    borderBottomLeftRadius: '4px',
-                    borderBottomRightRadius: '4px',
-                    marginTop: '10px',
-                    justifyContent: 'flex-start',
-                    paddingLeft: '25px',
-                    paddingRight: '25px',
-                    ':hover': {
-                      backgroundColor: '#1DA1F2',
+                    backgroundColor: "#1DA1F2",
+                    width: "100%",
+                    maxWidth: "260px",
+                    borderTopLeftRadius: "4px",
+                    borderTopRightRadius: "4px",
+                    borderBottomLeftRadius: "4px",
+                    borderBottomRightRadius: "4px",
+                    marginTop: "10px",
+                    justifyContent: "flex-start",
+                    paddingLeft: "25px",
+                    paddingRight: "25px",
+                    ":hover": {
+                      backgroundColor: "#1DA1F2",
                       opacity: 0.95,
                     },
                   };

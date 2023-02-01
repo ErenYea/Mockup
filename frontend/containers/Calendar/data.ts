@@ -5,64 +5,64 @@ function subtractDateByDay(day) {
 export const events = [
   {
     id: 0,
-    title: 'All Day Event very long title',
+    title: "All Day Event very long title",
     allDay: true,
     start: subtractDateByDay(5),
     end: subtractDateByDay(5),
   },
   {
     id: 1,
-    title: 'Long Event',
+    title: "Long Event",
     start: subtractDateByDay(3),
     end: subtractDateByDay(2),
   },
 
   {
     id: 2,
-    title: 'DTS STARTS',
+    title: "DTS STARTS",
     start: subtractDateByDay(4),
     end: subtractDateByDay(3),
   },
 
   {
     id: 4,
-    title: 'Some Event',
+    title: "Some Event",
     start: subtractDateByDay(7),
     end: subtractDateByDay(6),
   },
   {
     id: 5,
-    title: 'Conference',
+    title: "Conference",
     start: subtractDateByDay(10),
     end: subtractDateByDay(7),
-    desc: 'Big conference for important people',
+    desc: "Big conference for important people",
   },
   {
     id: 6,
-    title: 'Meeting',
+    title: "Meeting",
     start: subtractDateByDay(3),
     end: subtractDateByDay(3),
-    desc: 'Pre-meeting meeting, to prepare for the meeting',
+    desc: "Pre-meeting meeting, to prepare for the meeting",
   },
 
   {
     id: 14,
-    title: 'Today',
+    title: "Today",
     start: new Date(new Date().setHours(new Date().getHours() - 3)),
     end: new Date(new Date().setHours(new Date().getHours() + 3)),
   },
 
   {
     id: 21,
-    title: 'Phone Interview',
+    title: "Phone Interview",
     start: subtractDateByDay(13),
     end: subtractDateByDay(13),
   },
 
   {
     id: 23,
-    title: 'Go to the gym',
-    start: subtractDateByDay(15),
-    end: subtractDateByDay(15),
+    title: "Go to the gym",
+    start: new Date(2023, 1, 1, 8),
+    end: new Date(2023, 1, 1, 9),
   },
 ];
