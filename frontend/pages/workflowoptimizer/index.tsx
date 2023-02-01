@@ -75,31 +75,6 @@ const index = (props: Props) => {
         <Block paddingTop={["0", "0", "0", "40px"]}>
           <Grid gridColumns={12} gridGutters={0} gridMargins={0} gridGaps={2}>
             <div className="flex flex-col">
-              <div className="w-full flex flex-col items-center">
-                <Block
-                  paddingBottom="20px"
-                  right="0px"
-                  className={"w-1/2 flex justify-center items-center ff fg"}
-                >           
-                 <label className="m-2 text-xl font-semibold text-customDarkBlue">
-                    Select Worker
-                 </label>
-                  <select
-                    id="dropdown"
-                    // onChange={showInfo}
-                    className="w-1/2 p-2.5 text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-                  >
-                    {data.map((val, ind) => {
-                      return (
-                        <option value={ind} key={ind} className="font-bold">
-                          {val.name}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  {/* <PersonDropdown args={data} /> */}
-                </Block>
-              </div>
               <div className="flex flex-row items-start mx-auto space-x-2">
                 {/* <Cell span={[12, 12, 3]}> */}
                 <div className="w-1/4 h-full rounded-l-lg ">
@@ -115,7 +90,6 @@ const index = (props: Props) => {
                         <th className="text-lg text-customDarkBlue font-black p-2 border-b-2 border-customDarkBlue">
                           Quantity
                         </th>
-
                       </tr>
                       {tasks?.map((task, i) => (
                         <tr
@@ -125,7 +99,7 @@ const index = (props: Props) => {
                           <td className="p-1 border-r-2 border-l-2 border-customDarkBlue">
                             {task?.name}
                           </td>
-                          <td className="border-r-2 border-l-2 border-customDarkBlue">
+                          <td className="border-r-2 border-l-2 pl-2 border-customDarkBlue">
                             {task?.order}
                           </td>
                         </tr>
@@ -148,7 +122,6 @@ const index = (props: Props) => {
                 {/* </Cell> */}
               </div>
             </div>
-
           </Grid>
         </Block>
       </Container>
