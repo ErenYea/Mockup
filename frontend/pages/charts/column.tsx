@@ -7,7 +7,7 @@ import Container from "components/UiElements/Container/Container";
 import ChartMenu from "components/SideMenu/ChartMenu";
 import ApexChart from "components/UiElements/ApexChart/ApexChart";
 
-const Column: NextPage<{}> = () => {
+const Column: NextPage<{}> = (props) => {
   const [state, setState] = useState<any>({
     series: [
       {

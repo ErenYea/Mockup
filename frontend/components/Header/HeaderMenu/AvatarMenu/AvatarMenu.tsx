@@ -1,14 +1,14 @@
-import React from 'react';
-import Router from 'next/router';
-import { Block } from 'baseui/block';
-import { Avatar } from 'baseui/avatar';
-import { StatefulPopover } from 'baseui/popover';
-import ActiveLink from '../../../UiElements/NavLink/NavLink';
-import MenuWrapper, { Line, MenuItem } from './AvatarMenu.styled';
+import React from "react";
+import Router from "next/router";
+import { Block } from "baseui/block";
+import { Avatar } from "baseui/avatar";
+import { StatefulPopover } from "baseui/popover";
+import ActiveLink from "../../../UiElements/NavLink/NavLink";
+import MenuWrapper, { Line, MenuItem } from "./AvatarMenu.styled";
 import {
   useThemeSwitcherCtx,
   THEME,
-} from '../../../../contexts/theme/theme.provider';
+} from "../../../../contexts/theme/theme.provider";
 
 type AvatarMenuType = {
   name?: string;
@@ -43,14 +43,19 @@ const Menu = ({ onClick }: MenuType) => {
           onClick={() => {
             let getTheme = theme === THEME.light ? THEME.dark : THEME.light;
             setTheme(getTheme);
-            localStorage.setItem('theme', getTheme);
+            localStorage.setItem("theme", getTheme);
           }}
         >
-          {theme === THEME.light ? 'Dark Mode' : 'Light Mode'}
+          {theme === THEME.light ? "Dark Mode" : "Light Mode"}
         </MenuItem>
       </li>
       <Line></Line>
-      <li onClick={() => Router.push('/login')}>
+      <li
+        onClick={() => {
+          sessionStorage.removeItem("user");
+          Router.push("/login");
+        }}
+      >
         <MenuItem onClick={onClick}>Logout</MenuItem>
       </li>
     </MenuWrapper>
@@ -71,7 +76,7 @@ const AvatarMenu = ({
       ) : (
         <StatefulPopover
           content={<Menu onClick={onClick} />}
-          placement={placement ? placement : 'bottomRight'}
+          placement={placement ? placement : "bottomRight"}
           overrides={{
             Inner: {
               style: ({ $theme }) => {
@@ -83,8 +88,8 @@ const AvatarMenu = ({
           }}
           showArrow
         >
-          <Block overrides={{ Block: { style: { cursor: 'pointer' } } }}>
-            <Avatar src={src} name={name ? name : 'Jon Doe'} size="scale1000" />
+          <Block overrides={{ Block: { style: { cursor: "pointer" } } }}>
+            <Avatar src={src} name={name ? name : "Jon Doe"} size="scale1000" />
           </Block>
         </StatefulPopover>
       )}

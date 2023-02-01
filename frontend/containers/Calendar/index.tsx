@@ -19,6 +19,7 @@ function CalendarApp() {
   const [state, setState] = React.useState({
     events: events,
   });
+  console.log("state", state);
   function moveEvent({
     event,
     start,
