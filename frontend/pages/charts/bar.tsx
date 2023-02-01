@@ -11,19 +11,23 @@ const Bar: NextPage<{}> = () => {
   const [state, setState] = useState<any>({
     series: [
       {
-        name: "Toyata",
+        name: "Ford",
         data: [44, 55, 41, 37, 22, 43, 21],
       },
       {
-        name: "Honda",
+        name: "Nissan",
         data: [53, 32, 33, 52, 13, 43, 32],
       },
       {
-        name: "Tesla",
+        name: "Hyundai",
         data: [12, 17, 11, 9, 15, 11, 20],
       },
       {
-        name: "BMW",
+        name: "Honda",
+        data: [9, 7, 5, 8, 6, 9, 4],
+      },
+      {
+        name: "Toyota",
         data: [9, 7, 5, 8, 6, 9, 4],
       },
       // {
@@ -66,16 +70,16 @@ const Bar: NextPage<{}> = () => {
           "January",
         ],
         labels: {
-          formatter: function (val: number) {
-            return val + "K";
-          },
+          // formatter: function (val: number) {
+          //   return val + "K";
+          // },
         },
       },
       tooltip: {
         y: {
-          formatter: function (val: number) {
-            return val + "K";
-          },
+          // formatter: function (val: number) {
+          //   return val + "K";
+          // },
         },
       },
       fill: {

@@ -5,6 +5,7 @@ import Container from "components/UiElements/Container/Container";
 import { Grid, Cell } from "baseui/layout-grid";
 import { Block } from "baseui/block";
 import PersonDropdown from "./personDropdown";
+import Head from "next/head";
 type Props = {};
 
 const index = (props: Props) => {
@@ -29,97 +30,102 @@ const index = (props: Props) => {
   ];
   var data = [
     {
-      name: "Sam Curren",
+      name: "Sam Davidson",
       desc: "Machine Learning Engineer",
       image: "/images/person1.jpg",
     },
     {
-      name: "Michael Jordan",
+      name: "Dennis Ray",
       desc: "Frontend Developer",
       image: "/images/person1.jpg",
     },
     {
-      name: "George Bills",
+      name: "Gilbert Holland",
       desc: "Backend Developer",
-      image: "/images/person1.jpg",
-    },
-    {
-      name: "Harry Callum",
-      desc: "DevOps Engineer",
-      image: "/images/person1.jpg",
-    },
-    {
-      name: "Ivan Gilbert",
-      desc: "iOS Developer",
-      image: "/images/person1.jpg",
-    },
-    {
-      name: "Felix Adams",
-      desc: "Senior Developer",
-      image: "/images/person1.jpg",
-    },
-    {
-      name: "Roberto Arim",
-      desc: "Nodejs Developer",
       image: "/images/person1.jpg",
     },
   ];
   return (
     <>
+      <Head>
+        <title>Dashboard | Workflow Optimizer</title>
+      </Head>
       <PageTitle title={"WorkFlow Optimizer"} subtitle={""} />
       <Container>
         <Block paddingTop={["0", "0", "0", "40px"]}>
           <Grid gridColumns={12} gridGutters={0} gridMargins={0} gridGaps={2}>
-            <Cell span={[12, 12, 3]}>
-              <div className="w-full h-full rounded-l-lg text-customDarkBlue bg-customBlue  border-customDarkBlue">
-                <h3 className="m-4 pb-2 text-xl font-black border-b-2 hover:text-2xl duration-100 cursor-pointer">
-                  Expected Upcoming Tasks
-                </h3>
-                <div className="mb-2">
-                  <table className="mx-auto gap-3">
-                    <tr className="">
-                      <th className="text-lg text-customDarkBlue font-black p-2 border-b-2 border-r-2 border-customDarkBlue">
-                        Car Company
-                      </th>
-                      <th className="text-lg text-customDarkBlue font-black p-2 border-b-2 border-customDarkBlue">
-                        Quantity
-                      </th>
-                    </tr>
-                    {tasks?.map((task, i) => (
-                      <tr
-                        key={i}
-                        className="hover:text-xl hover:text-gray-600 hover:font-bold duration-100 cursor-pointer"
-                      >
-                        <td className="p-1 border-r-2 border-l-2 border-customDarkBlue">
-                          {task?.name}
-                        </td>
-                        <td className="border-r-2 border-l-2 border-customDarkBlue">
-                          {task?.order}
-                        </td>
-                      </tr>
-                    ))}
-                  </table>
-                </div>
+            <div className="flex flex-col">
+              <div className="w-full flex flex-col items-center">
+                <Block
+                  paddingBottom="20px"
+                  right="0px"
+                  className={"w-1/2 flex justify-center items-center ff fg"}
+                >           
+                 <label className="m-2 text-xl font-semibold text-customDarkBlue">
+                    Select Worker
+                 </label>
+                  <select
+                    id="dropdown"
+                    // onChange={showInfo}
+                    className="w-1/2 p-2.5 text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
+                  >
+                    {data.map((val, ind) => {
+                      return (
+                        <option value={ind} key={ind} className="font-bold">
+                          {val.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  {/* <PersonDropdown args={data} /> */}
+                </Block>
               </div>
-            </Cell>
-            <Cell span={[12, 12, 9]}>
-              <Block
-                paddingBottom="20px"
-                right="0px"
-                className={"flex  items-end justify-end"}
-              >
-                <PersonDropdown args={data} />
-              </Block>
+              <div className="flex flex-row items-start mx-auto space-x-2">
+                {/* <Cell span={[12, 12, 3]}> */}
+                <div className="w-1/4 h-full rounded-l-lg ">
+                  <h3 className="m-4 pb-2 text-xl font-black border-b-2 hover:text-2xl duration-100 cursor-pointer">
+                    Expected Upcoming Tasks
+                  </h3>
+                  <div className="mb-2">
+                    <table className="mx-auto gap-3">
+                      <tr className="">
+                        <th className="text-lg text-customDarkBlue font-black p-2 border-b-2 border-r-2 border-customDarkBlue">
+                          Car Company
+                        </th>
+                        <th className="text-lg text-customDarkBlue font-black p-2 border-b-2 border-customDarkBlue">
+                          Quantity
+                        </th>
+                      </tr>
+                      {tasks?.map((task, i) => (
+                        <tr
+                          key={i}
+                          className="hover:text-xl hover:text-gray-600 hover:font-bold duration-100 cursor-pointer"
+                        >
+                          <td className="p-1 border-r-2 border-l-2 border-customDarkBlue">
+                            {task?.name}
+                          </td>
+                          <td className="border-r-2 border-l-2 border-customDarkBlue">
+                            {task?.order}
+                          </td>
+                        </tr>
+                      ))}
+                    </table>
+                  </div>
+                </div>
+                {/* </Cell> */}
+                {/* <Cell span={[12, 12, 9]}> */}
 
-              <Block
-                paddingTop={["10px", "20px", "30px", "0"]}
-                minHeight="500px"
-                height="100%"
-                maxHeight="700px"
-              >
-                <Calendar />
-              </Block>
-            </Cell>
+                <Block
+                  paddingTop={["10px", "20px", "30px", "0"]}
+                  minHeight="500px"
+                  height="100%"
+                  maxHeight="700px"
+                >
+                  <Calendar />
+                </Block>
+                {/* </Cell> */}
+              </div>
+            </div>
           </Grid>
         </Block>
       </Container>

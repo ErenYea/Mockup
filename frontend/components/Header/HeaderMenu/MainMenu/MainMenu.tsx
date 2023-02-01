@@ -5,7 +5,7 @@ import Menu, { MenuItem, MenuLink } from "./MainMenu.styled";
 const menuItems = [
   {
     id: 1,
-    label: "Home",
+    label: "Dashboard",
     path: "/",
   },
   {

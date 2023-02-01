@@ -27,9 +27,9 @@ const Menu = ({ onClick }: MenuType) => {
   return (
     <MenuWrapper>
       <li>
-        <ActiveLink activeClassName="active" href="/">
+        {/* <ActiveLink activeClassName="active" href="/">
           <MenuItem onClick={onClick}>Dashboard</MenuItem>
-        </ActiveLink>
+        </ActiveLink> */}
       </li>
       {/* <Line></Line> */}
       {/* <li>
@@ -49,15 +49,18 @@ const Menu = ({ onClick }: MenuType) => {
           {theme === THEME.light ? "Dark Mode" : "Light Mode"}
         </MenuItem>
       </li> */}
-      <Line></Line>
+      
       <li
         onClick={() => {
           sessionStorage.removeItem("user");
           Router.push("/login");
         }}
       >
-        <MenuItem onClick={onClick}>Logout</MenuItem>
+        <ActiveLink activeClassName="active" href="/login">
+         <MenuItem onClick={onClick}>Logout</MenuItem>
+        </ActiveLink>
       </li>
+      <Line></Line>
     </MenuWrapper>
   );
 };

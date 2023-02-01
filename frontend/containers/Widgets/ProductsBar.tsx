@@ -11,9 +11,9 @@ const ProductsBar = ({ className, labels, products }: ProductsBarType) => {
   const chartOptions = {
     options: {
       fill: {
-        colors: ["#0070F3", "#7928CA", "#FF0080"],
+        colors: ["#FF0080", "#7928CA", "#B3536D","#B8B154","#43CA16"],
       },
-      colors: ["#0070F3", "#7928CA", "#FF0080"],
+      colors:["#FF0080", "#7928CA", "#B3536D","#B8B154","#43CA16"],
       chart: {
         toolbar: {
           show: true,
@@ -22,7 +22,9 @@ const ProductsBar = ({ className, labels, products }: ProductsBarType) => {
       labels,
       dataLabels: {
         style: {
-          fontSize: "30px",
+          fontSize: "48px",
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          fontWeight: 'bold',
         },
       },
     },

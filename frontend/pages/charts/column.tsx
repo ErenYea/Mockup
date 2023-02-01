@@ -11,13 +11,13 @@ const Column: NextPage<{}> = (props) => {
   const [state, setState] = useState<any>({
     series: [
       {
-        name: "Product",
-        data: [28, 29, 33, 36, 32, 32, 33],
+        name: "Satisfaction Percentage",
+        data: [91, 89, 92, 88, 93, 93, 94],
       },
-      {
-        name: "View",
-        data: [12, 11, 14, 18, 17, 13, 13],
-      },
+      // {
+      //   name: "View",
+      //   data: [12, 11, 14, 18, 17, 13, 13],
+      // },
     ],
     options: {
       chart: {
@@ -32,7 +32,13 @@ const Column: NextPage<{}> = (props) => {
       },
       colors: ["#006ff3", "#39a66d"],
       dataLabels: {
-        enabled: true,
+        enabled:true,
+        dropShadow:{
+          enabled: false,
+        },
+        formatter: function(val) {
+          return val ? val.toFixed(1) + '%' : ''
+        }
       },
       stroke: {
         curve: "smooth",
@@ -45,11 +51,23 @@ const Column: NextPage<{}> = (props) => {
         size: 1,
       },
       xaxis: {
-        categories: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"],
+        categories: ["2018", "2019", "2020", "2021", "2022"],
       },
       yaxis: {
+        labels: {
+          formatter: function(val) {
+            return val + '%'
+          }
+        },
         min: 5,
-        max: 40,
+        max: 100,
+      },
+      tooltip: {
+        y:{
+            formatter: function(val) {
+                return val + '%'
+              }
+        }
       },
       legend: {
         position: "top",

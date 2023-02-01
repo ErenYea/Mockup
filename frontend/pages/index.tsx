@@ -72,35 +72,35 @@ const Home: NextPage<{}> = () => {
   const productsBarOptions = [
     {
       color: "#FF0080",
-      label: productsBar.labels[5],
-    },
-    {
-      color: "#7928CA",
-      label: productsBar.labels[4],
-    },
-    {
-      color: "#0070F3",
-      label: productsBar.labels[3],
-    },
-    {
-      color: "#FF0080",
-      label: productsBar.labels[2],
+      label: productsBar.labels[0],
     },
     {
       color: "#7928CA",
       label: productsBar.labels[1],
     },
     {
-      color: "#0070F3",
-      label: productsBar.labels[0],
+      color: "#B3536D",
+      label: productsBar.labels[2],
     },
+    {
+      color: "#B8B154",
+      label: productsBar.labels[3],
+    },
+    {
+      color: "#43CA16",
+      label: productsBar.labels[4],
+    },
+    // {
+    //   color: "#43ca16",
+    //   label: productsBar.labels[0],
+    // },
   ];
   console.log(data);
   const [state, setState] = useState<any>({
     series: [
       {
-        name: "High - 2020",
-        data: [28, 29, 33, 36, 32, 32, 33],
+        name: "Active Jobs",
+        data: [280, 290, 330, 360, 320, 320, 330],
       },
       // {
       //   name: "Low - 2020",
@@ -138,7 +138,7 @@ const Home: NextPage<{}> = () => {
         size: 1,
       },
       xaxis: {
-        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        categories: ["Jul' 22","Aug' 22", "Sept' 22", "Oct' 22", "Nov' 22", "Dec' 22", "Jan' 23"],
         title: {
           text: "Month",
         },
@@ -148,14 +148,14 @@ const Home: NextPage<{}> = () => {
           text: "Jobs",
         },
         min: 5,
-        max: 40,
+        max: 400,
       },
       legend: {
         position: "top",
         horizontalAlign: "right",
         floating: true,
-        offsetY: -25,
-        offsetX: -5,
+        offsetY: 25,
+        offsetX: 5,
       },
     },
   });
@@ -332,7 +332,7 @@ const Home: NextPage<{}> = () => {
           <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
             <Cell span={[12, 12, 6]}>
               <Card
-                title="Car Model Satisfaction"
+                title="Customer Loyalty"
                 overrides={{
                   Root: {
                     style: ({ $theme }) => {
@@ -364,13 +364,13 @@ const Home: NextPage<{}> = () => {
                   },
                 }}
               >
+
                 <StyledBody>
                   <ProductsBar
                     className="padding-control"
                     labels={productsBar.labels}
                     products={productsBar.products}
                   />
-
                   <LabelGroup
                     style={{
                       position: "absolute",
@@ -429,7 +429,7 @@ const Home: NextPage<{}> = () => {
               <div className="cash-flow">
 
                 <Card
-                  title="Revenue Generated"
+                  title="Revenue Variation"
                   overrides={{
                     Root: {
                       style: ({ $theme }) => {
@@ -512,7 +512,7 @@ const Home: NextPage<{}> = () => {
             <Cell span={12}>
               <div className="cash-flow mt-5">
                 <Card
-                  title="Cars Served"
+                  title="Vehicles Served"
                   overrides={{
                     Root: {
                       style: ({ $theme }) => {
