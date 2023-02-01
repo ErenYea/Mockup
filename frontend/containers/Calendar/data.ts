@@ -1,68 +1,88 @@
-const now = new Date();
-function subtractDateByDay(day) {
-  return new Date(now.getTime() - day * 24 * 60 * 60 * 1000);
-}
-export const events = [
+export const data = [
   {
-    id: 0,
-    title: "All Day Event very long title",
-    allDay: true,
-    start: subtractDateByDay(5),
-    end: subtractDateByDay(5),
+    id: "den",
+    name: "Dennis Ray",
+    img:
+      "https://media.istockphoto.com/id/1300972574/photo/millennial-male-team-leader-organize-virtual-workshop-with-employees-online.jpg?s=612x612&w=0&k=20&c=uP9rKidKETywVil0dbvg_vAKyv2wjXMwWJDNPHzc_Ug=",
+    modaldata: {
+      toy: {
+        performance: 9.5,
+        time: 27,
+      },
+      hon: {
+        performance: 7,
+        time: 40,
+      },
+      nis: {
+        performance: 4,
+        time: 60,
+      },
+      hyu: {
+        performance: 4,
+        time: 65,
+      },
+      for: {
+        performance: 3,
+        time: 70,
+      },
+    },
+    workload: 5,
   },
   {
-    id: 1,
-    title: "Long Event",
-    start: subtractDateByDay(3),
-    end: subtractDateByDay(2),
+    id: "gil",
+    name: "Gilbert Holland",
+    img:
+      "https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?s=612x612&w=0&k=20&c=kPvoBm6qCYzQXMAn9JUtqLREXe9-PlZyMl9i-ibaVuY=",
+    modaldata: {
+      toy: {
+        performance: 3,
+        time: 67,
+      },
+      hon: {
+        performance: 9,
+        time: 40,
+      },
+      nis: {
+        performance: 4,
+        time: 60,
+      },
+      hyu: {
+        performance: 4,
+        time: 65,
+      },
+      for: {
+        performance: 3,
+        time: 70,
+      },
+    },
+    workload: 3,
   },
-
   {
-    id: 2,
-    title: "DTS STARTS",
-    start: subtractDateByDay(4),
-    end: subtractDateByDay(3),
-  },
-
-  {
-    id: 4,
-    title: "Some Event",
-    start: subtractDateByDay(7),
-    end: subtractDateByDay(6),
-  },
-  {
-    id: 5,
-    title: "Conference",
-    start: subtractDateByDay(10),
-    end: subtractDateByDay(7),
-    desc: "Big conference for important people",
-  },
-  {
-    id: 6,
-    title: "Meeting",
-    start: subtractDateByDay(3),
-    end: subtractDateByDay(3),
-    desc: "Pre-meeting meeting, to prepare for the meeting",
-  },
-
-  {
-    id: 14,
-    title: "Today",
-    start: new Date(new Date().setHours(new Date().getHours() - 3)),
-    end: new Date(new Date().setHours(new Date().getHours() + 3)),
-  },
-
-  {
-    id: 21,
-    title: "Phone Interview",
-    start: subtractDateByDay(13),
-    end: subtractDateByDay(13),
-  },
-
-  {
-    id: 23,
-    title: "Go to the gym",
-    start: new Date(2023, 1, 1, 8),
-    end: new Date(2023, 1, 1, 9),
+    id: "sam",
+    name: "Sam Davidson",
+    img: "/images/person2.jpg",
+    modaldata: {
+      toy: {
+        performance: 5,
+        time: 47,
+      },
+      hon: {
+        performance: 7,
+        time: 40,
+      },
+      nis: {
+        performance: 4,
+        time: 60,
+      },
+      hyu: {
+        performance: 9.6,
+        time: 25,
+      },
+      for: {
+        performance: 3,
+        time: 70,
+      },
+    },
+    workload: 6,
   },
 ];

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import moment from "moment";
 import { Calendar, Views, momentLocalizer } from "react-big-calendar";
-import { events } from "./data";
+// import { events } from "./data";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 
 import { addDays } from "date-fns";
@@ -150,8 +150,10 @@ function CalendarApp(props) {
     let hour = {
       // id: newId,
       title: event.title,
+      person: event.person,
+      model: event.model,
       // allDay: event.slots.length == 1,
-      desc: event.desc,
+
       start: newstartdate,
       end: newenddate,
     };
@@ -187,9 +189,10 @@ function CalendarApp(props) {
     let updatedEvent = {
       id: event.id,
       title: event.title,
-      desc: event.desc,
+      person: event.person,
       start: newstartdate,
       end: newenddate,
+      model: event.model,
     };
     updateCalendar(updatedEvent);
     setState({
@@ -251,13 +254,13 @@ function CalendarApp(props) {
   }, []);
   return (
     <>
+      {/* resizable */}
       <DragAndDropCalendar
         popup
         selectable
         localizer={localizer}
         events={state.events}
         onEventDrop={moveEvent}
-        resizable
         onEventResize={resizeEvent}
         onSelectSlot={onSelectSlot}
         onSelectEvent={onSelectEvent}
