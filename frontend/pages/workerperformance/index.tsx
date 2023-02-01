@@ -104,7 +104,7 @@ const index = (props: Props) => {
   }
   return (
     <>
-      <PageTitle title={"Workshop Floor"} subtitle={""} />
+      <PageTitle title={"Worker Performance Metrics"} subtitle={""} />
       <Container>
         <Block paddingBottom="20px">
           <div className="flex m-4 font-display text-center justify-center space-x-2">

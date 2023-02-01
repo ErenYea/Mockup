@@ -130,7 +130,7 @@ const Home: NextPage<{}> = () => {
   return (
     <Container>
       <Head>
-        <title> INST.</title>
+        <title> Dashboard | Portal</title>
       </Head>
       <Block
         marginLeft={"-8px"}

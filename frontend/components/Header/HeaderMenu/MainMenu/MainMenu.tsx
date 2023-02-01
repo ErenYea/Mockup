@@ -10,13 +10,14 @@ const menuItems = [
   },
   {
     id: 2,
-    label: "Workflow Optimizer",
-    path: "/workflowoptimizer",
+    label: "Workshop Floor",
+    path: "/workshop",
   },
   {
     id: 3,
-    label: "Workshop Floor",
-    path: "/workshop",
+    label: "Worker Performance Metrics",
+    path: "/workerperformance",
+
   },
   // {
   //   id: 4,
@@ -25,39 +26,38 @@ const menuItems = [
   // },
   {
     id: 4,
-    label: "Worker Performance",
-    path: "/workerperformance",
+    label: "Workflow Optimizer",
+    path: "/workflowoptimizer",
   },
   {
     id: 5,
-    label: "Charts",
-    path: "/charts",
-  },
-  {
-    id: 6,
-    label: "Forms",
-    path: "/forms",
-  },
-  {
-    id: 7,
-    label: "UI Elements",
-    path: "/uielements",
-  },
-  {
-    id: 8,
     label: "Demand Forcasting",
     path: "/demandforcasting",
   },
   {
-    id: 9,
-    label: "Profile",
-    path: "/profile",
+    id: 6,
+    label: "Charts",
+    path: "/charts",
   },
-  {
-    id: 10,
-    label: "Settings",
-    path: "/settings",
-  },
+  // {
+  //   id: 7,
+  //   label: "UI Elements",
+  //   path: "/uielements",
+  // },
+  // {
+  //   id: 8,
+
+  // },
+  // {
+  //   id: 9,
+  //   label: "Profile",
+  //   path: "/profile",
+  // },
+  // {
+  //   id: 10,
+  //   label: "Settings",
+  //   path: "/settings",
+  // },
 ];
 
 type MenuProps = {

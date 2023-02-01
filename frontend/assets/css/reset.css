@@ -1,13 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 body * {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, "SF Pro Text", "SF Pro Icons", "Helvetica Neue",
-    "Helvetica", "Arial", "Open Sans", sans-serif;
+  font-family: 'Manrope', -apple-system, 'SF Pro Text', 'SF Pro Icons',
+    'Helvetica Neue', 'Helvetica', 'Arial', 'Open Sans', sans-serif;
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
   text-shadow: rgba(0, 0, 0, 0.004) 1px 1px 1px;
@@ -26,21 +26,21 @@ img {
   height: auto;
 }
 
-.row div[class*="col-"] {
+.row div[class*='col-'] {
   padding-left: 10px;
   padding-right: 10px;
 }
 
-div[data-baseweb="popover"] {
+div[data-baseweb='popover'] {
   z-index: 2;
 }
 
-div[data-baseweb="popover"] ul li a.active {
+div[data-baseweb='popover'] ul li a.active {
   color: #000000;
   background-color: rgb(246, 246, 246);
 }
 
-#__next .__debug-0 + div > div + div div[data-baseweb="popover"] {
+#__next .__debug-0 + div > div + div div[data-baseweb='popover'] {
   z-index: 99999;
 }
 
@@ -128,7 +128,7 @@ ul.side-menu {
 }
 
 ul.main-nav li a.active::after {
-  content: "";
+  content: '';
   display: inline-block;
   width: 100%;
   height: 2px;
@@ -333,7 +333,7 @@ ul.main-nav li a.active::after {
 */
 
 .step-menu li::before {
-  content: "";
+  content: '';
   width: 70px;
   background-image: url(../images/line.svg);
   background-repeat: no-repeat;
@@ -352,7 +352,7 @@ ul.main-nav li a.active::after {
   }
 }
 
-body[dir="rtl"] .step-menu li::before {
+body[dir='rtl'] .step-menu li::before {
   left: auto;
   right: -77px;
 }
@@ -444,7 +444,7 @@ body[dir="rtl"] .step-menu li::before {
   text-align: left;
 }
 
-body[dir="rlt"] .apexcharts-menu .apexcharts-menu-item {
+body[dir='rlt'] .apexcharts-menu .apexcharts-menu-item {
   text-align: right;
 }
 
@@ -454,41 +454,41 @@ body[dir="rlt"] .apexcharts-menu .apexcharts-menu-item {
 |--------------------------------------------------
 */
 
-div[data-baseweb="card"] .apexcharts-canvas {
+div[data-baseweb='card'] .apexcharts-canvas {
   padding-top: 20px;
 }
 
-div[data-baseweb="card"] .padding-control .apexcharts-canvas {
+div[data-baseweb='card'] .padding-control .apexcharts-canvas {
   padding-top: 50px;
 }
 
-div[data-baseweb="card"] .apexcharts-canvas .apexcharts-toolbar {
+div[data-baseweb='card'] .apexcharts-canvas .apexcharts-toolbar {
   left: auto;
   right: 0;
 }
 
-body[dir="rtl"]
-  div[data-baseweb="card"]
+body[dir='rtl']
+  div[data-baseweb='card']
   .apexcharts-canvas
   .apexcharts-toolbar {
   left: 0;
   right: auto;
 }
 
-body[dir="ltr"] .listgrid-card.has-thumb {
+body[dir='ltr'] .listgrid-card.has-thumb {
   margin-left: -18px;
 }
 
-body[dir="rtl"] .listgrid-card.has-thumb {
+body[dir='rtl'] .listgrid-card.has-thumb {
   margin-right: -18px;
 }
 
-body[dir="rtl"] div[data-baseweb="modal"] button[aria-label="Close"] {
+body[dir='rtl'] div[data-baseweb='modal'] button[aria-label='Close'] {
   right: auto;
   left: 12px;
 }
 
-body[dir="rtl"] div[data-baseweb="modal"] .followers-list {
+body[dir='rtl'] div[data-baseweb='modal'] .followers-list {
   padding-left: 35px;
   padding-right: 0;
 }
@@ -710,16 +710,16 @@ body[dir="rtl"] div[data-baseweb="modal"] .followers-list {
   fill: #ffffff;
 }
 
-input[aria-describedby="datepicker--screenreader--message--input"] {
+input[aria-describedby='datepicker--screenreader--message--input'] {
   background-color: #ffffff;
 }
 
-.dark input[aria-describedby="datepicker--screenreader--message--input"] {
+.dark input[aria-describedby='datepicker--screenreader--message--input'] {
   background-color: #000000;
 }
 
-div[role="dialog"]
-  input[aria-describedby="datepicker--screenreader--message--input"] {
+div[role='dialog']
+  input[aria-describedby='datepicker--screenreader--message--input'] {
   background-color: transparent;
 }
 

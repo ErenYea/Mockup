@@ -6,15 +6,22 @@ import { Grid, Cell } from "baseui/layout-grid";
 import { Block } from "baseui/block";
 import DropdownComponent from "./dropdown";
 import InformationBoxv2 from "./informationBoxv2";
+import Gauge from 'pages/charts/gauge';
 // import { Select } from "baseui/select";
 import { Select } from "baseui/select";
+import {
+  useThemeSwitcherCtx,
+  THEME,
+} from '../../contexts/theme/theme.provider';
 type Props = {};
 
 const index: NextPage = (props: Props) => {
   const timeSteps = [1500, 1000, 3000, 1500, 3000];
+
   useEffect(() => {
-    const text = "Car Model: Likely Ford F-150";
+    let cleanup = false;
     async function beginPage() {
+      const text = "Car Model: Likely Ford F-150";
       var elements = document.getElementsByClassName("custom");
       for (let index = 0; index < elements.length; index++) {
         const element = elements[index];
@@ -26,22 +33,34 @@ const index: NextPage = (props: Props) => {
           .classList.add("text-2xl", "font-black");
         await new Promise((r) => setTimeout(r, timeSteps[index]));
         if (index == 0) {
+          try{
           document.getElementsByClassName("custom-text")[0].textContent = text;
+          }
+          catch{}
         }
         element
           .getElementsByTagName("span")[0]
           .classList.remove("text-2xl", "font-black");
       }
     }
+    if (!cleanup) {
+      // Do something here 
     beginPage();
-  });
+  }
+  return () => {
+    cleanup = true;
+  }
+
+  },[]);
+
+  const { theme, setTheme } = useThemeSwitcherCtx();
   return (
     <>
       <PageTitle title={"Workshop Floor"} subtitle={""} />
       <Container>
         <Block paddingBottom="20px">
-          <div className="flex m-4 font-display text-start text-customDarkBlue justify-center space-x-2 h-full w-full">
-            <label className="m-2 text-xl font-semibold text-customDarkBlue leading-none">
+          <div className="flex m-4 font-display text-start  justify-center space-x-2 h-full w-full">
+            <label className={`m-2 text-xl font-semibold ${theme === THEME.light ? 'text-black' : 'text-white' } leading-none`}>
               Select Workshop
             </label>
             <DropdownComponent
@@ -57,23 +76,23 @@ const index: NextPage = (props: Props) => {
         <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
           <Cell span={[12, 12, 6]}>
             <div className="h-fit w-full">
-              <div className="bg-black w-full flex items-center justify-center rounded-lg">
+              <div className={`${theme === THEME.light ? 'bg-black' : 'bg-white' } w-full flex items-center justify-center rounded-lg`}>
                 <video
                   src="/videos/video1.mp4"
                   loop
                   autoPlay
                   muted
                   controls={false}
-                  className="border-4 bg-black border-gray-900 rounded-lg w-[300px] h-fit"
+                  className= " rounded-lg w-[300px] h-fit"
                 ></video>
               </div>
               <div className=" mb-4 h-1/4">
-                <h1 className="custom-text text-2xl mt-2 flex p-2 font-semibold underline text-customDarkBlue">
+                <h1 className={`custom-text text-2xl mt-2 flex p-2 font-semibold underline ${theme === THEME.light ? 'text-black' : 'text-white' }`}>
                   Car Model:
                 </h1>
                 <div className="pt-2 w-full">
-                  <ul className="list-disc ml-8">
-                    <li className="custom p-2 h-fit text-xl text-start text-customDarkBlue flex">
+                  <ul className={` list-disc ml-8 `}>
+                    <li className={`custom p-2 h-fit text-xl text-start ${theme === THEME.light ? 'text-black' : 'text-white' } flex`}>
                       <span className="">Detecting Car Model</span>
                       <div className="flex">
                         {/* <div class="lds-ring hideMeAfter5Seconds ml-1 -mt-0.5">
@@ -87,19 +106,19 @@ const index: NextPage = (props: Props) => {
                         </span> */}
                       </div>
                     </li>
-                    <li className="custom p-2 h-fit text-xl text-start text-customDarkBlue flex">
+                    <li className={`custom p-2 h-fit text-xl text-start ${theme === THEME.light ? 'text-black' : 'text-white' } flex`}>
                       <span className="">Calculating template placement</span>
                       <div className="flex"></div>
                     </li>
-                    <li className="custom p-2 h-fit  text-xl text-start text-customDarkBlue flex">
+                    <li className={`custom p-2 h-fit  text-xl text-start ${theme === THEME.light ? 'text-black' : 'text-white' } flex`}>
                       <span className="">Overlaying template placement</span>
                       <div className="flex"></div>
                     </li>
-                    <li className="custom p-2 h-fit  text-xl text-start text-customDarkBlue flex">
+                    <li className={`custom p-2 h-fit  text-xl text-start ${theme === THEME.light ? 'text-black' : 'text-white' } flex`}>
                       <span className="">Fetching placement measurement</span>
                       <div className="flex"></div>
                     </li>
-                    <li className="custom p-2 h-fit  text-xl text-start text-customDarkBlue flex">
+                    <li className={`custom p-2 h-fit  text-xl text-start ${theme === THEME.light ? 'text-black' : 'text-white' } flex`}>
                       <span className="">
                         Overlaying template placement measurement
                       </span>
@@ -113,7 +132,7 @@ const index: NextPage = (props: Props) => {
           <Cell span={[12, 12, 6]}>
             <div className="flex justify-end h-fit w-full">
               <div className="w-full mr-4 pt-6 mb-2 bg-white justify-center  border-white-200 rounded-lg h-fit">
-                <InformationBoxv2 />
+                <InformationBoxv2/>
               </div>
             </div>
           </Cell>
