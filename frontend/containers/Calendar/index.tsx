@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import moment from "moment";
 import { Calendar, Views, momentLocalizer } from "react-big-calendar";
-import { events } from "./data";
+// import { events } from "./data";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 
 import { addDays } from "date-fns";
@@ -10,16 +10,54 @@ import CreateOrUpdateEvent from "./CreateOrUpdateEvent";
 const localizer: any = momentLocalizer(moment);
 
 const DragAndDropCalendar = withDragAndDrop(Calendar);
+type Props = {
+  events: Array<Object>;
+};
 
-function CalendarApp() {
+function CalendarApp(props) {
+  // const [events, setEvents] = useState<any>([]);
   const [isOpen, setIsOpen] = React.useState(false);
   const [actionType, setActionType] = React.useState("create");
   const [event, setEvent] = React.useState(null);
 
   const [state, setState] = React.useState({
-    events: events,
+    events: [],
   });
-  console.log("state", state);
+  const getDate = async () => {
+    const response = await fetch("https://MongooseAPI.erenyea.repl.co/get");
+    const post = await response.json();
+    console.log(post);
+    if (post.success === true) {
+      const senddata = post.data.map((i) => {
+        var d = i;
+        d.start = new Date(i.start);
+        d.end = new Date(i.end);
+        d.id = i._id;
+        return d;
+      });
+      setState({ events: senddata });
+    }
+  };
+  const updateCalendar = (event: any) => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify(event);
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("https://MongooseAPI.erenyea.repl.co/update", requestOptions)
+      .then((response) => response.json())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  };
+
+  // console.log("state", props.events);
   function moveEvent({
     event,
     start,
@@ -66,34 +104,97 @@ function CalendarApp() {
 
     //alert(`${event.title} was resized to ${start}-${end}`)
   }
+  const sendEvent = (event: any) => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify(event);
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("https://MongooseAPI.erenyea.repl.co/post", requestOptions)
+      .then((response) => response.json())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  };
 
   function newEvent(event: any) {
-    let idList = state.events.map((a) => a.id);
-    let newId = Math.max(...idList) + 1;
+    // let idList = state.events.map((a) => a.id);
+    // let newId = Math.max(...idList) + 1;
+    console.log("event", event);
+    var starttime = parseInt(event.starttime.split(":")[0]);
+    var starttimeminute = parseInt(event.starttime.split(":")[1]);
+    var endtime = parseInt(event.endtime.split(":")[0]);
+    var endtimeminute = parseInt(event.endtime.split(":")[1]);
+    var start = event.slots.length == 1 ? event.start : event.slots[0];
+    var end = event.slots.length == 1 ? event.end : event.slots[1];
+    var newstartdate = new Date(
+      start.getFullYear(),
+      start.getMonth(),
+      start.getDate(),
+      starttime,
+      starttimeminute
+    );
+    var newenddate = new Date(
+      end.getFullYear(),
+      end.getMonth(),
+      end.getDate(),
+      endtime,
+      endtimeminute
+    );
     let hour = {
-      id: newId,
+      // id: newId,
       title: event.title,
-      allDay: event.slots.length == 1,
-      desc: event.desc,
-      start: event.slots.length == 1 ? event.start : event.slots[0],
-      end: event.slots.length == 1 ? event.end : event.slots[1],
+      person: event.person,
+      model: event.model,
+      // allDay: event.slots.length == 1,
+
+      start: newstartdate,
+      end: newenddate,
     };
+    sendEvent(hour);
     setState({
       ...state,
       events: state.events.concat([hour]),
     });
+
     return;
   }
   function updateEvent(event: any) {
+    var start = event.slots.length == 1 ? event.start : event.slots[0];
+    var end = event.slots.length == 1 ? event.end : event.slots[1];
+    var starttime = parseInt(event.starttime.split(":")[0]);
+    var starttimeminute = parseInt(event.starttime.split(":")[1]);
+    var endtime = parseInt(event.endtime.split(":")[0]);
+    var endtimeminute = parseInt(event.endtime.split(":")[1]);
+    var newstartdate = new Date(
+      start.getFullYear(),
+      start.getMonth(),
+      start.getDate(),
+      starttime,
+      starttimeminute
+    );
+    var newenddate = new Date(
+      end.getFullYear(),
+      end.getMonth(),
+      end.getDate(),
+      endtime,
+      endtimeminute
+    );
     let updatedEvent = {
       id: event.id,
       title: event.title,
-      allDay: event.slots.length == 1,
-      desc: event.desc,
-      start: event.slots.length == 1 ? event.start : event.slots[0],
-      end: event.slots.length == 1 ? event.end : event.slots[1],
+      person: event.person,
+      start: newstartdate,
+      end: newenddate,
+      model: event.model,
     };
-
+    updateCalendar(updatedEvent);
     setState({
       ...state,
       events: state.events.map((item) =>
@@ -106,6 +207,7 @@ function CalendarApp() {
   function onSubmit(value: any) {
     setIsOpen(false);
     setEvent(null);
+    console.log(value);
     if (actionType === "create") {
       newEvent(value);
     }
@@ -114,8 +216,28 @@ function CalendarApp() {
     }
   }
   function onSelectEvent(selectedEvent: any) {
+    var sendevent = selectedEvent;
+    sendevent.starttime = `${
+      sendevent.start.getHours().toString().length == 1
+        ? "0" + sendevent.start.getHours().toString()
+        : sendevent.start.getHours().toString()
+    }:${
+      sendevent.start.getMinutes().toString().length == 1
+        ? "0" + sendevent.start.getMinutes().toString()
+        : sendevent.start.getMinutes().toString()
+    }`;
+    sendevent.endtime = `${
+      sendevent.end.getHours().toString().length == 1
+        ? "0" + sendevent.end.getHours().toString()
+        : sendevent.end.getHours().toString()
+    }:${
+      sendevent.end.getMinutes().toString().length == 1
+        ? "0" + sendevent.end.getMinutes().toString()
+        : sendevent.end.getMinutes().toString()
+    }`;
+    console.log("selectedEvent", sendevent);
     setIsOpen(true);
-    setEvent(selectedEvent);
+    setEvent(sendevent);
     setActionType("update");
   }
   function onSelectSlot(selectedSlot: any) {
@@ -127,15 +249,18 @@ function CalendarApp() {
     setIsOpen(false);
     setEvent(null);
   }
+  useEffect(() => {
+    getDate();
+  }, []);
   return (
     <>
+      {/* resizable */}
       <DragAndDropCalendar
         popup
         selectable
         localizer={localizer}
         events={state.events}
         onEventDrop={moveEvent}
-        resizable
         onEventResize={resizeEvent}
         onSelectSlot={onSelectSlot}
         onSelectEvent={onSelectEvent}
