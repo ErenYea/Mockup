@@ -92,7 +92,7 @@ const index = (props: Props) => {
           <Grid gridColumns={12} gridGutters={0} gridMargins={0} gridGaps={2}>
             <Cell span={[12, 12, 3]}>
               <div className="w-full h-full rounded-l-lg text-customDarkBlue bg-customBlue  border-customDarkBlue">
-                <h3 className="m-4 pb-2 text-xl font-black border-b-2 hover:text-2xl duration-100 cursor-pointer">
+                <h3 className="p-2 text-xl font-black border-b-2 hover:text-2xl duration-100 cursor-pointer">
                   Expected Upcoming Tasks
                 </h3>
                 <div className="mb-2">
@@ -123,13 +123,13 @@ const index = (props: Props) => {
               </div>
             </Cell>
             <Cell span={[12, 12, 9]}>
-              <Block
+              {/* <Block
                 paddingBottom="20px"
                 right="0px"
                 className={"flex  items-end justify-end"}
               >
                 <PersonDropdown args={data} />
-              </Block>
+              </Block> */}
 
               <Block
                 paddingTop={["10px", "20px", "30px", "0"]}
