@@ -12,7 +12,7 @@ const ColumnChart: NextPage<{}> = ( props ) => {
 	const state = {
 		series: [
 			{
-				name: 'Product',
+				name: 'Vehicles',
 				data: props.args.value,
 			},
 
@@ -46,11 +46,11 @@ const ColumnChart: NextPage<{}> = ( props ) => {
 				size: 1,
 			},
 			xaxis: {
-				categories: ['Ford Motors', 'KIA', 'Toyota', 'Honda', 'Volkswagen', 'BMW', 'Mercedes'],
+				categories: ['Fords', 'Nissan', 'Hyundai', 'Honda', 'Toyota'],
 			},
 			yaxis: {
 				min: 5,
-				max: 40,
+				max: 50,
 			},
 			legend: {
 				position: 'top',

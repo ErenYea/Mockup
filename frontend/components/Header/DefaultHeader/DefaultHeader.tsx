@@ -51,7 +51,7 @@ const DefaultHeader: React.FC<{}> = () => {
               count={cartItems.length}
             /> */}
             <div className=' w-10 h-10 cursor-pointer'>
-
+{/* 
               {theme === THEME.light ? <SunIcon onClick={() => {
               let getTheme = theme === THEME.light ? THEME.dark : THEME.light;
               setTheme(getTheme);
@@ -62,7 +62,7 @@ const DefaultHeader: React.FC<{}> = () => {
             setTheme(getTheme);
             localStorage.setItem('theme', getTheme);
             }}
-        />}
+        />} */}
             </div>
             <AvatarMenu
               name="Team Wings"
@@ -99,7 +99,7 @@ const DefaultHeader: React.FC<{}> = () => {
                   count={cartItems.length}
                 /> */}
                 <div className=' w-10 h-10 cursor-pointer'>
-                  {theme === THEME.light ? <SunIcon onClick={() => {
+                  {/* {theme === THEME.light ? <SunIcon onClick={() => {
                   let getTheme = theme === THEME.light ? THEME.dark : THEME.light;
                   setTheme(getTheme);
                   localStorage.setItem('theme', getTheme);
@@ -109,7 +109,7 @@ const DefaultHeader: React.FC<{}> = () => {
                   setTheme(getTheme);
                   localStorage.setItem('theme', getTheme);
                   }}
-                  />}
+                  />} */}
                   </div>
                 <AvatarMenu
                   name="Team Wings"

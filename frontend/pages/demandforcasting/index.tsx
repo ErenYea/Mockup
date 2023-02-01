@@ -4,57 +4,58 @@ import { useState } from "react";
 import PageTitle from "components/UiElements/PageTitle/PageTitle";
 // import { Block } from "baseui/block";
 import ColumnChart from "./columnChart"
+import Head from "next/head";
 type Props = {};
 
 const index = (props: Props) => {
   const jsonData = [
     {
       name: "January",
-      value: [12, 14, 33, 21, 42, 9, 7]
+      value: [12, 14, 33, 21, 42]
     },
     {
       name: "February",
-      value: [21, 16, 13, 17, 34, 12, 25]
+      value: [21, 16, 13, 17, 34]
     },
     {
       name: "March",
-      value: [20, 30, 25, 24, 19, 8, 12]
+      value: [20, 30, 25, 24, 19]
     },
     {
       name: "April",
-      value: [31, 23, 44, 6, 21, 8, 4]
+      value: [31, 23, 44, 6, 21]
     },
     {
       name: "May",
-      value: [26, 12, 17, 19, 15, 19, 30]
+      value: [26, 12, 17, 19, 15]
     },
     {
       name: "June",
-      value: [23, 18, 14, 27, 25, 10, 5]
+      value: [23, 18, 14, 27, 25]
     },
     {
       name: "July",
-      value: [15, 11, 32, 27, 22, 9, 12]
+      value: [15, 11, 32, 27, 22]
     },
     {
       name: "August",
-      value: [22, 34, 43, 21, 22, 11, 7]
+      value: [22, 34, 43, 21, 22]
     },
     {
       name: "September",
-      value: [28, 29, 33, 36, 32, 32, 33]
+      value: [28, 29, 33, 36, 32]
     },
     {
       name: "October",
-      value: [12, 16, 40, 21, 22, 13, 6]
+      value: [12, 16, 40, 21, 22]
     },
     {
       name: "November",
-      value: [23,32, 11, 23, 15, 14, 9]
+      value: [23,32, 11, 23, 15]
     },
     {
       name: "December",
-      value: [14, 15, 32, 11, 32, 12, 17]
+      value: [14, 15, 32, 11, 32]
     },
   ];
   const [Index, setIndex] = useState(0);
@@ -65,11 +66,15 @@ const index = (props: Props) => {
   }
   return (
     <>
+      <Head>
+        <title>Dashboard | Demand Forecasting</title>
+      </Head>
       <PageTitle title={"Demand Forecasting"} subtitle={""} />
-          <div className="flex justify-center h-[1450px] rounded-lg items-center border-2 ">
+          <div className="flex flex-col justify-center h-[1450px] rounded-lg items-center border-2 ">
+            <span className="text-4xl font-black z-10 -mb-10">Automotive Parts Projection</span>
             {/* <div className=" bg-customBlue rounded-lg p-5 flex  w-[99%] justify-center h-5/6  border-2 border-customDarkBlue"> */}
               <iframe
-                className="w-full h-[95%] mt-20 rounded-lg overflow-x-hidden scrollbar scrollbar-thumb-blue-700 scrollbar-track-blue-300 overflow-y-scroll hover:scrollbar-thumb-blue-500"
+                className="w-full h-[95%] mt-2 rounded-lg overflow-x-hidden scrollbar scrollbar-thumb-blue-700 scrollbar-track-blue-300 overflow-y-scroll hover:scrollbar-thumb-blue-500"
                 src="http://owaisahmed142002.pythonanywhere.com/"
               ></iframe>
             {/* </div> */}

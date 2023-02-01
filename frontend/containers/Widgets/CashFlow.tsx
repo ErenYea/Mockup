@@ -23,7 +23,10 @@ const CashFlow = ({
         align: 'left',
       },
       dataLabels: {
-        enabled: false,
+        enabled:false,
+        dropShadow: {
+          enabled: false
+        },
       },
       plotOptions: {
         bar: {
@@ -53,8 +56,15 @@ const CashFlow = ({
         type: 'category',
         categories,
         labels: {
-          show: false,
+          show: true,
         },
+      },
+      yaxis:{
+        labels: {
+          formatter: function(val) {
+            return val + '%'
+          }
+        }
       },
       legend: {
         position: 'bottom',
@@ -66,7 +76,7 @@ const CashFlow = ({
     },
     series: [
       {
-        name: 'Cash Flow',
+        name: 'Variation in Percentage',
         data: cash,
       },
     ],
