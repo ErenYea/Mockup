@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import Gauge from 'pages/charts/gauge';
 
 export default function InformationBox({ args }) {
   return (
@@ -17,9 +18,13 @@ export default function InformationBox({ args }) {
                     ></img>
                   </div>
                 </div>
-                {/* <div class="w-1/5 h-1/4 mt-1 flex-row justify-center items-center">
+                <div class="w-1/5 h-1/4 mt-5 flex-row justify-center items-center">
                   <div className="justify-center items-center text-center text-gray-800 font-semibold text-sm flex flex-col">
-                    <GaugeChart
+                    <Gauge
+                      className="flex items-center justify-center"
+                      args={args?.performance}
+                    />
+                    {/* <GaugeChart
                       className="flex items-center justify-center"
                       colors={["#4B5563"]}
                       percent={args?.performance}
@@ -33,9 +38,9 @@ export default function InformationBox({ args }) {
                       arcPadding={0}
                     />
                     <span className="-mt-1 ml-[2.2px] -pt-4 leading-none">{`${args?.performance*100}%`}<br/></span>
-                    <span className="text-center ">Performance</span>
+                    <span className="text-center ">Performance</span> */}
                   </div>
-                </div> */}
+                </div>
               </div>
               <div class="text-center  flex flex-col">
                 <span class="text-2xl font-semibold leading-normal mb-1 text-gray-700">

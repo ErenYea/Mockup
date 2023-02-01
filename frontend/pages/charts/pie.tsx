@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
 import { Grid, Cell } from "baseui/layout-grid";
@@ -10,18 +10,33 @@ type Props = {
   args: any;
 };
 const Pie = (props: Props) => {
-  let values;
-  let labels;
+  console.log(props.args)
+  let values =useState<any>(null)
+  let labels = useState<any>(null)
+  // let labels;
+  
   if (props.args) {
-    values = props.args.boxPlotValue.map((i) => {
-      return i.y.reduce((x, y) => x + y, 0);
-    });
-    labels = props.args.boxPlotValue.map((i) => {
-      return i.x;
-    });
+    values = props.args.pieValue.map((i,ind)=>{
+      if(ind!=0){
+        return i[1]
+      }
+      
+    })
+    labels = props.args.pieValue.map((i,ind)=>{
+      if(ind!=0){
+        return i[0]
+      }
+    })
+    values.shift()
+    labels.shift()
   }
-  const [state, setState] = useState<any>({
-    series: props.args == null ? [44, 55, 13, 43, 22] : values,
+  // useEffect(() => {
+  // }, [props.args])
+  
+  console.log(values)
+  console.log(labels)
+  const state = {
+    series:values,
     options: {
       chart: {
         width: 380,
@@ -45,7 +60,7 @@ const Pie = (props: Props) => {
         },
       ],
     },
-  });
+  };
 
   return (
     <>
@@ -62,12 +77,15 @@ const Pie = (props: Props) => {
 						</Cell> */}
             <Cell span={12}>
               <Block paddingTop={["10px", "15px", "30px", "0"]}>
-                <ApexChart
+                {
+                  state.series == null? "" : <ApexChart
                   options={state.options}
                   series={state.series}
                   type="pie"
                   height={420}
                 />
+                }
+               
               </Block>
             </Cell>
           </Grid>

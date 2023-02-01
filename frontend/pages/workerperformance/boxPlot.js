@@ -1,30 +1,38 @@
-import dynamic from "next/dynamic";
-import { func } from "prop-types";
-import { useState } from "react";
+import dynamic from 'next/dynamic';
+import { func } from 'prop-types';
+import { useState } from 'react';
 // import ReactApexChart from "react-apexcharts";
-import ApexChart from "components/UiElements/ApexChart/ApexChart";
+import ApexChart from 'components/UiElements/ApexChart/ApexChart';
 
 export default function ApexCharts({ args }) {
   console.log(args.boxPlotValue);
   const options = {
     chart: {
       id: args.id,
-      type: "boxPlot",
-      height: 350,
+      type: 'boxPlot',
     },
     title: {
-      text: "",
-      align: "left",
+      text: '',
+      align: 'left',
+    },
+    xaxis: {
+      title: {
+        text: 'Models',
+      },
+    },
+    yaxis: {
+      title: {
+        text: 'Minutes',
+      },
     },
     plotOptions: {
       bar: {
-        horizontal: true,
-        barHeight: "50%",
+        horizontal: false,
       },
       boxPlot: {
         colors: {
-          upper: "#004899",
-          lower: "#004950",
+          upper: '#004899',
+          lower: '#004950',
         },
       },
     },
@@ -43,7 +51,6 @@ export default function ApexCharts({ args }) {
           height={350}
         />
       </div>
-      <span>Minutes</span>
     </>
   );
 }
