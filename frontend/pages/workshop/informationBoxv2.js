@@ -1,9 +1,34 @@
-import React from "react";
+import React from 'react';
 // import image from "../static/image.jpg";
 // import GaugeChart from "react-gauge-chart";
-import { LineChartv2 } from "./lineChartv2";
+import { LineChartv2 } from './lineChartv2';
+import Gauge from 'pages/charts/gauge';
+import { useState, useEffect } from 'react';
+
+const useTypewriter = (text) => {
+  const [currentText, setCurrentText] = useState('');
+
+  useEffect(() => {
+    let i = 0;
+    const intervalId = setInterval(() => {
+      setCurrentText(text.substring(0, i));
+      i++;
+      if (i > text.length) {
+        clearInterval(intervalId);
+      }
+    }, 50);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [text]);
+
+  return currentText;
+};
 
 export default function InformationBox() {
+  const text = useTypewriter(
+    'Hi Sam Davidson, you are doing a great job except that you have misplaced the measuring mat at the roof of the car, please take great care of it, thanks.'
+  );
   return (
     <div>
       <section class="bg-blueGray-50 h-fit">
@@ -20,7 +45,11 @@ export default function InformationBox() {
                     ></img>
                   </div>
                 </div>
-                <div class="w-1/3 h-1/3 mt-2 justify-center items-center">
+                <div class="w-1/3 h-1/3 mt-5 flex-row justify-center items-center">
+                  <Gauge
+                    className="flex items-center justify-center"
+                    args={0.92}
+                  />
                   {/* <div className="justify-center items-center text-center font-semibold text-gray-600 flex-col flex">
                     <GaugeChart
                       className="flex items-center justify-center"
@@ -52,7 +81,7 @@ export default function InformationBox() {
                   1883 Venture Place, Alberta
                 </div>
                 <div class="w-full h-fit text-center items-center justify-center flex">
-                  <div class="flex flex-col justify-center py-4 lg:pt-4 pt-8 w-11/12">
+                  <div class="flex flex-col justify-center py-4 lg:pt-2 pt-4 w-11/12">
                     <div class="mr-4 p-3 text-center">
                       <span class="text-xl font-bold block e tracking-wide text-gray-600">
                         Senior Technician
@@ -85,6 +114,10 @@ export default function InformationBox() {
                       <LineChartv2 />
                     </div>
                   </div>
+                </div>
+                <div class="w-5/6 h-fit text-center items-center justify-center flex flex-col border-l-2 border-black pl-2 ">
+                  <span className="text-xl font-black">Feedback</span>
+                  <span className="text-lg">{text}</span>
                 </div>
               </div>
             </div>

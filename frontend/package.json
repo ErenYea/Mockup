@@ -10,6 +10,7 @@
   "dependencies": {
     "@apollo/client": "^3.4.7",
     "@glidejs/glide": "^3.4.1",
+    "@heroicons/react": "^2.0.14",
     "@hookform/resolvers": "^2.7.1",
     "apexcharts": "^3.27.3",
     "baseui": "^10.0.0",
@@ -40,6 +41,7 @@
     "react-image": "^4.0.3",
     "react-reveal": "^1.2.2",
     "react-scrollspy": "^3.4.3",
+    "react-simple-typewriter": "^5.0.1",
     "react-stickynode": "^4.0.0",
     "react-toastify": "^7.0.4",
     "resize-observer-polyfill": "^1.5.1",

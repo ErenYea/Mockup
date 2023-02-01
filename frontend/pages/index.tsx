@@ -159,6 +159,7 @@ const Home: NextPage<{}> = () => {
       },
     },
   });
+
   useEffect(() => {
     if (sessionStorage.getItem("user")) {
       setCond(true);
@@ -170,7 +171,7 @@ const Home: NextPage<{}> = () => {
     return (
       <Container>
         <Head>
-          <title> INST.</title>
+          <title>Dashboard | Portal</title>
         </Head>
         <Block
           marginLeft={"-8px"}
@@ -426,6 +427,7 @@ const Home: NextPage<{}> = () => {
           <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
             <Cell span={12}>
               <div className="cash-flow">
+
                 <Card
                   title="Revenue Generated"
                   overrides={{

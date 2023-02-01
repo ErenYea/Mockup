@@ -31,14 +31,14 @@ const Menu = ({ onClick }: MenuType) => {
           <MenuItem onClick={onClick}>Dashboard</MenuItem>
         </ActiveLink>
       </li>
-      <Line></Line>
-      <li>
+      {/* <Line></Line> */}
+      {/* <li>
         <ActiveLink activeClassName="active" href="/settings">
           <MenuItem onClick={onClick}>Settings</MenuItem>
         </ActiveLink>
-      </li>
-      <Line></Line>
-      <li>
+      </li> */}
+      {/* <Line></Line> */}
+      {/* <li>
         <MenuItem
           onClick={() => {
             let getTheme = theme === THEME.light ? THEME.dark : THEME.light;
@@ -48,7 +48,7 @@ const Menu = ({ onClick }: MenuType) => {
         >
           {theme === THEME.light ? "Dark Mode" : "Light Mode"}
         </MenuItem>
-      </li>
+      </li> */}
       <Line></Line>
       <li
         onClick={() => {
@@ -74,7 +74,8 @@ const AvatarMenu = ({
       {showOnlyMenu ? (
         <Menu onClick={onClick} />
       ) : (
-        <StatefulPopover
+        <StatefulPopover 
+          
           content={<Menu onClick={onClick} />}
           placement={placement ? placement : "bottomRight"}
           overrides={{
@@ -88,8 +89,10 @@ const AvatarMenu = ({
           }}
           showArrow
         >
+
           <Block overrides={{ Block: { style: { cursor: "pointer" } } }}>
             <Avatar src={src} name={name ? name : "Jon Doe"} size="scale1000" />
+
           </Block>
         </StatefulPopover>
       )}
