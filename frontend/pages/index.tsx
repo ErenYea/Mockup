@@ -17,19 +17,22 @@ import { withApollo } from "apollo/client";
 import Head from "next/head";
 import { useState } from "react";
 import ApexChart from "components/UiElements/ApexChart/ApexChart";
+import Area from "./charts/area";
+import Bar from "./charts/bar";
+import Column from "./charts/column";
 
 const productsBarOptions = [
   {
     color: "#FF0080",
-    label: "Banana",
+    label: "Tesla",
   },
   {
     color: "#7928CA",
-    label: "Orange",
+    label: "Honda",
   },
   {
     color: "#0070F3",
-    label: "Blueberry",
+    label: "Toyota",
   },
 ];
 const GET_DASHBOARD = gql`
@@ -63,6 +66,32 @@ const Home: NextPage<{}> = () => {
   });
   if (!data) return null;
   const { productViews, recentApps, productsBar, cashFlow } = data.dashboard;
+  const productsBarOptions = [
+    {
+      color: "#FF0080",
+      label: productsBar.labels[5],
+    },
+    {
+      color: "#7928CA",
+      label: productsBar.labels[4],
+    },
+    {
+      color: "#0070F3",
+      label: productsBar.labels[3],
+    },
+    {
+      color: "#FF0080",
+      label: productsBar.labels[2],
+    },
+    {
+      color: "#7928CA",
+      label: productsBar.labels[1],
+    },
+    {
+      color: "#0070F3",
+      label: productsBar.labels[0],
+    },
+  ];
   console.log(data);
   const [state, setState] = useState<any>({
     series: [
@@ -70,10 +99,10 @@ const Home: NextPage<{}> = () => {
         name: "High - 2020",
         data: [28, 29, 33, 36, 32, 32, 33],
       },
-      {
-        name: "Low - 2020",
-        data: [12, 11, 14, 18, 17, 13, 13],
-      },
+      // {
+      //   name: "Low - 2020",
+      //   data: [12, 11, 14, 18, 17, 13, 13],
+      // },
     ],
     options: {
       chart: {
@@ -243,7 +272,7 @@ const Home: NextPage<{}> = () => {
             <Grid gridGutters={16} gridMargins={0}>
               <Cell span={12}>
                 <Card
-                  title="Jobs performed Last Week"
+                  title="Weekly Outlook"
                   overrides={{
                     Root: {
                       style: ({ $theme }) => {
@@ -291,7 +320,7 @@ const Home: NextPage<{}> = () => {
         <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
           <Cell span={[12, 12, 6]}>
             <Card
-              title="Product List"
+              title="Car Model Satisfaction"
               overrides={{
                 Root: {
                   style: ({ $theme }) => {
@@ -344,7 +373,7 @@ const Home: NextPage<{}> = () => {
 
           <Cell span={[12, 12, 6]}>
             <Card
-              title="Average View"
+              title="Customer Satisfaction"
               overrides={{
                 Root: {
                   style: ({ $theme }) => {
@@ -376,7 +405,8 @@ const Home: NextPage<{}> = () => {
               }}
             >
               <StyledBody>
-                <Views className="padding-control" totalView={75} />
+                <Column />
+                {/* <Views className="padding-control" totalView={75} /> */}
               </StyledBody>
             </Card>
           </Cell>
@@ -420,6 +450,86 @@ const Home: NextPage<{}> = () => {
                     categories={cashFlow.categories}
                     cash={cashFlow.cash}
                   />
+                </StyledBody>
+              </Card>
+            </div>
+          </Cell>
+        </Grid>
+        <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+          <Cell span={12}>
+            <div className="cash-flow mt-5">
+              <Card
+                title="Revenue Generated"
+                overrides={{
+                  Root: {
+                    style: ({ $theme }) => {
+                      return {
+                        borderTopColor: "transparent",
+                        borderRightColor: "transparent",
+                        borderBottomColor: "transparent",
+                        borderLeftColor: "transparent",
+                        boxShadow: $theme.lighting.shadow400,
+                      };
+                    },
+                  },
+                  Title: {
+                    style: ({ $theme }) => {
+                      return {
+                        ...$theme.typography.font250,
+                      };
+                    },
+                  },
+                  Body: {
+                    style: () => {
+                      return {
+                        minHeight: "200px",
+                      };
+                    },
+                  },
+                }}
+              >
+                <StyledBody>
+                  <Area />
+                </StyledBody>
+              </Card>
+            </div>
+          </Cell>
+        </Grid>
+        <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+          <Cell span={12}>
+            <div className="cash-flow mt-5">
+              <Card
+                title="Cars Served"
+                overrides={{
+                  Root: {
+                    style: ({ $theme }) => {
+                      return {
+                        borderTopColor: "transparent",
+                        borderRightColor: "transparent",
+                        borderBottomColor: "transparent",
+                        borderLeftColor: "transparent",
+                        boxShadow: $theme.lighting.shadow400,
+                      };
+                    },
+                  },
+                  Title: {
+                    style: ({ $theme }) => {
+                      return {
+                        ...$theme.typography.font250,
+                      };
+                    },
+                  },
+                  Body: {
+                    style: () => {
+                      return {
+                        minHeight: "200px",
+                      };
+                    },
+                  },
+                }}
+              >
+                <StyledBody>
+                  <Bar />
                 </StyledBody>
               </Card>
             </div>

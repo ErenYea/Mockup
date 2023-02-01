@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import ApexChart from '../../components/UiElements/ApexChart/ApexChart';
+import React, { useState } from "react";
+import ApexChart from "../../components/UiElements/ApexChart/ApexChart";
 
 type ProductsBarType = {
   className?: string;
@@ -8,12 +8,12 @@ type ProductsBarType = {
 };
 
 const ProductsBar = ({ className, labels, products }: ProductsBarType) => {
-  const [chartOptions, setChartOptions] = useState({
+  const chartOptions = {
     options: {
       fill: {
-        colors: ['#0070F3', '#7928CA', '#FF0080'],
+        colors: ["#0070F3", "#7928CA", "#FF0080"],
       },
-      colors: ['#0070F3', '#7928CA', '#FF0080'],
+      colors: ["#0070F3", "#7928CA", "#FF0080"],
       chart: {
         toolbar: {
           show: true,
@@ -22,12 +22,12 @@ const ProductsBar = ({ className, labels, products }: ProductsBarType) => {
       labels,
       dataLabels: {
         style: {
-          fontSize: '30px',
+          fontSize: "30px",
         },
       },
     },
     series: products,
-  });
+  };
 
   return (
     <ApexChart
