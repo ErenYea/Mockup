@@ -1,8 +1,8 @@
-import React from 'react';
-import { FormControl } from 'baseui/form-control';
-import { Input } from 'baseui/input';
-import { Textarea } from 'baseui/textarea';
-import { Datepicker } from 'baseui/datepicker';
+import React from "react";
+import { FormControl } from "baseui/form-control";
+import { Input } from "baseui/input";
+import { Textarea } from "baseui/textarea";
+import { Datepicker } from "baseui/datepicker";
 import {
   Modal,
   ModalHeader,
@@ -11,15 +11,21 @@ import {
   ModalButton,
   SIZE,
   ROLE,
-} from 'baseui/modal';
+} from "baseui/modal";
 export default ({ onClose, isOpen, onSubmit, event }: any) => {
-  const [title, setTitle] = React.useState(event.title ? event.title : '');
-  const [desc, setDescription] = React.useState(event.desc ? event.desc : '');
+  const [title, setTitle] = React.useState(event.title ? event.title : "");
+  const [desc, setDescription] = React.useState(event.desc ? event.desc : "");
   const [slots, setSlots] = React.useState<any>([event.start, event.end]);
+  const [starttime, setStartTime] = React.useState<any>(
+    event.starttime ? event.starttime : ""
+  );
+  const [endtime, setEndTime] = React.useState<any>(
+    event.endtime ? event.endtime : ""
+  );
 
   function handleSubmit(e: any) {
     e.preventDefault();
-    onSubmit({ ...event, title, desc, slots });
+    onSubmit({ ...event, title, desc, slots, starttime, endtime });
   }
   return (
     <Modal
@@ -45,14 +51,15 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
             <Input
               id="input-id"
               value={title}
-              onChange={event => setTitle(event.currentTarget.value)}
+              onChange={(event) => setTitle(event.currentTarget.value)}
+              required
             />
           </FormControl>
           <FormControl label="Set Description">
             <Textarea
               id="textarea-id"
               value={desc}
-              onChange={event => setDescription(event.currentTarget.value)}
+              onChange={(event) => setDescription(event.currentTarget.value)}
             />
           </FormControl>
           <FormControl label="Set Date">
@@ -61,6 +68,24 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
               value={slots}
               onChange={({ date }) => setSlots(date)}
               placeholder="YYYY/MM/DD – YYYY/MM/DD"
+            />
+          </FormControl>
+          <FormControl label="Start Time">
+            <Input
+              id="starttime"
+              value={starttime}
+              onChange={(event) => setStartTime(event.currentTarget.value)}
+              placeholder={"00:00"}
+              required
+            />
+          </FormControl>
+          <FormControl label="End Time">
+            <Input
+              id="endtime"
+              value={endtime}
+              onChange={(event) => setEndTime(event.currentTarget.value)}
+              placeholder={"00:00"}
+              required
             />
           </FormControl>
         </ModalBody>

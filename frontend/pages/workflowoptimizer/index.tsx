@@ -1,5 +1,5 @@
 import PageTitle from "components/UiElements/PageTitle/PageTitle";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "containers/Calendar";
 import Container from "components/UiElements/Container/Container";
 import { Grid, Cell } from "baseui/layout-grid";
@@ -8,6 +8,7 @@ import PersonDropdown from "./personDropdown";
 type Props = {};
 
 const index = (props: Props) => {
+  const [events, setEvents] = useState<any>([]);
   var tasks = [
     { name: "KIA", order: 15 },
     { name: "Toyota", order: 45 },
@@ -64,6 +65,25 @@ const index = (props: Props) => {
       image: "/images/person1.jpg",
     },
   ];
+  // useEffect(() => {
+  //   const getDate = async () => {
+  //     const response = await fetch("https://MongooseAPI.erenyea.repl.co/get");
+  //     const post = await response.json();
+  //     console.log(post);
+  //     if (post.success === true) {
+  //       const senddata = post.data.map((i) => {
+  //         var d = i;
+  //         d.start = new Date(i.start);
+  //         d.end = new Date(i.end);
+  //         d.id = i._id;
+  //         return d;
+  //       });
+  //       setEvents(senddata);
+  //     }
+  //   };
+  //   getDate();
+  // }, []);
+  console.log(events);
   return (
     <>
       <PageTitle title={"WorkFlow Optimizer"} subtitle={""} />
@@ -117,7 +137,7 @@ const index = (props: Props) => {
                 height="100%"
                 maxHeight="700px"
               >
-                <Calendar />
+                <Calendar events={events} />
               </Block>
             </Cell>
           </Grid>
