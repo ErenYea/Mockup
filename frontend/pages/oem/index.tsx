@@ -236,7 +236,7 @@ const index = () => {
         </div>
         <div className="w-full flex flex-col justify-center items-center mt-4">
           <span className="text-2xl font-black">Sunroof Ordering</span>
-          <LineBar args={data[Index]["sunroof"]} />
+          <LineBar args={data[Index]["sunroof"]} sunroof={true} />
           <div className="w-[83%] flex flex-row items-start justify-end -mt-[44px]">
             <span className="text-sm text-black">Prediction</span>
           </div>
@@ -260,38 +260,151 @@ const index = () => {
                   className="flex justify-evenly w-full border border-gray-800 bg-slate-400 rounded-lg mt-2"
                   key={i.workshop.id}
                 >
-                  <div className="text-base border-gray-700 border p-2 rounded bg-white">
-                    This is {i.workshop.name}
+                  <div className="text-base border-gray-700 border p-2 rounded bg-white flex flex-col justify-center items-center">
+                    <h3 className="text-bold text-lg uppercase">
+                      {i.workshop.name}
+                    </h3>
+                    <div
+                      className="flex flex-col items-center border-gray-400"
+                      // data-key={i.id}
+                    >
+                      <div
+                        className="text-black text-[14px] text-center"
+                        // data-key={i.id}
+                      >
+                        Performance:{" "}
+                        <span
+                          className=" text-yellow-300 text-center w-full"
+                          // data-key={i.id}
+                        >
+                          {
+                            i.workshop.modaldata[
+                              i.model.slice(0, 3).toLowerCase()
+                            ].performance
+                          }
+                          /10
+                        </span>
+                      </div>
+                      <div
+                        className="text-black text-[14px] text-center"
+                        // data-key={i.id}
+                      >
+                        Material Present:{" "}
+                        <span
+                          className=" text-yellow-300 text-center w-full uppercase"
+                          // data-key={i.id}
+                        >
+                          {i.workshop.modaldata[
+                            i.model.slice(0, 3).toLowerCase()
+                          ].material
+                            ? "Yes"
+                            : "No"}
+                        </span>
+                      </div>
+                      <div
+                        className="text-black text-[14px] text-center"
+                        // data-key={i.id}
+                      >
+                        Workload:{" "}
+                        <span
+                          className=" text-yellow-300 text-center w-full"
+                          // data-key={i.id}
+                        >
+                          {i.workshop.workload} cars this week
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-base p-2 border border-gray-700 rounded bg-white">
-                    This is the job of {i.car} {i.model} cars
+                  <div className="text-base p-2 border border-gray-700 rounded bg-white flex flex-col">
+                    <div className="flex flex-col items-center">
+                      <h3 className="text-bold text-lg capitalize">
+                        Car Model
+                      </h3>
+                      <div className=" text-red-600">{i.model}</div>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <h3 className="text-bold text-lg capitalize">
+                        Total Jobs
+                      </h3>
+                      <div className=" text-red-600">{i.car}</div>
+                    </div>
                   </div>
                 </div>
               ))}
+              {/* <div className="flex justify-evenly w-full border border-gray-800 bg-slate-400 rounded-lg mt-2" key={i.workshop.id}>
+                <div className="text-base border-gray-700 border p-2 rounded bg-white flex flex-col justify-center items-center">
+                  <h3 className="text-bold text-lg uppercase">{i.workshop.name}</h3>
+                  <div
+                    className="flex flex-col items-center border-gray-400"
+                    data-key={i.id}
+                  >
+                    <div
+                      className="text-black text-[14px] text-center"
+                      data-key={i.id}
+                    >
+                      Performance:{" "}
+                      <span
+                        className=" text-yellow-300 text-center w-full"
+                        data-key={i.id}
+                      >
+                        
+                        {i.workshop.modaldata[model.slice(0,3).toLowerCase()].performance}/10
+                      </span>
+                    </div>
+                    <div
+                      className="text-black text-[14px] text-center"
+                      data-key={i.id}
+                    >
+                      Material Present:{" "}
+                      <span
+                        className=" text-yellow-300 text-center w-full uppercase"
+                        data-key={i.id}
+                      >
+                        {i.workshop.modaldata[model.slice(0,3).toLowerCase()].material ? "Yes" : "No"}
+                      </span>
+                    </div>
+                    <div
+                      className="text-black text-[14px] text-center"
+                      data-key={i.id}
+                    >
+                      Workload:{" "}
+                      <span
+                        className=" text-yellow-300 text-center w-full"
+                        data-key={i.id}
+                      >
+                        {i.workshop.workload} cars this week
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-base p-2 border border-gray-700 rounded bg-white flex flex-col">
+                  <div className="flex flex-col items-center">
+                    <h3 className="text-bold text-lg capitalize">Car Model</h3>
+                    <div className=" text-red-600">{model}</div>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <h3 className="text-bold text-lg capitalize">Total Jobs</h3>
+                    <div className=" text-red-600">{i.cars}</div>
+                  </div>
+                </div>
+              </div> */}
+
               {/* <div className="flex justify-evenly w-full border border-gray-800 bg-slate-400 rounded-lg mt-2">
-            <div className="text-base border-gray-700 border p-2 rounded bg-white">
-              This is workshop 1
-            </div>
-            <div className="text-base p-2 border border-gray-700 rounded bg-white">
-              This is the job of 100 cars
-            </div>
-          </div>
-          <div className="flex justify-evenly w-full border border-gray-800 bg-slate-400 rounded-lg mt-2">
-            <div className="text-base border-gray-700 border p-2 rounded bg-white">
-              This is workshop 1
-            </div>
-            <div className="text-base p-2 border border-gray-700 rounded bg-white">
-              This is the job of 100 cars
-            </div>
-          </div>
-          <div className="flex justify-evenly w-full border border-gray-800 bg-slate-400 rounded-lg mt-2">
-            <div className="text-base border-gray-700 border p-2 rounded bg-white">
-              This is workshop 1
-            </div>
-            <div className="text-base p-2 border border-gray-700 rounded bg-white">
-              This is the job of 100 cars
-            </div>
-          </div> */}
+                <div className="text-base border-gray-700 border p-2 rounded bg-white">
+                  This is workshop 1
+                </div>
+                <div className="text-base p-2 border border-gray-700 rounded bg-white">
+                  This is the job of 100 cars
+                </div>
+              </div>
+              <div className="flex justify-evenly w-full border border-gray-800 bg-slate-400 rounded-lg mt-2">
+                <div className="text-base border-gray-700 border p-2 rounded bg-white">
+                  This is workshop 1
+                </div>
+                <div className="text-base p-2 border border-gray-700 rounded bg-white">
+                  This is the job of 100 cars
+                </div>
+              </div> */}
             </div>
           </Block>
           {event && (

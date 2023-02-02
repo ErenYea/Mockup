@@ -29,6 +29,11 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
     "Honda",
     "Toyota",
   ]);
+  const getthecar = (value: any) => {
+    return modalModal.filter(
+      (item) => item.slice(0, 3).toLowerCase() == value
+    )[0];
+  };
 
   function handleSubmit(e: any) {
     e.preventDefault();
@@ -210,7 +215,11 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
                               className=" text-yellow-300 text-center w-full"
                               data-key={i.id}
                             >
-                              {i.workload} cars this week
+                              {i.workload} cars this week (
+                              {ind == 0
+                                ? getthecar(model) + " only"
+                                : "except " + getthecar(model)}
+                              )
                             </span>
                           </div>
                         </div>

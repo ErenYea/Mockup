@@ -138,7 +138,15 @@ const Home: NextPage<{}> = () => {
         size: 1,
       },
       xaxis: {
-        categories: ["Jul' 22","Aug' 22", "Sept' 22", "Oct' 22", "Nov' 22", "Dec' 22", "Jan' 23"],
+        categories: [
+          "Jul' 22",
+          "Aug' 22",
+          "Sept' 22",
+          "Oct' 22",
+          "Nov' 22",
+          "Dec' 22",
+          "Jan' 23",
+        ],
         title: {
           text: "Month",
         },
@@ -332,7 +340,7 @@ const Home: NextPage<{}> = () => {
           <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
             <Cell span={[12, 12, 6]}>
               <Card
-                title="Customer Loyalty"
+                title="Accuracy (Defect Detection) provided to customer"
                 overrides={{
                   Root: {
                     style: ({ $theme }) => {
@@ -364,7 +372,6 @@ const Home: NextPage<{}> = () => {
                   },
                 }}
               >
-
                 <StyledBody>
                   <ProductsBar
                     className="padding-control"
@@ -427,7 +434,6 @@ const Home: NextPage<{}> = () => {
           <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
             <Cell span={12}>
               <div className="cash-flow">
-
                 <Card
                   title="Revenue Variation"
                   overrides={{
@@ -512,7 +518,7 @@ const Home: NextPage<{}> = () => {
             <Cell span={12}>
               <div className="cash-flow mt-5">
                 <Card
-                  title="Vehicles Served"
+                  title="Vehicles Serviced"
                   overrides={{
                     Root: {
                       style: ({ $theme }) => {

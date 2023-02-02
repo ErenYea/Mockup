@@ -75,7 +75,7 @@ const index = (props: Props) => {
         <Block paddingTop={["0", "0", "0", "40px"]}>
           <Grid gridColumns={12} gridGutters={0} gridMargins={0} gridGaps={2}>
             <div className="flex flex-col">
-              <div className="flex flex-row items-start mx-auto space-x-2">
+              <div className="flex  items-start mx-auto space-x-2">
                 {/* <Cell span={[12, 12, 3]}> */}
                 <div className="w-1/4 h-full rounded-l-lg ">
                   <h3 className="m-4 pb-2 text-xl font-black border-b-2 hover:text-2xl duration-100 cursor-pointer">

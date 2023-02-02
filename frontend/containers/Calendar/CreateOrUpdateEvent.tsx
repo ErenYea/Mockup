@@ -31,6 +31,11 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     "Honda",
     "Toyota",
   ]);
+  const getthecar = (value: any) => {
+    return modalModal.filter(
+      (item) => item.slice(0, 3).toLowerCase() == value
+    )[0];
+  };
   const [starttime, setStartTime] = React.useState<any>(
     event.starttime ? event.starttime : ""
   );
@@ -58,7 +63,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     console.log(value);
     const filteredData = data;
     filteredData.sort(
-      (a, b) => b.modaldata[value].performance - a.modaldata.toy.performance
+      (a, b) => b.modaldata[value].performance - a.modaldata[value].performance
     );
     setSelectedData(filteredData);
 
@@ -369,7 +374,11 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                             className=" text-yellow-300 text-center w-full"
                             data-key={i.id}
                           >
-                            {i.workload} jobs this week
+                            {i.workload} jobs this week (
+                            {ind == 0
+                              ? getthecar(model) + " only"
+                              : "except " + getthecar(model)}
+                            )
                           </span>
                         </div>
                       </div>

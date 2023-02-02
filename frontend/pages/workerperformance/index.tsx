@@ -21,7 +21,7 @@ const index = (props: Props) => {
       totalJobs: 579,
       best: "Ford F-150",
       score: 91,
-      desc: "Best and Outstanding Skills. Very Reliable",
+      desc: "Best and Outstanding Skills",
       pieValue: [
         ["Task", "Hours per Day"],
         ["Ford", 11],
@@ -48,7 +48,7 @@ const index = (props: Props) => {
       totalJobs: 312,
       best: "Ford F-100",
       score: 82,
-      desc: "Satisfactory Performance. Has outstanding handskills",
+      desc: "Satisfactory Performance.",
       pieValue: [
         ["Task", "Hours per Day"],
         ["Ford", 15],
@@ -105,7 +105,7 @@ const index = (props: Props) => {
   }
   return (
     <>
-          <Head>
+      <Head>
         <title>Dashboard | Worker Performance Metrics</title>
       </Head>
       <PageTitle title={"Worker Performance Metrics"} subtitle={""} />
