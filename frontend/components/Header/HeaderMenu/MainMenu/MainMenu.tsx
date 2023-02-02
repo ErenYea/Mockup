@@ -17,7 +17,6 @@ const menuItems = [
     id: 3,
     label: "Worker Performance Metrics",
     path: "/workerperformance",
-
   },
   // {
   //   id: 4,
@@ -34,11 +33,11 @@ const menuItems = [
     label: "Demand Forcasting",
     path: "/demandforcasting",
   },
-  {
-    id: 6,
-    label: "Charts",
-    path: "/charts",
-  },
+  // {
+  //   id: 6,
+  //   label: "Charts",
+  //   path: "/charts",
+  // },
   // {
   //   id: 7,
   //   label: "UI Elements",
