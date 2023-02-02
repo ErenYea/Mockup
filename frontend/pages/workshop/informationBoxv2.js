@@ -27,7 +27,7 @@ const useTypewriter = (text) => {
 
 export default function InformationBox() {
   const text = useTypewriter(
-    'Hi Sam Davidson, you are doing a great job except that you have misplaced the measuring mat at the roof of the car, please take great care of it, thanks.'
+    'Hi Sean Davidson, you are doing a great job except that you have misplaced the measuring mat at the roof of the car, please take great care of it, thanks.'
   );
   return (
     <div>
@@ -76,7 +76,7 @@ export default function InformationBox() {
               </div>
               <div class="text-center  flex flex-col items-center justify-center">
                 <span class="text-2xl font-semibold leading-normal mb-1 text-blueGray-700">
-                  Sam Davidson
+                  Sean Davidson
                 </span>
                 <div class="text-sm leading-normal mt-0 mb-2 text-gray-800 font-bold uppercase">
                   <i class="fas fa-map-marker-alt mr-2 text-lg text-gray-800"></i>

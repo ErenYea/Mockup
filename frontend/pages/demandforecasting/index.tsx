@@ -68,6 +68,7 @@ const index = (props: Props) => {
     <>
       <Head>
         <title>Dashboard | Demand Forecasting</title>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
       </Head>
       <PageTitle title={"Demand Forecasting"} subtitle={""} />
           <div className="flex flex-col justify-center h-[1450px] rounded-lg items-center border-2 ">

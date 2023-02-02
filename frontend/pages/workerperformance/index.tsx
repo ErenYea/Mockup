@@ -14,7 +14,7 @@ import { LineChart } from "pages/workshop/lineChart";
 const index = (props: Props) => {
   const jsonData = [
     {
-      name: "Sam Davidson",
+      name: "Sean Davidson",
       performance: 0.92,
       address: "1883 Venture Place, Alberta",
       designation: "Senior Technician",

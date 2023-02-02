@@ -31,7 +31,7 @@ const index = (props: Props) => {
   ];
   var data = [
     {
-      name: "Sam Davidson",
+      name: "Sean Davidson",
       desc: "Machine Learning Engineer",
       image: "/images/person1.jpg",
     },

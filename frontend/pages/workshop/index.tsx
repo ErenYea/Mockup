@@ -23,7 +23,7 @@ const index: NextPage = (props: Props) => {
   const timeSteps = [1500, 1000, 3000, 1500, 3000];
   const jsonData = [
     {
-      name: "Sam Davidson",
+      name: "Sean Davidson",
       performance: 0.92,
       address: "1883 Venture Place, Alberta",
       designation: "Senior Technician",
