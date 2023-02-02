@@ -3,11 +3,13 @@ import PageTitle from "components/UiElements/PageTitle/PageTitle";
 import Container from "components/UiElements/Container/Container";
 import { Grid, Cell } from "baseui/layout-grid";
 import ApexCharts from "./boxPlot";
+import Head from "next/head";
 type Props = {};
 import { Block } from "baseui/block";
 // import InformationBox from "pages/workshop/informationBoxv2";
 import InformationBox from "./informationBox";
 import Pie from "pages/charts/pie";
+import { LineChart } from "pages/workshop/lineChart";
 
 const index = (props: Props) => {
   const jsonData = [
@@ -22,19 +24,19 @@ const index = (props: Props) => {
       desc: "Best and Outstanding Skills. Very Reliable",
       pieValue: [
         ["Task", "Hours per Day"],
-        ["Toyota", 11],
-        ["Ford", 2],
-        ["KIA", 2],
+        ["Ford", 11],
+        ["Nissan", 2],
+        ["Hyundai", 2],
         ["Honda", 2],
-        ["Hyundai", 7],
+        ["Toyota", 7],
       ],
       pic: "/images/image.jpg",
       boxPlotValue: [
-        { x: "Toyota", y: [54, 66, 69, 75, 88] },
-        { x: "Ford", y: [43, 65, 69, 76, 81] },
-        { x: "KIA", y: [31, 39, 45, 51, 59] },
+        { x: "Ford", y: [54, 66, 69, 75, 88] },
+        { x: "Nissan", y: [43, 65, 69, 76, 81] },
+        { x: "Hyundai", y: [31, 39, 45, 51, 59] },
         { x: "Honda", y: [39, 46, 55, 65, 71] },
-        { x: "Hyundai", y: [29, 31, 35, 39, 44] },
+        { x: "Toyota", y: [29, 31, 35, 39, 44] },
       ],
       id: "index1",
     },
@@ -49,20 +51,20 @@ const index = (props: Props) => {
       desc: "Satisfactory Performance. Has outstanding handskills",
       pieValue: [
         ["Task", "Hours per Day"],
-        ["Toyota", 15],
-        ["Ford", 3],
-        ["KIA", 14],
+        ["Ford", 15],
+        ["Nissan", 3],
+        ["Hyundai", 14],
         ["Honda", 1],
-        ["Hyundai", 4],
+        ["Toyota", 4],
       ],
       pic:
         "https://media.istockphoto.com/id/1300972574/photo/millennial-male-team-leader-organize-virtual-workshop-with-employees-online.jpg?s=612x612&w=0&k=20&c=uP9rKidKETywVil0dbvg_vAKyv2wjXMwWJDNPHzc_Ug=",
       boxPlotValue: [
-        { x: "Toyota", y: [44, 56, 59, 65, 78] },
-        { x: "Ford", y: [33, 55, 59, 66, 71] },
-        { x: "KIA", y: [21, 29, 35, 41, 49] },
+        { x: "Ford", y: [44, 56, 59, 65, 78] },
+        { x: "Nissan", y: [33, 55, 59, 66, 71] },
+        { x: "Hyundai", y: [21, 29, 35, 41, 49] },
         { x: "Honda", y: [29, 36, 45, 55, 61] },
-        { x: "Hyundai", y: [19, 21, 25, 29, 34] },
+        { x: "Toyota", y: [19, 21, 25, 29, 34] },
       ],
       id: "index2",
     },
@@ -77,20 +79,20 @@ const index = (props: Props) => {
       desc: "Eager to learn but still needs experience!",
       pieValue: [
         ["Task", "Hours per Day"],
-        ["Toyota", 4],
-        ["Ford", 5],
-        ["KIA", 11],
+        ["Ford", 4],
+        ["Nissan", 5],
+        ["Hyundai", 11],
         ["Honda", 15],
-        ["Hyundai", 17],
+        ["Toyota", 17],
       ],
       pic:
         "https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?s=612x612&w=0&k=20&c=kPvoBm6qCYzQXMAn9JUtqLREXe9-PlZyMl9i-ibaVuY=",
       boxPlotValue: [
-        { x: "Toyota", y: [53, 75, 79, 86, 91] },
-        { x: "Ford", y: [64, 76, 79, 75, 98] },
-        { x: "KIA", y: [41, 49, 55, 61, 69] },
+        { x: "Ford", y: [53, 75, 79, 86, 91] },
+        { x: "Nissan", y: [64, 76, 79, 75, 98] },
+        { x: "Hyundai", y: [41, 49, 55, 61, 69] },
         { x: "Honda", y: [49, 56, 65, 75, 81] },
-        { x: "Hyundai", y: [39, 41, 45, 49, 54] },
+        { x: "Toyota", y: [39, 41, 45, 49, 54] },
       ],
       id: "index3",
     },
@@ -103,7 +105,10 @@ const index = (props: Props) => {
   }
   return (
     <>
-      <PageTitle title={"Workshop Floor"} subtitle={""} />
+          <Head>
+        <title>Dashboard | Worker Performance Metrics</title>
+      </Head>
+      <PageTitle title={"Worker Performance Metrics"} subtitle={""} />
       <Container>
         <Block paddingBottom="20px">
           <div className="flex m-4 font-display text-center justify-center space-x-2">
@@ -130,12 +135,19 @@ const index = (props: Props) => {
             /> */}
           </div>
         </Block>
-        <Block>
+        <Block paddingBottom="20px">
           <div className="pt-6 flex w-full bg-white justify-center items-center border-white-200 rounded-lg mx-auto">
             <InformationBox args={jsonData[Index]} />
           </div>
+        </Block>
+        <Block paddingBottom="20px">
           <Pie args={jsonData[Index]} />
+        </Block>
+        <Block paddingBottom="20px">
           <ApexCharts args={jsonData[Index]} />
+        </Block>
+        <Block paddingBottom="20px">
+          <LineChart args={jsonData[Index]} />
         </Block>
         {/* <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
           <Cell span={12}>

@@ -44,12 +44,12 @@ const ProductViews = ({
       dataLabels: {
         enabled: false,
       },
-      colors: ["#3AA76D", "#EEEEEE"],
+      colors: ["#3AA76D", "#2583f4"],
       xaxis: {
         type: "category",
-        categories,
+        categories: ["Mon", "Tue", "Wed", "Thu", "Fri","Sat","Sun"],
         labels: {
-          show: false,
+          show: true,
         },
       },
       legend: {
@@ -62,11 +62,11 @@ const ProductViews = ({
     },
     series: [
       {
-        name: "Jobs",
+        name: "Active Jobs",
         data: products,
       },
       {
-        name: "Incoming",
+        name: "Incoming Jobs",
         data: views,
       },
     ],
