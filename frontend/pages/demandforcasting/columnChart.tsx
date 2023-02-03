@@ -15,7 +15,7 @@ const ColumnChart = (props) => {
     series: [
       {
         name: "Vehicles",
-        data: props.args.value,
+        data: props.args?.value,
       },
     ],
     options: {

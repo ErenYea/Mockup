@@ -1,5 +1,5 @@
-import React from 'react';
-import Gauge from 'pages/charts/gauge';
+import React from "react";
+import Gauge from "pages/charts/gauge";
 
 export default function InformationBox({ args }) {
   return (
@@ -13,7 +13,7 @@ export default function InformationBox({ args }) {
                   <div class="flex justify-center items-center h-11/12">
                     <img
                       alt="..."
-                      src={args.pic}
+                      src={args?.pic}
                       class="shadow-xl rounded-full h-11/12 align-middle border-none w-1/2"
                     ></img>
                   </div>
