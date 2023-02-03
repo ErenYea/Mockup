@@ -70,7 +70,7 @@ const Home = () => {
   //   notifyOnNetworkStatusChange: true,
   // });
   const [data, setData] = useState<any>(datas);
-  const [loading, setLoading] = useState<any>(false);
+  const [loading, setLoading] = useState<any>(true);
   console.log("data=>", data);
   // console.log("loadDashboard=>", datas);
   if (!data) return null;
@@ -180,9 +180,9 @@ const Home = () => {
     } else {
       router.push("/login");
     }
-    setTimeout(() => {
-      setLoading(true);
-    }, 3000);
+    // setTimeout(() => {
+    //   setLoading(true);
+    // }, 3000);
   }, []);
   if (cond) {
     return (
