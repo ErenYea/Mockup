@@ -8,7 +8,7 @@ export default function ApexCharts({ args }) {
   // console.log(args.boxPlotValue);
   const options = {
     chart: {
-      id: args.id,
+      id: args?.id,
       type: "boxPlot",
     },
     title: {
