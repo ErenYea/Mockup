@@ -5,7 +5,7 @@ import { useState } from "react";
 import ApexChart from "components/UiElements/ApexChart/ApexChart";
 
 export default function ApexCharts({ args }) {
-  console.log(args.boxPlotValue);
+  // console.log(args.boxPlotValue);
   const options = {
     chart: {
       id: args.id,
