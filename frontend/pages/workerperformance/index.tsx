@@ -14,7 +14,7 @@ import LineChart from "pages/workshop/lineChart";
 const index = (props: Props) => {
   const jsonData = [
     {
-      name: "Sam Davidson",
+      name: "Sean Davidson",
       performance: 0.92,
       address: "1883 Venture Place, Alberta",
       designation: "Senior Technician",
@@ -141,15 +141,20 @@ const index = (props: Props) => {
             <InformationBox args={jsonData[Index]} />
           </div>
         </Block>
-        <Block paddingBottom="20px">
+        {/* <Block paddingBottom="20px">
           <Pie args={jsonData[Index]} />
-        </Block>
+        </Block> */}
         <Block paddingBottom="20px">
           <ApexCharts args={jsonData[Index]} />
         </Block>
-        <Block paddingBottom="20px">
+        <div>
+          <div className="w-1/3"></div>
+          <div className="w-1/3"></div>
+          <div className="w-1/3"></div>
+        </div>
+        {/* <Block paddingBottom="20px">
           <LineChart args={jsonData[Index]} />
-        </Block>
+        </Block> */}
         {/* <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
           <Cell span={12}>
             <div className="pt-6 w-full bg-white justify-center items-center border-white-200 rounded-lg mx-auto">

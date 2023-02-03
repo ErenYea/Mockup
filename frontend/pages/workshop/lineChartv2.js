@@ -1,7 +1,21 @@
 import React from "react";
 import { Chart } from "react-google-charts";
-import { data } from "containers/Workshop/data";
+// import {data} from  "./lineChart"
 
+const data = [
+  ["x", "Actual", "Expected"],
+  ["1", 100, 100],
+  ["2", 90, 95],
+  ["3", 80, 88],
+  ["4", 70, 79],
+  ["5", 60, 55],
+  ["6", 50, 52],
+  ["7", 40, null],
+  ["8", 30, null],
+  ["9", 20, null],
+  ["10", 10, null],
+  // ["Day 11",0,null],
+];
 // function getRandomInt(min, max) {
 //   min = Math.ceil(min);
 //   max = Math.floor(max);
@@ -23,16 +37,14 @@ import { data } from "containers/Workshop/data";
 // }
 
 export default function LineChartv2() {
-  console.log("data=>", data);
   const options = {
-    legend: { position: "none" },
-
+    legend: { position: "bottom" },
     hAxis: {
-      title: "",
+      title: "Days",
       // format: "yyyy-MM-dd",
     },
     vAxis: {
-      title: "Performance",
+      title: "Remaining Effort (Hour)",
       format: "0",
       ticks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
     },
@@ -41,7 +53,6 @@ export default function LineChartv2() {
     },
     // pointsVisible: true
   };
-
   return (
     <Chart
       chartType="LineChart"
@@ -50,7 +61,7 @@ export default function LineChartv2() {
       data={data}
       options={options}
       width="100%"
-      height="200px"
+      height="300px"
     />
   );
 }

@@ -30,8 +30,8 @@ const menuItems = [
   },
   {
     id: 5,
-    label: "Demand Forcasting",
-    path: "/demandforcasting",
+    label: "Demand Forecasting",
+    path: "/demandforecasting",
   },
   // {
   //   id: 6,

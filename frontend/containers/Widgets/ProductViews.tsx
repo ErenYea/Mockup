@@ -62,11 +62,11 @@ const ProductViews = ({
     },
     series: [
       {
-        name: "Active Jobs",
+        name: "Active Confirmed Jobs",
         data: products,
       },
       {
-        name: "Incoming Jobs",
+        name: "Predicted Incoming Jobs",
         data: views,
       },
     ],

@@ -105,13 +105,13 @@ const Home = () => {
   const [state, setState] = useState<any>({
     series: [
       {
-        name: "Active Jobs",
-        data: [280, 290, 330, 360, 320, 320, 330],
+        name: "Booked Jobs",
+        data: [130, 140, 180, 210, 170, 180, 190],
       },
-      // {
-      //   name: "Low - 2020",
-      //   data: [12, 11, 14, 18, 17, 13, 13],
-      // },
+      {
+        name: "Predicted Jobs",
+        data: [164, 193, 228, 248, 222, 206, 237],
+      },
     ],
     options: {
       chart: {
@@ -145,31 +145,216 @@ const Home = () => {
       },
       xaxis: {
         categories: [
-          "Jul' 22",
-          "Aug' 22",
-          "Sept' 22",
-          "Oct' 22",
-          "Nov' 22",
-          "Dec' 22",
           "Jan' 23",
+          "Feb' 23",
+          "Mar' 23",
+          "Apr' 23",
+          "May' 23",
+          "Jun' 23",
+          "Jul' 23",
         ],
         title: {
-          text: "Month",
+          text: "Months",
         },
       },
       yaxis: {
         title: {
           text: "Jobs",
         },
-        min: 5,
-        max: 400,
+        min: 100,
+        max: 300,
       },
       legend: {
         position: "top",
         horizontalAlign: "right",
-        floating: true,
-        offsetY: 25,
-        offsetX: 5,
+        // floating: true,
+        // offsetY: 25,
+        // offsetX: 5,
+      },
+    },
+  });
+  const [stateOne, setStateOne] = useState<any>({
+    series: [
+      {
+        name: "Man Hours per Job",
+        data: [8, 9, 11, 13, 14, 4, 3, 2, 4, 3, 4, 2],
+      },
+    ],
+    options: {
+      chart: {
+        height: 420,
+        type: "line",
+        dropShadow: {
+          enabled: true,
+          color: "#000",
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2,
+        },
+        toolbar: {
+          show: false,
+        },
+      },
+      colors: ["#ff0080", "#006ff3"],
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: "smooth",
+      },
+      title: {
+        text: "",
+        align: "left",
+      },
+      markers: {
+        size: 1,
+      },
+      xaxis: {
+        categories: [
+          "Jan' 22",
+          "Feb' 22",
+          "Mar' 22",
+          "Apr' 22",
+          "May' 22",
+          "Jun' 22",
+          "Jul' 22",
+          "Aug' 22",
+          "Sept' 22",
+          "Oct' 22",
+          "Nov' 22",
+          "Dec' 22",
+        ],
+        title: {
+          text: "Months",
+        },
+      },
+      yaxis: {
+        // labels: {
+        //   formatter: function(val) {
+        //     return val + '$'
+        //   }
+        // },
+        title: {
+          text: "Man Hours per Job",
+        },
+        min: 0,
+        max: 20,
+      },
+      annotations: {
+        xaxis: [
+          {
+            x: "Jun' 22",
+            borderColor: "#775DD0",
+            label: {
+              style: {
+                color: "#000000",
+              },
+              text: "Solution Deployed",
+            },
+          },
+        ],
+      },
+      legend: {
+        position: "top",
+        horizontalAlign: "right",
+        // floating: true,
+        // offsetY: 25,
+        // offsetX: 5,
+      },
+    },
+  });
+  const [stateTwo, setStateTwo] = useState<any>({
+    series: [
+      {
+        name: "Loss Incured",
+        data: [
+          84, 25450, 33040, 43250, 44000, 5600, 5300, 4200, 4000, 3400, 3200,
+          2600,
+        ],
+      },
+    ],
+    options: {
+      chart: {
+        height: 420,
+        type: "line",
+        dropShadow: {
+          enabled: true,
+          color: "#000",
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2,
+        },
+        toolbar: {
+          show: false,
+        },
+      },
+      colors: ["#0000FF"],
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: "smooth",
+      },
+      title: {
+        text: "",
+        align: "left",
+      },
+      markers: {
+        size: 1,
+      },
+      xaxis: {
+        categories: [
+          "Jan' 22",
+          "Feb' 22",
+          "Mar' 22",
+          "Apr' 22",
+          "May' 22",
+          "Jun' 22",
+          "Jul' 22",
+          "Aug' 22",
+          "Sept' 22",
+          "Oct' 22",
+          "Nov' 22",
+          "Dec' 22",
+        ],
+        title: {
+          text: "Month",
+        },
+      },
+      yaxis: {
+        labels: {
+          formatter: function (val) {
+            return val + "$";
+          },
+        },
+        title: {
+          text: "Loss Incured(CAD)",
+        },
+        min: 0,
+        max: 50000,
+      },
+      annotations: {
+        xaxis: [
+          {
+            x: "Jun' 22",
+            borderColor: "#775DD0",
+            label: {
+              style: {
+                color: "#000000",
+              },
+              text: "Solution Deployed",
+            },
+          },
+        ],
+      },
+      legend: {
+        position: "top",
+        horizontalAlign: "right",
+        // floating: true,
+        // offsetY: 25,
+        // offsetX: 5,
       },
     },
   });
@@ -190,59 +375,58 @@ const Home = () => {
         <Head>
           <title>Dashboard | Portal</title>
         </Head>
-        {loading ? (
-          <Block
-            marginLeft={"-8px"}
-            marginRight={"-8px"}
-            paddingTop={["15px", "20px", "30px", "40px"]}
-          >
-            <Grid gridColumns={12} gridGutters={0} gridMargins={0}>
-              <Cell span={[12, 12, 6]}>
-                <Grid gridGutters={16} gridMargins={0}>
-                  <Cell span={12}>
-                    <Card
-                      title="Active Jobs per Month"
-                      overrides={{
-                        Root: {
-                          style: ({ $theme }) => {
-                            return {
-                              borderTopColor: "transparent",
-                              borderRightColor: "transparent",
-                              borderBottomColor: "transparent",
-                              borderLeftColor: "transparent",
-                              boxShadow: $theme.lighting.shadow400,
-                              minHeight: "312px",
-                              marginBottom: "20px",
-                            };
-                          },
+        <Block
+          marginLeft={"-8px"}
+          marginRight={"-8px"}
+          paddingTop={["15px", "20px", "30px", "40px"]}
+        >
+          <Grid gridColumns={12} gridGutters={0} gridMargins={0}>
+            <Cell span={[12, 12, 6]}>
+              <Grid gridGutters={16} gridMargins={0}>
+                <Cell span={12}>
+                  <Card
+                    title="Jobs per Month"
+                    overrides={{
+                      Root: {
+                        style: ({ $theme }) => {
+                          return {
+                            borderTopColor: "transparent",
+                            borderRightColor: "transparent",
+                            borderBottomColor: "transparent",
+                            borderLeftColor: "transparent",
+                            boxShadow: $theme.lighting.shadow400,
+                            minHeight: "312px",
+                            marginBottom: "20px",
+                          };
                         },
-                        Title: {
-                          style: ({ $theme }) => {
-                            return {
-                              ...$theme.typography.font250,
-                              position: "absolute",
-                            };
-                          },
+                      },
+                      Title: {
+                        style: ({ $theme }) => {
+                          return {
+                            ...$theme.typography.font250,
+                            position: "absolute",
+                          };
                         },
-                        Body: {
-                          style: () => {
-                            return {
-                              minHeight: "260px",
-                            };
-                          },
+                      },
+                      Body: {
+                        style: () => {
+                          return {
+                            minHeight: "260px",
+                          };
                         },
-                      }}
-                    >
-                      <StyledBody>
-                        <ApexChart
-                          options={state.options}
-                          series={state.series}
-                          type="line"
-                          height={250}
-                        />
-                      </StyledBody>
-                    </Card>
-                    {/* <Block paddingTop={["10px", "15px", "30px", "0"]}>
+                      },
+                    }}
+                  >
+                    <StyledBody>
+                      <ApexChart
+                        options={state.options}
+                        series={state.series}
+                        type="line"
+                        height={250}
+                      />
+                    </StyledBody>
+                  </Card>
+                  {/* <Block paddingTop={["10px", "15px", "30px", "0"]}>
                     <ApexChart
                       options={state.options}
                       series={state.series}
@@ -250,7 +434,7 @@ const Home = () => {
                       height={420}
                     />
                   </Block> */}
-                    {/* <WidgetCard
+                  {/* <WidgetCard
                     style={{ marginBottom: "20px" }}
                     title="210"
                     icon={<IoIosMailUnread color="#ffffff" size="1.7em" />}
@@ -259,8 +443,8 @@ const Home = () => {
                     label="Total mail"
                     onClick={() => console.log("View report of unread email.")}
                   /> */}
-                  </Cell>
-                  {/* <Cell span={[12, 6]}>
+                </Cell>
+                {/* <Cell span={[12, 6]}>
                   <WidgetCard
                     style={{ marginBottom: '20px' }}
                     color="#0070F3"
@@ -296,61 +480,61 @@ const Home = () => {
                     onClick={() => console.log('View report of previous month.')}
                   />
                 </Cell> */}
-                </Grid>
-              </Cell>
-              <Cell span={[12, 12, 6]}>
-                <Grid gridGutters={16} gridMargins={0}>
-                  <Cell span={12}>
-                    <Card
-                      title="Weekly Outlook"
-                      overrides={{
-                        Root: {
-                          style: ({ $theme }) => {
-                            return {
-                              borderTopColor: "transparent",
-                              borderRightColor: "transparent",
-                              borderBottomColor: "transparent",
-                              borderLeftColor: "transparent",
-                              boxShadow: $theme.lighting.shadow400,
-                              minHeight: "312px",
-                              marginBottom: "20px",
-                            };
-                          },
+              </Grid>
+            </Cell>
+            <Cell span={[12, 12, 6]}>
+              <Grid gridGutters={16} gridMargins={0}>
+                <Cell span={12}>
+                  <Card
+                    title="Upcoming Week Outlook"
+                    overrides={{
+                      Root: {
+                        style: ({ $theme }) => {
+                          return {
+                            borderTopColor: "transparent",
+                            borderRightColor: "transparent",
+                            borderBottomColor: "transparent",
+                            borderLeftColor: "transparent",
+                            boxShadow: $theme.lighting.shadow400,
+                            minHeight: "312px",
+                            marginBottom: "20px",
+                          };
                         },
-                        Title: {
-                          style: ({ $theme }) => {
-                            return {
-                              ...$theme.typography.font250,
-                              position: "absolute",
-                            };
-                          },
+                      },
+                      Title: {
+                        style: ({ $theme }) => {
+                          return {
+                            ...$theme.typography.font250,
+                            position: "absolute",
+                          };
                         },
-                        Body: {
-                          style: () => {
-                            return {
-                              minHeight: "260px",
-                            };
-                          },
+                      },
+                      Body: {
+                        style: () => {
+                          return {
+                            minHeight: "260px",
+                          };
                         },
-                      }}
-                    >
-                      <StyledBody>
-                        <ProductViews
-                          categories={productViews.categories}
-                          products={productViews.products}
-                          views={productViews.views}
-                        />
-                      </StyledBody>
-                    </Card>
-                  </Cell>
-                </Grid>
-              </Cell>
-            </Grid>
-
-            <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
-              <Cell span={[12, 12, 6]}>
+                      },
+                    }}
+                  >
+                    <StyledBody>
+                      <ProductViews
+                        categories={productViews.categories}
+                        products={productViews.products}
+                        views={productViews.views}
+                      />
+                    </StyledBody>
+                  </Card>
+                </Cell>
+              </Grid>
+            </Cell>
+          </Grid>
+          <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+            <Cell span={12}>
+              <div className="cash-flow mt-5">
                 <Card
-                  title="Accuracy (Defect Detection) provided to customer"
+                  title="Predicted Incoming Jobs - Breakdown by Manufacturer"
                   overrides={{
                     Root: {
                       style: ({ $theme }) => {
@@ -360,7 +544,6 @@ const Home = () => {
                           borderBottomColor: "transparent",
                           borderLeftColor: "transparent",
                           boxShadow: $theme.lighting.shadow400,
-                          marginBottom: $theme.sizing.scale700,
                         };
                       },
                     },
@@ -368,41 +551,30 @@ const Home = () => {
                       style: ({ $theme }) => {
                         return {
                           ...$theme.typography.font250,
-                          position: "absolute",
                         };
                       },
                     },
                     Body: {
                       style: () => {
                         return {
-                          minHeight: "372px",
-                          position: "relative",
+                          minHeight: "200px",
                         };
                       },
                     },
                   }}
                 >
                   <StyledBody>
-                    <ProductsBar
-                      className="padding-control"
-                      labels={productsBar.labels}
-                      products={productsBar.products}
-                    />
-                    <LabelGroup
-                      style={{
-                        position: "absolute",
-                        width: "100%",
-                        bottom: "-66px",
-                      }}
-                      items={productsBarOptions}
-                    />
+                    <Bar />
                   </StyledBody>
                 </Card>
-              </Cell>
-
-              <Cell span={[12, 12, 6]}>
+              </div>
+            </Cell>
+          </Grid>
+          <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+            <Cell span={12}>
+              <div className="cash-flow  mt-5 mb-5">
                 <Card
-                  title="Customer Satisfaction"
+                  title="Production Variation"
                   overrides={{
                     Root: {
                       style: ({ $theme }) => {
@@ -412,7 +584,6 @@ const Home = () => {
                           borderBottomColor: "transparent",
                           borderLeftColor: "transparent",
                           boxShadow: $theme.lighting.shadow400,
-                          marginBottom: $theme.sizing.scale700,
                         };
                       },
                     },
@@ -420,160 +591,214 @@ const Home = () => {
                       style: ({ $theme }) => {
                         return {
                           ...$theme.typography.font250,
-                          position: "absolute",
                         };
                       },
                     },
-                    Contents: {
+                    Body: {
                       style: () => {
                         return {
-                          minHeight: "372px",
+                          minHeight: "200px",
                         };
                       },
                     },
                   }}
                 >
                   <StyledBody>
-                    <Column />
-                    {/* <Views className="padding-control" totalView={75} /> */}
+                    <CashFlow
+                      categories={cashFlow.categories}
+                      cash={cashFlow.cash}
+                    />
                   </StyledBody>
                 </Card>
-              </Cell>
-            </Grid>
-
-            <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
-              <Cell span={12}>
-                <div className="cash-flow">
-                  <Card
-                    title="Revenue Variation"
-                    overrides={{
-                      Root: {
-                        style: ({ $theme }) => {
-                          return {
-                            borderTopColor: "transparent",
-                            borderRightColor: "transparent",
-                            borderBottomColor: "transparent",
-                            borderLeftColor: "transparent",
-                            boxShadow: $theme.lighting.shadow400,
-                          };
-                        },
-                      },
-                      Title: {
-                        style: ({ $theme }) => {
-                          return {
-                            ...$theme.typography.font250,
-                          };
-                        },
-                      },
-                      Body: {
-                        style: () => {
-                          return {
-                            minHeight: "200px",
-                          };
-                        },
-                      },
-                    }}
-                  >
-                    <StyledBody>
-                      <CashFlow
-                        categories={cashFlow.categories}
-                        cash={cashFlow.cash}
-                      />
-                    </StyledBody>
-                  </Card>
-                </div>
-              </Cell>
-            </Grid>
-            <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
-              <Cell span={12}>
-                <div className="cash-flow mt-5">
-                  <Card
-                    title="Revenue Generated"
-                    overrides={{
-                      Root: {
-                        style: ({ $theme }) => {
-                          return {
-                            borderTopColor: "transparent",
-                            borderRightColor: "transparent",
-                            borderBottomColor: "transparent",
-                            borderLeftColor: "transparent",
-                            boxShadow: $theme.lighting.shadow400,
-                          };
-                        },
-                      },
-                      Title: {
-                        style: ({ $theme }) => {
-                          return {
-                            ...$theme.typography.font250,
-                          };
-                        },
-                      },
-                      Body: {
-                        style: () => {
-                          return {
-                            minHeight: "200px",
-                          };
-                        },
-                      },
-                    }}
-                  >
-                    <StyledBody>
-                      <Area />
-                    </StyledBody>
-                  </Card>
-                </div>
-              </Cell>
-            </Grid>
-            <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
-              <Cell span={12}>
-                <div className="cash-flow mt-5">
-                  <Card
-                    title="Vehicles Serviced"
-                    overrides={{
-                      Root: {
-                        style: ({ $theme }) => {
-                          return {
-                            borderTopColor: "transparent",
-                            borderRightColor: "transparent",
-                            borderBottomColor: "transparent",
-                            borderLeftColor: "transparent",
-                            boxShadow: $theme.lighting.shadow400,
-                          };
-                        },
-                      },
-                      Title: {
-                        style: ({ $theme }) => {
-                          return {
-                            ...$theme.typography.font250,
-                          };
-                        },
-                      },
-                      Body: {
-                        style: () => {
-                          return {
-                            minHeight: "200px",
-                          };
-                        },
-                      },
-                    }}
-                  >
-                    <StyledBody>
-                      <Bar />
-                    </StyledBody>
-                  </Card>
-                </div>
-              </Cell>
-            </Grid>
-          </Block>
-        ) : (
-          <div className=" text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden  z-0">
-            <div className="flex justify-center items-center h-screen">
-              <div className="relative w-24 h-24 animate-spin rounded-full bg-gradient-to-r from-purple-400 via-blue-500 to-red-400 ">
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white rounded-full border-2 "></div>
               </div>
-            </div>
-          </div>
-        )}
+            </Cell>
+          </Grid>
+          <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+            <Cell span={[12, 12, 6]}>
+              <Card
+                title="Quality Control"
+                overrides={{
+                  Root: {
+                    style: ({ $theme }) => {
+                      return {
+                        borderTopColor: "transparent",
+                        borderRightColor: "transparent",
+                        borderBottomColor: "transparent",
+                        borderLeftColor: "transparent",
+                        boxShadow: $theme.lighting.shadow400,
+                        marginBottom: $theme.sizing.scale700,
+                      };
+                    },
+                  },
+                  Title: {
+                    style: ({ $theme }) => {
+                      return {
+                        ...$theme.typography.font250,
+                        position: "absolute",
+                      };
+                    },
+                  },
+                  Body: {
+                    style: () => {
+                      return {
+                        minHeight: "372px",
+                        position: "relative",
+                      };
+                    },
+                  },
+                }}
+              >
+                <StyledBody>
+                  <ProductsBar
+                    className="padding-control"
+                    labels={productsBar.labels}
+                    products={productsBar.products}
+                  />
+                  <LabelGroup
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      bottom: "-66px",
+                    }}
+                    items={productsBarOptions}
+                  />
+                </StyledBody>
+              </Card>
+            </Cell>
+
+            <Cell span={[12, 12, 6]}>
+              <Card
+                title="Customer Satisfaction"
+                overrides={{
+                  Root: {
+                    style: ({ $theme }) => {
+                      return {
+                        borderTopColor: "transparent",
+                        borderRightColor: "transparent",
+                        borderBottomColor: "transparent",
+                        borderLeftColor: "transparent",
+                        boxShadow: $theme.lighting.shadow400,
+                        marginBottom: $theme.sizing.scale700,
+                      };
+                    },
+                  },
+                  Title: {
+                    style: ({ $theme }) => {
+                      return {
+                        ...$theme.typography.font250,
+                        position: "absolute",
+                      };
+                    },
+                  },
+                  Contents: {
+                    style: () => {
+                      return {
+                        minHeight: "372px",
+                      };
+                    },
+                  },
+                }}
+              >
+                <StyledBody>
+                  <Column />
+                  {/* <Views className="padding-control" totalView={75} /> */}
+                </StyledBody>
+              </Card>
+            </Cell>
+          </Grid>
+          <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+            <Cell span={12}>
+              <div className="cash-flow mt-5">
+                <Card
+                  title="Defect Losses"
+                  overrides={{
+                    Root: {
+                      style: ({ $theme }) => {
+                        return {
+                          borderTopColor: "transparent",
+                          borderRightColor: "transparent",
+                          borderBottomColor: "transparent",
+                          borderLeftColor: "transparent",
+                          boxShadow: $theme.lighting.shadow400,
+                        };
+                      },
+                    },
+                    Title: {
+                      style: ({ $theme }) => {
+                        return {
+                          ...$theme.typography.font250,
+                        };
+                      },
+                    },
+                    Body: {
+                      style: () => {
+                        return {
+                          minHeight: "200px",
+                        };
+                      },
+                    },
+                  }}
+                >
+                  <StyledBody>
+                    {/* <ApexChart
+                        options={stateOne.options}
+                        series={stateOne.series}
+                        type="line"
+                        height={500}
+                      />
+                       */}
+                    <Area />
+                  </StyledBody>
+                </Card>
+              </div>
+            </Cell>
+          </Grid>
+          <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+            <Cell span={12}>
+              <div className="cash-flow mt-5">
+                <Card
+                  title="Man Hours Utilized"
+                  overrides={{
+                    Root: {
+                      style: ({ $theme }) => {
+                        return {
+                          borderTopColor: "transparent",
+                          borderRightColor: "transparent",
+                          borderBottomColor: "transparent",
+                          borderLeftColor: "transparent",
+                          boxShadow: $theme.lighting.shadow400,
+                        };
+                      },
+                    },
+                    Title: {
+                      style: ({ $theme }) => {
+                        return {
+                          ...$theme.typography.font250,
+                        };
+                      },
+                    },
+                    Body: {
+                      style: () => {
+                        return {
+                          minHeight: "200px",
+                        };
+                      },
+                    },
+                  }}
+                >
+                  <StyledBody>
+                    <ApexChart
+                      options={stateOne.options}
+                      series={stateOne.series}
+                      type="line"
+                      height={500}
+                    />
+                  </StyledBody>
+                </Card>
+              </div>
+            </Cell>
+          </Grid>
+        </Block>
       </Container>
     );
   } else {
