@@ -12,7 +12,7 @@ import {
   SIZE,
   ROLE,
 } from "baseui/modal";
-import { data } from "../../containers/Calendar/oem/data";
+import { data } from "containers/Calendar/oem/data";
 
 export default ({ onClose, isOpen, onSubmit }: any) => {
   const [title, setTitle] = React.useState("");

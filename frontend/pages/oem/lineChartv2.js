@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "react-google-charts";
-import { data } from "./lineChart";
+import { data } from "containers/Calendar/oem/lineChart";
 
 // function getRandomInt(min, max) {
 //   min = Math.ceil(min);
