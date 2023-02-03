@@ -249,6 +249,7 @@ function CalendarApp(props) {
     setIsOpen(false);
     setEvent(null);
   }
+  const today = new Date();
   useEffect(() => {
     getDate();
   }, []);
@@ -265,10 +266,23 @@ function CalendarApp(props) {
         onSelectSlot={onSelectSlot}
         onSelectEvent={onSelectEvent}
         onDragStart={console.log}
-        defaultView={Views.MONTH}
-        defaultDate={new Date()}
+        defaultView={Views.WEEK}
+        defaultDate={today}
         timeslots={15}
         step={1}
+        min={
+          new Date(today.getFullYear(), today.getMonth(), today.getDate(), 8)
+        }
+        max={
+          new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate(),
+            18,
+            15
+          )
+        }
+        // defaultView="week"
       />
       {event && (
         <CreateOrUpdateEvent

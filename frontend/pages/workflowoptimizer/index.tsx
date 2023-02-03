@@ -77,7 +77,7 @@ const index = (props: Props) => {
             <div className="flex flex-col items-center w-full">
               <div className="flex  items-start mx-auto space-x-2 w-full">
                 {/* <Cell span={[12, 12, 3]}> */}
-                <div className="w-1/4 h-full rounded-l-lg ">
+                {/* <div className="w-1/4 h-full rounded-l-lg ">
                   <h3 className="m-4 pb-2 text-xl font-black border-b-2 hover:text-2xl duration-100 cursor-pointer">
                     Expected Upcoming Tasks
                   </h3>
@@ -106,7 +106,7 @@ const index = (props: Props) => {
                       ))}
                     </table>
                   </div>
-                </div>
+                </div> */}
 
                 {/* </Cell> */}
                 {/* <Cell span={[12, 12, 9]}> */}

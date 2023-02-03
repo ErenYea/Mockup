@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 import { Textarea } from "baseui/textarea";
@@ -15,6 +15,7 @@ import {
 import { data } from "./data";
 
 export default ({ onClose, isOpen, onSubmit, event }: any) => {
+  const [time, setTime] = useState<any>([]);
   const [title, setTitle] = React.useState(event.title ? event.title : "");
   const [model, setModel] = React.useState(event.model ? event.model : "");
   // const [person, setPerson] = React.useState(event.person ? event.person : "");
@@ -42,7 +43,21 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
   const [endtime, setEndTime] = React.useState<any>(
     event.endtime ? event.endtime : ""
   );
-
+  const fillTime = () => {
+    var timetofill = [];
+    for (var i = 8; i < 16; i++) {
+      for (var j = 0; j < 60; j += 15) {
+        timetofill.push(
+          (i.toString().length == 1 ? `0${i.toString()}` : i.toString()) +
+            ":" +
+            (j.toString().length == 1 ? `0${j.toString()}` : j.toString())
+        );
+      }
+    }
+    timetofill.push("16:00");
+    console.log(timetofill);
+    setTime(timetofill);
+  };
   function handleSubmit(e: any) {
     e.preventDefault();
     var sl = slots;
@@ -93,6 +108,9 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
   };
   const handleStarttime = (event) => {
     console.log("personeselected", personSelect);
+    const value = (document.getElementById("timemodels") as HTMLInputElement)
+      .value;
+    console.log(value);
     var da = selectedData.filter((i) => {
       if (i.id == personSelect) {
         return true;
@@ -104,39 +122,29 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     var hour;
     var cond = false;
 
-    if (
-      da[0].modaldata[model].time +
-        parseInt(event.currentTarget.value.split(":")[1]) >=
-      60
-    ) {
-      min =
-        (da[0].modaldata[model].time +
-          parseInt(event.currentTarget.value.split(":")[1])) %
-        60;
+    if (da[0].modaldata[model].time + parseInt(value.split(":")[1]) >= 60) {
+      min = (da[0].modaldata[model].time + parseInt(value.split(":")[1])) % 60;
       hour = Math.floor(
-        (da[0].modaldata[model].time +
-          parseInt(event.currentTarget.value.split(":")[1])) /
-          60
+        (da[0].modaldata[model].time + parseInt(value.split(":")[1])) / 60
       );
       cond = true;
     } else {
-      min =
-        da[0].modaldata[model].time +
-        parseInt(event.currentTarget.value.split(":")[1]);
+      min = da[0].modaldata[model].time + parseInt(value.split(":")[1]);
       hour = 0;
     }
 
-    var end = (
-      parseInt(event.currentTarget.value.split(":")[0]) + hour
-    ).toString();
+    var end = (parseInt(value.split(":")[0]) + hour).toString();
     end = end.length > 1 ? end : "0" + end;
     end =
       end +
       ":" +
       (min.toString().length > 1 ? min.toString() : "0" + min.toString());
     setEndTime(end);
-    setStartTime(event.currentTarget.value);
+    setStartTime(value);
   };
+  useEffect(() => {
+    fillTime();
+  }, []);
   return (
     <Modal
       onClose={onClose}
@@ -549,13 +557,40 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
             />
           </FormControl> */}
           <FormControl label="Start Time">
-            <Input
+            <>
+              <select
+                id="timemodels"
+                onChange={handleStarttime}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                disabled={personSelect == "" ? true : false}
+              >
+                <option selected={model != "" ? false : true} disabled>
+                  Choose a Start Time
+                </option>
+                {time.map((item, index) => (
+                  <option
+                    key={index}
+                    value={item}
+                    selected={
+                      model != "" ? (model == item ? true : false) : false
+                    }
+                  >
+                    {item}
+                  </option>
+                ))}
+                {/* <option value="US">United States</option>
+                <option value="CA">Canada</option>
+                <option value="FR">France</option>
+                <option value="DE">Germany</option> */}
+              </select>
+            </>
+            {/* <Input
               id="starttime"
               value={starttime}
               onChange={handleStarttime}
               placeholder={"00:00"}
               required
-            />
+            /> */}
           </FormControl>
           <FormControl label="End Time">
             <Input

@@ -1,5 +1,5 @@
 import { Block } from "baseui/block";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import PageTitle from "components/UiElements/PageTitle/PageTitle";
 // import { Block } from "baseui/block";
@@ -8,6 +8,7 @@ import Head from "next/head";
 type Props = {};
 
 const index = (props: Props) => {
+  const [loading, setLoading] = useState<any>(false);
   const jsonData = [
     {
       name: "January",
@@ -66,6 +67,12 @@ const index = (props: Props) => {
     );
     setIndex(value);
   }
+  useEffect(() => {
+    const iframe = document.querySelector("iframe") as HTMLIFrameElement;
+    iframe.addEventListener("load", () => {
+      setLoading(true);
+    });
+  }, []);
   return (
     <>
       <Head>
@@ -81,10 +88,22 @@ const index = (props: Props) => {
           Automotive Parts Projection
         </span>
         {/* <div className=" bg-customBlue rounded-lg p-5 flex  w-[99%] justify-center h-5/6  border-2 border-customDarkBlue"> */}
+        {loading ? (
+          ""
+        ) : (
+          <div className=" text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden w-full  z-0">
+            <div className="flex justify-center items-center h-screen">
+              <div className="relative w-24 h-24 animate-spin rounded-full bg-gradient-to-r from-purple-400 via-blue-500 to-red-400 ">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white rounded-full border-2 "></div>
+              </div>
+            </div>
+          </div>
+        )}
         <iframe
           className="w-full h-[95%] mt-2 rounded-lg overflow-x-hidden scrollbar scrollbar-thumb-blue-700 scrollbar-track-blue-300 overflow-y-scroll hover:scrollbar-thumb-blue-500"
           src="http://owaisahmed142002.pythonanywhere.com/"
         ></iframe>
+
         {/* </div> */}
       </div>
       <div className="w-full flex justify-center items-center flex-row">
