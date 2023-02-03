@@ -22,11 +22,19 @@ type Props = {};
 const index = (props: Props) => {
   const timeSteps = [1500, 1000, 3000, 1500, 3000];
   var tasks = [
-    { name: "Ford F-150", order: 2 , time: 3,resource:'Sean Davidson'},
-    { name: "Toyota RAV4", order: 3 ,time: 4,resource:'Dennis Ray'},
-    { name: "Honda CR-V", order: 1, time: 4,resource:'Gilbert Holland'},
-    { name: "Nissan Altima", order: 2,time: 2,resource:'Sean Davidson' },
-    { name: "Hyundai Elantra", order: 3,time: 5,resource:'Dennis Ray' },
+    { name: "Ford F-150", order: 12 , time: 11,resource:'Sean Davidson'},
+    { name: "Toyota RAV4", order: 9 ,time: 8,resource:'Dennis Ray'},
+    { name: "Honda CR-V", order: 7, time: 7,resource:'Gilbert Holland'},
+    { name: "Nissan Altima", order: 12,time: 10,resource:'Sean Davidson' },
+    { name: "Audi Q5", order: 10,time: 10,resource:'Dennis Ray'},
+    { name: "BMW X5", order: 11,time: 9,resource:'Sean Davidson'},
+    { name: "Kia Sportage", order: 13,time: 10,resource:'Gilbert Holland'},
+    { name: "Toyota Camry", order: 4,time: 6,resource:'Dennis Ray'},
+    { name: "Toyota Tacoma", order: 4,time: 7,resource:'Gilbert Holland'},
+    { name: "BMW X3", order: 6,time: 6,resource:'Sean Davidson'},
+    { name: "Lexus RX", order: 7,time:8,resource:'Dennis Ray'},
+    { name: "Hyundai Santa Fe", order: 7,time:8,resource:'Dennis Ray'},
+    { name: "Subaru Forester", order: 9,time:10,resource:'Gilbert Holland'},
   ];
   const jsonData = [
     {
@@ -265,20 +273,20 @@ const index = (props: Props) => {
           </Cell>
           <div className="w-full mx-auto">
             <div className="w-full flex flex-col justify-center items-center mb-2">
-              <span className=" text-3xl font-black underline w-fit">Job Queue</span>
+              <span className=" text-3xl font-black w-fit">Job Queue</span>
             </div>
           <table className="mx-auto gap-3">
             <tr className="">
-              <th className="text-xl text-customDarkBlue font-black p-2 border-b-2 border-r-2 border-customDarkBlue">
+              <th className="text-xl text-customDarkBlue font-black p-2 border-2 border-r-2 border-customDarkBlue">
                 Car Model
               </th>
-              <th className="text-xl text-customDarkBlue font-black p-2 border-b-2 border-r-2 border-customDarkBlue">
+              <th className="text-xl text-customDarkBlue font-black p-2 border-2 border-r-2 border-customDarkBlue">
                 Orders
               </th>
-              <th className="text-xl text-customDarkBlue font-black p-2 border-b-2 border-r-2 border-customDarkBlue">
+              <th className="text-xl text-customDarkBlue font-black p-2 border-2 border-r-2 border-customDarkBlue">
                 Time Estimated(Days)
               </th>
-              <th className="text-xl text-customDarkBlue font-black p-2 border-b-2  border-customDarkBlue">
+              <th className="text-xl text-customDarkBlue font-black p-2 border-2  border-customDarkBlue">
                 Resource Deployed
               </th>
             </tr>
@@ -301,6 +309,23 @@ const index = (props: Props) => {
                 </td>
               </tr>
             ))}
+              <tr
+              
+                className="hover:text-xl hover:text-gray-600 hover:font-bold duration-100 cursor-pointer"
+              >
+                <td className="text-lg p-1 border-b-2 border-l-2 border-customDarkBlue">
+                Mazda CX-5
+                </td>
+                <td className="text-lg border-b-2 border-l-2 pl-2 border-customDarkBlue">
+                  18
+                </td>
+                <td className="text-lg border-b-2 border-l-2 pl-2 border-customDarkBlue">
+                  19
+                </td>
+                <td className="text-lg border-b-2 border-l-2 border-r-2 pl-2 border-customDarkBlue">
+                  Dennis Ray
+                </td>
+              </tr>
           </table>
             {/* <Block paddingBottom="20px">
               <Pie args={jsonData[0]} />

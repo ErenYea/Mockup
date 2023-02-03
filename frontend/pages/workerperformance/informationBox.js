@@ -1,5 +1,5 @@
-import React from "react";
-import Gauge from "pages/charts/gauge";
+import React from 'react';
+import Gauge from 'pages/charts/gauge';
 
 export default function InformationBox({ args }) {
   return (
@@ -72,14 +72,14 @@ export default function InformationBox({ args }) {
                         Best Performance Model
                       </span>
                     </div>
-                    <div class="mr-4 p-3 text-center">
+                    {/* <div class="mr-4 p-3 text-center">
                       <span class="text-xl font-bold block  tracking-wide text-gray-600">
                         {args?.score}%
                       </span>
                       <span class="text-sm text-gray-400">
                         Score for Current Job
                       </span>
-                    </div>
+                    </div> */}
                     {/* <div className=" h-fit">
                       <LineChartv2/>
                     </div> */}

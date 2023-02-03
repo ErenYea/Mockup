@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PageTitle from "components/UiElements/PageTitle/PageTitle";
 import Container from "components/UiElements/Container/Container";
 import { Grid, Cell } from "baseui/layout-grid";
 import ApexCharts from "./boxPlot";
 import Head from "next/head";
+import Calendar from "containers/Calendar";
 type Props = {};
 import { Block } from "baseui/block";
 // import InformationBox from "pages/workshop/informationBoxv2";
 import InformationBox from "./informationBox";
 import Pie from "pages/charts/pie";
 import LineChart from "pages/workshop/lineChart";
+import CalendarApp from "./calendar";
 
 const index = (props: Props) => {
+  useEffect(()=>{
+    for (let index = 0; index < document.getElementsByClassName('rbc-btn-group').length; index++) {
+      document.getElementsByClassName('rbc-btn-group')[index].style.display='None'
+    }
+  
+  })
   const jsonData = [
     {
       name: "Sean Davidson",
@@ -39,6 +47,499 @@ const index = (props: Props) => {
         { x: "Toyota", y: [29, 31, 35, 39, 44] },
       ],
       id: "index1",
+      calendar:[
+        {
+            "_id": "63db6f01bdb9fbea8ad6211c",
+            "title": "Ford GT",
+            "start": "2023-02-01T03:00:00.000Z",
+            "end": "2023-02-01T03:55:00.000Z",
+            "model": "for",
+            "person": "Sean Davidson",
+            "__v": 0,
+            "id": "63db6f01bdb9fbea8ad6211c"
+        },
+        {
+            "_id": "63dbd51e99035c5d474c48e1",
+            "title": "Ford F-150",
+            "start": "2023-02-02T03:00:00.000Z",
+            "end": "2023-02-02T03:30:00.000Z",
+            "model": "nis",
+            "person": "Sean Davidson",
+            "__v": 0,
+            "id": "63dbd51e99035c5d474c48e1"
+        },
+        {
+            "_id": "63dd5642cae0ebbc1270e96f",
+            "title": "Toyota RAV4",
+            "start": "2023-02-04T05:30:00.000Z",
+            "end": "2023-02-04T06:00:00.000Z",
+            "model": "hon",
+            "person": "Sean Davidson",
+            "__v": 0,
+            "id": "63dd5642cae0ebbc1270e96f"
+        },
+        {
+          "_id": "63dd5642cae0ebbc1270e96f",
+          "title": "Honda CR-V",
+          "start": "2023-02-05T05:30:00.000Z",
+          "end": "2023-02-05T06:00:00.000Z",
+          "model": "hon",
+          "person": "Sean Davidson",
+          "__v": 0,
+          "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Nissan Altima",
+        "start": "2023-02-09T05:30:00.000Z",
+        "end": "2023-02-09T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-02-10T05:30:00.000Z",
+        "end": "2023-02-10T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X5",
+        "start": "2023-02-12T05:30:00.000Z",
+        "end": "2023-02-12T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Audi Q5",
+        "start": "2023-02-16T05:30:00.000Z",
+        "end": "2023-02-16T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X5",
+        "start": "2023-02-18T05:30:00.000Z",
+        "end": "2023-02-18T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Kia Sportage",
+        "start": "2023-02-19T05:30:00.000Z",
+        "end": "2023-02-19T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-02-25T05:30:00.000Z",
+        "end": "2023-02-25T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Hyundai Santa Fe",
+        "start": "2023-02-29T05:30:00.000Z",
+        "end": "2023-02-29T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Tacoma",
+        "start": "2023-03-01T05:30:00.000Z",
+        "end": "2023-03-01T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Honda CR-V",
+        "start": "2023-03-03T05:30:00.000Z",
+        "end": "2023-03-03T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Ford F-150",
+        "start": "2023-03-03T05:30:00.000Z",
+        "end": "2023-03-03T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota RAV4",
+        "start": "2023-03-05T05:30:00.000Z",
+        "end": "2023-03-05T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Audi Q5",
+        "start": "2023-03-08T05:30:00.000Z",
+        "end": "2023-03-08T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Camry",
+        "start": "2023-03-09T05:30:00.000Z",
+        "end": "2023-03-09T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-03-10T05:30:00.000Z",
+        "end": "2023-03-10T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Subaru Forester",
+        "start": "2023-03-11T05:30:00.000Z",
+        "end": "2023-03-11T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Tacoma",
+        "start": "2023-03-12T05:30:00.000Z",
+        "end": "2023-03-12T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Camry",
+        "start": "2023-03-15T05:30:00.000Z",
+        "end": "2023-03-15T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Ford F-150",
+        "start": "2023-03-17T05:30:00.000Z",
+        "end": "2023-03-17T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota RAV4",
+        "start": "2023-03-20T05:30:00.000Z",
+        "end": "2023-03-20T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Nissan Altima",
+        "start": "2023-03-23T05:30:00.000Z",
+        "end": "2023-03-23T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X5",
+        "start": "2023-03-25T05:30:00.000Z",
+        "end": "2023-03-25T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Kia Sportage",
+        "start": "2023-03-28T05:30:00.000Z",
+        "end": "2023-03-28T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Honda CR-V",
+        "start": "2023-03-30T05:30:00.000Z",
+        "end": "2023-03-30T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X5",
+        "start": "2023-04-01T05:30:00.000Z",
+        "end": "2023-04-01T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Tacoma",
+        "start": "2023-04-03T05:30:00.000Z",
+        "end": "2023-04-03T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Lexus RX",
+        "start": "2023-04-05T05:30:00.000Z",
+        "end": "2023-04-05T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Hyundai Santa Fe",
+        "start": "2023-04-06T05:30:00.000Z",
+        "end": "2023-04-06T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Subaru Forester",
+        "start": "2023-04-07T05:30:00.000Z",
+        "end": "2023-04-07T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Audi Q5",
+        "start": "2023-04-10T05:30:00.000Z",
+        "end": "2023-04-10T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X3",
+        "start": "2023-04-12T05:30:00.000Z",
+        "end": "2023-04-12T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Nissan Altima",
+        "start": "2023-04-14T05:30:00.000Z",
+        "end": "2023-04-14T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota RAV4",
+        "start": "2023-04-06T05:30:00.000Z",
+        "end": "2023-04-06T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Hyundai Santa Fe",
+        "start": "2023-04-16T05:30:00.000Z",
+        "end": "2023-04-16T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-04-17T05:30:00.000Z",
+        "end": "2023-04-17T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Subaru Forester",
+        "start": "2023-04-18T05:30:00.000Z",
+        "end": "2023-04-18T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Tacoma",
+        "start": "2023-04-19T05:30:00.000Z",
+        "end": "2023-04-19T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Audi Q5",
+        "start": "2023-04-21T05:30:00.000Z",
+        "end": "2023-04-21T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Ford F-150",
+        "start": "2023-04-22T05:30:00.000Z",
+        "end": "2023-04-22T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Kia Sportage",
+        "start": "2023-04-23T05:30:00.000Z",
+        "end": "2023-04-23T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Hyundai Santa Fe",
+        "start": "2023-04-24T05:30:00.000Z",
+        "end": "2023-04-24T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-04-25T05:30:00.000Z",
+        "end": "2023-04-25T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Honda CR-V",
+        "start": "2023-04-26T05:30:00.000Z",
+        "end": "2023-04-26T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota RAV4",
+        "start": "2023-04-28T05:30:00.000Z",
+        "end": "2023-04-28T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Kia Sportage",
+        "start": "2023-04-29T05:30:00.000Z",
+        "end": "2023-04-29T06:00:00.000Z",
+        "model": "hon",
+        "person": "Sean Davidson",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+    
+    ]
     },
     {
       name: "Dennis Ray",
@@ -66,6 +567,443 @@ const index = (props: Props) => {
         { x: "Toyota", y: [19, 21, 25, 29, 34] },
       ],
       id: "index2",
+      
+      calendar:[
+        {
+            "_id": "63db6f01bdb9fbea8ad6211c",
+            "title": "Ford GT",
+            "start": "2023-02-01T03:00:00.000Z",
+            "end": "2023-02-01T03:55:00.000Z",
+            "model": "for",
+            "person": "Dennis Ray",
+            "__v": 0,
+            "id": "63db6f01bdb9fbea8ad6211c"
+        },
+        {
+            "_id": "63dbd51e99035c5d474c48e1",
+            "title": "Ford F-150",
+            "start": "2023-02-02T03:00:00.000Z",
+            "end": "2023-02-02T03:30:00.000Z",
+            "model": "nis",
+            "person": "Dennis Ray",
+            "__v": 0,
+            "id": "63dbd51e99035c5d474c48e1"
+        },
+        {
+            "_id": "63dd5642cae0ebbc1270e96f",
+            "title": "Toyota RAV4",
+            "start": "2023-02-04T05:30:00.000Z",
+            "end": "2023-02-04T06:00:00.000Z",
+            "model": "hon",
+            "person": "Dennis Ray",
+            "__v": 0,
+            "id": "63dd5642cae0ebbc1270e96f"
+        },
+        {
+          "_id": "63dd5642cae0ebbc1270e96f",
+          "title": "Honda CR-V",
+          "start": "2023-02-05T05:30:00.000Z",
+          "end": "2023-02-05T06:00:00.000Z",
+          "model": "hon",
+          "person": "Dennis Ray",
+          "__v": 0,
+          "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Nissan Altima",
+        "start": "2023-02-09T05:30:00.000Z",
+        "end": "2023-02-09T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-02-10T05:30:00.000Z",
+        "end": "2023-02-10T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X5",
+        "start": "2023-02-12T05:30:00.000Z",
+        "end": "2023-02-12T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Audi Q5",
+        "start": "2023-02-16T05:30:00.000Z",
+        "end": "2023-02-16T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X5",
+        "start": "2023-02-18T05:30:00.000Z",
+        "end": "2023-02-18T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Kia Sportage",
+        "start": "2023-02-19T05:30:00.000Z",
+        "end": "2023-02-19T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-02-25T05:30:00.000Z",
+        "end": "2023-02-25T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Hyundai Santa Fe",
+        "start": "2023-02-29T05:30:00.000Z",
+        "end": "2023-02-29T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Tacoma",
+        "start": "2023-03-01T05:30:00.000Z",
+        "end": "2023-03-01T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Honda CR-V",
+        "start": "2023-03-03T05:30:00.000Z",
+        "end": "2023-03-03T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Ford F-150",
+        "start": "2023-03-03T05:30:00.000Z",
+        "end": "2023-03-03T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota RAV4",
+        "start": "2023-03-05T05:30:00.000Z",
+        "end": "2023-03-05T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Audi Q5",
+        "start": "2023-03-08T05:30:00.000Z",
+        "end": "2023-03-08T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Camry",
+        "start": "2023-03-09T05:30:00.000Z",
+        "end": "2023-03-09T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-03-10T05:30:00.000Z",
+        "end": "2023-03-10T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Subaru Forester",
+        "start": "2023-03-11T05:30:00.000Z",
+        "end": "2023-03-11T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Tacoma",
+        "start": "2023-03-12T05:30:00.000Z",
+        "end": "2023-03-12T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Camry",
+        "start": "2023-03-15T05:30:00.000Z",
+        "end": "2023-03-15T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Ford F-150",
+        "start": "2023-03-17T05:30:00.000Z",
+        "end": "2023-03-17T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota RAV4",
+        "start": "2023-03-20T05:30:00.000Z",
+        "end": "2023-03-20T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Nissan Altima",
+        "start": "2023-03-23T05:30:00.000Z",
+        "end": "2023-03-23T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X5",
+        "start": "2023-03-25T05:30:00.000Z",
+        "end": "2023-03-25T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Kia Sportage",
+        "start": "2023-03-28T05:30:00.000Z",
+        "end": "2023-03-28T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Honda CR-V",
+        "start": "2023-03-30T05:30:00.000Z",
+        "end": "2023-03-30T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X5",
+        "start": "2023-04-01T05:30:00.000Z",
+        "end": "2023-04-01T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Lexus RX",
+        "start": "2023-04-05T05:30:00.000Z",
+        "end": "2023-04-05T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Hyundai Santa Fe",
+        "start": "2023-04-06T05:30:00.000Z",
+        "end": "2023-04-06T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Subaru Forester",
+        "start": "2023-04-07T05:30:00.000Z",
+        "end": "2023-04-07T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Audi Q5",
+        "start": "2023-04-10T05:30:00.000Z",
+        "end": "2023-04-10T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Nissan Altima",
+        "start": "2023-04-14T05:30:00.000Z",
+        "end": "2023-04-14T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Hyundai Santa Fe",
+        "start": "2023-04-16T05:30:00.000Z",
+        "end": "2023-04-16T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Subaru Forester",
+        "start": "2023-04-18T05:30:00.000Z",
+        "end": "2023-04-18T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Tacoma",
+        "start": "2023-04-19T05:30:00.000Z",
+        "end": "2023-04-19T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+ 
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Ford F-150",
+        "start": "2023-04-22T05:30:00.000Z",
+        "end": "2023-04-22T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Kia Sportage",
+        "start": "2023-04-23T05:30:00.000Z",
+        "end": "2023-04-23T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Hyundai Santa Fe",
+        "start": "2023-04-24T05:30:00.000Z",
+        "end": "2023-04-24T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-04-25T05:30:00.000Z",
+        "end": "2023-04-25T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota RAV4",
+        "start": "2023-04-28T05:30:00.000Z",
+        "end": "2023-04-28T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Kia Sportage",
+        "start": "2023-04-29T05:30:00.000Z",
+        "end": "2023-04-29T06:00:00.000Z",
+        "model": "hon",
+        "person": "Dennis Ray",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+    
+    ]
     },
     {
       name: "Gilbert Holland",
@@ -93,6 +1031,461 @@ const index = (props: Props) => {
         { x: "Toyota", y: [39, 41, 45, 49, 54] },
       ],
       id: "index3",
+      calendar:[
+        {
+            "_id": "63db6f01bdb9fbea8ad6211c",
+            "title": "Ford GT",
+            "start": "2023-02-01T03:00:00.000Z",
+            "end": "2023-02-01T03:55:00.000Z",
+            "model": "for",
+            "person": "Gilbert Holland",
+            "__v": 0,
+            "id": "63db6f01bdb9fbea8ad6211c"
+        },
+        {
+            "_id": "63dd5642cae0ebbc1270e96f",
+            "title": "Toyota RAV4",
+            "start": "2023-02-04T05:30:00.000Z",
+            "end": "2023-02-04T06:00:00.000Z",
+            "model": "hon",
+            "person": "Gilbert Holland",
+            "__v": 0,
+            "id": "63dd5642cae0ebbc1270e96f"
+        },
+        {
+          "_id": "63dd5642cae0ebbc1270e96f",
+          "title": "Honda CR-V",
+          "start": "2023-02-05T05:30:00.000Z",
+          "end": "2023-02-05T06:00:00.000Z",
+          "model": "hon",
+          "person": "Gilbert Holland",
+          "__v": 0,
+          "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Nissan Altima",
+        "start": "2023-02-09T05:30:00.000Z",
+        "end": "2023-02-09T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-02-10T05:30:00.000Z",
+        "end": "2023-02-10T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X5",
+        "start": "2023-02-12T05:30:00.000Z",
+        "end": "2023-02-12T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Audi Q5",
+        "start": "2023-02-16T05:30:00.000Z",
+        "end": "2023-02-16T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X5",
+        "start": "2023-02-18T05:30:00.000Z",
+        "end": "2023-02-18T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Kia Sportage",
+        "start": "2023-02-19T05:30:00.000Z",
+        "end": "2023-02-19T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-02-25T05:30:00.000Z",
+        "end": "2023-02-25T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Hyundai Santa Fe",
+        "start": "2023-02-29T05:30:00.000Z",
+        "end": "2023-02-29T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Tacoma",
+        "start": "2023-03-01T05:30:00.000Z",
+        "end": "2023-03-01T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Honda CR-V",
+        "start": "2023-03-03T05:30:00.000Z",
+        "end": "2023-03-03T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Ford F-150",
+        "start": "2023-03-03T05:30:00.000Z",
+        "end": "2023-03-03T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota RAV4",
+        "start": "2023-03-05T05:30:00.000Z",
+        "end": "2023-03-05T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Audi Q5",
+        "start": "2023-03-08T05:30:00.000Z",
+        "end": "2023-03-08T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Camry",
+        "start": "2023-03-09T05:30:00.000Z",
+        "end": "2023-03-09T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-03-10T05:30:00.000Z",
+        "end": "2023-03-10T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Subaru Forester",
+        "start": "2023-03-11T05:30:00.000Z",
+        "end": "2023-03-11T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Tacoma",
+        "start": "2023-03-12T05:30:00.000Z",
+        "end": "2023-03-12T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Camry",
+        "start": "2023-03-15T05:30:00.000Z",
+        "end": "2023-03-15T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Ford F-150",
+        "start": "2023-03-17T05:30:00.000Z",
+        "end": "2023-03-17T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota RAV4",
+        "start": "2023-03-20T05:30:00.000Z",
+        "end": "2023-03-20T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Nissan Altima",
+        "start": "2023-03-23T05:30:00.000Z",
+        "end": "2023-03-23T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X5",
+        "start": "2023-03-25T05:30:00.000Z",
+        "end": "2023-03-25T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Kia Sportage",
+        "start": "2023-03-28T05:30:00.000Z",
+        "end": "2023-03-28T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Honda CR-V",
+        "start": "2023-03-30T05:30:00.000Z",
+        "end": "2023-03-30T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X5",
+        "start": "2023-04-01T05:30:00.000Z",
+        "end": "2023-04-01T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Tacoma",
+        "start": "2023-04-03T05:30:00.000Z",
+        "end": "2023-04-03T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Lexus RX",
+        "start": "2023-04-05T05:30:00.000Z",
+        "end": "2023-04-05T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Hyundai Santa Fe",
+        "start": "2023-04-06T05:30:00.000Z",
+        "end": "2023-04-06T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Subaru Forester",
+        "start": "2023-04-07T05:30:00.000Z",
+        "end": "2023-04-07T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Audi Q5",
+        "start": "2023-04-10T05:30:00.000Z",
+        "end": "2023-04-10T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "BMW X3",
+        "start": "2023-04-12T05:30:00.000Z",
+        "end": "2023-04-12T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Nissan Altima",
+        "start": "2023-04-14T05:30:00.000Z",
+        "end": "2023-04-14T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota RAV4",
+        "start": "2023-04-06T05:30:00.000Z",
+        "end": "2023-04-06T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Hyundai Santa Fe",
+        "start": "2023-04-16T05:30:00.000Z",
+        "end": "2023-04-16T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-04-17T05:30:00.000Z",
+        "end": "2023-04-17T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Subaru Forester",
+        "start": "2023-04-18T05:30:00.000Z",
+        "end": "2023-04-18T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Toyota Tacoma",
+        "start": "2023-04-19T05:30:00.000Z",
+        "end": "2023-04-19T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Audi Q5",
+        "start": "2023-04-21T05:30:00.000Z",
+        "end": "2023-04-21T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Ford F-150",
+        "start": "2023-04-22T05:30:00.000Z",
+        "end": "2023-04-22T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Kia Sportage",
+        "start": "2023-04-23T05:30:00.000Z",
+        "end": "2023-04-23T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Mazda CX-5",
+        "start": "2023-04-25T05:30:00.000Z",
+        "end": "2023-04-25T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+      {
+        "_id": "63dd5642cae0ebbc1270e96f",
+        "title": "Honda CR-V",
+        "start": "2023-04-26T05:30:00.000Z",
+        "end": "2023-04-26T06:00:00.000Z",
+        "model": "hon",
+        "person": "Gilbert Holland",
+        "__v": 0,
+        "id": "63dd5642cae0ebbc1270e96f"
+      },
+ 
+    
+    ]
     },
   ];
   const [Index, setIndex] = useState<number>(0);
@@ -137,20 +1530,39 @@ const index = (props: Props) => {
           </div>
         </Block>
         <Block paddingBottom="20px">
-          <div className="pt-6 flex w-full bg-white justify-center items-center border-white-200 rounded-lg mx-auto">
+          <div className="pt-6 flex flex-row w-full bg-white justify-start items-start border-white-200 rounded-lg">
             <InformationBox args={jsonData[Index]} />
+            <div className="w-11/12">
+              <ApexCharts args={jsonData[Index]} />
+            </div>
+            
           </div>
         </Block>
         {/* <Block paddingBottom="20px">
           <Pie args={jsonData[Index]} />
         </Block> */}
         <Block paddingBottom="20px">
-          <ApexCharts args={jsonData[Index]} />
+          
         </Block>
         <div>
-          <div className="w-1/3"></div>
-          <div className="w-1/3"></div>
-          <div className="w-1/3"></div>
+          <div className="flex flex-col items-center justify-center mb-8">
+            <h1 className="font-black text-4xl">Next 3 months Schedule </h1>
+            <span className="font-black text-xl">No. of Booked Jobs: {jsonData[Index]['calendar'].length}</span>
+          </div>
+          <div className="flex flex-row justify-evenly items-start space-x-10 mb-10">
+            <div className="w-1/3 ml-10 h-[400px]">
+              <CalendarApp args={new Date("2023-02-01T00:00:00Z")} calendarData={jsonData[Index]['calendar']}/>
+            </div>
+            <div className="w-1/3 h-[400px]">
+              <CalendarApp args={new Date("2023-03-01T00:00:00Z")} calendarData={jsonData[Index]['calendar']}/>
+            </div>
+          </div>
+          <div className="flex flex-col justify-center items-center">
+            <div className="w-1/3 h-[400px]">
+              <CalendarApp args={new Date("2023-04-01T00:00:00Z")} calendarData={jsonData[Index]['calendar']}/>
+            </div>
+
+          </div>
         </div>
         {/* <Block paddingBottom="20px">
           <LineChart args={jsonData[Index]} />
