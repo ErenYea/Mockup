@@ -7,26 +7,26 @@ export const data = [
     modaldata: {
       toy: {
         performance: 9.5,
-        time: 27,
+        time: 25,
       },
       hon: {
-        performance: 7,
-        time: 40,
+        performance: 8.5,
+        time: 30,
       },
       nis: {
-        performance: 4,
-        time: 60,
+        performance: 7.5,
+        time: 40,
       },
       hyu: {
-        performance: 4,
-        time: 65,
+        performance: 6.5,
+        time: 50,
       },
       for: {
-        performance: 3,
-        time: 70,
+        performance: 7.5,
+        time: 55,
       },
     },
-    workload: 5,
+    workload: 4,
   },
   {
     id: "gil",
@@ -35,27 +35,27 @@ export const data = [
       "https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?s=612x612&w=0&k=20&c=kPvoBm6qCYzQXMAn9JUtqLREXe9-PlZyMl9i-ibaVuY=",
     modaldata: {
       toy: {
-        performance: 3,
-        time: 67,
-      },
-      hon: {
-        performance: 9,
+        performance: 7,
         time: 40,
       },
+      hon: {
+        performance: 8,
+        time: 35,
+      },
       nis: {
-        performance: 4,
-        time: 60,
+        performance: 8.5,
+        time: 30,
       },
       hyu: {
-        performance: 4,
-        time: 65,
+        performance: 8,
+        time: 45,
       },
       for: {
-        performance: 3,
-        time: 70,
+        performance: 9.2,
+        time: 30,
       },
     },
-    workload: 3,
+    workload: 5,
   },
   {
     id: "sam",
@@ -63,26 +63,26 @@ export const data = [
     img: "/images/person2.jpg",
     modaldata: {
       toy: {
-        performance: 5,
-        time: 47,
+        performance: 8.8,
+        time: 37,
       },
       hon: {
-        performance: 7,
+        performance: 7.5,
         time: 40,
       },
       nis: {
-        performance: 4,
-        time: 60,
+        performance: 7,
+        time: 45,
       },
       hyu: {
         performance: 9.6,
         time: 25,
       },
       for: {
-        performance: 3,
-        time: 70,
+        performance: 9,
+        time: 35,
       },
     },
-    workload: 6,
+    workload: 5,
   },
 ];

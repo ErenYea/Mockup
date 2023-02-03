@@ -21,7 +21,7 @@ const index = (props: Props) => {
       totalJobs: 579,
       best: "Ford F-150",
       score: 91,
-      desc: "Best and Outstanding Skills. Very Reliable",
+      desc: "Best and Outstanding Skills",
       pieValue: [
         ["Task", "Hours per Day"],
         ["Ford", 11],
@@ -48,7 +48,7 @@ const index = (props: Props) => {
       totalJobs: 312,
       best: "Ford F-100",
       score: 82,
-      desc: "Satisfactory Performance. Has outstanding handskills",
+      desc: "Satisfactory Performance.",
       pieValue: [
         ["Task", "Hours per Day"],
         ["Ford", 15],
@@ -57,8 +57,7 @@ const index = (props: Props) => {
         ["Honda", 1],
         ["Toyota", 4],
       ],
-      pic:
-        "https://media.istockphoto.com/id/1300972574/photo/millennial-male-team-leader-organize-virtual-workshop-with-employees-online.jpg?s=612x612&w=0&k=20&c=uP9rKidKETywVil0dbvg_vAKyv2wjXMwWJDNPHzc_Ug=",
+      pic: "https://media.istockphoto.com/id/1300972574/photo/millennial-male-team-leader-organize-virtual-workshop-with-employees-online.jpg?s=612x612&w=0&k=20&c=uP9rKidKETywVil0dbvg_vAKyv2wjXMwWJDNPHzc_Ug=",
       boxPlotValue: [
         { x: "Ford", y: [44, 56, 59, 65, 78] },
         { x: "Nissan", y: [33, 55, 59, 66, 71] },
@@ -85,8 +84,7 @@ const index = (props: Props) => {
         ["Honda", 15],
         ["Toyota", 17],
       ],
-      pic:
-        "https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?s=612x612&w=0&k=20&c=kPvoBm6qCYzQXMAn9JUtqLREXe9-PlZyMl9i-ibaVuY=",
+      pic: "https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?s=612x612&w=0&k=20&c=kPvoBm6qCYzQXMAn9JUtqLREXe9-PlZyMl9i-ibaVuY=",
       boxPlotValue: [
         { x: "Ford", y: [53, 75, 79, 86, 91] },
         { x: "Nissan", y: [64, 76, 79, 75, 98] },
@@ -97,15 +95,18 @@ const index = (props: Props) => {
       id: "index3",
     },
   ];
-  const [Index, setIndex] = useState(0);
+  const [Index, setIndex] = useState<number>(0);
   function showInfo() {
-    var element: HTMLInputElement = document.getElementById("dropdown");
-    var value: Number = parseInt(element.value);
+    (document.getElementById("dropdown") as HTMLInputElement).value;
+    // var element: HTMLInputElement = document.getElementById("dropdown");
+    var value: number = parseInt(
+      (document.getElementById("dropdown") as HTMLInputElement).value
+    );
     setIndex(value);
   }
   return (
     <>
-          <Head>
+      <Head>
         <title>Dashboard | Worker Performance Metrics</title>
       </Head>
       <PageTitle title={"Worker Performance Metrics"} subtitle={""} />

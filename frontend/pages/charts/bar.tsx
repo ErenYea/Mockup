@@ -61,13 +61,13 @@ const Bar: NextPage<{}> = () => {
       },
       xaxis: {
         categories: [
-          "July",
-          "August",
-          "September",
-          "Octuber",
-          "November",
-          "December",
-          "January",
+          "July 2022",
+          "August 2022",
+          "September 2022",
+          "Octuber 2022",
+          "November 2022",
+          "December 2022",
+          "January 2023",
         ],
         labels: {
           // formatter: function (val: number) {
