@@ -44,7 +44,7 @@ function CalendarApp(props) {
 
     var raw = JSON.stringify(event);
 
-    var requestOptions = {
+    var requestOptions: any = {
       method: "POST",
       headers: myHeaders,
       body: raw,
@@ -110,7 +110,7 @@ function CalendarApp(props) {
 
     var raw = JSON.stringify(event);
 
-    var requestOptions = {
+    var requestOptions: any = {
       method: "POST",
       headers: myHeaders,
       body: raw,
