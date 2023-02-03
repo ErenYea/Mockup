@@ -27,11 +27,11 @@ export default function LineChart({ args }) {
     pointsVisible: true,
   };
   const data = [["x", "Performance"]];
-  var prevVal = getRandomInt(args.score, 98);
+  var prevVal = getRandomInt(args?.score, 98);
   for (let index = 0; index < 30; index++) {
-    var val = getRandomInt(args.score, 98);
+    var val = getRandomInt(args?.score, 98);
     while (val == prevVal) {
-      var val = getRandomInt(args.score, 98);
+      var val = getRandomInt(args?.score, 98);
     }
     data.push([, val]);
 
