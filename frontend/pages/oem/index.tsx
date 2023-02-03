@@ -17,9 +17,9 @@ import {
 import Container from "components/UiElements/Container/Container";
 import { Block } from "baseui/block";
 
-// type Props = {};
+type Props = {};
 
-const index = () => {
+const index = (props) => {
   const [event, setEvent] = useState(false);
   const [works, setWorks] = useState([]);
   const [isOpen, setIsOpen] = React.useState(false);
@@ -41,19 +41,7 @@ const index = () => {
     {
       name: "Ford",
       vehiclesSold: [
-        110,
-        113,
-        167,
-        112,
-        132,
-        122,
-        132,
-        124,
-        111,
-        144,
-        114,
-        127,
-        143,
+        110, 113, 167, 112, 132, 122, 132, 124, 111, 144, 114, 127, 143,
       ],
       sunroof: [27, 44, 36, 42, 32, 23, 36, 37, 39, 24, 22, 41, 43],
     },
@@ -65,57 +53,21 @@ const index = () => {
     {
       name: "Hyundai",
       vehiclesSold: [
-        143,
-        123,
-        142,
-        165,
-        134,
-        145,
-        99,
-        101,
-        114,
-        154,
-        111,
-        138,
-        139,
+        143, 123, 142, 165, 134, 145, 99, 101, 114, 154, 111, 138, 139,
       ],
       sunroof: [25, 19, 33, 41, 37, 24, 36, 23, 17, 42, 23, 46, 35],
     },
     {
       name: "Honda",
       vehiclesSold: [
-        134,
-        171,
-        142,
-        145,
-        132,
-        133,
-        164,
-        143,
-        115,
-        134,
-        121,
-        165,
-        169,
+        134, 171, 142, 145, 132, 133, 164, 143, 115, 134, 121, 165, 169,
       ],
       sunroof: [34, 56, 43, 51, 34, 29, 42, 37, 39, 25, 16, 15, 13],
     },
     {
       name: "Toyota",
       vehiclesSold: [
-        89,
-        67,
-        150,
-        111,
-        101,
-        128,
-        154,
-        131,
-        141,
-        113,
-        88,
-        141,
-        96,
+        89, 67, 150, 111, 101, 128, 154, 131, 141, 113, 88, 141, 96,
       ],
       sunroof: [45, 41, 36, 27, 29, 21, 31, 37, 25, 36, 31, 14, 28],
     },
@@ -127,8 +79,11 @@ const index = () => {
 
   const [Index, setIndex] = useState(0);
   function showInfo() {
-    var element: HTMLInputElement = document.getElementById("dropdown");
-    var value: Number = parseInt(element.value);
+    // (document.getElementById("dropdown") as HTMLInputElement).value
+    // var element: HTMLInputElement = document.getElementById("dropdown");
+    var value: number = parseInt(
+      (document.getElementById("dropdown") as HTMLInputElement).value
+    );
     setIndex(value);
   }
   const [state2, setState2] = useState<any>({
