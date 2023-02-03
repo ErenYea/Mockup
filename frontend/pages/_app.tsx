@@ -6,8 +6,8 @@ import { styletron, debug } from "styletron";
 import Layout from "components/Layout/Layout";
 import { ThemeSwitcherProvider, THEME } from "contexts/theme/theme.provider";
 import { CartProvider } from "contexts/cart/cart.provider";
-import { ApolloProvider } from "@apollo/client";
-import { useApollo } from "apollo/github.client";
+// import { ApolloProvider } from "@apollo/client";
+// import { useApollo } from "apollo/github.client";
 // external css
 import "@glidejs/glide/dist/css/glide.core.min.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -26,27 +26,27 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
     }
     setTheme(SAVED_THEME);
   }, []);
-  const apolloGithubClient = useApollo(pageProps.initialApolloState);
+  // const apolloGithubClient = useApollo(pageProps.initialApolloState);
 
   return (
-    <ApolloProvider client={apolloGithubClient}>
-      <ThemeSwitcherProvider value={{ theme, setTheme }}>
-        <StyletronProvider value={styletron} debugAfterHydration>
-          <BaseProvider
-            theme={
-              theme === THEME.light
-                ? { ...LightTheme, direction: "ltr" }
-                : { ...DarkTheme, direction: "ltr" }
-            }
-          >
-            <CartProvider>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </CartProvider>
-          </BaseProvider>
-        </StyletronProvider>
-      </ThemeSwitcherProvider>
-    </ApolloProvider>
+    // <ApolloProvider client={apolloGithubClient}>
+    <ThemeSwitcherProvider value={{ theme, setTheme }}>
+      <StyletronProvider value={styletron} debugAfterHydration>
+        <BaseProvider
+          theme={
+            theme === THEME.light
+              ? { ...LightTheme, direction: "ltr" }
+              : { ...DarkTheme, direction: "ltr" }
+          }
+        >
+          <CartProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </CartProvider>
+        </BaseProvider>
+      </StyletronProvider>
+    </ThemeSwitcherProvider>
+    // </ApolloProvider>
   );
 }

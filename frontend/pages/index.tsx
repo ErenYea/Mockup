@@ -12,8 +12,8 @@ import ProductViews from "containers/Widgets/ProductViews";
 import ProductsBar from "containers/Widgets/ProductsBar";
 import Views from "containers/Widgets/Views";
 import CashFlow from "containers/Widgets/CashFlow";
-import { useQuery, gql } from "@apollo/client";
-import { withApollo } from "apollo/client";
+// import { useQuery, gql } from "@apollo/client";
+// import { withApollo } from "apollo/client";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import ApexChart from "components/UiElements/ApexChart/ApexChart";
@@ -21,54 +21,59 @@ import Area from "./charts/area";
 import Bar from "./charts/bar";
 import Column from "./charts/column";
 import { useRouter } from "next/router";
+import loadDashboard from "./dashboard";
 
-const productsBarOptions = [
-  {
-    color: "#FF0080",
-    label: "Tesla",
-  },
-  {
-    color: "#7928CA",
-    label: "Honda",
-  },
-  {
-    color: "#0070F3",
-    label: "Toyota",
-  },
-];
-const GET_DASHBOARD = gql`
-  query {
-    dashboard {
-      recentApps {
-        id
-        name
-        image
-        description
-      }
-      productViews {
-        categories
-        products
-        views
-      }
-      productsBar {
-        labels
-        products
-      }
-      cashFlow {
-        categories
-        cash
-      }
-    }
-  }
-`;
-const Home: NextPage<{}> = () => {
+// const productsBarOptions = [
+//   {
+//     color: "#FF0080",
+//     label: "Tesla",
+//   },
+//   {
+//     color: "#7928CA",
+//     label: "Honda",
+//   },
+//   {
+//     color: "#0070F3",
+//     label: "Toyota",
+//   },
+// ];
+// const GET_DASHBOARD = gql`
+//   query {
+//     dashboard {
+//       recentApps {
+//         id
+//         name
+//         image
+//         description
+//       }
+//       productViews {
+//         categories
+//         products
+//         views
+//       }
+//       productsBar {
+//         labels
+//         products
+//       }
+//       cashFlow {
+//         categories
+//         cash
+//       }
+//     }
+//   }
+// `;
+const Home = () => {
   const [cond, setCond] = useState<any>(false);
+  console.log("hamza");
   const router = useRouter();
-  const { data, loading, error, fetchMore } = useQuery(GET_DASHBOARD, {
-    notifyOnNetworkStatusChange: true,
-  });
+  // const { data, loading, error, fetchMore } = useQuery(GET_DASHBOARD, {
+  //   notifyOnNetworkStatusChange: true,
+  // });
+  const [data, setData] = useState<any>(loadDashboard);
+  console.log("data=>", data);
+  console.log("loadDashboard=>", loadDashboard);
   if (!data) return null;
-  const { productViews, recentApps, productsBar, cashFlow } = data.dashboard;
+  const { productViews, recentApps, productsBar, cashFlow } = data;
   const productsBarOptions = [
     {
       color: "#FF0080",
@@ -95,7 +100,7 @@ const Home: NextPage<{}> = () => {
     //   label: productsBar.labels[0],
     // },
   ];
-  console.log(data);
+  console.log("data=>", data);
   const [state, setState] = useState<any>({
     series: [
       {
@@ -562,4 +567,4 @@ const Home: NextPage<{}> = () => {
   }
 };
 
-export default withApollo(Home);
+export default Home;
