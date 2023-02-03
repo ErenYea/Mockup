@@ -45,7 +45,7 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
   }
   // const
   const modelHandler = () => {
-    const value = document.getElementById("models").value;
+    const value = (document.getElementById("models") as HTMLInputElement).value;
     console.log(value);
     const filteredData = data;
     filteredData.sort(
@@ -53,7 +53,7 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
     );
     setSelectedData(filteredData);
 
-    setModel(document.getElementById("models").value);
+    setModel(value);
   };
   const personHandler = (e) => {
     // if (e.target.querySelector("#name")) {

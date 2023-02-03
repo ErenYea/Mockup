@@ -7,7 +7,11 @@ import Container from "components/UiElements/Container/Container";
 import ChartMenu from "components/SideMenu/ChartMenu";
 import ApexChart from "components/UiElements/ApexChart/ApexChart";
 
-const LineBar: NextPage<{}> = (props) => {
+type Props = {
+  args: any;
+  sunroof: boolean;
+};
+const LineBar = (props) => {
   console.log(props);
 
   // var x =props.args.slice(-1)[0] ; // the value of x can be changed as per your requirement
