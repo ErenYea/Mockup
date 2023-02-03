@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 // import image from "../static/image.jpg";
 // import GaugeChart from "react-gauge-chart";
-import { LineChartv2 } from './lineChartv2';
-import Gauge from 'pages/charts/gauge';
-import { useState, useEffect } from 'react';
+import LineChartv2 from "./lineChartv2";
+import Gauge from "pages/charts/gauge";
+import { useState, useEffect } from "react";
 
 const useTypewriter = (text) => {
-  const [currentText, setCurrentText] = useState('');
+  const [currentText, setCurrentText] = useState("");
 
   useEffect(() => {
     let i = 0;
@@ -27,7 +27,7 @@ const useTypewriter = (text) => {
 
 export default function InformationBox() {
   const text = useTypewriter(
-    'Hi Sam Davidson, you are doing a great job except that you have misplaced the measuring mat at the roof of the car, please take great care of it, thanks.'
+    "Hi Sam Davidson, you are doing a great job except that you have misplaced the measuring mat at the roof of the car, please take great care of it, thanks."
   );
   return (
     <div>

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Chart } from 'react-google-charts';
-import { data } from './lineChart';
+import React from "react";
+import { Chart } from "react-google-charts";
+import { data } from "./lineChart";
 
 // function getRandomInt(min, max) {
 //   min = Math.ceil(min);
@@ -22,25 +22,24 @@ import { data } from './lineChart';
 //   prevVal=val;
 // }
 
-export const options = {
-  legend: { position: 'none' },
+export default function LineChartv2() {
+  const options = {
+    legend: { position: "none" },
 
-  hAxis: {
-    title: '',
-    // format: "yyyy-MM-dd",
-  },
-  vAxis: {
-    title: 'Performance',
-    format: '0',
-    ticks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-  },
-  series: {
-    1: { curveType: 'function' },
-  },
-  // pointsVisible: true
-};
-
-export function LineChartv2() {
+    hAxis: {
+      title: "",
+      // format: "yyyy-MM-dd",
+    },
+    vAxis: {
+      title: "Performance",
+      format: "0",
+      ticks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+    },
+    series: {
+      1: { curveType: "function" },
+    },
+    // pointsVisible: true
+  };
   return (
     <Chart
       chartType="LineChart"

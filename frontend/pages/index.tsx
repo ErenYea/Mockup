@@ -21,7 +21,7 @@ import Area from "./charts/area";
 import Bar from "./charts/bar";
 import Column from "./charts/column";
 import { useRouter } from "next/router";
-import loadDashboard from "./dashboard";
+import { datas } from "./dashboard";
 
 // const productsBarOptions = [
 //   {
@@ -69,9 +69,9 @@ const Home = () => {
   // const { data, loading, error, fetchMore } = useQuery(GET_DASHBOARD, {
   //   notifyOnNetworkStatusChange: true,
   // });
-  const [data, setData] = useState<any>(loadDashboard);
+  const [data, setData] = useState<any>(datas);
   console.log("data=>", data);
-  console.log("loadDashboard=>", loadDashboard);
+  console.log("loadDashboard=>", datas);
   if (!data) return null;
   const { productViews, recentApps, productsBar, cashFlow } = data;
   const productsBarOptions = [
