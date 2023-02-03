@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "react-google-charts";
-import { data } from "./data";
+import { data } from "containers/Workshop/data";
 
 // function getRandomInt(min, max) {
 //   min = Math.ceil(min);
