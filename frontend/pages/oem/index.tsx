@@ -197,10 +197,8 @@ const index = (props) => {
           </div>
         </div>
         <Container>
-          <Block className={"flex items-end justify-end"}>
-            <ModalButton onClick={handleClick} className="right-0">
-              Order Job
-            </ModalButton>
+          <Block className={"flex items-end justify-end "}>
+            <ModalButton onClick={handleClick}>Order Job</ModalButton>
           </Block>
           <Block
             marginTop={"20px"}
