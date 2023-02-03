@@ -21,6 +21,13 @@ type Props = {};
 
 const index: NextPage = (props: Props) => {
   const timeSteps = [1500, 1000, 3000, 1500, 3000];
+  var tasks = [
+    { name: "Ford F-150", order: 2 , time: 3,resource:'Sean Davidson'},
+    { name: "Toyota RAV4", order: 3 ,time: 4,resource:'Dennis Ray'},
+    { name: "Honda CR-V", order: 1, time: 4,resource:'Gilbert Holland'},
+    { name: "Nissan Altima", order: 2,time: 2,resource:'Sean Davidson' },
+    { name: "Hyundai Elantra", order: 3,time: 5,resource:'Dennis Ray' },
+  ];
   const jsonData = [
     {
       name: "Sean Davidson",
@@ -259,16 +266,54 @@ const index: NextPage = (props: Props) => {
               </div>
             </div>
           </Cell>
-          <div className="w-full">
-            <Block paddingBottom="20px">
+          <div className="w-full mx-auto">
+            <div className="w-full flex flex-col justify-center items-center mb-2">
+              <span className=" text-3xl font-black underline w-fit">Job Queue</span>
+            </div>
+          <table className="mx-auto gap-3">
+            <tr className="">
+              <th className="text-xl text-customDarkBlue font-black p-2 border-b-2 border-r-2 border-customDarkBlue">
+                Car Model
+              </th>
+              <th className="text-xl text-customDarkBlue font-black p-2 border-b-2 border-r-2 border-customDarkBlue">
+                Orders
+              </th>
+              <th className="text-xl text-customDarkBlue font-black p-2 border-b-2 border-r-2 border-customDarkBlue">
+                Time Estimated(Days)
+              </th>
+              <th className="text-xl text-customDarkBlue font-black p-2 border-b-2  border-customDarkBlue">
+                Resource Deployed
+              </th>
+            </tr>
+            {tasks?.map((task, i) => (
+              <tr
+                key={i}
+                className="hover:text-xl hover:text-gray-600 hover:font-bold duration-100 cursor-pointer"
+              >
+                <td className="text-lg p-1 border-r-2 border-l-2 border-customDarkBlue">
+                  {task?.name}
+                </td>
+                <td className="text-lg border-r-2 border-l-2 pl-2 border-customDarkBlue">
+                  {task?.order}
+                </td>
+                <td className="text-lg border-r-2 border-l-2 pl-2 border-customDarkBlue">
+                  {task?.time}
+                </td>
+                <td className="text-lg border-r-2 border-l-2 pl-2 border-customDarkBlue">
+                  {task?.resource}
+                </td>
+              </tr>
+            ))}
+          </table>
+            {/* <Block paddingBottom="20px">
               <Pie args={jsonData[0]} />
-            </Block>
-            <Block paddingBottom="20px">
+            </Block> */}
+            {/* <Block paddingBottom="20px">
               <ApexCharts args={jsonData[0]} />
-            </Block>
-            <Block paddingBottom="20px">
+            </Block> */}
+            {/* <Block paddingBottom="20px">
               <LineChart args={jsonData[0]} />
-            </Block>
+            </Block> */}
           </div>
         </Grid>
       </Container>

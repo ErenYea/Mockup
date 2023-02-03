@@ -2,7 +2,7 @@ import { styled } from 'baseui';
 
 const ContainerArea = styled('div', {
 	width: '100%',
-	maxWidth: '1080px',
+	// maxWidth: '1080px',
 	paddingLeft: '15px',
 	paddingRight: '15px',
 	margin: '0 auto',

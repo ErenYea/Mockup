@@ -40,7 +40,7 @@ const Layout: React.FunctionComponent<{ router?: any }> = ({
         <Header />
       )}
 
-      <ContentWrapper>{children}</ContentWrapper>
+      <ContentWrapper className='!w-screen'>{children}</ContentWrapper>
 
       {pathname === '/login' || pathname === '/signup' ? '' : <Footer />}
     </AppWrapper>

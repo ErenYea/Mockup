@@ -1,7 +1,21 @@
-import React from "react";
-import { Chart } from "react-google-charts";
-import {data} from  "./lineChart"
+import React from 'react';
+import { Chart } from 'react-google-charts';
+// import {data} from  "./lineChart"
 
+const data = [
+  ['x', 'Actual', 'Expected'],
+  ['1', 100, 100],
+  ['2', 90, 95],
+  ['3', 80, 88],
+  ['4', 70, 79],
+  ['5', 60, 55],
+  ['6', 50, 52],
+  ['7', 40, null],
+  ['8', 30, null],
+  ['9', 20, null],
+  ['10', 10, null],
+  // ["Day 11",0,null],
+];
 // function getRandomInt(min, max) {
 //   min = Math.ceil(min);
 //   max = Math.floor(max);
@@ -18,42 +32,37 @@ import {data} from  "./lineChart"
 //     var val=getRandomInt(85,90);
 //   }
 //   data.push([,val])
-  
+
 //   prevVal=val;
 // }
 
 export const options = {
-  legend: {position: 'none'},
-
+  legend: { position: 'bottom' },
   hAxis: {
-    title: "",
+    title: 'Days',
     // format: "yyyy-MM-dd",
   },
   vAxis: {
-    title: "Performance",
-    format:'0',
-    ticks:[0,10,20,30,40,50,60,70,80,90,100]
+    title: 'Remaining Effort (Hour)',
+    format: '0',
+    ticks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
   },
   series: {
-    1: { curveType: "function" },
+    1: { curveType: 'function' },
   },
   // pointsVisible: true
 };
 
-
-export  function LineChartv2() {
+export function LineChartv2() {
   return (
     <Chart
-      
       chartType="LineChart"
       className="w-full rounded-lg"
       loader={<div>Loading Chart</div>}
       data={data}
       options={options}
       width="100%"
-      height="200px"
-      
-      
+      height="300px"
     />
   );
 }

@@ -56,7 +56,7 @@ export default function InformationBox({ args }) {
                       <span class="text-xl font-bold block e tracking-wide text-gray-600">
                         {args?.designation}
                       </span>
-                      <span class="text-sm text-gray-400">Designation</span>
+                      <span class="text-sm text-gray-400 ">Designation</span>
                     </div>
                     <div class="mr-4 p-3 text-center">
                       <span class="text-xl font-bold block  tracking-wide text-gray-600">
@@ -85,9 +85,9 @@ export default function InformationBox({ args }) {
                     </div> */}
                   </div>
                 </div>
-                <div className="w-full border-black text-xl font-bold block e tracking-wide text-gray-600 ">
+                {/* <div className="w-full border-black text-xl font-bold block e tracking-wide text-gray-600 ">
                   {args?.desc}
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

@@ -47,10 +47,10 @@ export default function InformationBox() {
                 </div>
                 <div class="w-1/3 h-1/3 mt-5 flex-row justify-center items-center">
                   <div className="justify-center items-center text-center text-gray-800 font-semibold text-sm flex flex-col">
-                    <Gauge
+                    {/* <Gauge
                       className="flex items-center justify-center"
                       args={0.92}
-                    />
+                    /> */}
                     {/* <div className="justify-center items-center text-center font-semibold text-gray-600 flex-col flex">
                     <GaugeChart
                       className="flex items-center justify-center"
@@ -109,18 +109,18 @@ export default function InformationBox() {
                         95%
                       </span>
                       <span class="text-sm text-gray-400">
-                        Score for Current Job
+                        Historical Score for Current Vehicle Model
                       </span>
                     </div>
-                    <div className=" h-fit">
+                    <div className="w-full h-fit">
                       <LineChartv2 />
                     </div>
                   </div>
                 </div>
-                <div class="w-5/6 h-fit text-center items-center justify-center flex flex-col border-l-2 border-black pl-2 ">
+                {/* <div class="w-5/6 h-fit text-center items-center justify-center flex flex-col border-l-2 border-black pl-2 ">
                   <span className="text-xl font-black">Feedback</span>
                   <span className="text-lg">{text}</span>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

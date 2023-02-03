@@ -61,7 +61,7 @@ const Login: NextPage<{}> = () => {
                         <div className="mb-2">
                           <label
                             htmlFor="email"
-                            className="block text-sm  text-white leading-3 gap-1"
+                            className="block text-sm  text-black leading-3 gap-1"
                           >
                             Email
                           </label>
@@ -74,7 +74,7 @@ const Login: NextPage<{}> = () => {
                         <div className="mb-2">
                           <label
                             htmlFor="password"
-                            className="block text-sm  text-white"
+                            className="block text-sm  text-black"
                           >
                             Password
                           </label>
@@ -163,7 +163,10 @@ const Login: NextPage<{}> = () => {
                         Sign in
                       </h1>
 
-                      <form className="mt-6">
+                      <form className="mt-6" onSubmit={() => {
+                              // sessionStorage.setItem("user", "1");
+                              router.push("/oem");
+                            }}>
                         <div className="mb-2">
                           <label
                             htmlFor="email"
@@ -199,12 +202,9 @@ const Login: NextPage<{}> = () => {
                         <div className="mt-6">
 
                           <button
-                            onClick={() => {
-                              sessionStorage.setItem("user", "1");
-                              router.push("/oem");
-                            }}
+
                             type="submit"
-                            className="w-full px-4 py-2 ease-in  duration-30  bg-[#000000] tracking-wide text-white font-bold transition-colors0 transform  rounded-md hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-blue-600"
+                            className="w-full px-4 py-2 ease-in  duration-30  bg-[#000000] tracking-wide text-white font-bold transition-colors0 transform  rounded-md hover:bg-gray-600 hover:text-white focus:outline-non"
                           >
                             Login
                           </button>
