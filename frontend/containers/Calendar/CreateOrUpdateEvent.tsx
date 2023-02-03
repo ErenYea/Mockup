@@ -45,7 +45,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
   );
   const fillTime = () => {
     var timetofill = [];
-    for (var i = 8; i < 16; i++) {
+    for (var i = 8; i < 18; i++) {
       for (var j = 0; j < 60; j += 15) {
         timetofill.push(
           (i.toString().length == 1 ? `0${i.toString()}` : i.toString()) +
@@ -54,7 +54,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
         );
       }
     }
-    timetofill.push("16:00");
+    timetofill.push("18:00");
     console.log(timetofill);
     setTime(timetofill);
   };

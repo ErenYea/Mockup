@@ -13,12 +13,52 @@ const DragAndDropCalendar = withDragAndDrop(Calendar);
 type Props = {
   events: Array<Object>;
 };
+const CustomHeader = ({ label, onNavigate, onView }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <span>{label}</span>
+      <div>
+        <button onClick={() => onNavigate(1)}>Next</button>
+      </div>
+    </div>
+  );
+};
 
 function CalendarApp(props) {
+  const [onNavigate, setOnNavigate] = React.useState(null);
   // const [events, setEvents] = useState<any>([]);
+  const [view, setView] = React.useState("week");
+  const [date, setDate] = React.useState(new Date());
+  const [count, setCount] = React.useState(0);
+
+  const handleNavigate = (date, view) => {
+    setDate(date);
+    console.log("view", view);
+    setView(view);
+  };
   const [isOpen, setIsOpen] = React.useState(false);
   const [actionType, setActionType] = React.useState("create");
   const [event, setEvent] = React.useState(null);
+  const eventPropGetter = (event) => {
+    const style = {
+      backgroundColor: event.color,
+      borderRadius: "10px",
+      opacity: 0.8,
+      color: "white",
+      weight: "bold",
+      border: "0px",
+      display: "block",
+    };
+    return {
+      style: style,
+    };
+  };
 
   const [state, setState] = React.useState({
     events: [],
@@ -253,10 +293,63 @@ function CalendarApp(props) {
   useEffect(() => {
     getDate();
   }, []);
+  useEffect(() => {
+    function getElementByXpath(path) {
+      return document.evaluate(
+        path,
+        document,
+        null,
+        XPathResult.FIRST_ORDERED_NODE_TYPE,
+        null
+      ).singleNodeValue;
+    }
+
+    console.log(view);
+    console.log("data", date);
+    if (count == 0) {
+      var ele = getElementByXpath(
+        `//div[@data-baseweb="block"]//button[contains(text(),'Back')]`
+      ) as HTMLButtonElement;
+      ele.disabled = true;
+    } else {
+      var ele = getElementByXpath(
+        `//div[@data-baseweb="block"]//button[contains(text(),'Back')]`
+      ) as HTMLButtonElement;
+      ele.disabled = false;
+    }
+    if (count == 2) {
+      var ele = getElementByXpath(
+        `//div[@data-baseweb="block"]//button[contains(text(),'Next')]`
+      ) as HTMLButtonElement;
+      ele.disabled = true;
+    } else {
+      var ele = getElementByXpath(
+        `//div[@data-baseweb="block"]//button[contains(text(),'Next')]`
+      ) as HTMLButtonElement;
+      ele.disabled = false;
+    }
+    if (date.getMonth() == new Date().getMonth()) {
+      setCount(0);
+    }
+    if (date.getMonth() == new Date().getMonth() + 1) {
+      setCount(1);
+    }
+    if (date.getMonth() == new Date().getMonth() + 2) {
+      setCount(2);
+    }
+    // if (date.getMonth() == new Date().getMonth() + 3) {
+    //   setCount(3);
+    // }
+  }, [view, date, count]);
+  useEffect(() => {
+    setOnNavigate((date, view, action) => {
+      console.log("onNavigate", date, view, action);
+    });
+  }, []);
   return (
     <>
       {/* resizable */}
-      <DragAndDropCalendar
+      <Calendar
         popup
         selectable
         localizer={localizer}
@@ -266,17 +359,39 @@ function CalendarApp(props) {
         onSelectSlot={onSelectSlot}
         onSelectEvent={onSelectEvent}
         onDragStart={console.log}
-        defaultView={Views.WEEK}
-        defaultDate={today}
+        defaultView={Views.Month}
+        showMultiDayTimes={true}
+        showNavigation={false}
+        eventPropGetter={eventPropGetter}
+        // defaultDate={today}
+        // view={"agenda"}
+        startAccessor="start"
+        // components={{
+        //   month: { header: CustomHeader },
+        //   week: { header: CustomHeader },
+        // }}
+        endAccessor="end"
+        // view={view}
+        views={["month", "week"]}
+        date={date}
+        onNavigate={onNavigate}
+        // date={
+        //   new Date(today.getFullYear(), today.getMonth(), today.getDate() - 2)
+        // }
         timeslots={15}
         step={1}
         min={
-          new Date(today.getFullYear(), today.getMonth(), today.getDate(), 8)
+          new Date(
+            today.getFullYear(),
+            today.getMonth() - 1,
+            today.getDate(),
+            8
+          )
         }
         max={
           new Date(
             today.getFullYear(),
-            today.getMonth(),
+            today.getMonth() + 1,
             today.getDate(),
             18,
             15
