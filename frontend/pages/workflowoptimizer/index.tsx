@@ -72,10 +72,10 @@ const index = (props: Props) => {
       </Head>
       <PageTitle title={"WorkFlow Optimizer"} subtitle={""} />
       <Container>
-        <Block paddingTop={["0", "0", "0", "40px"]}>
+        <Block paddingTop={["0", "0", "0", "40px"]} className="w-full">
           <Grid gridColumns={12} gridGutters={0} gridMargins={0} gridGaps={2}>
-            <div className="flex flex-col">
-              <div className="flex  items-start mx-auto space-x-2">
+            <div className="flex flex-col items-center w-full">
+              <div className="flex  items-start mx-auto space-x-2 w-full">
                 {/* <Cell span={[12, 12, 3]}> */}
                 <div className="w-1/4 h-full rounded-l-lg ">
                   <h3 className="m-4 pb-2 text-xl font-black border-b-2 hover:text-2xl duration-100 cursor-pointer">
@@ -116,8 +116,9 @@ const index = (props: Props) => {
                   minHeight="500px"
                   height="100%"
                   maxHeight="700px"
+                  className={"mx-2 w-full"}
                 >
-                  <Calendar />
+                  <Calendar className="w-full" />
                 </Block>
                 {/* </Cell> */}
               </div>

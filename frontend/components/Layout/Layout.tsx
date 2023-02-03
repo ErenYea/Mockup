@@ -33,21 +33,14 @@ const Layout: React.FunctionComponent<{ router?: any }> = ({
   }
 
   return (
-    <AppWrapper
-      className={
-        theme + "scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100"
-      }
-      style={{ backgroundColor: layoutBg }}
-    >
+    <AppWrapper className={theme} style={{ backgroundColor: layoutBg }}>
       {pathname === "/login" || pathname === "/signup" ? (
         <AuthHeader pathname={pathname} />
       ) : (
         <Header />
       )}
 
-      <ContentWrapper className="scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
-        {children}
-      </ContentWrapper>
+      <ContentWrapper className="!w-screen">{children}</ContentWrapper>
 
       {pathname === "/login" || pathname === "/signup" ? "" : <Footer />}
     </AppWrapper>
