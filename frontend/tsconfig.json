@@ -16,5 +16,5 @@
     "baseUrl": "."
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/dashboard.js"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "containers/Dashboard/dashboard.js", "containers/Calendar/oem/data.js"]
 }

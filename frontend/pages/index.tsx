@@ -21,7 +21,7 @@ import Area from "./charts/area";
 import Bar from "./charts/bar";
 import Column from "./charts/column";
 import { useRouter } from "next/router";
-import { datas } from "./dashboard";
+import { datas } from "../containers/Dashboard/dashboard";
 
 // const productsBarOptions = [
 //   {
