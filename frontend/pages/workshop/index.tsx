@@ -5,10 +5,10 @@ import Container from "components/UiElements/Container/Container";
 import { Grid, Cell } from "baseui/layout-grid";
 import { Block } from "baseui/block";
 import DropdownComponent from "./dropdown";
-import InformationBoxv2 from "./informationBoxv2";
+import InformationBox from "./informationBoxv2";
 import Head from "next/head";
 import Pie from "pages/charts/pie";
-import { LineChart } from "pages/workshop/lineChart";
+import LineChart from "pages/workshop/lineChart";
 import ApexCharts from "./boxPlot";
 import Gauge from "pages/charts/gauge";
 // import { Select } from "baseui/select";
@@ -19,7 +19,7 @@ import {
 } from "../../contexts/theme/theme.provider";
 type Props = {};
 
-const index: NextPage = (props: Props) => {
+const index = (props: Props) => {
   const timeSteps = [1500, 1000, 3000, 1500, 3000];
   const jsonData = [
     {
@@ -66,8 +66,7 @@ const index: NextPage = (props: Props) => {
         ["Honda", 1],
         ["Toyota", 4],
       ],
-      pic:
-        "https://media.istockphoto.com/id/1300972574/photo/millennial-male-team-leader-organize-virtual-workshop-with-employees-online.jpg?s=612x612&w=0&k=20&c=uP9rKidKETywVil0dbvg_vAKyv2wjXMwWJDNPHzc_Ug=",
+      pic: "https://media.istockphoto.com/id/1300972574/photo/millennial-male-team-leader-organize-virtual-workshop-with-employees-online.jpg?s=612x612&w=0&k=20&c=uP9rKidKETywVil0dbvg_vAKyv2wjXMwWJDNPHzc_Ug=",
       boxPlotValue: [
         { x: "Ford", y: [44, 56, 59, 65, 78] },
         { x: "Nissan", y: [33, 55, 59, 66, 71] },
@@ -94,8 +93,7 @@ const index: NextPage = (props: Props) => {
         ["Honda", 15],
         ["Toyota", 17],
       ],
-      pic:
-        "https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?s=612x612&w=0&k=20&c=kPvoBm6qCYzQXMAn9JUtqLREXe9-PlZyMl9i-ibaVuY=",
+      pic: "https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?s=612x612&w=0&k=20&c=kPvoBm6qCYzQXMAn9JUtqLREXe9-PlZyMl9i-ibaVuY=",
       boxPlotValue: [
         { x: "Ford", y: [53, 75, 79, 86, 91] },
         { x: "Nissan", y: [64, 76, 79, 75, 98] },
@@ -122,9 +120,8 @@ const index: NextPage = (props: Props) => {
         await new Promise((r) => setTimeout(r, timeSteps[index]));
         if (index == 0) {
           try {
-            document.getElementsByClassName(
-              "custom-text"
-            )[0].textContent = text;
+            document.getElementsByClassName("custom-text")[0].textContent =
+              text;
           } catch {}
         }
         element
@@ -255,7 +252,7 @@ const index: NextPage = (props: Props) => {
           <Cell span={[12, 12, 6]}>
             <div className="flex justify-end h-fit w-full">
               <div className="w-full mr-4 pt-6 mb-2 bg-white justify-center  border-white-200 rounded-lg h-fit">
-                <InformationBoxv2 />
+                <InformationBox />
               </div>
             </div>
           </Cell>

@@ -9,7 +9,7 @@ import { Block } from "baseui/block";
 // import InformationBox from "pages/workshop/informationBoxv2";
 import InformationBox from "./informationBox";
 import Pie from "pages/charts/pie";
-import { LineChart } from "pages/workshop/lineChart";
+import LineChart from "pages/workshop/lineChart";
 
 const index = (props: Props) => {
   const jsonData = [

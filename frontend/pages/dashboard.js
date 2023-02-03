@@ -1,4 +1,4 @@
-export default {
+export const datas = {
   recentApps: [
     {
       id: 1,

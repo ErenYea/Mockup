@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "react-google-charts";
-import {data} from  "./lineChart"
+import { data } from "./data";
 
 // function getRandomInt(min, max) {
 //   min = Math.ceil(min);
@@ -18,33 +18,32 @@ import {data} from  "./lineChart"
 //     var val=getRandomInt(85,90);
 //   }
 //   data.push([,val])
-  
+
 //   prevVal=val;
 // }
 
-export const options = {
-  legend: {position: 'none'},
+export default function LineChartv2() {
+  console.log("data=>", data);
+  const options = {
+    legend: { position: "none" },
 
-  hAxis: {
-    title: "",
-    // format: "yyyy-MM-dd",
-  },
-  vAxis: {
-    title: "Performance",
-    format:'0',
-    ticks:[0,10,20,30,40,50,60,70,80,90,100]
-  },
-  series: {
-    1: { curveType: "function" },
-  },
-  // pointsVisible: true
-};
+    hAxis: {
+      title: "",
+      // format: "yyyy-MM-dd",
+    },
+    vAxis: {
+      title: "Performance",
+      format: "0",
+      ticks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+    },
+    series: {
+      1: { curveType: "function" },
+    },
+    // pointsVisible: true
+  };
 
-
-export  function LineChartv2() {
   return (
     <Chart
-      
       chartType="LineChart"
       className="w-full rounded-lg"
       loader={<div>Loading Chart</div>}
@@ -52,8 +51,6 @@ export  function LineChartv2() {
       options={options}
       width="100%"
       height="200px"
-      
-      
     />
   );
 }
