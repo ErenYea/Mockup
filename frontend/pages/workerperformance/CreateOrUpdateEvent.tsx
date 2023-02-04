@@ -169,7 +169,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
             <Input
               id="input-id"
               value={title}
-              onChange={(event) => setTitle(event.currentTarget.value)}
+              onChange={(event) => setTitle(event?.currentTarget.value)}
               required
             />
           </FormControl>
@@ -226,7 +226,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                       src={
                         data?.filter(
                           (item) =>
-                            item.id === event.person.slice(0, 3).toLowerCase()
+                            item.id === event?.person.slice(0, 3).toLowerCase()
                         )[0].img
                       }
                       alt=""
@@ -240,7 +240,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                       {
                         data?.filter(
                           (item) =>
-                            item.id === event.person.slice(0, 3).toLowerCase()
+                            item.id === event?.person.slice(0, 3).toLowerCase()
                         )[0].name
                       }
                     </div>
@@ -265,7 +265,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                             data?.filter(
                               (item) =>
                                 item.id ===
-                                event.person.slice(0, 3).toLowerCase()
+                                event?.person.slice(0, 3).toLowerCase()
                             )[0].modaldata[model].performance
                           }
                           /10
@@ -284,7 +284,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                             data?.filter(
                               (item) =>
                                 item.id ===
-                                event.person.slice(0, 3).toLowerCase()
+                                event?.person.slice(0, 3).toLowerCase()
                             )[0].modaldata[model].time
                           }{" "}
                           min
@@ -303,7 +303,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                             data?.filter(
                               (item) =>
                                 item.id ===
-                                event.person.slice(0, 3).toLowerCase()
+                                event?.person.slice(0, 3).toLowerCase()
                             )[0].workload
                           }{" "}
                           jobs this week
@@ -327,62 +327,62 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                       }
                     >
                       <img
-                        data-key={i.id}
-                        src={i.img}
+                        data-key={i?.id}
+                        src={i?.img}
                         alt=""
                         className="w-[130px] h-[100px] rounded"
                       />
                       <div
-                        data-key={i.id}
+                        data-key={i?.id}
                         id="name"
                         className=" text-purple-600 text-bold text-lg"
                       >
-                        {i.name}
+                        {i?.name}
                       </div>
                       <div
                         className=" text-red-600 text-base h-[24px]"
-                        ddata-key={i.id}
+                        ddata-key={i?.id}
                       >
                         {ind == 0 ? "Recomended*" : ""}
                       </div>
                       <div
                         className="flex flex-col items-center border-gray-400"
-                        data-key={i.id}
+                        data-key={i?.id}
                       >
                         <div
                           className="text-white text-[14px] text-center"
-                          data-key={i.id}
+                          data-key={i?.id}
                         >
                           Performance:{" "}
                           <span
                             className=" text-yellow-300 text-center w-full"
-                            data-key={i.id}
+                            data-key={i?.id}
                           >
                             {i.modaldata[model].performance}/10
                           </span>
                         </div>
                         <div
                           className="text-white text-[14px] text-center"
-                          data-key={i.id}
+                          data-key={i?.id}
                         >
                           Time to Completion:{" "}
                           <span
                             className=" text-yellow-300 text-center w-full"
-                            data-key={i.id}
+                            data-key={i?.id}
                           >
-                            {i.modaldata[model].time} min
+                            {i?.modaldata[model].time} min
                           </span>
                         </div>
                         <div
                           className="text-white text-[14px] text-center"
-                          data-key={i.id}
+                          data-key={i?.id}
                         >
                           Workload:{" "}
                           <span
                             className=" text-yellow-300 text-center w-full"
-                            data-key={i.id}
+                            data-key={i?.id}
                           >
-                            {i.workload} jobs this week (
+                            {i?.workload} jobs this week (
                             {ind == 0
                               ? getthecar(model) + " only"
                               : "except " + getthecar(model)}

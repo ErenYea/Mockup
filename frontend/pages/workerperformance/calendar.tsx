@@ -67,11 +67,11 @@ function CalendarApp(props) {
     const { events } = state;
 
     const idx = events.indexOf(event);
-    let allDay = event.allDay;
+    let allDay = event?.allDay;
 
-    if (!event.allDay && droppedOnAllDaySlot) {
+    if (!event?.allDay && droppedOnAllDaySlot) {
       allDay = true;
-    } else if (event.allDay && !droppedOnAllDaySlot) {
+    } else if (event?.allDay && !droppedOnAllDaySlot) {
       allDay = false;
     }
 
@@ -92,7 +92,7 @@ function CalendarApp(props) {
     const { events } = state;
 
     const nextEvents = events.map((existingEvent) => {
-      return existingEvent.id == event.id
+      return existingEvent?.id == event?.id
         ? { ...existingEvent, start, end }
         : existingEvent;
     });
@@ -127,12 +127,12 @@ function CalendarApp(props) {
     // let idList = state.events.map((a) => a.id);
     // let newId = Math.max(...idList) + 1;
     console.log("event", event);
-    var starttime = parseInt(event.starttime.split(":")[0]);
-    var starttimeminute = parseInt(event.starttime.split(":")[1]);
-    var endtime = parseInt(event.endtime.split(":")[0]);
-    var endtimeminute = parseInt(event.endtime.split(":")[1]);
-    var start = event.slots.length == 1 ? event.start : event.slots[0];
-    var end = event.slots.length == 1 ? event.end : event.slots[1];
+    var starttime = parseInt(event?.starttime.split(":")[0]);
+    var starttimeminute = parseInt(event?.starttime.split(":")[1]);
+    var endtime = parseInt(event?.endtime.split(":")[0]);
+    var endtimeminute = parseInt(event?.endtime.split(":")[1]);
+    var start = event?.slots.length == 1 ? event?.start : event?.slots[0];
+    var end = event?.slots.length == 1 ? event?.end : event?.slots[1];
     var newstartdate = new Date(
       start.getFullYear(),
       start.getMonth(),
@@ -149,9 +149,9 @@ function CalendarApp(props) {
     );
     let hour = {
       // id: newId,
-      title: event.title,
-      person: event.person,
-      model: event.model,
+      title: event?.title,
+      person: event?.person,
+      model: event?.model,
       // allDay: event.slots.length == 1,
 
       start: newstartdate,
@@ -166,12 +166,12 @@ function CalendarApp(props) {
     return;
   }
   function updateEvent(event: any) {
-    var start = event.slots.length == 1 ? event.start : event.slots[0];
-    var end = event.slots.length == 1 ? event.end : event.slots[1];
-    var starttime = parseInt(event.starttime.split(":")[0]);
-    var starttimeminute = parseInt(event.starttime.split(":")[1]);
-    var endtime = parseInt(event.endtime.split(":")[0]);
-    var endtimeminute = parseInt(event.endtime.split(":")[1]);
+    var start = event?.slots.length == 1 ? event?.start : event?.slots[0];
+    var end = event?.slots.length == 1 ? event?.end : event?.slots[1];
+    var starttime = parseInt(event?.starttime.split(":")[0]);
+    var starttimeminute = parseInt(event?.starttime.split(":")[1]);
+    var endtime = parseInt(event?.endtime.split(":")[0]);
+    var endtimeminute = parseInt(event?.endtime.split(":")[1]);
     var newstartdate = new Date(
       start.getFullYear(),
       start.getMonth(),
@@ -187,18 +187,18 @@ function CalendarApp(props) {
       endtimeminute
     );
     let updatedEvent = {
-      id: event.id,
-      title: event.title,
-      person: event.person,
+      id: event?.id,
+      title: event?.title,
+      person: event?.person,
       start: newstartdate,
       end: newenddate,
-      model: event.model,
+      model: event?.model,
     };
     updateCalendar(updatedEvent);
     setState({
       ...state,
       events: state.events.map((item) =>
-        item.id === updatedEvent.id ? updatedEvent : item
+        item?.id === updatedEvent.id ? updatedEvent : item
       ),
     });
     return;
@@ -261,14 +261,14 @@ function CalendarApp(props) {
         popup
         selectable
         localizer={localizer}
-        events={props.calendarData}
+        events={props?.calendarData}
         onEventDrop={moveEvent}
         onEventResize={resizeEvent}
         onSelectSlot={onSelectSlot}
         onSelectEvent={onSelectEvent}
         onDragStart={console.log}
         defaultView={Views.Month}
-        defaultDate={props.args}
+        defaultDate={props?.args}
         timeslots={15}
         step={1}
         min={
