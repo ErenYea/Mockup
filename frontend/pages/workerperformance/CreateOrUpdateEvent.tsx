@@ -112,7 +112,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
       .value;
     console.log(value);
     var da = selectedData?.filter((i) => {
-      if (i.id == personSelect) {
+      if (i?.id == personSelect) {
         return true;
       } else {
         return false;
@@ -212,7 +212,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
               <div className="flex border rounded justify-center border-gray-800 h-[300px] w-full bg-gray-600">
                 {model == "" ? (
                   ""
-                ) : event.person ? (
+                ) : event?.person ? (
                   <main
                     // key={ind}
                     // onClick={(e) => personHandler(e)}
@@ -226,7 +226,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                       src={
                         data?.filter(
                           (item) =>
-                            item.id === event?.person.slice(0, 3).toLowerCase()
+                            item?.id === event?.person.slice(0, 3).toLowerCase()
                         )[0].img
                       }
                       alt=""
@@ -240,7 +240,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                       {
                         data?.filter(
                           (item) =>
-                            item.id === event?.person.slice(0, 3).toLowerCase()
+                            item?.id === event?.person.slice(0, 3).toLowerCase()
                         )[0].name
                       }
                     </div>
@@ -264,7 +264,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                           {
                             data?.filter(
                               (item) =>
-                                item.id ===
+                                item?.id ===
                                 event?.person.slice(0, 3).toLowerCase()
                             )[0].modaldata[model].performance
                           }
@@ -283,7 +283,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                           {
                             data?.filter(
                               (item) =>
-                                item.id ===
+                                item?.id ===
                                 event?.person.slice(0, 3).toLowerCase()
                             )[0].modaldata[model].time
                           }{" "}
@@ -302,7 +302,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                           {
                             data?.filter(
                               (item) =>
-                                item.id ===
+                                item?.id ===
                                 event?.person.slice(0, 3).toLowerCase()
                             )[0].workload
                           }{" "}
@@ -316,11 +316,11 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                     <main
                       key={ind}
                       onClick={(e) => personHandler(e)}
-                      data-key={i.id}
+                      data-key={i?.id}
                       className={
                         "flex w-[130px] flex-col border border-gray-900 rounded items-center hover:bg-gray-900  hover:cursor-pointer active:bg-gray-900" +
                         (personSelect != ""
-                          ? personSelect == i.id
+                          ? personSelect == i?.id
                             ? "bg-gray-900"
                             : ""
                           : "")
@@ -358,7 +358,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                             className=" text-yellow-300 text-center w-full"
                             data-key={i?.id}
                           >
-                            {i.modaldata[model].performance}/10
+                            {i?.modaldata[model].performance}/10
                           </span>
                         </div>
                         <div
@@ -607,11 +607,11 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
           <ModalButton
             type="button"
             onClick={onClose}
-            disabled={event.person ? true : false}
+            disabled={event?.person ? true : false}
           >
             Cancel
           </ModalButton>
-          <ModalButton disabled={event.person ? true : false}>Okay</ModalButton>
+          <ModalButton disabled={event?.person ? true : false}>Okay</ModalButton>
         </ModalFooter>
       </form>
     </Modal>
