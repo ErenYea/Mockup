@@ -1533,7 +1533,7 @@ const index = (props: Props) => {
           </div>
         </Block>
         <Block paddingBottom="20px">
-          <div className="pt-6 flex flex-row w-full bg-white justify-start items-start border-white-200 rounded-lg">
+          <div className="pt-6 h-full flex flex-row w-full bg-white justify-start items-start border-white-200 rounded-lg">
             <InformationBox args={jsonData[Index]} />
             <div className="w-11/12">
               <ApexCharts args={jsonData[Index]} />

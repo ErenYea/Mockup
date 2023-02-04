@@ -12,7 +12,7 @@ import {
   SIZE,
   ROLE,
 } from "baseui/modal";
-import { data } from "./data";
+import { data } from "../../containers/Calendar/data";
 
 export default ({ onClose, isOpen, onSubmit, event }: any) => {
   const [time, setTime] = useState<any>([]);

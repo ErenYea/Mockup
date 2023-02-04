@@ -48,7 +48,7 @@ export default function ApexCharts({ args }) {
             },
           ]}
           type="boxPlot"
-          height={400}
+          height={500}
         />
       </div>
     </>

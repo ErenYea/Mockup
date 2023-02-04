@@ -22,19 +22,19 @@ type Props = {};
 const index = (props: Props) => {
   const timeSteps = [1500, 1000, 3000, 1500, 3000];
   var tasks = [
-    { name: "Ford F-150", order: 12 , time: 11,resource:'Sean Davidson'},
-    { name: "Toyota RAV4", order: 9 ,time: 8,resource:'Dennis Ray'},
-    { name: "Honda CR-V", order: 7, time: 7,resource:'Gilbert Holland'},
-    { name: "Nissan Altima", order: 12,time: 10,resource:'Sean Davidson' },
-    { name: "Audi Q5", order: 10,time: 10,resource:'Dennis Ray'},
-    { name: "BMW X5", order: 11,time: 9,resource:'Sean Davidson'},
-    { name: "Kia Sportage", order: 13,time: 10,resource:'Gilbert Holland'},
-    { name: "Toyota Camry", order: 4,time: 6,resource:'Dennis Ray'},
-    { name: "Toyota Tacoma", order: 4,time: 7,resource:'Gilbert Holland'},
-    { name: "BMW X3", order: 6,time: 6,resource:'Sean Davidson'},
-    { name: "Lexus RX", order: 7,time:8,resource:'Dennis Ray'},
-    { name: "Hyundai Santa Fe", order: 7,time:8,resource:'Dennis Ray'},
-    { name: "Subaru Forester", order: 9,time:10,resource:'Gilbert Holland'},
+    { name: "Ford F-150", order: 12 , time: 2,resource:'Sean Davidson'},
+    { name: "Toyota RAV4", order: 9 ,time: 2,resource:'Dennis Ray'},
+    { name: "Honda CR-V", order: 7, time: 1,resource:'Gilbert Holland'},
+    { name: "Nissan Altima", order: 12,time: 2,resource:'Sean Davidson' },
+    { name: "Audi Q5", order: 10,time: 3,resource:'Dennis Ray'},
+    { name: "BMW X5", order: 11,time: 3,resource:'Sean Davidson'},
+    { name: "Kia Sportage", order: 13,time: 2,resource:'Gilbert Holland'},
+    { name: "Toyota Camry", order: 9,time: 2,resource:'Dennis Ray'},
+    { name: "Toyota Tacoma", order: 12,time: 3,resource:'Gilbert Holland'},
+    { name: "BMW X3", order: 8,time: 2,resource:'Sean Davidson'},
+    { name: "Lexus RX", order: 12,time:3,resource:'Dennis Ray'},
+    { name: "Hyundai Santa Fe", order: 13,time:3,resource:'Dennis Ray'},
+    { name: "Subaru Forester", order: 11,time:3,resource:'Gilbert Holland'},
   ];
   const jsonData = [
     {
@@ -320,7 +320,7 @@ const index = (props: Props) => {
                   18
                 </td>
                 <td className="text-lg border-b-2 border-l-2 pl-2 border-customDarkBlue">
-                  19
+                  3
                 </td>
                 <td className="text-lg border-b-2 border-l-2 border-r-2 pl-2 border-customDarkBlue">
                   Dennis Ray

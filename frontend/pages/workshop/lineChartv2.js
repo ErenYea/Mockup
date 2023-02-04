@@ -1,19 +1,19 @@
-import React from "react";
-import { Chart } from "react-google-charts";
+import React from 'react';
+import { Chart } from 'react-google-charts';
 // import {data} from  "./lineChart"
 
 const data = [
-  ["x", "Actual", "Expected"],
-  ["1", 100, 100],
-  ["2", 90, 95],
-  ["3", 80, 88],
-  ["4", 70, 79],
-  ["5", 60, 55],
-  ["6", 50, 52],
-  ["7", 40, null],
-  ["8", 30, null],
-  ["9", 20, null],
-  ["10", 10, null],
+  ['x', 'Actual', 'Expected'],
+  ['5', 100, 100],
+  ['10', 90, 95],
+  ['15', 80, 88],
+  ['20', 70, 79],
+  ['25', 60, 55],
+  ['30', 50, 52],
+  ['35', 40, null],
+  ['40', 30, null],
+  ['45', 20, null],
+  ['50', 10, null],
   // ["Day 11",0,null],
 ];
 // function getRandomInt(min, max) {
@@ -38,18 +38,18 @@ const data = [
 
 export default function LineChartv2() {
   const options = {
-    legend: { position: "bottom" },
+    legend: { position: 'bottom' },
     hAxis: {
-      title: "Days",
+      title: 'Minutes',
       // format: "yyyy-MM-dd",
     },
     vAxis: {
-      title: "Remaining Effort (Hour)",
-      format: "0",
+      title: 'Remaining Effort (Hour)',
+      format: '0',
       ticks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
     },
     series: {
-      1: { curveType: "function" },
+      1: { curveType: 'function' },
     },
     // pointsVisible: true
   };
