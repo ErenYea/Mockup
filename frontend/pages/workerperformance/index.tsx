@@ -15,9 +15,12 @@ import CalendarApp from "./calendar";
 
 const index = (props: Props) => {
   useEffect(()=>{
-    for (let index = 0; index < document.getElementsByClassName('rbc-btn-group').length; index++) {
-      document.getElementsByClassName('rbc-btn-group')[index].style.display='None'
-    }
+    document.querySelectorAll('.rbc-btn-group').forEach((p: HTMLElement, i:number, arr:NodeListOf<HTMLElement>) => {
+      p.style.display = 'None';
+     })
+    // for (let index = 0; index < document.getElementsByClassName('rbc-btn-group').length; index++) {
+    //     document.getElementsByClassName('rbc-btn-group')[index].style.display='None'
+    // }
   
   })
   const jsonData = [
