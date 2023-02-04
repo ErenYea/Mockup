@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import moment from "moment";
 import { Calendar, Views, momentLocalizer } from "react-big-calendar";
-// import { events } from "./data";
+// import { events } from "../../data";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 
 import { addDays } from "date-fns";
 
-import CreateOrUpdateEvent from "./CreateOrUpdateEvent";
+import CreateOrUpdateEvent from "../../CreateOrUpdateEvent";
 const localizer: any = momentLocalizer(moment);
 
 const DragAndDropCalendar = withDragAndDrop(Calendar);

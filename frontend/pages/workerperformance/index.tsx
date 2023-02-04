@@ -11,7 +11,7 @@ import { Block } from "baseui/block";
 import InformationBox from "./informationBox";
 import Pie from "pages/charts/pie";
 import LineChart from "pages/workshop/lineChart";
-import CalendarApp from "./calendar";
+import CalendarApp from "../../containers/Calendar/oem/newcalendar/index";
 
 const index = (props: Props) => {
   useEffect(()=>{
