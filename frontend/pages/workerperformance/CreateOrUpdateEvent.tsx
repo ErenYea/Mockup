@@ -16,13 +16,13 @@ import { data } from "../../containers/Calendar/data";
 
 export default ({ onClose, isOpen, onSubmit, event }: any) => {
   const [time, setTime] = useState<any>([]);
-  const [title, setTitle] = React.useState(event.title ? event.title : "");
-  const [model, setModel] = React.useState(event.model ? event.model : "");
+  const [title, setTitle] = React.useState(event?.title ? event?.title : "");
+  const [model, setModel] = React.useState(event?.model ? event?.model : "");
   // const [person, setPerson] = React.useState(event.person ? event.person : "");
-  const [slots, setSlots] = React.useState<any>([event.start, event.end]);
+  const [slots, setSlots] = React.useState<any>([event?.start, event?.end]);
   const [selectedData, setSelectedData] = React.useState<any>([]);
   const [personSelect, setPersonSelect] = React.useState<any>(
-    event.person ? event.person : ""
+    event?.person ? event?.person : ""
   );
 
   const [modalModal, setModalModal] = React.useState<any>([
@@ -33,15 +33,15 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     "Toyota",
   ]);
   const getthecar = (value: any) => {
-    return modalModal.filter(
+    return modalModal?.filter(
       (item) => item.slice(0, 3).toLowerCase() == value
     )[0];
   };
   const [starttime, setStartTime] = React.useState<any>(
-    event.starttime ? event.starttime : ""
+    event?.starttime ? event?.starttime : ""
   );
   const [endtime, setEndTime] = React.useState<any>(
-    event.endtime ? event.endtime : ""
+    event?.endtime ? event?.endtime : ""
   );
   const fillTime = () => {
     var timetofill = [];
@@ -62,7 +62,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     e.preventDefault();
     var sl = slots;
     var da = sl[1];
-    var person = selectedData.filter((i) => {
+    var person = selectedData?.filter((i) => {
       if (i.id == personSelect) {
         return true;
       } else {
@@ -111,7 +111,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     const value = (document.getElementById("timemodels") as HTMLInputElement)
       .value;
     console.log(value);
-    var da = selectedData.filter((i) => {
+    var da = selectedData?.filter((i) => {
       if (i.id == personSelect) {
         return true;
       } else {
@@ -184,7 +184,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                 <option selected={model != "" ? false : true} disabled>
                   Choose a Model
                 </option>
-                {modalModal.map((item, index) => (
+                {modalModal?.map((item, index) => (
                   <option
                     key={index}
                     value={item.slice(0, 3).toLowerCase()}
@@ -224,7 +224,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                     <img
                       // data-key={i.id}
                       src={
-                        data.filter(
+                        data?.filter(
                           (item) =>
                             item.id === event.person.slice(0, 3).toLowerCase()
                         )[0].img
@@ -238,7 +238,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                       className=" text-purple-600 text-bold text-lg"
                     >
                       {
-                        data.filter(
+                        data?.filter(
                           (item) =>
                             item.id === event.person.slice(0, 3).toLowerCase()
                         )[0].name
@@ -262,7 +262,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                           // data-key={i.id}
                         >
                           {
-                            data.filter(
+                            data?.filter(
                               (item) =>
                                 item.id ===
                                 event.person.slice(0, 3).toLowerCase()
@@ -281,7 +281,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                           // data-key={i.id}
                         >
                           {
-                            data.filter(
+                            data?.filter(
                               (item) =>
                                 item.id ===
                                 event.person.slice(0, 3).toLowerCase()
@@ -300,7 +300,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                           // data-key={i.id}
                         >
                           {
-                            data.filter(
+                            data?.filter(
                               (item) =>
                                 item.id ===
                                 event.person.slice(0, 3).toLowerCase()
@@ -567,7 +567,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                 <option selected={model != "" ? false : true} disabled>
                   Choose a Start Time
                 </option>
-                {time.map((item, index) => (
+                {time?.map((item, index) => (
                   <option
                     key={index}
                     value={item}

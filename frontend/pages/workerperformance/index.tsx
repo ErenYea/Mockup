@@ -1518,7 +1518,7 @@ const index = (props: Props) => {
                 onChange={showInfo}
                 className="w-full p-2.5 text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
               >
-                {jsonData.map((val, ind) => {
+                {jsonData?.map((val, ind) => {
                   return (
                     <option value={ind} key={ind} className="font-bold">
                       {val.name}
