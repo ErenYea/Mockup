@@ -78,7 +78,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     console.log(value);
     const filteredData = data;
     filteredData.sort(
-      (a, b) => b.modaldata[value].performance - a.modaldata[value].performance
+      (a, b) => b?.modaldata[value].performance - a?.modaldata[value].performance
     );
     setSelectedData(filteredData);
 
@@ -94,7 +94,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     //     e.target.parentElement.parentElement.querySelector("#name").textContent
     //   );
     // }
-    const key = e.target.getAttribute("data-key");
+    const key = e?.target.getAttribute("data-key");
     console.log("key", key);
     // console.log(document.querySelector(`main[data-key='${key}']`));
     if (document.querySelector(`main[data-key='${key}']`)) {

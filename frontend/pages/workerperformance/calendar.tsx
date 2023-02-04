@@ -30,9 +30,9 @@ function CalendarApp(props) {
     if (post.success === true) {
       const senddata = post.data.map((i) => {
         var d = i;
-        d.start = new Date(i.start);
-        d.end = new Date(i.end);
-        d.id = i._id;
+        d.start = new Date(i?.start);
+        d.end = new Date(i?.end);
+        d.id = i?._id;
         return d;
       });
       setState({ events: senddata });
