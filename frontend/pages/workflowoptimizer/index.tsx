@@ -157,19 +157,43 @@ const index = (props: Props) => {
     var alldate = [];
     for (var i = 0; i < 7; i++) {
       var hon = honda?.filter((item) => {
+        var date = new Date(item.start);
+        var end = new Date(item.end);
+
         if (
-          new Date(item.start) ==
+          new Date(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate()
+          ).getTime() ==
             new Date(
               secondDate.getFullYear(),
               secondDate.getMonth(),
               secondDate.getDate() + i
-            ) ||
-          new Date(item.end) >=
+            ).getTime() ||
+          (new Date(
+            end.getFullYear(),
+            end.getMonth(),
+            end.getDate()
+          ).getTime() >=
             new Date(
               secondDate.getFullYear(),
               secondDate.getMonth(),
               secondDate.getDate() + i
-            )
+            ).getTime() &&
+            new Date(item.start) < newDate &&
+            !(
+              new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate()
+              ).getTime() >
+              new Date(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              ).getTime()
+            ))
         ) {
           return true;
         } else {
@@ -177,19 +201,43 @@ const index = (props: Props) => {
         }
       });
       var nis = nissan?.filter((item) => {
+        var date = new Date(item.start);
+        var end = new Date(item.end);
+
         if (
-          new Date(item.start) ==
+          new Date(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate()
+          ).getTime() ==
             new Date(
               secondDate.getFullYear(),
               secondDate.getMonth(),
               secondDate.getDate() + i
-            ) ||
-          new Date(item.end) >=
+            ).getTime() ||
+          (new Date(
+            end.getFullYear(),
+            end.getMonth(),
+            end.getDate()
+          ).getTime() >=
             new Date(
               secondDate.getFullYear(),
               secondDate.getMonth(),
               secondDate.getDate() + i
-            )
+            ).getTime() &&
+            new Date(item.start) < newDate &&
+            !(
+              new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate()
+              ).getTime() >
+              new Date(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              ).getTime()
+            ))
         ) {
           return true;
         } else {
@@ -197,19 +245,43 @@ const index = (props: Props) => {
         }
       });
       var toy = toyota?.filter((item) => {
+        var date = new Date(item.start);
+        var end = new Date(item.end);
+
         if (
-          new Date(item.start) ==
+          new Date(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate()
+          ).getTime() ==
             new Date(
               secondDate.getFullYear(),
               secondDate.getMonth(),
               secondDate.getDate() + i
-            ) ||
-          new Date(item.end) >=
+            ).getTime() ||
+          (new Date(
+            end.getFullYear(),
+            end.getMonth(),
+            end.getDate()
+          ).getTime() >=
             new Date(
               secondDate.getFullYear(),
               secondDate.getMonth(),
               secondDate.getDate() + i
-            )
+            ).getTime() &&
+            new Date(item.start) < newDate &&
+            !(
+              new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate()
+              ).getTime() >
+              new Date(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              ).getTime()
+            ))
         ) {
           return true;
         } else {
@@ -217,19 +289,43 @@ const index = (props: Props) => {
         }
       });
       var hyu = hyundai?.filter((item) => {
+        var date = new Date(item.start);
+        var end = new Date(item.end);
+
         if (
-          new Date(item.start) ==
+          new Date(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate()
+          ).getTime() ==
             new Date(
               secondDate.getFullYear(),
               secondDate.getMonth(),
               secondDate.getDate() + i
-            ) ||
-          new Date(item.end) >=
+            ).getTime() ||
+          (new Date(
+            end.getFullYear(),
+            end.getMonth(),
+            end.getDate()
+          ).getTime() >=
             new Date(
               secondDate.getFullYear(),
               secondDate.getMonth(),
               secondDate.getDate() + i
-            )
+            ).getTime() &&
+            new Date(item.start) < newDate &&
+            !(
+              new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate()
+              ).getTime() >
+              new Date(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              ).getTime()
+            ))
         ) {
           return true;
         } else {
@@ -237,19 +333,43 @@ const index = (props: Props) => {
         }
       });
       var fro = ford?.filter((item) => {
+        var date = new Date(item.start);
+        var end = new Date(item.end);
+
         if (
-          new Date(item.start) ==
+          new Date(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate()
+          ).getTime() ==
             new Date(
               secondDate.getFullYear(),
               secondDate.getMonth(),
               secondDate.getDate() + i
-            ) ||
-          new Date(item.end) >=
+            ).getTime() ||
+          (new Date(
+            end.getFullYear(),
+            end.getMonth(),
+            end.getDate()
+          ).getTime() >=
             new Date(
               secondDate.getFullYear(),
               secondDate.getMonth(),
               secondDate.getDate() + i
-            )
+            ).getTime() &&
+            new Date(item.start) < newDate &&
+            !(
+              new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate()
+              ).getTime() >
+              new Date(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              ).getTime()
+            ))
         ) {
           return true;
         } else {
@@ -322,7 +442,7 @@ const index = (props: Props) => {
         data: carstoy,
       },
     ];
-    // console.log(aldata);
+    console.log(aldata);
     setAllcar(aldata);
     setRangeDate(alldate);
     // setHonda(carshonda);

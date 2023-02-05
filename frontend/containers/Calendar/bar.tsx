@@ -110,9 +110,9 @@ const Bar = (props: Props) => {
   //     },
   //   },
   // });
-  // useEffect(() => {
-  //   console.log("props", props);
-  // }, [props, state.series]);
+  useEffect(() => {
+    console.log("props", props);
+  }, [props]);
   return (
     <>
       {/* <Head>
