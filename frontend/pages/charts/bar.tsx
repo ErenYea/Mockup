@@ -6,8 +6,8 @@ import { Block } from "baseui/block";
 import Container from "components/UiElements/Container/Container";
 import ChartMenu from "components/SideMenu/ChartMenu";
 import ApexChart from "components/UiElements/ApexChart/ApexChart";
-
-const Bar: NextPage<{}> = () => {
+type Props = {};
+const Bar = (props: Props) => {
   const [state, setState] = useState<any>({
     series: [
       {
