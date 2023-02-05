@@ -7,44 +7,38 @@ import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import { addDays } from "date-fns";
 
 import CreateOrUpdateEvent from "./CreateOrUpdateEvent";
+import MonthModal from "./MonthModal";
+import { Cell, Grid } from "baseui/layout-grid";
 const localizer: any = momentLocalizer(moment);
 
 const DragAndDropCalendar = withDragAndDrop(Calendar);
 type Props = {
   events: Array<Object>;
-};
-const CustomHeader = ({ label, onNavigate, onView }) => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <span>{label}</span>
-      <div>
-        <button onClick={() => onNavigate(1)}>Next</button>
-      </div>
-    </div>
-  );
+  view: any;
+  setView: any;
+  state: any;
+  setState: any;
+  date: any;
+  setDate: any;
 };
 
 function CalendarApp(props) {
   const [onNavigate, setOnNavigate] = React.useState(null);
   // const [events, setEvents] = useState<any>([]);
-  const [view, setView] = React.useState("week");
-  const [date, setDate] = React.useState(new Date());
+  // const [view, setView] = React.useState("week");
+  // const [date, setDate] = React.useState(new Date());
   const [count, setCount] = React.useState(0);
 
-  const handleNavigate = (date, view) => {
-    setDate(date);
-    console.log("view", view);
-    setView(view);
+  const handleView = (newview) => {
+    // setDate(date);
+    console.log("hamza");
+    console.log("view", newview);
+    props?.setView(newview);
   };
   const [isOpen, setIsOpen] = React.useState(false);
   const [actionType, setActionType] = React.useState("create");
   const [event, setEvent] = React.useState(null);
+  const [monthevent, setMonthEvent] = React.useState([]);
   const eventPropGetter = (event) => {
     const style = {
       backgroundColor: event.color,
@@ -60,22 +54,45 @@ function CalendarApp(props) {
     };
   };
 
-  const [state, setState] = React.useState({
-    events: [],
-  });
+  // const [state, setState] = React.useState({
+  //   events: [],
+  // });
   const getDate = async () => {
-    const response = await fetch("https://MongooseAPI.erenyea.repl.co/get");
-    const post = await response.json();
-    console.log(post);
-    if (post.success === true) {
-      const senddata = post.data.map((i) => {
-        var d = i;
-        d.start = new Date(i.start);
-        d.end = new Date(i.end);
-        d.id = i._id;
-        return d;
-      });
-      setState({ events: senddata });
+    if (props?.state?.events.length == 0) {
+      const response = await fetch("https://MongooseAPI.erenyea.repl.co/get");
+      const post = await response.json();
+      console.log(post);
+      if (post.success === true) {
+        const senddata = post?.data?.map((i) => {
+          var d = i;
+          d.start = new Date(i?.start);
+          d.end = new Date(i?.end);
+          d.id = i?._id;
+
+          return d;
+        });
+        props?.setState({ events: senddata });
+      }
+    }
+  };
+  const getMonth = async () => {
+    if (monthevent.length == 0) {
+      const response = await fetch(
+        "https://MongooseAPI.erenyea.repl.co/getmonth"
+      );
+      const month = await response.json();
+      console.log(month);
+      if (month?.success === true) {
+        const senddata = month?.data?.map((i) => {
+          var d = i;
+          d.start = new Date(i?.start);
+          d.end = new Date(i?.end);
+          d.id = i?._id;
+          d.title = i?.title + ": " + i?.jobs.toString();
+          return d;
+        });
+        setMonthEvent(senddata);
+      }
     }
   };
   const updateCalendar = (event: any) => {
@@ -96,6 +113,11 @@ function CalendarApp(props) {
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
   };
+  const handleNavigate = (date, view) => {
+    console.log("navigate", date, view);
+    props?.setDate(date);
+    props?.setView(view);
+  };
 
   // console.log("state", props.events);
   function moveEvent({
@@ -104,14 +126,14 @@ function CalendarApp(props) {
     end,
     isAllDay: droppedOnAllDaySlot,
   }: any) {
-    const { events } = state;
+    const { events } = props.state;
 
     const idx = events.indexOf(event);
-    let allDay = event.allDay;
+    let allDay = event?.allDay;
 
-    if (!event.allDay && droppedOnAllDaySlot) {
+    if (!event?.allDay && droppedOnAllDaySlot) {
       allDay = true;
-    } else if (event.allDay && !droppedOnAllDaySlot) {
+    } else if (event?.allDay && !droppedOnAllDaySlot) {
       allDay = false;
     }
 
@@ -120,8 +142,8 @@ function CalendarApp(props) {
     const nextEvents = [...events];
     nextEvents.splice(idx, 1, updatedEvent);
 
-    setState({
-      ...state,
+    props.setState({
+      ...props.state,
       events: nextEvents,
     });
 
@@ -129,7 +151,7 @@ function CalendarApp(props) {
   }
 
   function resizeEvent({ event, start, end }: any) {
-    const { events } = state;
+    const { events } = props.state;
 
     const nextEvents = events.map((existingEvent) => {
       return existingEvent.id == event.id
@@ -137,14 +159,14 @@ function CalendarApp(props) {
         : existingEvent;
     });
 
-    setState({
-      ...state,
+    props.setState({
+      ...props.state,
       events: nextEvents,
     });
 
     //alert(`${event.title} was resized to ${start}-${end}`)
   }
-  const sendEvent = (event: any) => {
+  const sendEvent = async (event: any) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -157,22 +179,24 @@ function CalendarApp(props) {
       redirect: "follow",
     };
 
-    fetch("https://MongooseAPI.erenyea.repl.co/post", requestOptions)
-      .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+    const response = await fetch(
+      "https://MongooseAPI.erenyea.repl.co/post",
+      requestOptions
+    );
+    const data = await response.json();
+    return data;
   };
 
-  function newEvent(event: any) {
+  async function newEvent(event: any) {
     // let idList = state.events.map((a) => a.id);
     // let newId = Math.max(...idList) + 1;
     console.log("event", event);
-    var starttime = parseInt(event.starttime.split(":")[0]);
-    var starttimeminute = parseInt(event.starttime.split(":")[1]);
-    var endtime = parseInt(event.endtime.split(":")[0]);
-    var endtimeminute = parseInt(event.endtime.split(":")[1]);
-    var start = event.slots.length == 1 ? event.start : event.slots[0];
-    var end = event.slots.length == 1 ? event.end : event.slots[1];
+    var starttime = parseInt(event?.starttime.split(":")[0]);
+    var starttimeminute = parseInt(event?.starttime.split(":")[1]);
+    var endtime = parseInt(event?.endtime.split(":")[0]);
+    var endtimeminute = parseInt(event?.endtime.split(":")[1]);
+    var start = event?.slots.length == 1 ? event?.start : event?.slots[0];
+    var end = event?.slots.length == 1 ? event?.end : event?.slots[1];
     var newstartdate = new Date(
       start.getFullYear(),
       start.getMonth(),
@@ -187,31 +211,39 @@ function CalendarApp(props) {
       endtime,
       endtimeminute
     );
+    var title = `Sunroof fitment for ${event?.work} (No. of Jobs= ${event?.title})`;
     let hour = {
       // id: newId,
-      title: event.title,
-      person: event.person,
-      model: event.model,
+      title: title,
+      cars: event?.title,
+      workshop: event?.workshop,
+      model: event?.work,
       // allDay: event.slots.length == 1,
 
       start: newstartdate,
       end: newenddate,
+      color: event?.color,
     };
-    sendEvent(hour);
-    setState({
-      ...state,
-      events: state.events.concat([hour]),
-    });
+    console.log(hour);
+    const response = await sendEvent(hour);
+    if (response.success == true) {
+      props?.setState({
+        ...props?.state,
+        events: props?.state?.events.concat([hour]),
+      });
+    } else {
+      alert(response?.message);
+    }
 
     return;
   }
   function updateEvent(event: any) {
-    var start = event.slots.length == 1 ? event.start : event.slots[0];
-    var end = event.slots.length == 1 ? event.end : event.slots[1];
-    var starttime = parseInt(event.starttime.split(":")[0]);
-    var starttimeminute = parseInt(event.starttime.split(":")[1]);
-    var endtime = parseInt(event.endtime.split(":")[0]);
-    var endtimeminute = parseInt(event.endtime.split(":")[1]);
+    var start = event?.slots.length == 1 ? event?.start : event?.slots[0];
+    var end = event?.slots.length == 1 ? event.end : event?.slots[1];
+    var starttime = parseInt(event?.starttime.split(":")[0]);
+    var starttimeminute = parseInt(event?.starttime.split(":")[1]);
+    var endtime = parseInt(event?.endtime.split(":")[0]);
+    var endtimeminute = parseInt(event?.endtime.split(":")[1]);
     var newstartdate = new Date(
       start.getFullYear(),
       start.getMonth(),
@@ -227,18 +259,18 @@ function CalendarApp(props) {
       endtimeminute
     );
     let updatedEvent = {
-      id: event.id,
-      title: event.title,
-      person: event.person,
+      id: event?.id,
+      title: event?.title,
+      person: event?.person,
       start: newstartdate,
       end: newenddate,
-      model: event.model,
+      model: event?.model,
     };
     updateCalendar(updatedEvent);
-    setState({
-      ...state,
-      events: state.events.map((item) =>
-        item.id === updatedEvent.id ? updatedEvent : item
+    props?.setState({
+      ...props?.state,
+      events: props?.state?.events.map((item) =>
+        item?.id === updatedEvent?.id ? updatedEvent : item
       ),
     });
     return;
@@ -291,8 +323,12 @@ function CalendarApp(props) {
   }
   const today = new Date();
   useEffect(() => {
-    getDate();
-  }, []);
+    if (props?.view == "month") {
+      getMonth();
+    } else {
+      getDate();
+    }
+  }, [props?.view]);
   useEffect(() => {
     function getElementByXpath(path) {
       return document.evaluate(
@@ -304,110 +340,182 @@ function CalendarApp(props) {
       ).singleNodeValue;
     }
 
-    console.log(view);
-    console.log("data", date);
-    if (count == 0) {
-      var ele = getElementByXpath(
-        `//div[@data-baseweb="block"]//button[contains(text(),'Back')]`
-      ) as HTMLButtonElement;
-      ele.disabled = true;
-    } else {
+    console.log(props?.view);
+    console.log("data", props?.date);
+    if (props?.view == "week") {
       var ele = getElementByXpath(
         `//div[@data-baseweb="block"]//button[contains(text(),'Back')]`
       ) as HTMLButtonElement;
       ele.disabled = false;
-    }
-    if (count == 2) {
-      var ele = getElementByXpath(
-        `//div[@data-baseweb="block"]//button[contains(text(),'Next')]`
-      ) as HTMLButtonElement;
-      ele.disabled = true;
-    } else {
       var ele = getElementByXpath(
         `//div[@data-baseweb="block"]//button[contains(text(),'Next')]`
       ) as HTMLButtonElement;
       ele.disabled = false;
-    }
-    if (date.getMonth() == new Date().getMonth()) {
-      setCount(0);
-    }
-    if (date.getMonth() == new Date().getMonth() + 1) {
-      setCount(1);
-    }
-    if (date.getMonth() == new Date().getMonth() + 2) {
-      setCount(2);
+    } else {
+      if (count == 0) {
+        var ele = getElementByXpath(
+          `//div[@data-baseweb="block"]//button[contains(text(),'Back')]`
+        ) as HTMLButtonElement;
+        ele.disabled = true;
+      } else {
+        var ele = getElementByXpath(
+          `//div[@data-baseweb="block"]//button[contains(text(),'Back')]`
+        ) as HTMLButtonElement;
+        ele.disabled = false;
+      }
+      if (count == 2) {
+        var ele = getElementByXpath(
+          `//div[@data-baseweb="block"]//button[contains(text(),'Next')]`
+        ) as HTMLButtonElement;
+        ele.disabled = true;
+      } else {
+        var ele = getElementByXpath(
+          `//div[@data-baseweb="block"]//button[contains(text(),'Next')]`
+        ) as HTMLButtonElement;
+        ele.disabled = false;
+      }
+      if (props.date.getMonth() == new Date().getMonth()) {
+        setCount(0);
+      }
+      if (props.date.getMonth() == new Date().getMonth() + 1) {
+        setCount(1);
+      }
+      if (props.date.getMonth() == new Date().getMonth() + 2) {
+        setCount(2);
+      }
     }
     // if (date.getMonth() == new Date().getMonth() + 3) {
     //   setCount(3);
     // }
-  }, [view, date, count]);
-  useEffect(() => {
-    setOnNavigate((date, view, action) => {
-      console.log("onNavigate", date, view, action);
-    });
-  }, []);
+  }, [props?.view, props?.date, count]);
+  // useEffect(() => {
+  //   setOnNavigate((date, view, action) => {
+  //     console.log("onNavigate", date, view, action);
+  //   });
+  // }, []);
   return (
     <>
-      {/* resizable */}
-      <Calendar
-        popup
-        selectable
-        localizer={localizer}
-        events={state.events}
-        onEventDrop={moveEvent}
-        onEventResize={resizeEvent}
-        onSelectSlot={onSelectSlot}
-        onSelectEvent={onSelectEvent}
-        onDragStart={console.log}
-        defaultView={Views.Month}
-        showMultiDayTimes={true}
-        showNavigation={false}
-        eventPropGetter={eventPropGetter}
-        // defaultDate={today}
-        // view={"agenda"}
-        startAccessor="start"
-        // components={{
-        //   month: { header: CustomHeader },
-        //   week: { header: CustomHeader },
-        // }}
-        endAccessor="end"
-        // view={view}
-        views={["month", "week"]}
-        date={date}
-        onNavigate={onNavigate}
-        // date={
-        //   new Date(today.getFullYear(), today.getMonth(), today.getDate() - 2)
-        // }
-        timeslots={15}
-        step={1}
-        min={
-          new Date(
-            today.getFullYear(),
-            today.getMonth() - 1,
-            today.getDate(),
-            8
-          )
-        }
-        max={
-          new Date(
-            today.getFullYear(),
-            today.getMonth() + 1,
-            today.getDate(),
-            18,
-            15
-          )
-        }
-        // defaultView="week"
-      />
-      {event && (
-        <CreateOrUpdateEvent
-          onClose={close}
-          isOpen={isOpen}
-          event={event}
-          type={actionType}
-          onSubmit={(value: any) => onSubmit(value)}
+      {props?.view == "month" ? (
+        <Calendar
+          popup
+          selectable={props?.view == "month" ? false : true}
+          localizer={localizer}
+          events={props?.view == "month" ? monthevent : props?.state?.events}
+          // onEventDrop={moveEvent}
+          // onEventResize={resizeEvent}
+          onSelectSlot={props?.view == "month" ? null : onSelectSlot}
+          onSelectEvent={props?.view == "month" ? null : onSelectEvent}
+          onDragStart={console.log}
+          // defaultView={Views.Month}
+          showMultiDayTimes={true}
+          showNavigation={true}
+          eventPropGetter={eventPropGetter}
+          defaultDate={today}
+          // view={"agenda"}
+          startAccessor="start"
+          // components={{
+          //   month: { header: CustomHeader },
+          //   week: { header: CustomHeader },
+          // }}
+          endAccessor="end"
+          view={props?.view}
+          views={["month", "week"]}
+          date={props?.date}
+          onNavigate={handleNavigate}
+          onView={handleView}
+          // date={
+          //   new Date(today.getFullYear(), today.getMonth(), today.getDate() - 2)
+          // }
+          timeslots={15}
+          step={1}
+          min={
+            new Date(
+              today.getFullYear(),
+              today.getMonth() - 1,
+              today.getDate(),
+              8
+            )
+          }
+          max={
+            new Date(
+              today.getFullYear(),
+              today.getMonth() + 1,
+              today.getDate(),
+              18,
+              15
+            )
+          }
+          // defaultView="week"
         />
+      ) : (
+        <>
+          <Calendar
+            popup
+            selectable={props?.view == "month" ? false : true}
+            localizer={localizer}
+            events={props?.view == "month" ? monthevent : props?.state?.events}
+            // onEventDrop={moveEvent}
+            // onEventResize={resizeEvent}
+            onSelectSlot={props?.view == "month" ? null : onSelectSlot}
+            onSelectEvent={props?.view == "month" ? null : null}
+            // onDragStart={console.log}
+            // defaultView={Views.Month}
+            showMultiDayTimes={true}
+            showNavigation={true}
+            eventPropGetter={eventPropGetter}
+            // defaultDate={today}
+            // view={"agenda"}
+            startAccessor="start"
+            // components={{
+            //   month: { header: CustomHeader },
+            //   week: { header: CustomHeader },
+            // }}
+            endAccessor="end"
+            view={props?.view}
+            views={["month", "week"]}
+            date={props?.date}
+            onNavigate={handleNavigate}
+            onView={handleView}
+            // date={
+            //   new Date(today.getFullYear(), today.getMonth(), today.getDate() - 2)
+            // }
+            timeslots={15}
+            step={1}
+            min={
+              new Date(
+                today.getFullYear(),
+                today.getMonth() - 1,
+                today.getDate(),
+                8
+              )
+            }
+            max={
+              new Date(
+                today.getFullYear(),
+                today.getMonth() + 1,
+                today.getDate(),
+                18,
+                15
+              )
+            }
+
+            // defaultView="week"
+          />
+        </>
       )}
+
+      {event &&
+        (props?.view == "week" ? (
+          <CreateOrUpdateEvent
+            onClose={close}
+            isOpen={isOpen}
+            event={event}
+            type={actionType}
+            onSubmit={(value: any) => onSubmit(value)}
+          />
+        ) : (
+          ""
+        ))}
     </>
   );
 }
