@@ -34,7 +34,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     "Toyota",
   ]);
   const getthecar = (value: any) => {
-    return modalModal.filter(
+    return modalModal?.filter(
       (item) => item.slice(0, 3).toLowerCase() == value
     )[0];
   };
@@ -71,7 +71,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     //   }
     // })[0].name;
     // sl[1] = da.setDate(da.getDate() - 1);
-    var work = modalModal.filter(
+    var work = modalModal?.filter(
       (item) => item.slice(0, 3).toLowerCase() == model
     )[0];
     var color;
@@ -113,7 +113,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     const value = (document.getElementById("models") as HTMLInputElement).value;
     console.log(value);
     const filteredData = data;
-    filteredData.sort(
+    filteredData?.sort(
       (a, b) => b.modaldata[value].performance - a.modaldata[value].performance
     );
     setSelectedData(filteredData);
