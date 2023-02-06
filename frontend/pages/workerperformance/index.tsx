@@ -61,6 +61,7 @@ const index = (props: Props) => {
           person: "Sean Davidson",
           __v: 0,
           id: "63db6f01bdb9fbea8ad6211c",
+          color: "#42dd60",
         },
         {
           _id: "63dbd51e99035c5d474c48e1",
@@ -71,12 +72,13 @@ const index = (props: Props) => {
           person: "Sean Davidson",
           __v: 0,
           id: "63dbd51e99035c5d474c48e1",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "Toyota RAV4",
-          start: "2023-02-04T05:30:00.000Z",
-          end: "2023-02-04T06:00:00.000Z",
+          start: "2023-02-03T05:30:00.000Z",
+          end: "2023-02-03T06:00:00.000Z",
           model: "hon",
           person: "Sean Davidson",
           __v: 0,
@@ -85,8 +87,8 @@ const index = (props: Props) => {
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "Honda CR-V",
-          start: "2023-02-05T05:30:00.000Z",
-          end: "2023-02-05T06:00:00.000Z",
+          start: "2023-02-06T05:30:00.000Z",
+          end: "2023-02-06T06:00:00.000Z",
           model: "hon",
           person: "Sean Davidson",
           __v: 0,
@@ -115,8 +117,8 @@ const index = (props: Props) => {
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "BMW X5",
-          start: "2023-02-12T05:30:00.000Z",
-          end: "2023-02-12T06:00:00.000Z",
+          start: "2023-02-13T05:30:00.000Z",
+          end: "2023-02-13T06:00:00.000Z",
           model: "hon",
           person: "Sean Davidson",
           __v: 0,
@@ -135,8 +137,8 @@ const index = (props: Props) => {
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "BMW X5",
-          start: "2023-02-18T05:30:00.000Z",
-          end: "2023-02-18T06:00:00.000Z",
+          start: "2023-02-17T05:30:00.000Z",
+          end: "2023-02-17T06:00:00.000Z",
           model: "hon",
           person: "Sean Davidson",
           __v: 0,
@@ -145,8 +147,8 @@ const index = (props: Props) => {
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "Kia Sportage",
-          start: "2023-02-19T05:30:00.000Z",
-          end: "2023-02-19T06:00:00.000Z",
+          start: "2023-02-20T05:30:00.000Z",
+          end: "2023-02-20T06:00:00.000Z",
           model: "hon",
           person: "Sean Davidson",
           __v: 0,
@@ -155,8 +157,8 @@ const index = (props: Props) => {
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "Mazda CX-5",
-          start: "2023-02-25T05:30:00.000Z",
-          end: "2023-02-25T06:00:00.000Z",
+          start: "2023-02-24T05:30:00.000Z",
+          end: "2023-02-24T06:00:00.000Z",
           model: "hon",
           person: "Sean Davidson",
           __v: 0,
@@ -205,8 +207,8 @@ const index = (props: Props) => {
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "Toyota RAV4",
-          start: "2023-03-05T05:30:00.000Z",
-          end: "2023-03-05T06:00:00.000Z",
+          start: "2023-03-06T05:30:00.000Z",
+          end: "2023-03-06T06:00:00.000Z",
           model: "hon",
           person: "Sean Davidson",
           __v: 0,
@@ -245,8 +247,8 @@ const index = (props: Props) => {
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "Subaru Forester",
-          start: "2023-03-11T05:30:00.000Z",
-          end: "2023-03-11T06:00:00.000Z",
+          start: "2023-03-10T05:30:00.000Z",
+          end: "2023-03-10T06:00:00.000Z",
           model: "hon",
           person: "Sean Davidson",
           __v: 0,
@@ -255,8 +257,8 @@ const index = (props: Props) => {
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "Toyota Tacoma",
-          start: "2023-03-12T05:30:00.000Z",
-          end: "2023-03-12T06:00:00.000Z",
+          start: "2023-03-13T05:30:00.000Z",
+          end: "2023-03-13T06:00:00.000Z",
           model: "hon",
           person: "Sean Davidson",
           __v: 0,
@@ -305,8 +307,8 @@ const index = (props: Props) => {
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "BMW X5",
-          start: "2023-03-25T05:30:00.000Z",
-          end: "2023-03-25T06:00:00.000Z",
+          start: "2023-03-24T05:30:00.000Z",
+          end: "2023-03-24T06:00:00.000Z",
           model: "hon",
           person: "Sean Davidson",
           __v: 0,
@@ -335,8 +337,8 @@ const index = (props: Props) => {
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "BMW X5",
-          start: "2023-04-01T05:30:00.000Z",
-          end: "2023-04-01T06:00:00.000Z",
+          start: "2023-04-03T05:30:00.000Z",
+          end: "2023-04-03T06:00:00.000Z",
           model: "hon",
           person: "Sean Davidson",
           __v: 0,
@@ -425,8 +427,8 @@ const index = (props: Props) => {
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "Hyundai Santa Fe",
-          start: "2023-04-16T05:30:00.000Z",
-          end: "2023-04-16T06:00:00.000Z",
+          start: "2023-04-17T05:30:00.000Z",
+          end: "2023-04-17T06:00:00.000Z",
           model: "hon",
           person: "Sean Davidson",
           __v: 0,
@@ -485,8 +487,8 @@ const index = (props: Props) => {
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "Kia Sportage",
-          start: "2023-04-23T05:30:00.000Z",
-          end: "2023-04-23T06:00:00.000Z",
+          start: "2023-04-24T05:30:00.000Z",
+          end: "2023-04-24T06:00:00.000Z",
           model: "hon",
           person: "Sean Davidson",
           __v: 0,
@@ -581,6 +583,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63db6f01bdb9fbea8ad6211c",
+          color: "#f408a4",
         },
         {
           _id: "63dbd51e99035c5d474c48e1",
@@ -591,6 +594,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dbd51e99035c5d474c48e1",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -601,6 +605,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -611,6 +616,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -621,6 +627,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -631,6 +638,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -641,6 +649,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -651,6 +660,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -661,6 +671,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -671,6 +682,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -681,6 +693,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -691,6 +704,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -701,6 +715,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -711,6 +726,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -721,6 +737,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -731,6 +748,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -741,6 +759,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -751,6 +770,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -761,6 +781,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -771,6 +792,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -781,6 +803,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -791,6 +814,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -801,6 +825,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -811,6 +836,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -821,6 +847,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -831,6 +858,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -841,6 +869,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -851,6 +880,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -861,6 +891,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -871,6 +902,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -881,6 +913,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -891,6 +924,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -901,6 +935,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -911,6 +946,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -921,8 +957,8 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
-
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "Subaru Forester",
@@ -932,6 +968,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -942,17 +979,18 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
-
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "Ford F-150",
-          start: "2023-04-22T05:30:00.000Z",
-          end: "2023-04-22T06:00:00.000Z",
+          start: "2023-04-21T05:30:00.000Z",
+          end: "2023-04-21T06:00:00.000Z",
           model: "hon",
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -963,6 +1001,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -973,6 +1012,7 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
@@ -983,8 +1023,8 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
-
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "Toyota RAV4",
@@ -994,16 +1034,18 @@ const index = (props: Props) => {
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#f408a4",
         },
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "Kia Sportage",
-          start: "2023-04-29T05:30:00.000Z",
-          end: "2023-04-29T06:00:00.000Z",
+          start: "2023-04-28T05:30:00.000Z",
+          end: "2023-04-28T06:00:00.000Z",
           model: "hon",
           person: "Dennis Ray",
           __v: 0,
           id: "63dd5642cae0ebbc1270e96f",
+          color: "#42dd60",
         },
       ],
     },
@@ -1307,8 +1349,8 @@ const index = (props: Props) => {
         {
           _id: "63dd5642cae0ebbc1270e96f",
           title: "BMW X5",
-          start: "2023-04-01T05:30:00.000Z",
-          end: "2023-04-01T06:00:00.000Z",
+          start: "2023-03-31T05:30:00.000Z",
+          end: "2023-03-31T06:00:00.000Z",
           model: "hon",
           person: "Gilbert Holland",
           __v: 0,
