@@ -253,7 +253,7 @@ function CalendarApp(props) {
   useEffect(() => {
     getDate();
   }, []);
-  console.log(props.calendarData)
+  console.log(props.calendarData);
   return (
     <>
       {/* resizable */}
@@ -283,6 +283,7 @@ function CalendarApp(props) {
             15
           )
         }
+        className="!h-[400px]"
         // defaultView="week"
       />
       {event && (
