@@ -1553,16 +1553,16 @@ const index = (props: Props) => {
             <span className="font-black text-xl">No. of Booked Jobs: {jsonData[Index]['calendar'].length}</span>
           </div>
           <div className="flex flex-row justify-evenly items-start space-x-10 mb-10">
-            <div className="w-1/3 ml-10 h-[400px]">
-              <CalendarApp args={new Date("2023-02-01T00:00:00Z")} calendarData={jsonData[Index]['calendar']}/>
+            <div className="w-1/3 ml-10 !h-[400px]">
+              <CalendarApp args={new Date("2023-02-01T00:00:00Z")} calendarData={jsonData[Index]['calendar']} className="!h-[400px]"/>
             </div>
-            <div className="w-1/3 h-[400px]">
-              <CalendarApp args={new Date("2023-03-01T00:00:00Z")} calendarData={jsonData[Index]['calendar']}/>
+            <div className="w-1/3 !h-[400px]">
+              <CalendarApp args={new Date("2023-03-01T00:00:00Z")} calendarData={jsonData[Index]['calendar']} className="!h-[400px]"/>
             </div>
           </div>
           <div className="flex flex-col justify-center items-center">
-            <div className="w-1/3 h-[400px]">
-              <CalendarApp args={new Date("2023-04-01T00:00:00Z")} calendarData={jsonData[Index]['calendar']}/>
+            <div className="w-1/3 !h-[400px]">
+              <CalendarApp args={new Date("2023-04-01T00:00:00Z")} calendarData={jsonData[Index]['calendar']} className="!h-[400px]"/>
             </div>
 
           </div>
