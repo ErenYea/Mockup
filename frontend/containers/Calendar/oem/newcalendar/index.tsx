@@ -283,7 +283,7 @@ function CalendarApp(props) {
             15
           )
         }
-        className="!h-[400px]"
+        className="!h-[450px]"
         // defaultView="week"
       />
       {event && (
