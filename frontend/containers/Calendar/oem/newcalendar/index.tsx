@@ -259,13 +259,13 @@ function CalendarApp(props) {
       {/* resizable */}
       <DragAndDropCalendar
         popup
-        selectable
+        // selectable
         localizer={localizer}
         events={props?.calendarData}
         onEventDrop={moveEvent}
-        onEventResize={resizeEvent}
-        onSelectSlot={onSelectSlot}
-        onSelectEvent={onSelectEvent}
+        // onEventResize={resizeEvent}
+        // onSelectSlot={onSelectSlot}
+        // onSelectEvent={onSelectEvent}
         onDragStart={console.log}
         defaultView={Views.Month}
         defaultDate={props?.args}
