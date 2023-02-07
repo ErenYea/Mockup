@@ -422,6 +422,30 @@ const index = (props) => {
                           {i.workshop.workload} cars this week
                         </span>
                       </div>
+                      <div
+                        className="text-black text-[14px] text-center"
+                        // data-key={i.id}
+                      >
+                        Start Date:{" "}
+                        <span
+                          className=" text-yellow-300 text-center w-full"
+                          // data-key={i.id}
+                        >
+                          {i.startdate}
+                        </span>
+                      </div>
+                      <div
+                        className="text-black text-[14px] text-center"
+                        // data-key={i.id}
+                      >
+                        End Date:{" "}
+                        <span
+                          className=" text-yellow-300 text-center w-full"
+                          // data-key={i.id}
+                        >
+                          {i.enddate}
+                        </span>
+                      </div>
                     </div>
                   </div>
                   <div className="text-base p-2 border border-gray-700 rounded bg-white flex flex-col">
