@@ -47,9 +47,31 @@ const ColumnChart = (props) => {
         size: 1,
       },
       xaxis: {
+        title: {
+          text: "Models",
+        },
         categories: ["Fords", "Nissan", "Hyundai", "Honda", "Toyota"],
       },
       yaxis: {
+        title: {
+          text: "No. of Car Units",
+        },
+        labels: {
+          show: true,
+          align: 'left',
+          minWidth: 0,
+          maxWidth: 360,
+          style: {
+              colors: [],
+              fontSize: '12px',
+              fontFamily: 'Helvetica, Arial, sans-serif',
+              fontWeight: 400,
+              cssClass: 'apexcharts-yaxis-label',
+          },
+          offsetX: -5,
+          offsetY: 10,
+          rotate: 0,
+        },
         min: 5,
         max: 50,
       },

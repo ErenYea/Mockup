@@ -11,7 +11,7 @@ type Props = {
   args: any;
   sunroof: boolean;
 };
-const LineBar = (props) => {
+const LineBarv2 = (props) => {
   console.log(props);
 
   // var x =props.args.slice(-1)[0] ; // the value of x can be changed as per your requirement
@@ -25,9 +25,14 @@ const LineBar = (props) => {
   const state = {
     series: [
       {
-        name: "Vehicles Sold",
+        name: "Forecasted Bookings",
         data: props.args,
       },
+      {
+        name: "OEM Capacity",
+        data: props.args2,
+      },
+      
     ],
     options: {
       chart: {
@@ -62,19 +67,19 @@ const LineBar = (props) => {
       xaxis: {
         // type: '',
         categories: [
-          "Jan 2023",
-          "Feb 2023",
-          "Mar 2023",
-          "Apr 2023",
-          "May 2023",
-          "Jun 2023",
-          "Jul 2023",
-          "Aug 2023",
-          "Sep 2023",
-          "Oct 2023",
-          "Nov 2023",
-          "Dec 2023",
-          "Jan 2024",
+            "Jan' 23",
+            "Feb' 23",
+            "Mar' 23",
+            "Apr' 23",
+            "May' 23",
+            "Jun' 23",
+            "Jul' 23",
+            "Aug' 23",
+            "Sept' 23",
+            "Oct' 23",
+            "Nov' 23",
+            "Dec' 23",
+            "Jan' 24",
         ],
         title: {
           text: "Months",
@@ -82,10 +87,41 @@ const LineBar = (props) => {
       },
       yaxis: {
         title: {
-          text: props.sunroof ? "Sunroofs" : "Vehicles",
+          text: "No. of Units",
         },
+        labels: {
+          show: true,
+          align: 'left',
+          minWidth: 0,
+          maxWidth: 360,
+          style: {
+              colors: [],
+              fontSize: '12px',
+              fontFamily: 'Helvetica, Arial, sans-serif',
+              fontWeight: 400,
+              cssClass: 'apexcharts-yaxis-label',
+          },
+          offsetX: -5,
+          offsetY: 10,
+          rotate: 0,
+        },
+
         min: 0,
-        max: props.sunroof ? 50 : 100,
+        max: 100,
+      },
+      annotations: {
+        xaxis: [
+          {
+            x: "Quarter 1, 2023",
+            borderColor: "#775DD0",
+            label: {
+              style: {
+                color: "#000000",
+              },
+              text: "Predictions",
+            },
+          },
+        ],
       },
       legend: {
         position: "top",
@@ -101,10 +137,10 @@ const LineBar = (props) => {
         options={state.options}
         series={state.series}
         type="line"
-        height={250}
+        height={500}
       />
     </>
   );
 };
 
-export default LineBar;
+export default LineBarv2;
