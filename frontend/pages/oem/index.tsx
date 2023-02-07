@@ -1896,7 +1896,7 @@ const index = (props) => {
         </div>
         <div className="w-full flex flex-col justify-center items-center mt-10 mb-10">
           <span className="text-2xl font-black">
-          Forecasted total sunroof market demand and oem installation capacity
+          Forecasted sunroof market
           </span>
           <LineBarv2
             args={data[Index]["sunroof"][IndexModel]}
