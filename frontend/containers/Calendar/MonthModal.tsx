@@ -13,18 +13,18 @@ import {
   ROLE,
 } from "baseui/modal";
 import { data } from "./data";
+type Props = {};
 
-export default ({ onClose, isOpen, onSubmit, event }: any) => {
+const MonthModal = ({ onClose, isOpen, onSubmit, event }: any) => {
   const [time, setTime] = useState<any>([]);
-  const [title, setTitle] = React.useState<any>(0);
-  const [model, setModel] = React.useState("");
-  const [workshop, setWorkshop] = React.useState("");
+  const [title, setTitle] = React.useState(event.title ? event.title : "");
+  const [model, setModel] = React.useState(event.model ? event.model : "");
   // const [person, setPerson] = React.useState(event.person ? event.person : "");
   const [slots, setSlots] = React.useState<any>([event.start, event.end]);
   const [selectedData, setSelectedData] = React.useState<any>([]);
-  // const [personSelect, setPersonSelect] = React.useState<any>(
-  //   event.person ? event.person : ""
-  // );
+  const [personSelect, setPersonSelect] = React.useState<any>(
+    event.person ? event.person : ""
+  );
 
   const [modalModal, setModalModal] = React.useState<any>([
     "Ford Motors",
@@ -34,15 +34,15 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     "Toyota",
   ]);
   const getthecar = (value: any) => {
-    return modalModal?.filter(
+    return modalModal.filter(
       (item) => item.slice(0, 3).toLowerCase() == value
     )[0];
   };
   const [starttime, setStartTime] = React.useState<any>(
-    event.starttime ? event.starttime : "08:00"
+    event.starttime ? event.starttime : ""
   );
   const [endtime, setEndTime] = React.useState<any>(
-    event.endtime ? event.endtime : "08:00"
+    event.endtime ? event.endtime : ""
   );
   const fillTime = () => {
     var timetofill = [];
@@ -61,59 +61,24 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
   };
   function handleSubmit(e: any) {
     e.preventDefault();
-    // var sl = slots;
-    // var da = sl[1];
-    // var person = selectedData.filter((i) => {
-    //   if (i.id == personSelect) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // })[0].name;
-    // sl[1] = da.setDate(da.getDate() - 1);
-    var work = modalModal?.filter(
-      (item) => item.slice(0, 3).toLowerCase() == model
-    )[0];
-    var color;
-    if (workshop == "1") {
-      color = "#42dd60";
-    }
-    if (workshop == "2") {
-      color = "#3F51B5";
-    }
-    if (workshop == "3") {
-      color = "#f408a4";
-    }
-    if (workshop == "4") {
-      color = "#f47908";
-    }
-    console.log({
-      ...event,
-      title,
-      work,
-      workshop,
-      starttime,
-      endtime,
-      slots,
-      color,
-    });
-    onSubmit({
-      ...event,
-      title,
-      work,
-      workshop,
-      slots,
-      starttime,
-      endtime,
-      color,
-    });
+    var sl = slots;
+    var da = sl[1];
+    var person = selectedData.filter((i) => {
+      if (i.id == personSelect) {
+        return true;
+      } else {
+        return false;
+      }
+    })[0].name;
+    sl[1] = da.setDate(da.getDate() - 1);
+    onSubmit({ ...event, title, model, person, sl, starttime, endtime });
   }
   // const
   const modelHandler = () => {
     const value = (document.getElementById("models") as HTMLInputElement).value;
     console.log(value);
     const filteredData = data;
-    filteredData?.sort(
+    filteredData.sort(
       (a, b) => b.modaldata[value].performance - a.modaldata[value].performance
     );
     setSelectedData(filteredData);
@@ -130,69 +95,53 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     //     e.target.parentElement.parentElement.querySelector("#name").textContent
     //   );
     // }
-    const value = (document.getElementById("workshop") as HTMLInputElement)
-      .value;
-    console.log(value);
-    setWorkshop(value);
-    // const filteredData = data;
-    // filteredData.sort(
-    //   (a, b) => b.modaldata[value].performance - a.modaldata[value].performance
-    // );
-    // setSelectedData(filteredData);
-
-    // setModel(value);
-    // const key = e.target.getAttribute("");
-    // console.log("key", key);
-    // // console.log(document.querySelector(`main[data-key='${key}']`));
-    // if (document.querySelector(`main[data-key='${key}']`)) {
-    //   document
-    //     .querySelector(`main[data-key='${key}']`)
-    //     .classList.add("bg-gray-900");
-    // }
-    // setPersonSelect(key);
-    // console.log(e);
+    const key = e.target.getAttribute("data-key");
+    console.log("key", key);
+    // console.log(document.querySelector(`main[data-key='${key}']`));
+    if (document.querySelector(`main[data-key='${key}']`)) {
+      document
+        .querySelector(`main[data-key='${key}']`)
+        .classList.add("bg-gray-900");
+    }
+    setPersonSelect(key);
+    console.log(e);
     // .target.parentNode.querySelector("div")
   };
   const handleStarttime = (event) => {
-    console.log("workselected", workshop);
+    console.log("personeselected", personSelect);
     const value = (document.getElementById("timemodels") as HTMLInputElement)
       .value;
     console.log(value);
-    // var da = selectedData.filter((i) => {
-    //   if (i.id == personSelect) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // });
-    // var min;
-    // var hour;
-    // var cond = false;
+    var da = selectedData.filter((i) => {
+      if (i.id == personSelect) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    var min;
+    var hour;
+    var cond = false;
 
-    // if (da[0].modaldata[model].time + parseInt(value.split(":")[1]) >= 60) {
-    //   min = (da[0].modaldata[model].time + parseInt(value.split(":")[1])) % 60;
-    //   hour = Math.floor(
-    //     (da[0].modaldata[model].time + parseInt(value.split(":")[1])) / 60
-    //   );
-    //   cond = true;
-    // } else {
-    //   min = da[0].modaldata[model].time + parseInt(value.split(":")[1]);
-    //   hour = 0;
-    // }
+    if (da[0].modaldata[model].time + parseInt(value.split(":")[1]) >= 60) {
+      min = (da[0].modaldata[model].time + parseInt(value.split(":")[1])) % 60;
+      hour = Math.floor(
+        (da[0].modaldata[model].time + parseInt(value.split(":")[1])) / 60
+      );
+      cond = true;
+    } else {
+      min = da[0].modaldata[model].time + parseInt(value.split(":")[1]);
+      hour = 0;
+    }
 
-    // var end = (parseInt(value.split(":")[0]) + hour).toString();
-    // end = end.length > 1 ? end : "0" + end;
-    // end =
-    //   end +
-    //   ":" +
-    //   (min.toString().length > 1 ? min.toString() : "0" + min.toString());
-    // setEndTime(end);
+    var end = (parseInt(value.split(":")[0]) + hour).toString();
+    end = end.length > 1 ? end : "0" + end;
+    end =
+      end +
+      ":" +
+      (min.toString().length > 1 ? min.toString() : "0" + min.toString());
+    setEndTime(end);
     setStartTime(value);
-  };
-  const handleEndtime = (event) => {
-    const value = (document.getElementById("endtime") as HTMLInputElement)
-      .value;
-    setEndTime(value);
   };
   useEffect(() => {
     fillTime();
@@ -217,13 +166,12 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
       <form onSubmit={handleSubmit}>
         {/* <ModalHeader>Hello world</ModalHeader> */}
         <ModalBody>
-          <FormControl label="Set No of Cars">
+          <FormControl label="Set Title">
             <Input
               id="input-id"
               value={title}
               onChange={(event) => setTitle(event.currentTarget.value)}
               required
-              type="number"
             />
           </FormControl>
 
@@ -252,116 +200,13 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                     {item}
                   </option>
                 ))}
-                {/* <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option> */}
               </select>
             </>
           </FormControl>
 
-          <FormControl label="Select WorkShop">
+          <FormControl label="Select Person">
             <>
-              <select
-                disabled={model == ""}
-                id="workshop"
-                onChange={personHandler}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option selected disabled>
-                  Choose a Workshop
-                </option>
-
-                <option value="1">Workshop Floor 1</option>
-                <option value="2">Workshop Floor 2</option>
-                <option value="3">Workshop Floor 3</option>
-                <option value="4">Workshop Floor 4</option>
-              </select>
-            </>
-          </FormControl>
-
-          <FormControl label="Set Date">
-            <Datepicker
-              range
-              value={slots}
-              onChange={({ date }) => setSlots(date)}
-              placeholder="YYYY/MM/DD – YYYY/MM/DD"
-            />
-          </FormControl>
-          <FormControl label="Start Time">
-            <>
-              <select
-                id="timemodels"
-                onChange={handleStarttime}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                disabled={workshop == "" ? true : false}
-              >
-                <option selected={model != "" ? false : true} disabled>
-                  Choose a Start Time
-                </option>
-                {time.map((item, index) => (
-                  <option
-                    key={index}
-                    value={item}
-                    selected={
-                      model != "" ? (model == item ? true : false) : false
-                    }
-                  >
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </>
-          </FormControl>
-          <FormControl label="End Time">
-            <>
-              <select
-                id="endtime"
-                onChange={handleEndtime}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                disabled={workshop == "" ? true : false}
-              >
-                <option selected={model != "" ? false : true} disabled>
-                  Choose a End Time
-                </option>
-                {time.map((item, index) => (
-                  <option
-                    key={index}
-                    value={item}
-                    selected={
-                      model != "" ? (model == item ? true : false) : false
-                    }
-                  >
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </>
-            {/* <Input
-              id="endtime"
-              value={endtime}
-              // onChange={(event) => setEndTime(event.currentTarget.value)}
-              placeholder={"00:00"}
-              required
-            /> */}
-          </FormControl>
-        </ModalBody>
-        <ModalFooter>
-          <ModalButton
-            type="button"
-            onClick={onClose}
-            disabled={event.person ? true : false}
-          >
-            Cancel
-          </ModalButton>
-          <ModalButton disabled={event.person ? true : false}>Okay</ModalButton>
-        </ModalFooter>
-      </form>
-    </Modal>
-  );
-};
-{
-  /* <div className="flex border rounded justify-center border-gray-800 h-[300px] w-full bg-gray-600">
+              <div className="flex border rounded justify-center border-gray-800 h-[300px] w-full bg-gray-600">
                 {model == "" ? (
                   ""
                 ) : event.person ? (
@@ -545,6 +390,59 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
                     </main>
                   ))
                 )}
-                
-              </div> */
-}
+              </div>
+            </>
+          </FormControl>
+
+          <FormControl label="Start Time">
+            <>
+              <select
+                id="timemodels"
+                onChange={handleStarttime}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                disabled={personSelect == "" ? true : false}
+              >
+                <option selected={model != "" ? false : true} disabled>
+                  Choose a Start Time
+                </option>
+                {time.map((item, index) => (
+                  <option
+                    key={index}
+                    value={item}
+                    selected={
+                      model != "" ? (model == item ? true : false) : false
+                    }
+                  >
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </>
+          </FormControl>
+          <FormControl label="End Time">
+            <Input
+              id="endtime"
+              value={endtime}
+              disabled
+              // onChange={(event) => setEndTime(event.currentTarget.value)}
+              placeholder={"00:00"}
+              required
+            />
+          </FormControl>
+        </ModalBody>
+        <ModalFooter>
+          <ModalButton
+            type="button"
+            onClick={onClose}
+            disabled={event.person ? true : false}
+          >
+            Cancel
+          </ModalButton>
+          <ModalButton disabled={event.person ? true : false}>Okay</ModalButton>
+        </ModalFooter>
+      </form>
+    </Modal>
+  );
+};
+
+export default MonthModal;

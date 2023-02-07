@@ -253,19 +253,19 @@ function CalendarApp(props) {
   useEffect(() => {
     getDate();
   }, []);
-  console.log(props.calendarData)
+  console.log(props.calendarData);
   return (
     <>
       {/* resizable */}
       <DragAndDropCalendar
         popup
-        selectable
+        // selectable
         localizer={localizer}
         events={props?.calendarData}
         onEventDrop={moveEvent}
-        onEventResize={resizeEvent}
-        onSelectSlot={onSelectSlot}
-        onSelectEvent={onSelectEvent}
+        // onEventResize={resizeEvent}
+        // onSelectSlot={onSelectSlot}
+        // onSelectEvent={onSelectEvent}
         onDragStart={console.log}
         defaultView={Views.Month}
         defaultDate={props?.args}
@@ -283,6 +283,7 @@ function CalendarApp(props) {
             15
           )
         }
+        className="!h-[500px]"
         // defaultView="week"
       />
       {event && (
