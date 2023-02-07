@@ -21,6 +21,7 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
   // const [slots, setSlots] = React.useState<any>([event.start, event.end]);
   const [selectedData, setSelectedData] = React.useState<any>([]);
   const [personSelect, setPersonSelect] = React.useState<any>("");
+  const [date, setDate] = React.useState<any>();
 
   const [modalModal, setModalModal] = React.useState<any>([
     "Ford Motors",
@@ -41,7 +42,40 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
     var carname = modalModal.filter(
       (item) => item.slice(0, 3).toLowerCase() == model
     )[0];
-    onSubmit({ car: parseInt(title), model: carname, workshop });
+    // console.log(date);
+    var startdate = new Date(
+      parseInt(date.slice(0, 4)),
+      parseInt(date.slice(5, 7)),
+      parseInt(date.slice(8, 10))
+    );
+    var enddate;
+    var noofcars = parseInt(title);
+    if (noofcars <= 4) {
+      enddate = new Date(
+        parseInt(date.slice(0, 4)),
+        parseInt(date.slice(5, 7)),
+        parseInt(date.slice(8, 10))
+      );
+    } else if (noofcars <= 8) {
+      enddate = new Date(
+        parseInt(date.slice(0, 4)),
+        parseInt(date.slice(5, 7)),
+        parseInt(date.slice(8, 10)) + 2
+      );
+    } else {
+      enddate = new Date(
+        parseInt(date.slice(0, 4)),
+        parseInt(date.slice(5, 7)),
+        parseInt(date.slice(8, 10)) + 4
+      );
+    }
+    onSubmit({
+      car: parseInt(title),
+      model: carname,
+      workshop,
+      startdate: startdate.toDateString(),
+      enddate: enddate.toDateString(),
+    });
   }
   // const
   const modelHandler = () => {
@@ -241,6 +275,16 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
                 <option value="DE">Germany</option>
               </select> */}
             </>
+          </FormControl>
+          <FormControl label="Select Start Date">
+            <Input
+              type="date"
+              id="starttime"
+              // format="yyyy-MM-dd"
+              required
+              value={date}
+              onChange={(event) => setDate(event.currentTarget.value)}
+            />
           </FormControl>
         </ModalBody>
         <ModalFooter>
