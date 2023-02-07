@@ -1154,7 +1154,7 @@ const Area: NextPage<{}> = () => {
       },
       yaxis:{
         title: {
-            text: "Losses Incured (CAD)",
+            text: "Losses Incurred ($)",
           },
         // labels: {
         //     formatter: function(val) {

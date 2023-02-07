@@ -331,7 +331,7 @@ const index = (props) => {
           </div> */}
         </div>
         <div className="w-full flex flex-col justify-center items-center mt-4">
-          <span className="text-2xl font-black">Sunroof Ordering</span>
+          <span className="text-2xl font-black">Sunroof orders</span>
           <LineBar args={data[Index]["sunroof"][IndexModel]} sunroof={true} />
           {/* <div className="w-[83%] flex flex-row items-start justify-end -mt-[44px]">
             <span className="text-sm text-black">Prediction</span>
@@ -339,7 +339,7 @@ const index = (props) => {
         </div>
         <div className="w-full flex flex-col justify-center items-center mt-10 mb-10">
           <span className="text-2xl font-black">
-            Forecasted total market demand and OEM Installation Capacity
+          Forecasted total sunroof marker demand and oem installation capacity
           </span>
           <LineBarv2
             args={data[Index]["sunroof"][IndexModel]}

@@ -85,7 +85,7 @@ const LineBar = (props) => {
       },
       yaxis: {
         title: {
-          text: "No. of Car Units",
+          text: "No of car units (with sunroofs)",
         },
         labels: {
           show: true,

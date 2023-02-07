@@ -54,7 +54,7 @@ const ColumnChart = (props) => {
       },
       yaxis: {
         title: {
-          text: "No. of Car Units",
+          text: "No of car units (sunroofs)",
         },
         labels: {
           show: true,

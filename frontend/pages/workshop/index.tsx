@@ -284,7 +284,7 @@ const index = (props: Props) => {
                 Orders
               </th>
               <th className="text-xl text-customDarkBlue font-black p-2 border-2 border-r-2 border-customDarkBlue">
-                Time Estimated(Days)
+              Estimated Time (Days)
               </th>
               <th className="text-xl text-customDarkBlue font-black p-2 border-2  border-customDarkBlue">
                 Resource Deployed
