@@ -172,10 +172,10 @@ const index = (props: Props) => {
             </label>
             <DropdownComponent
               args={[
-                "Workhop Area 1",
-                "Workhop Area 2",
-                "Workhop Area 3",
-                "Workhop Area 4",
+                "Workshop Area 1",
+                "Workshop Area 2",
+                "Workshop Area 3",
+                "Workshop Area 4",
               ]}
             />
           </div>
