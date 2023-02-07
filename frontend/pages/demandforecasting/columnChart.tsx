@@ -50,7 +50,7 @@ const ColumnChart = (props) => {
         title: {
           text: "Models",
         },
-        categories: ["Fords", "Nissan", "Hyundai", "Honda", "Toyota"],
+        categories: ["Ford", "Nissan", "Hyundai", "Honda", "Toyota"],
       },
       yaxis: {
         title: {
