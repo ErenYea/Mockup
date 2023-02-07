@@ -308,7 +308,7 @@ const index = (props) => {
       <Head>
         <title>Manufacturer/OEMs</title>
       </Head>
-      <PageTitle title={"OEM/Dealership"} subtitle={""} />
+      <PageTitle title={"Manufacturer/OEMs"} subtitle={""} />
       <div className="w-full flex flex-col items-center justify-center">
       <span className="m-2 text-6xl font-black text-customDarkBlue z-10">
             {data[Index]['name']}
@@ -345,7 +345,7 @@ const index = (props) => {
             <span className="text-sm text-black">Prediction</span>
           </div> */}
         </div>
-        <div className="w-full flex flex-col justify-center items-center mt-10">
+        <div className="w-full flex flex-col justify-center items-center mt-10 mb-10">
           <span className="text-2xl font-black">Forecasted total market demand and OEM Installation Capacity</span>
           <LineBarv2 args={data[Index]["sunroof"][IndexModel]} args2={data[Index]["oemCapacity"][IndexModel]} sunroof={true} />
           <div className="w-[83%] flex flex-row items-start justify-end -mt-[44px]">
@@ -353,12 +353,12 @@ const index = (props) => {
           </div>
         </div>
         <Container>
-          <Block className={"flex items-end justify-end "}>
+          <Block className={"flex items-end justify-end mt-10"}>
             <ModalButton onClick={handleClick}>Order Job</ModalButton>
           </Block>
           <Block
             marginTop={"20px"}
-            className="border border-gray-700 h-full rounded bg-gray-200 "
+            className="border border-gray-700 h-full rounded bg-gray-200"
           >
             <div className="flex flex-col p-2 min-h-[400px]">
               <div className="text-bold text-xl border p-2 text-white bg-slate-800 w-fit">

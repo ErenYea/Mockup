@@ -7,6 +7,10 @@ import { Block } from "baseui/block";
 import { Button } from "baseui/button";
 import Container from "../components/UiElements/Container/Container";
 
+function getData(){
+  return (document.getElementById('emailBrand') as HTMLInputElement).value;
+}
+
 const Login: NextPage<{}> = () => {
   const router = useRouter();
   const [openTab, setOpenTab] = useState(1);
@@ -178,7 +182,7 @@ const Login: NextPage<{}> = () => {
 
                       <form className="mt-6" onSubmit={() => {
                               sessionStorage.setItem("user", "1");
-                              sessionStorage.setItem("emailType",`${document.getElementById('emailBrand').value}`);
+                              sessionStorage.setItem("emailType",`${getData()}`);
                               router.push("/oem");
                             }}>
                         <div className="mb-2">

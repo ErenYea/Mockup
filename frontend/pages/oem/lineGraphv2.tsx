@@ -25,11 +25,11 @@ const LineBarv2 = (props) => {
   const state = {
     series: [
       {
-        name: "Forecasted Bookings",
+        name: "OEM Capacity",
         data: props.args,
       },
       {
-        name: "OEM Capacity",
+        name: "Forecasted Bookings",
         data: props.args2,
       },
       
