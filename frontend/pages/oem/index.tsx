@@ -1968,7 +1968,7 @@ const index = (props) => {
       </div>
       <Container>
           <Block className={"flex items-end justify-end mt-10"}>
-            <ModalButton onClick={handleClick}>Order Job</ModalButton>
+            <ModalButton onClick={handleClick}>Schedule Job</ModalButton>
           </Block>
           <Block
             marginTop={"20px"}
