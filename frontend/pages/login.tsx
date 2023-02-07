@@ -7,12 +7,12 @@ import { Block } from "baseui/block";
 import { Button } from "baseui/button";
 import Container from "../components/UiElements/Container/Container";
 
-function getData(){
-  return (document.getElementById('emailBrand') as HTMLInputElement).value;
+function getData() {
+  return (document.getElementById("emailBrand") as HTMLInputElement).value;
 }
 
-function getData2(){
-  return (document.getElementById('emailBrand2') as HTMLInputElement).value;
+function getData2() {
+  return (document.getElementById("emailBrand2") as HTMLInputElement).value;
 }
 
 const Login: NextPage<{}> = () => {
@@ -184,11 +184,15 @@ const Login: NextPage<{}> = () => {
                         Sign in
                       </h1>
 
-                      <form className="mt-6" onSubmit={() => {
-                              sessionStorage.setItem("user", "1");
-                              sessionStorage.setItem("emailType",`${getData()}`);
-                              router.push("/oem");
-                            }}>
+                      <form
+                        className="mt-6"
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          sessionStorage.setItem("user", "1");
+                          sessionStorage.setItem("emailType", `${getData()}`);
+                          router.push("/oem");
+                        }}
+                      >
                         <div className="mb-2">
                           <label
                             htmlFor="email"
@@ -198,7 +202,7 @@ const Login: NextPage<{}> = () => {
                           </label>
                           <input
                             type="email"
-                            id='emailBrand'
+                            id="emailBrand"
                             className=" block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             required
                           />
@@ -223,9 +227,7 @@ const Login: NextPage<{}> = () => {
                           Forget Password?
                         </a>
                         <div className="mt-6">
-
                           <button
-
                             type="submit"
                             className="w-full px-4 py-2 ease-in  duration-30  bg-[#000000] tracking-wide text-white font-bold transition-colors0 transform  rounded-md hover:bg-gray-600 hover:text-white focus:outline-non"
                           >
@@ -292,11 +294,15 @@ const Login: NextPage<{}> = () => {
                         Sign in
                       </h1>
 
-                      <form className="mt-6" onSubmit={() => {
-                              sessionStorage.setItem("user", "1");
-                              sessionStorage.setItem("emailType",`${getData2()}`);
-                              router.push("/retailer");
-                            }}>
+                      <form
+                        className="mt-6"
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          sessionStorage.setItem("user", "1");
+                          sessionStorage.setItem("emailType", `${getData2()}`);
+                          router.push("/retailer");
+                        }}
+                      >
                         <div className="mb-2">
                           <label
                             htmlFor="email"
@@ -306,7 +312,7 @@ const Login: NextPage<{}> = () => {
                           </label>
                           <input
                             type="email"
-                            id='emailBrand2'
+                            id="emailBrand2"
                             className=" block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             required
                           />
@@ -331,9 +337,7 @@ const Login: NextPage<{}> = () => {
                           Forget Password?
                         </a>
                         <div className="mt-6">
-
                           <button
-
                             type="submit"
                             className="w-full px-4 py-2 ease-in  duration-30  bg-[#000000] tracking-wide text-white font-bold transition-colors0 transform  rounded-md hover:bg-gray-600 hover:text-white focus:outline-non"
                           >
