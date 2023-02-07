@@ -21,7 +21,7 @@ export default ({ onClose, isOpen, onSubmit, index }: any) => {
   // const [slots, setSlots] = React.useState<any>([event.start, event.end]);
   const [selectedData, setSelectedData] = React.useState<any>([]);
   const [personSelect, setPersonSelect] = React.useState<any>("");
-
+  const [date, setDate] = React.useState<any>();
   const [modalModal, setModalModal] = React.useState<any>([
     "Ford",
     "Nissan",
@@ -41,37 +41,68 @@ export default ({ onClose, isOpen, onSubmit, index }: any) => {
     var carname = modalModal.filter(
       (item) => item.slice(0, 3).toLowerCase() == model
     )[0];
-    onSubmit({ car: parseInt(title), model: carname, workshop });
+    var startdate = new Date(
+      parseInt(date.slice(0, 4)),
+      parseInt(date.slice(5, 7)),
+      parseInt(date.slice(8, 10))
+    );
+    var enddate;
+    var noofcars = parseInt(title);
+    if (noofcars <= 4) {
+      enddate = new Date(
+        parseInt(date.slice(0, 4)),
+        parseInt(date.slice(5, 7)),
+        parseInt(date.slice(8, 10))
+      );
+    } else if (noofcars <= 8) {
+      enddate = new Date(
+        parseInt(date.slice(0, 4)),
+        parseInt(date.slice(5, 7)),
+        parseInt(date.slice(8, 10)) + 2
+      );
+    } else {
+      enddate = new Date(
+        parseInt(date.slice(0, 4)),
+        parseInt(date.slice(5, 7)),
+        parseInt(date.slice(8, 10)) + 4
+      );
+    }
+    onSubmit({
+      car: parseInt(title),
+      model: carname,
+      workshop,
+      startdate: startdate.toDateString(),
+      enddate: enddate.toDateString(),
+    });
+    // onSubmit({ car: parseInt(title), model: carname, workshop });
   }
   // const
   const modelHandler = () => {
     // const value = (document.getElementById("models") as HTMLInputElement).value;
     // console.log(value);
-    const value=modalModal[index].slice(0,3).toLowerCase()
+    const value = modalModal[index].slice(0, 3).toLowerCase();
     const filteredData = data;
 
-    console.log(filteredData)
-    filteredData.forEach(function(item:any) {
+    console.log(filteredData);
+    filteredData.forEach(function (item: any) {
       item.modaldata = Object.entries(item.modaldata)
-        .sort((a:any, b:any) => b[1].performance - a[1].performance)
+        .sort((a: any, b: any) => b[1].performance - a[1].performance)
         .reduce((obj, [key, value]) => {
           obj[key] = value;
           return obj;
         }, {});
     });
-    
-    
-    
+
     // filteredData.sort(
     //   (a, b) => b.modaldata[value].performance - a.modaldata.toy.performance
     // );
-    console.log(filteredData)
+    console.log(filteredData);
     setSelectedData(filteredData);
     setModel(value);
   };
-  useEffect(()=>{
-    modelHandler()
-  })
+  useEffect(() => {
+    modelHandler();
+  });
   const personHandler = (e) => {
     // if (e.target.querySelector("#name")) {
     //   console.log(e.target.querySelector("#name").textContent);
@@ -126,14 +157,13 @@ export default ({ onClose, isOpen, onSubmit, index }: any) => {
 
           <FormControl label="Select Model">
             <Input
-                id="models"
-                value={modalModal[index]}
-                type="text"
-                
-                // onChange={(event) => setTitle(event.currentTarget.value)}
-                disabled
-              />
-              {/* <select
+              id="models"
+              value={modalModal[index]}
+              type="text"
+              // onChange={(event) => setTitle(event.currentTarget.value)}
+              disabled
+            />
+            {/* <select
                 id="models"
                 onChange={modelHandler}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -160,8 +190,7 @@ export default ({ onClose, isOpen, onSubmit, index }: any) => {
                 <option value="CA">Canada</option>
                 <option value="FR">France</option>
                 <option value="DE">Germany</option> */}
-              {/* </select> */} 
-            
+            {/* </select> */}
           </FormControl>
 
           <FormControl label="Select Workshop">
@@ -265,6 +294,16 @@ export default ({ onClose, isOpen, onSubmit, index }: any) => {
                 <option value="DE">Germany</option>
               </select> */}
             </>
+          </FormControl>
+          <FormControl label="Select Start Date">
+            <Input
+              type="date"
+              id="starttime"
+              // format="yyyy-MM-dd"
+              required
+              value={date}
+              onChange={(event) => setDate(event.currentTarget.value)}
+            />
           </FormControl>
         </ModalBody>
         <ModalFooter>
