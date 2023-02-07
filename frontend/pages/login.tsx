@@ -11,6 +11,10 @@ function getData(){
   return (document.getElementById('emailBrand') as HTMLInputElement).value;
 }
 
+function getData2(){
+  return (document.getElementById('emailBrand2') as HTMLInputElement).value;
+}
+
 const Login: NextPage<{}> = () => {
   const router = useRouter();
   const [openTab, setOpenTab] = useState(1);
@@ -289,7 +293,8 @@ const Login: NextPage<{}> = () => {
                       </h1>
 
                       <form className="mt-6" onSubmit={() => {
-                              // sessionStorage.setItem("user", "1");
+                              sessionStorage.setItem("user", "1");
+                              sessionStorage.setItem("emailType",`${getData2()}`);
                               router.push("/retailer");
                             }}>
                         <div className="mb-2">
@@ -301,6 +306,7 @@ const Login: NextPage<{}> = () => {
                           </label>
                           <input
                             type="email"
+                            id='emailBrand2'
                             className=" block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             required
                           />
