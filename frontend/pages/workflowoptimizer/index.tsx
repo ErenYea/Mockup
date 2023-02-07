@@ -30,6 +30,12 @@ const index = (props: Props) => {
   //   "Toyota",
   // ]);
   // console.log("state=>", state);
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   const getNoJobs = () => {
     var events = state?.events;
     // console.log("inside", events);
@@ -376,38 +382,48 @@ const index = (props: Props) => {
       // console.log("Nis", nis);
       if (hon.length > 0) {
         carshonda.push(
-          hon?.reduce((total, num) => total + parseInt(num?.cars), 0)
+          // hon?.reduce((total, num) => total + parseInt(num?.cars), 0)
+          getRandomInt(3, 6)
         );
       } else {
-        carshonda.push(0);
+        // carshonda.push(0);
+        carshonda.push(getRandomInt(3, 6));
       }
       if (nis.length > 0) {
-        carsnis.push(
-          nis?.reduce((total, num) => total + parseInt(num?.cars), 0)
-        );
+        // carsnis.push(
+        //   nis?.reduce((total, num) => total + parseInt(num?.cars), 0)
+        // );
+        carsnis.push(getRandomInt(3, 6));
       } else {
-        carsnis.push(0);
+        // carsnis.push(0);
+        carsnis.push(getRandomInt(3, 6));
       }
       if (toy.length > 0) {
-        carstoy.push(
-          toy?.reduce((total, num) => total + parseInt(num?.cars), 0)
-        );
+        carstoy.push(getRandomInt(3, 6));
+        // carstoy.push(
+        //   toy?.reduce((total, num) => total + parseInt(num?.cars), 0)
+        // );
       } else {
-        carstoy.push(0);
+        // carstoy.push(0);
+        carstoy.push(getRandomInt(3, 6));
       }
       if (hyu.length > 0) {
-        carshyu.push(
-          hyu?.reduce((total, num) => total + parseInt(num?.cars), 0)
-        );
+        carshyu.push(getRandomInt(3, 6));
+        // carshyu.push(
+        //   hyu?.reduce((total, num) => total + parseInt(num?.cars), 0)
+        // );
       } else {
-        carshyu.push(0);
+        // carshyu.push(0);
+        carshyu.push(getRandomInt(3, 6));
       }
       if (fro.length > 0) {
-        carsfro.push(
-          fro?.reduce((total, num) => total + parseInt(num?.cars), 0)
-        );
+        carsfro.push(getRandomInt(3, 6));
+        // carsfro.push(
+        //   fro?.reduce((total, num) => total + parseInt(num?.cars), 0)
+        // );
       } else {
-        carsfro.push(0);
+        // carsfro.push(0);
+        carsfro.push(getRandomInt(3, 6));
       }
       var curdate = new Date(
         secondDate.getFullYear(),
@@ -423,21 +439,21 @@ const index = (props: Props) => {
         data: carsfro,
       },
       {
-        name: "Danis Ray",
+        name: "Dennis Ray",
         data: carshonda,
       },
       {
-        name: "Gilbart Holland",
+        name: "Gilbert Holland",
         data: carshyu,
       },
-      {
-        name: "Mikal Heap",
-        data: carsnis,
-      },
-      {
-        name: "Thomas Shelby",
-        data: carstoy,
-      },
+      // {
+      //   name: "Mikal Heap",
+      //   data: carsnis,
+      // },
+      // {
+      //   name: "Thomas Shelby",
+      //   data: carstoy,
+      // },
     ];
     console.log(aldata);
     setAllcar(aldata);
