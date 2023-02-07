@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import PageTitle from "components/UiElements/PageTitle/PageTitle";
 import ApexChart from "components/UiElements/ApexChart/ApexChart";
 import Head from "next/head";
-import LineBarv2 from "./lineGraphv2";
+import LineBarv2 from "components/retailer/lineGraphv2";
 import CalendarApp from "../../containers/Calendar/oem/newcalendar/index";
 import {
   Modal,
@@ -16,7 +16,7 @@ import {
 } from "baseui/modal";
 import Container from "components/UiElements/Container/Container";
 import { Block } from "baseui/block";
-import LineBar from "./lineGraph";
+import LineBar from "../../components/retailer/lineGraph";
 import CreateOrUpdateEvent from "pages/oem/CreateOrUpdateEvent";
 
 type Props = {};

@@ -11,7 +11,7 @@ type Props = {
   args: any;
   sunroof: boolean;
 };
-const LineBarv2 = (props) => {
+const LineBarv2 = (props: any) => {
   console.log(props);
 
   // var x =props.args.slice(-1)[0] ; // the value of x can be changed as per your requirement
@@ -21,11 +21,11 @@ const LineBarv2 = (props) => {
   // useEffect(()=>{
 
   // })
-  var x = props.args2.map(function(item, index) {
-    // In this case item correspond to currentValue of array a, 
+  var x = props.args2.map(function (item, index) {
+    // In this case item correspond to currentValue of array a,
     // using index to get value from array b
     return item - props.args[index];
-  })
+  });
   const state = {
     series: [
       {
@@ -37,10 +37,9 @@ const LineBarv2 = (props) => {
         data: props.args2,
       },
       {
-        name:"Predicted ASC Bookings",
-        data:x,
-      }
-      
+        name: "Predicted ASC Bookings",
+        data: x,
+      },
     ],
     options: {
       chart: {
@@ -75,19 +74,19 @@ const LineBarv2 = (props) => {
       xaxis: {
         // type: '',
         categories: [
-            "Jan' 23",
-            "Feb' 23",
-            "Mar' 23",
-            "Apr' 23",
-            "May' 23",
-            "Jun' 23",
-            "Jul' 23",
-            "Aug' 23",
-            "Sept' 23",
-            "Oct' 23",
-            "Nov' 23",
-            "Dec' 23",
-            "Jan' 24",
+          "Jan' 23",
+          "Feb' 23",
+          "Mar' 23",
+          "Apr' 23",
+          "May' 23",
+          "Jun' 23",
+          "Jul' 23",
+          "Aug' 23",
+          "Sept' 23",
+          "Oct' 23",
+          "Nov' 23",
+          "Dec' 23",
+          "Jan' 24",
         ],
         title: {
           text: "Months",
@@ -99,15 +98,15 @@ const LineBarv2 = (props) => {
         },
         labels: {
           show: true,
-          align: 'left',
+          align: "left",
           minWidth: 0,
           maxWidth: 360,
           style: {
-              colors: [],
-              fontSize: '12px',
-              fontFamily: 'Helvetica, Arial, sans-serif',
-              fontWeight: 400,
-              cssClass: 'apexcharts-yaxis-label',
+            colors: [],
+            fontSize: "12px",
+            fontFamily: "Helvetica, Arial, sans-serif",
+            fontWeight: 400,
+            cssClass: "apexcharts-yaxis-label",
           },
           offsetX: -5,
           offsetY: 10,
