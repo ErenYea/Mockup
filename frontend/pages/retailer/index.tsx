@@ -197,7 +197,9 @@ const index = (props) => {
 
     
   const [Index, setIndex] = useState(0);
-
+  useEffect(() => {
+    document.getElementsByTagName("nav")[0].style.display = "None";  
+  })
 
  
   return (

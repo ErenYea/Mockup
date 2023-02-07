@@ -51,9 +51,9 @@ export default ({ onClose, isOpen, onSubmit, index }: any) => {
     const filteredData = data;
 
     console.log(filteredData)
-    filteredData.forEach(function(item) {
+    filteredData.forEach(function(item:any) {
       item.modaldata = Object.entries(item.modaldata)
-        .sort((a, b) => b[1].performance - a[1].performance)
+        .sort((a:any, b:any) => b[1].performance - a[1].performance)
         .reduce((obj, [key, value]) => {
           obj[key] = value;
           return obj;
