@@ -141,6 +141,54 @@ const index = (props: Props) => {
         <title>Dashboard | Demand Forecasting</title>
       </Head>
       <PageTitle title={"Demand Forecasting"} subtitle={""} />
+
+        {/* <div className=" bg-customBlue rounded-lg p-5 flex  w-[99%] justify-center h-5/6  border-2 border-customDarkBlue"> */}
+        {/* (
+          ""
+        ) : (
+          <div className=" text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden w-full  z-0">
+            <div className="flex justify-center items-center h-screen">
+              <div className="relative w-24 h-24 animate-spin rounded-full bg-gradient-to-r from-purple-400 via-blue-500 to-red-400 ">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white rounded-full border-2 "></div>
+              </div>
+            </div>
+          </div>
+        ) */}
+        {/* <iframe
+          className="w-full h-[95%] mt-2 rounded-lg overflow-x-hidden scrollbar scrollbar-thumb-blue-700 scrollbar-track-blue-300 overflow-y-scroll hover:scrollbar-thumb-blue-500"
+          src="http://owaisahmed142002.pythonanywhere.com/"
+        ></iframe> */}
+
+        {/* </div> */}
+
+      <div className="w-full flex flex-col justify-center items-center mb-5 mt-5">
+        <div>
+        <h1 className="text-4xl font-black mb-4 ">Forecasted sunroof market</h1>
+        </div>
+       <LineBar args={[40000, 45000, 120000, 100000, 105000, 110000, 95000, 95000, 45000, 55000, 35000, 30000]} 
+       argSecond={[8500, 10800, 30000, 25000, 27000, 32000, 29000, 29500, 8000, 9500, 11000, 12000]}
+       />   
+      </div>
+      <div className="w-full flex justify-center items-center flex-row">
+        <h1 className="text-4xl font-black mb-4 mt-10 ">Projected installations per month</h1>
+      </div>
+      <div className="w-full flex justify-center items-center flex-row">
+        <span className="mr-2 text-lg font-black">Select Month of 2023 </span>
+        <select
+          id="dropdown"
+          onChange={showInfo}
+          className="w-1/4 p-2.5 text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
+        >
+          {jsonData.map((val, ind) => {
+            return (
+              <option value={ind} key={ind} className="font-bold">
+                {val.name}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <ColumnChart args={jsonData[Index]} />
       <div className="flex flex-col h-[100px] justify-center rounded-lg items-center border-2 w-full ">
         <span className="text-4xl font-black z-10">
           Automotive Parts Projection
@@ -186,53 +234,6 @@ const index = (props: Props) => {
       <div className="w-full flex items-center justify-center">
             <LineBarv2 args={plotData[0][`${Categoryindex}${Brandindex}`]}/>
       </div>
-        {/* <div className=" bg-customBlue rounded-lg p-5 flex  w-[99%] justify-center h-5/6  border-2 border-customDarkBlue"> */}
-        {/* (
-          ""
-        ) : (
-          <div className=" text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden w-full  z-0">
-            <div className="flex justify-center items-center h-screen">
-              <div className="relative w-24 h-24 animate-spin rounded-full bg-gradient-to-r from-purple-400 via-blue-500 to-red-400 ">
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white rounded-full border-2 "></div>
-              </div>
-            </div>
-          </div>
-        ) */}
-        {/* <iframe
-          className="w-full h-[95%] mt-2 rounded-lg overflow-x-hidden scrollbar scrollbar-thumb-blue-700 scrollbar-track-blue-300 overflow-y-scroll hover:scrollbar-thumb-blue-500"
-          src="http://owaisahmed142002.pythonanywhere.com/"
-        ></iframe> */}
-
-        {/* </div> */}
-
-      <div className="w-full flex flex-col justify-center items-center mb-5 mt-5">
-        <div>
-        <h1 className="text-4xl font-black mb-4 ">Forecasted total sunroof market demand and OEM installation capacity (Trend)</h1>
-        </div>
-       <LineBar args={[40000, 45000, 120000, 100000, 105000, 110000, 95000, 95000, 45000, 55000, 35000, 30000]} 
-       argSecond={[8500, 10800, 30000, 25000, 27000, 32000, 29000, 29500, 8000, 9500, 11000, 12000]}
-       />   
-      </div>
-      <div className="w-full flex justify-center items-center flex-row">
-        <h1 className="text-4xl font-black mb-4 mt-10 ">Monthly Projection</h1>
-      </div>
-      <div className="w-full flex justify-center items-center flex-row">
-        <span className="mr-2 text-lg font-black">Select Month of 2023 </span>
-        <select
-          id="dropdown"
-          onChange={showInfo}
-          className="w-1/4 p-2.5 text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-        >
-          {jsonData.map((val, ind) => {
-            return (
-              <option value={ind} key={ind} className="font-bold">
-                {val.name}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-      <ColumnChart args={jsonData[Index]} />
       {/* </section> */}
     </>
   );

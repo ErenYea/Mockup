@@ -25,7 +25,7 @@ const LineBar = (props) => {
   const state = {
     series: [
       {
-        name: "Workshop Load",
+        name: "Installer Capacity",
         data: props.args,
       },
     ],
@@ -82,7 +82,7 @@ const LineBar = (props) => {
       },
       yaxis: {
         title: {
-          text:'Work load',
+          text:'Capacity',
         },
         min: 0,
         max: 50,

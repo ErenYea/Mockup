@@ -145,13 +145,14 @@ const Home = () => {
       },
       xaxis: {
         categories: [
-          "Jan' 23",
+          // "Jan' 23",
           "Feb' 23",
           "Mar' 23",
           "Apr' 23",
           "May' 23",
           "Jun' 23",
           "Jul' 23",
+          "Aug' 23",
         ],
         title: {
           text: "Months",

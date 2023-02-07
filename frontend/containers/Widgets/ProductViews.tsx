@@ -66,7 +66,7 @@ const ProductViews = ({
         data: products,
       },
       {
-        name: "Predicted Incoming Jobs",
+        name: "Pending Requested Jobs",
         data: views,
       },
     ],

@@ -42,15 +42,15 @@ const index = (props) => {
 
   var workshopData = [
     {
-      name: "Workshop 1",
+      name: "Installer 1 - ASC",
       load: [24, 28, 32, 35, 28, 29, 36, 39, 42, 11, 17, 23, 27],
     },
     {
-      name: "Workshop 2",
+      name: "Installer 2",
       load: [17, 25, 16, 17, 19, 25, 32, 15, 31, 42, 17, 24, 20],
     },
     {
-      name: "Workshop 3",
+      name: "Installer 3",
       load: [28, 18, 22, 25, 18, 19, 26, 29, 32, 15, 17, 24, 25],
     },
   ];
@@ -1584,7 +1584,7 @@ const index = (props) => {
   ];
   var data = [
     {
-      name: "Ford",
+      name: "East gate Ford Dealership",
       vehiclesSold: [
         [24, 28, 32, 35, 28, 29, 36, 39, 42, 11, 17, 23, 27],
         [34, 38, 23, 12, 34, 56, 34, 23, 36, 38, 17, 27, 43],
@@ -1825,7 +1825,7 @@ const index = (props) => {
         </div>
         <div className="w-full flex-row flex justify-center items-center z-10 mb-10 mt-10">
           <label className="m-2 text-xl font-semibold text-customDarkBlue">
-            Select Workshop
+            Select Installer
           </label>
           <select
             id="dropdown2"
@@ -1842,7 +1842,7 @@ const index = (props) => {
           </select>
         </div>
         <div className="w-full flex flex-col justify-center items-center">
-          <span className="text-2xl font-black">Workshop Load</span>
+          <span className="text-2xl font-black">Installer Capacity</span>
           <LineBar args={workshopData[Workshop]["load"]} />
           {/* <div className="w-[83%] flex flex-row items-start justify-end -mt-[44px]">
             <span className="text-sm text-black">Prediction</span>
@@ -1892,7 +1892,7 @@ const index = (props) => {
         >
           <div className="flex flex-col p-2 min-h-[400px]">
             <div className="text-bold text-xl border p-2 text-white bg-slate-800 w-fit">
-              Active Jobs
+              Pending Requested Jobs
             </div>
             {works?.map((i) => (
               <div
