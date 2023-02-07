@@ -25,7 +25,7 @@ const LineBar = (props) => {
   const state = {
     series: [
       {
-        name: "Vehicles Sold",
+        name: "Workshop Load",
         data: props.args,
       },
     ],
@@ -82,10 +82,10 @@ const LineBar = (props) => {
       },
       yaxis: {
         title: {
-          text: props.sunroof ? "Sunroofs" : "Vehicles",
+          text:'Work load',
         },
         min: 0,
-        max: props.sunroof ? 50 : 100,
+        max: 50,
       },
       legend: {
         position: "top",

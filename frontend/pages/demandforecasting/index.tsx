@@ -207,14 +207,14 @@ const index = (props: Props) => {
 
       <div className="w-full flex flex-col justify-center items-center mb-5 mt-5">
         <div>
-        <h1 className="text-4xl font-black mb-4 ">Trend between Forecasted Installation and OEM Installation Demand</h1>
+        <h1 className="text-4xl font-black mb-4 ">Forecasted total market demand and OEM Installation Capacity (Trend)</h1>
         </div>
        <LineBar args={[40000, 45000, 120000, 100000, 105000, 110000, 95000, 95000, 45000, 55000, 35000, 30000]} 
        argSecond={[8500, 10800, 30000, 25000, 27000, 32000, 29000, 29500, 8000, 9500, 11000, 12000]}
        />   
       </div>
       <div className="w-full flex justify-center items-center flex-row">
-        <h1 className="text-4xl font-black mb-4 ">Monthly Projection</h1>
+        <h1 className="text-4xl font-black mb-4 mt-10 ">Monthly Projection</h1>
       </div>
       <div className="w-full flex justify-center items-center flex-row">
         <span className="mr-2 text-lg font-black">Select Month of 2023 </span>

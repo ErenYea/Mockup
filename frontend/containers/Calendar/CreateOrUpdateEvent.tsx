@@ -76,7 +76,7 @@ export default ({ onClose, isOpen, onSubmit, event }: any) => {
     )[0];
     var color;
     if (workshop == "1") {
-      color = "#F443366";
+      color = "#42dd60";
     }
     if (workshop == "2") {
       color = "#3F51B5";

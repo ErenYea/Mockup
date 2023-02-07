@@ -4,10 +4,8 @@ import Calendar from "containers/Calendar";
 import Container from "components/UiElements/Container/Container";
 import { Grid, Cell } from "baseui/layout-grid";
 import { Block } from "baseui/block";
-import PersonDropdown from "./personDropdown";
 import Head from "next/head";
 import Bar from "containers/Calendar/bar";
-// import Bar from "pages/charts/bar";
 type Props = {};
 
 const index = (props: Props) => {
@@ -148,7 +146,6 @@ const index = (props: Props) => {
     var toyota = events?.filter((item) => item?.model == "Toyota");
     var hyundai = events?.filter((item) => item?.model == "Hyundai");
     var ford = events?.filter((item) => item?.model == "Ford Motors");
-    // console.log("Nissan", nissan);
     var carshonda = [];
     var carsnis = [];
     var carstoy = [];
@@ -419,43 +416,32 @@ const index = (props: Props) => {
       );
       alldate.push(curdate.toDateString());
     }
-    // console.log("carsnis", carsnis);
+
     var aldata = [
       {
-        name: "Ford Motors",
+        name: "Sean Davidson",
         data: carsfro,
       },
       {
-        name: "Honda",
+        name: "Danis Ray",
         data: carshonda,
       },
       {
-        name: "Hyundai",
+        name: "Gilbart Holland",
         data: carshyu,
       },
       {
-        name: "Nissan",
+        name: "Mikal Heap",
         data: carsnis,
       },
       {
-        name: "Toyota",
+        name: "Thomas Shelby",
         data: carstoy,
       },
     ];
     console.log(aldata);
     setAllcar(aldata);
     setRangeDate(alldate);
-    // setHonda(carshonda);
-    // setNissan(carsnis);
-    // setToyota(carstoy);
-    // setHyundai(carshyu);
-    // setFord(carsfro);
-    // setHonda(honda?.reduce((total,num)=>total+num?.cars,0))
-    // setToyota(toyota?.reduce((total,num)=>total+num?.cars,0))
-    // setFord(ford?.reduce((total,num)=>total+num?.cars,0))
-    // setHyundai(hyundai?.reduce((total,num)=>total+num?.cars,0))
-    // setNissan(nissan?.reduce((total,num)=>total+num?.cars,0))
-    // console.log("totalJobs", totalJobs);
     setJobs(totalJobs);
     // return totalJobs;
   };
@@ -528,7 +514,30 @@ const index = (props: Props) => {
         <title>Dashboard | Workflow Optimizer</title>
       </Head>
       <PageTitle title={"WorkFlow Optimizer"} subtitle={""} />
+
       <Container>
+        {view == "week" ? (
+          <div className="container flex  items-center justify-center">
+            <div className="flex text-black items-center mr-2">
+              <h3 className="text-xl text-black">WorkShop 1</h3>
+              <div className=" h-3 w-3 bg-[#42dd60] border ml-2"></div>
+            </div>
+            <div className="flex text-black items-center mr-2">
+              <h3 className="text-xl text-black">WorkShop 2</h3>
+              <div className=" h-3 w-3 bg-[#3F51B5] border ml-2"></div>
+            </div>
+            <div className="flex text-black items-center mr-2">
+              <h3 className="text-xl text-black">WorkShop 3</h3>
+              <div className=" h-3 w-3 bg-[#f408a4] border ml-2"></div>
+            </div>
+            <div className="flex text-black items-center">
+              <h3 className="text-xl text-black">WorkShop 4</h3>
+              <div className=" h-3 w-3 bg-[#f47908] border ml-2"></div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
         <Block paddingTop={["0", "0", "0", "40px"]} className="w-full h-full">
           <Grid gridColumns={12} gridGutters={0} gridMargins={0} gridGaps={2}>
             <div className="flex flex-col items-center w-full h-full">
@@ -588,7 +597,7 @@ const index = (props: Props) => {
                     setDate={setDate}
                   />
                   {view == "week" ? (
-                    <div className="flex w-full h-full flex-col justify-center items-center mt-2">
+                    <div className="flex w-full h-full flex-col justify-center items-center mt-4">
                       <h3 className="text-3xl text-bold text-gray-900 decoration-sky-500/30  subpixel-antialiased font-black">
                         Weekly Outlook
                       </h3>

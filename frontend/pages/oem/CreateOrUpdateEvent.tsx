@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 import { Textarea } from "baseui/textarea";
@@ -14,7 +14,7 @@ import {
 } from "baseui/modal";
 import { data } from "containers/Calendar/oem/data";
 
-export default ({ onClose, isOpen, onSubmit }: any) => {
+export default ({ onClose, isOpen, onSubmit, index }: any) => {
   const [title, setTitle] = React.useState("");
   const [model, setModel] = React.useState("");
   // const [person, setPerson] = React.useState(event.person ? event.person : "");
@@ -24,7 +24,7 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
   const [date, setDate] = React.useState<any>();
 
   const [modalModal, setModalModal] = React.useState<any>([
-    "Ford Motors",
+    "Ford",
     "Nissan",
     "Hyundai",
     "Honda",
@@ -79,16 +79,33 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
   }
   // const
   const modelHandler = () => {
-    const value = (document.getElementById("models") as HTMLInputElement).value;
-    console.log(value);
+    // const value = (document.getElementById("models") as HTMLInputElement).value;
+    // console.log(value);
+    const value=modalModal[index].slice(0,3).toLowerCase()
     const filteredData = data;
-    filteredData.sort(
-      (a, b) => b.modaldata[value].performance - a.modaldata.toy.performance
-    );
-    setSelectedData(filteredData);
 
+    console.log(filteredData)
+    filteredData.forEach(function(item:any) {
+      item.modaldata = Object.entries(item.modaldata)
+        .sort((a:any, b:any) => b[1].performance - a[1].performance)
+        .reduce((obj, [key, value]) => {
+          obj[key] = value;
+          return obj;
+        }, {});
+    });
+    
+    
+    
+    // filteredData.sort(
+    //   (a, b) => b.modaldata[value].performance - a.modaldata.toy.performance
+    // );
+    console.log(filteredData)
+    setSelectedData(filteredData);
     setModel(value);
   };
+  useEffect(()=>{
+    modelHandler()
+  })
   const personHandler = (e) => {
     // if (e.target.querySelector("#name")) {
     //   console.log(e.target.querySelector("#name").textContent);
@@ -102,9 +119,9 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
     const key = e.target.getAttribute("data-key");
     console.log("key", key);
     // console.log(document.querySelector(`main[data-key='${key}']`));
-    if (document.querySelector(`main[data-key='${key}']`)) {
+    if (document.querySelector(`div[data-key='${key}']`)) {
       document
-        .querySelector(`main[data-key='${key}']`)
+        .querySelector(`div[data-key='${key}']`)
         .classList.add("bg-gray-900");
     }
     setPersonSelect(key);
@@ -142,8 +159,15 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
           </FormControl>
 
           <FormControl label="Select Model">
-            <>
-              <select
+            <Input
+                id="models"
+                value={modalModal[index]}
+                type="text"
+                
+                // onChange={(event) => setTitle(event.currentTarget.value)}
+                disabled
+              />
+              {/* <select
                 id="models"
                 onChange={modelHandler}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -170,8 +194,8 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
                 <option value="CA">Canada</option>
                 <option value="FR">France</option>
                 <option value="DE">Germany</option> */}
-              </select>
-            </>
+              {/* </select> */} 
+            
           </FormControl>
 
           <FormControl label="Select Workshop">
@@ -180,12 +204,12 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
                 {model == ""
                   ? ""
                   : selectedData?.map((i, ind) => (
-                      <main
+                      <div
                         key={ind}
                         onClick={(e) => personHandler(e)}
                         data-key={i.id}
                         className={
-                          "flex w-[130px] flex-col border border-gray-900 rounded items-center hover:bg-gray-900  hover:cursor-pointer active:bg-gray-900" +
+                          "flex w-[130px] flex-col border border-gray-900 rounded items-center  hover:bg-gray-900  hover:cursor-pointer active:bg-gray-900" +
                           (personSelect != ""
                             ? personSelect == i.id
                               ? "bg-gray-900"
@@ -210,7 +234,7 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
                           className=" text-red-600 text-base h-[24px]"
                           ddata-key={i.id}
                         >
-                          {ind == 0 ? "Recomended*" : ""}
+                          {ind == 0 ? "Recommended*" : ""}
                         </div>
                         <div
                           className="flex flex-col items-center border-gray-400"
@@ -257,7 +281,7 @@ export default ({ onClose, isOpen, onSubmit }: any) => {
                             </span>
                           </div>
                         </div>
-                      </main>
+                      </div>
                     ))}
               </div>
               {/* <select
