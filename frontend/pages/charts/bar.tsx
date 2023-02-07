@@ -6,8 +6,8 @@ import { Block } from "baseui/block";
 import Container from "components/UiElements/Container/Container";
 import ChartMenu from "components/SideMenu/ChartMenu";
 import ApexChart from "components/UiElements/ApexChart/ApexChart";
-
-const Bar: NextPage<{}> = () => {
+type Props = {};
+const Bar = (props: Props) => {
   const [state, setState] = useState<any>({
     series: [
       {
@@ -61,13 +61,13 @@ const Bar: NextPage<{}> = () => {
       },
       xaxis: {
         categories: [
-          "July 2022",
-          "August 2022",
-          "September 2022",
-          "Octuber 2022",
-          "November 2022",
-          "December 2022",
-          "January 2023",
+          "Jan' 23",
+          "Feb' 23",
+          "Mar' 23",
+          "Apr' 23",
+          "May' 23",
+          "Jun' 23",
+          "Jul' 23",
         ],
         labels: {
           // formatter: function (val: number) {

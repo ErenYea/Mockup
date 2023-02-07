@@ -59,7 +59,7 @@ export const data = [
   },
   {
     id: "sam",
-    name: "Sam Davidson",
+    name: "Sean Davidson",
     img: "/images/person2.jpg",
     modaldata: {
       toy: {

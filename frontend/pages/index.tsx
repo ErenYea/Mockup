@@ -70,8 +70,9 @@ const Home = () => {
   //   notifyOnNetworkStatusChange: true,
   // });
   const [data, setData] = useState<any>(datas);
+  const [loading, setLoading] = useState<any>(true);
   console.log("data=>", data);
-  console.log("loadDashboard=>", datas);
+  // console.log("loadDashboard=>", datas);
   if (!data) return null;
   const { productViews, recentApps, productsBar, cashFlow } = data;
   const productsBarOptions = [
@@ -104,13 +105,13 @@ const Home = () => {
   const [state, setState] = useState<any>({
     series: [
       {
-        name: "Active Jobs",
-        data: [280, 290, 330, 360, 320, 320, 330],
+        name: "Booked Jobs",
+        data: [130, 140, 180, 210, 170, 180, 190],
       },
-      // {
-      //   name: "Low - 2020",
-      //   data: [12, 11, 14, 18, 17, 13, 13],
-      // },
+      {
+        name: "Predicted Jobs",
+        data: [164, 193, 228, 248, 222, 206, 237],
+      },
     ],
     options: {
       chart: {
@@ -144,31 +145,216 @@ const Home = () => {
       },
       xaxis: {
         categories: [
-          "Jul' 22",
-          "Aug' 22",
-          "Sept' 22",
-          "Oct' 22",
-          "Nov' 22",
-          "Dec' 22",
           "Jan' 23",
+          "Feb' 23",
+          "Mar' 23",
+          "Apr' 23",
+          "May' 23",
+          "Jun' 23",
+          "Jul' 23",
         ],
         title: {
-          text: "Month",
+          text: "Months",
         },
       },
       yaxis: {
         title: {
           text: "Jobs",
         },
-        min: 5,
-        max: 400,
+        min: 100,
+        max: 300,
       },
       legend: {
         position: "top",
         horizontalAlign: "right",
-        floating: true,
-        offsetY: 25,
-        offsetX: 5,
+        // floating: true,
+        // offsetY: 25,
+        // offsetX: 5,
+      },
+    },
+  });
+  const [stateOne, setStateOne] = useState<any>({
+    series: [
+      {
+        name: "Man Hours per Job",
+        data: [8, 9, 11, 13, 14, 4, 3, 2, 4, 3, 4, 2],
+      },
+    ],
+    options: {
+      chart: {
+        height: 420,
+        type: "line",
+        dropShadow: {
+          enabled: true,
+          color: "#000",
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2,
+        },
+        toolbar: {
+          show: false,
+        },
+      },
+      colors: ["#ff0080", "#006ff3"],
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: "smooth",
+      },
+      title: {
+        text: "",
+        align: "left",
+      },
+      markers: {
+        size: 1,
+      },
+      xaxis: {
+        categories: [
+          "Jan' 22",
+          "Feb' 22",
+          "Mar' 22",
+          "Apr' 22",
+          "May' 22",
+          "Jun' 22",
+          "Jul' 22",
+          "Aug' 22",
+          "Sept' 22",
+          "Oct' 22",
+          "Nov' 22",
+          "Dec' 22",
+        ],
+        title: {
+          text: "Months",
+        },
+      },
+      yaxis: {
+        // labels: {
+        //   formatter: function(val) {
+        //     return val + '$'
+        //   }
+        // },
+        title: {
+          text: "Man Hours per Job",
+        },
+        min: 0,
+        max: 20,
+      },
+      annotations: {
+        xaxis: [
+          {
+            x: "Jun' 22",
+            borderColor: "#775DD0",
+            label: {
+              style: {
+                color: "#000000",
+              },
+              text: "Solution Deployed",
+            },
+          },
+        ],
+      },
+      legend: {
+        position: "top",
+        horizontalAlign: "right",
+        // floating: true,
+        // offsetY: 25,
+        // offsetX: 5,
+      },
+    },
+  });
+  const [stateTwo, setStateTwo] = useState<any>({
+    series: [
+      {
+        name: "Loss Incured",
+        data: [
+          84, 25450, 33040, 43250, 44000, 5600, 5300, 4200, 4000, 3400, 3200,
+          2600,
+        ],
+      },
+    ],
+    options: {
+      chart: {
+        height: 420,
+        type: "line",
+        dropShadow: {
+          enabled: true,
+          color: "#000",
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2,
+        },
+        toolbar: {
+          show: false,
+        },
+      },
+      colors: ["#0000FF"],
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: "smooth",
+      },
+      title: {
+        text: "",
+        align: "left",
+      },
+      markers: {
+        size: 1,
+      },
+      xaxis: {
+        categories: [
+          "Jan' 22",
+          "Feb' 22",
+          "Mar' 22",
+          "Apr' 22",
+          "May' 22",
+          "Jun' 22",
+          "Jul' 22",
+          "Aug' 22",
+          "Sept' 22",
+          "Oct' 22",
+          "Nov' 22",
+          "Dec' 22",
+        ],
+        title: {
+          text: "Month",
+        },
+      },
+      yaxis: {
+        labels: {
+          formatter: function (val) {
+            return val + "$";
+          },
+        },
+        title: {
+          text: "Loss Incured(CAD)",
+        },
+        min: 0,
+        max: 50000,
+      },
+      annotations: {
+        xaxis: [
+          {
+            x: "Jun' 22",
+            borderColor: "#775DD0",
+            label: {
+              style: {
+                color: "#000000",
+              },
+              text: "Solution Deployed",
+            },
+          },
+        ],
+      },
+      legend: {
+        position: "top",
+        horizontalAlign: "right",
+        // floating: true,
+        // offsetY: 25,
+        // offsetX: 5,
       },
     },
   });
@@ -179,6 +365,9 @@ const Home = () => {
     } else {
       router.push("/login");
     }
+    // setTimeout(() => {
+    //   setLoading(true);
+    // }, 3000);
   }, []);
   if (cond) {
     return (
@@ -196,7 +385,7 @@ const Home = () => {
               <Grid gridGutters={16} gridMargins={0}>
                 <Cell span={12}>
                   <Card
-                    title="Active Jobs per Month"
+                    title="Jobs per Month"
                     overrides={{
                       Root: {
                         style: ({ $theme }) => {
@@ -297,7 +486,7 @@ const Home = () => {
               <Grid gridGutters={16} gridMargins={0}>
                 <Cell span={12}>
                   <Card
-                    title="Weekly Outlook"
+                    title="Upcoming Week Outlook"
                     overrides={{
                       Root: {
                         style: ({ $theme }) => {
@@ -341,11 +530,93 @@ const Home = () => {
               </Grid>
             </Cell>
           </Grid>
-
+          <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+            <Cell span={12}>
+              <div className="cash-flow mt-5">
+                <Card
+                  title="Predicted Incoming Jobs - Breakdown by Manufacturer"
+                  overrides={{
+                    Root: {
+                      style: ({ $theme }) => {
+                        return {
+                          borderTopColor: "transparent",
+                          borderRightColor: "transparent",
+                          borderBottomColor: "transparent",
+                          borderLeftColor: "transparent",
+                          boxShadow: $theme.lighting.shadow400,
+                        };
+                      },
+                    },
+                    Title: {
+                      style: ({ $theme }) => {
+                        return {
+                          ...$theme.typography.font250,
+                        };
+                      },
+                    },
+                    Body: {
+                      style: () => {
+                        return {
+                          minHeight: "200px",
+                        };
+                      },
+                    },
+                  }}
+                >
+                  <StyledBody>
+                    <Bar />
+                  </StyledBody>
+                </Card>
+              </div>
+            </Cell>
+          </Grid>
+          <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+            <Cell span={12}>
+              <div className="cash-flow  mt-5 mb-5">
+                <Card
+                  title="Production Variation"
+                  overrides={{
+                    Root: {
+                      style: ({ $theme }) => {
+                        return {
+                          borderTopColor: "transparent",
+                          borderRightColor: "transparent",
+                          borderBottomColor: "transparent",
+                          borderLeftColor: "transparent",
+                          boxShadow: $theme.lighting.shadow400,
+                        };
+                      },
+                    },
+                    Title: {
+                      style: ({ $theme }) => {
+                        return {
+                          ...$theme.typography.font250,
+                        };
+                      },
+                    },
+                    Body: {
+                      style: () => {
+                        return {
+                          minHeight: "200px",
+                        };
+                      },
+                    },
+                  }}
+                >
+                  <StyledBody>
+                    <CashFlow
+                      categories={cashFlow.categories}
+                      cash={cashFlow.cash}
+                    />
+                  </StyledBody>
+                </Card>
+              </div>
+            </Cell>
+          </Grid>
           <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
             <Cell span={[12, 12, 6]}>
               <Card
-                title="Accuracy (Defect Detection) provided to customer"
+                title="Quality Control"
                 overrides={{
                   Root: {
                     style: ({ $theme }) => {
@@ -435,55 +706,11 @@ const Home = () => {
               </Card>
             </Cell>
           </Grid>
-
-          <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
-            <Cell span={12}>
-              <div className="cash-flow">
-                <Card
-                  title="Revenue Variation"
-                  overrides={{
-                    Root: {
-                      style: ({ $theme }) => {
-                        return {
-                          borderTopColor: "transparent",
-                          borderRightColor: "transparent",
-                          borderBottomColor: "transparent",
-                          borderLeftColor: "transparent",
-                          boxShadow: $theme.lighting.shadow400,
-                        };
-                      },
-                    },
-                    Title: {
-                      style: ({ $theme }) => {
-                        return {
-                          ...$theme.typography.font250,
-                        };
-                      },
-                    },
-                    Body: {
-                      style: () => {
-                        return {
-                          minHeight: "200px",
-                        };
-                      },
-                    },
-                  }}
-                >
-                  <StyledBody>
-                    <CashFlow
-                      categories={cashFlow.categories}
-                      cash={cashFlow.cash}
-                    />
-                  </StyledBody>
-                </Card>
-              </div>
-            </Cell>
-          </Grid>
           <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
             <Cell span={12}>
               <div className="cash-flow mt-5">
                 <Card
-                  title="Revenue Generated"
+                  title="Defect Losses"
                   overrides={{
                     Root: {
                       style: ({ $theme }) => {
@@ -513,6 +740,13 @@ const Home = () => {
                   }}
                 >
                   <StyledBody>
+                    {/* <ApexChart
+                        options={stateOne.options}
+                        series={stateOne.series}
+                        type="line"
+                        height={500}
+                      />
+                       */}
                     <Area />
                   </StyledBody>
                 </Card>
@@ -523,7 +757,7 @@ const Home = () => {
             <Cell span={12}>
               <div className="cash-flow mt-5">
                 <Card
-                  title="Vehicles Serviced"
+                  title="Man Hours Utilized"
                   overrides={{
                     Root: {
                       style: ({ $theme }) => {
@@ -553,7 +787,12 @@ const Home = () => {
                   }}
                 >
                   <StyledBody>
-                    <Bar />
+                    <ApexChart
+                      options={stateOne.options}
+                      series={stateOne.series}
+                      type="line"
+                      height={500}
+                    />
                   </StyledBody>
                 </Card>
               </div>

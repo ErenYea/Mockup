@@ -1,6 +1,6 @@
-import React from 'react';
-import Container from '../Container/Container';
-import Section, { Title, Subtitle, Backdrop } from './PageTitle.styled';
+import React from "react";
+import Container from "../Container/Container";
+import Section, { Title, Subtitle, Backdrop } from "./PageTitle.styled";
 
 type PageTitleProps = {
   title: string | undefined;
@@ -13,7 +13,7 @@ const PageTitle = ({ title, subtitle, backdrop, bgColor }: PageTitleProps) => {
   return (
     <Section style={{ backgroundColor: bgColor }}>
       <Container>
-        <Title>{title}</Title>
+        <Title className="mx-8">{title}</Title>
         {subtitle && <Subtitle>{subtitle}</Subtitle>}
       </Container>
       {backdrop && <Backdrop></Backdrop>}

@@ -21,9 +21,24 @@ type Props = {};
 
 const index = (props: Props) => {
   const timeSteps = [1500, 1000, 3000, 1500, 3000];
+  var tasks = [
+    { name: "Ford F-150", order: 12 , time: 2,resource:'Sean Davidson'},
+    { name: "Toyota RAV4", order: 9 ,time: 2,resource:'Dennis Ray'},
+    { name: "Honda CR-V", order: 7, time: 1,resource:'Gilbert Holland'},
+    { name: "Nissan Altima", order: 12,time: 2,resource:'Sean Davidson' },
+    { name: "Audi Q5", order: 10,time: 3,resource:'Dennis Ray'},
+    { name: "BMW X5", order: 11,time: 3,resource:'Sean Davidson'},
+    { name: "Kia Sportage", order: 13,time: 2,resource:'Gilbert Holland'},
+    { name: "Toyota Camry", order: 9,time: 2,resource:'Dennis Ray'},
+    { name: "Toyota Tacoma", order: 12,time: 3,resource:'Gilbert Holland'},
+    { name: "BMW X3", order: 8,time: 2,resource:'Sean Davidson'},
+    { name: "Lexus RX", order: 12,time:3,resource:'Dennis Ray'},
+    { name: "Hyundai Santa Fe", order: 13,time:3,resource:'Dennis Ray'},
+    { name: "Subaru Forester", order: 11,time:3,resource:'Gilbert Holland'},
+  ];
   const jsonData = [
     {
-      name: "Sam Davidson",
+      name: "Sean Davidson",
       performance: 0.92,
       address: "1883 Venture Place, Alberta",
       designation: "Senior Technician",
@@ -256,16 +271,71 @@ const index = (props: Props) => {
               </div>
             </div>
           </Cell>
-          <div className="w-full">
-            <Block paddingBottom="20px">
+          <div className="w-full mx-auto">
+            <div className="w-full flex flex-col justify-center items-center mb-2">
+              <span className=" text-3xl font-black w-fit">Job Queue</span>
+            </div>
+          <table className="mx-auto gap-3">
+            <tr className="">
+              <th className="text-xl text-customDarkBlue font-black p-2 border-2 border-r-2 border-customDarkBlue">
+                Car Model
+              </th>
+              <th className="text-xl text-customDarkBlue font-black p-2 border-2 border-r-2 border-customDarkBlue">
+                Orders
+              </th>
+              <th className="text-xl text-customDarkBlue font-black p-2 border-2 border-r-2 border-customDarkBlue">
+                Time Estimated(Days)
+              </th>
+              <th className="text-xl text-customDarkBlue font-black p-2 border-2  border-customDarkBlue">
+                Resource Deployed
+              </th>
+            </tr>
+            {tasks?.map((task, i) => (
+              <tr
+                key={i}
+                className="hover:text-xl hover:text-gray-600 hover:font-bold duration-100 cursor-pointer"
+              >
+                <td className="text-lg p-1 border-r-2 border-l-2 border-customDarkBlue">
+                  {task?.name}
+                </td>
+                <td className="text-lg border-r-2 border-l-2 pl-2 border-customDarkBlue">
+                  {task?.order}
+                </td>
+                <td className="text-lg border-r-2 border-l-2 pl-2 border-customDarkBlue">
+                  {task?.time}
+                </td>
+                <td className="text-lg border-r-2 border-l-2 pl-2 border-customDarkBlue">
+                  {task?.resource}
+                </td>
+              </tr>
+            ))}
+              <tr
+              
+                className="hover:text-xl hover:text-gray-600 hover:font-bold duration-100 cursor-pointer"
+              >
+                <td className="text-lg p-1 border-b-2 border-l-2 border-customDarkBlue">
+                Mazda CX-5
+                </td>
+                <td className="text-lg border-b-2 border-l-2 pl-2 border-customDarkBlue">
+                  18
+                </td>
+                <td className="text-lg border-b-2 border-l-2 pl-2 border-customDarkBlue">
+                  3
+                </td>
+                <td className="text-lg border-b-2 border-l-2 border-r-2 pl-2 border-customDarkBlue">
+                  Dennis Ray
+                </td>
+              </tr>
+          </table>
+            {/* <Block paddingBottom="20px">
               <Pie args={jsonData[0]} />
-            </Block>
-            <Block paddingBottom="20px">
+            </Block> */}
+            {/* <Block paddingBottom="20px">
               <ApexCharts args={jsonData[0]} />
-            </Block>
-            <Block paddingBottom="20px">
+            </Block> */}
+            {/* <Block paddingBottom="20px">
               <LineChart args={jsonData[0]} />
-            </Block>
+            </Block> */}
           </div>
         </Grid>
       </Container>

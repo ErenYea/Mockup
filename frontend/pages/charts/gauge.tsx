@@ -68,6 +68,7 @@ const gauge = (props: Props) => {
         options={options}
         series={[props.args * 100]}
         type="radialBar"
+        height="100px"
       />
     </div>
   );
