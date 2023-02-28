@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require("tailwindcss/plugin");
 module.exports = {
-  content: ["./**/*.{html,js,tsx}"],
+  content: ["./**/*.{html,js,tsx,jsx}"],
   theme: {
     extend: {
       boxShadow: {
