@@ -1,16 +1,9 @@
-import { NextPage } from 'next';
-// import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { Block } from 'baseui/block';
 import Container from '../components/UiElements/Container/Container';
 import Chat from '../containers/Chat/Chat';
 
-// const DynamicChatWithNoSSR = dynamic(
-//   () => import('../containers/Chat/Chat'),
-//   { ssr: false }
-// );
-
-const ChatPage: NextPage<{}> = () => {
+const ChatPage = () => {
 	return (
 		<>
 			<Head>

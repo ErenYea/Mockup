@@ -1,21 +1,18 @@
-import { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { IoLogoFacebook, IoLogoTwitter } from "react-icons/io";
 import { Block } from "baseui/block";
-import { Button } from "baseui/button";
 import Container from "../components/UiElements/Container/Container";
 
 function getData() {
-  return (document.getElementById("emailBrand") as HTMLInputElement).value;
+  return document.getElementById("emailBrand").value;
 }
 
 function getData2() {
-  return (document.getElementById("emailBrand2") as HTMLInputElement).value;
+  return document.getElementById("emailBrand2").value;
 }
 
-const Login: NextPage<{}> = () => {
+const Login = () => {
   const router = useRouter();
   const [openTab, setOpenTab] = useState(1);
   return (
@@ -113,7 +110,6 @@ const Login: NextPage<{}> = () => {
                         </a>
                         <div className="mt-6">
                           <button
-                            // onClick={goToMain}
                             onClick={() => {
                               sessionStorage.setItem("user", "1");
                               router.push("/");

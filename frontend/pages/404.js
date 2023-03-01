@@ -1,10 +1,9 @@
 import React from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import Container from '../components/UiElements/Container/Container';
 import NotFound from '../components/UiElements/NotFound/NotFound';
 
-const NotFoundPage: NextPage<{}> = () => {
+const NotFoundPage = () => {
 	return (
 		<>
 			<Head>

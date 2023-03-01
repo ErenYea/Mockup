@@ -1,21 +1,16 @@
-import Document, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-  DocumentContext,
-} from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { Provider as StyletronProvider } from 'styletron-react';
 import { styletron } from 'styletron';
 import favicon from 'assets/images/favicon.png';
-export default class CustomDocument extends Document<any> {
-  static async getInitialProps(ctx: DocumentContext) {
+
+export default class CustomDocument extends Document {
+  static async getInitialProps(ctx) {
     const page = await ctx.renderPage((App) => (props) => (
       <StyletronProvider value={styletron}>
         <App {...props} />
       </StyletronProvider>
     ));
-    const stylesheets = (styletron as any).getStylesheets() || [];
+    const stylesheets = styletron.getStylesheets() || [];
     return { ...page, stylesheets };
   }
 
