@@ -24,21 +24,6 @@ export default function InformationBox({ args }) {
                       className="flex items-center justify-center"
                       args={args?.performance}
                     />
-                    {/* <GaugeChart
-                      className="flex items-center justify-center"
-                      colors={["#4B5563"]}
-                      percent={args?.performance}
-                      nrOfLevels={1}
-                      textColor="none"
-                      needleBaseColor="#4B5563"
-                      needleColor="#4B5563"
-                      cornerRadius={20}
-                      fontSize={17}
-                      arcWidth={0.25}
-                      arcPadding={0}
-                    />
-                    <span className="-mt-1 ml-[2.2px] -pt-4 leading-none">{`${args?.performance*100}%`}<br/></span>
-                    <span className="text-center ">Performance</span> */}
                   </div>
                 </div>
               </div>
@@ -72,22 +57,8 @@ export default function InformationBox({ args }) {
                         Best Performance Model
                       </span>
                     </div>
-                    {/* <div class="mr-4 p-3 text-center">
-                      <span class="text-xl font-bold block  tracking-wide text-gray-600">
-                        {args?.score}%
-                      </span>
-                      <span class="text-sm text-gray-400">
-                        Score for Current Job
-                      </span>
-                    </div> */}
-                    {/* <div className=" h-fit">
-                      <LineChartv2/>
-                    </div> */}
                   </div>
                 </div>
-                {/* <div className="w-full border-black text-xl font-bold block e tracking-wide text-gray-600 ">
-                  {args?.desc}
-                </div> */}
               </div>
             </div>
           </div>
@@ -95,52 +66,4 @@ export default function InformationBox({ args }) {
       </section>
     </div>
   );
-}
-
-{
-  /* <div>
-<div className=" rounded border-gray-600 h-full w-full flex flex-col items-center">
-  <div className="  mt-20 m-4 w-1/2 h-1/5 ">
-    <img src={image}></img>
-  </div>
-  <ul className=" m-2 p-2  w-11/12 h-4/5">
-    <li className="p-1 m-2 h-fit">
-      <label className="text-xl  ">
-        <span className="font-semibold">&#187; Name:</span> Peter
-      </label>
-    </li>
-    <li className="p-1 m-2 h-fit ">
-      <label className="text-xl  ">
-        <span className="font-semibold">&#187; Designation: </span>ML
-        Engineer
-      </label>
-    </li>
-    <li className="p-1 m-2 h-fit ">
-      <label className="text-xl  ">
-        <span className="font-semibold">&#187; Domain: </span>Technical
-      </label>
-    </li>
-    <li className="p-1 m-2 h-fit ">
-      <label className="text-xl  ">
-        <span className="font-semibold">&#187; Salary: </span>$5000
-      </label>
-    </li>
-    <li className="p-1 m-2 h-fit ">
-      <label className="text-xl  ">
-        <span className="font-semibold">&#187; Job: </span>Remote
-      </label>
-    </li>
-    <li className="p-1 m-2 h-fit ">
-      <label className="text-xl  ">
-        <span className="font-semibold">&#187; Country: </span>Pakistan
-      </label>
-    </li>
-    <li className="p-1 m-2 h-fit ">
-      <label className="text-xl  ">
-        <span className="font-semibold">&#187; Performance: </span>9.8
-      </label>
-    </li>
-  </ul>
-</div>
-</div> */
 }
