@@ -1,4 +1,3 @@
-import { NextPage } from "next";
 import React, { useEffect } from "react";
 import PageTitle from "components/UiElements/PageTitle/PageTitle";
 import Container from "components/UiElements/Container/Container";
@@ -7,19 +6,9 @@ import { Block } from "baseui/block";
 import DropdownComponent from "./dropdown";
 import InformationBox from "./informationBoxv2";
 import Head from "next/head";
-import Pie from "pages/charts/pie";
-import LineChart from "pages/workshop/lineChart";
-import ApexCharts from "./boxPlot";
-import Gauge from "pages/charts/gauge";
-// import { Select } from "baseui/select";
-import { Select } from "baseui/select";
-import {
-  useThemeSwitcherCtx,
-  THEME,
-} from "../../contexts/theme/theme.provider";
-type Props = {};
+import { useThemeSwitcherCtx, THEME } from "../../contexts/theme/theme.provider";
 
-const index = (props: Props) => {
+const index = () => {
   const timeSteps = [1500, 1000, 3000, 1500, 3000];
   var tasks = [
     { name: "Ford F-150", order: 12 , time: 2,resource:'Sean Davidson'},
@@ -145,7 +134,6 @@ const index = (props: Props) => {
       }
     }
     if (!cleanup) {
-      // Do something here
       beginPage();
     }
     return () => {
@@ -214,15 +202,7 @@ const index = (props: Props) => {
                     >
                       <span className="">Detecting Car Model</span>
                       <div className="flex">
-                        {/* <div class="lds-ring hideMeAfter5Seconds ml-1 -mt-0.5">
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                        </div>
-                        <span className="ml-1 showMe text-xl font-black">
-                          &#10003;
-                        </span> */}
+                        
                       </div>
                     </li>
                     <li
@@ -309,10 +289,7 @@ const index = (props: Props) => {
                 </td>
               </tr>
             ))}
-              <tr
-              
-                className="hover:text-xl hover:text-gray-600 hover:font-bold duration-100 cursor-pointer"
-              >
+              <tr className="hover:text-xl hover:text-gray-600 hover:font-bold duration-100 cursor-pointer">
                 <td className="text-lg p-1 border-b-2 border-l-2 border-customDarkBlue">
                 Mazda CX-5
                 </td>
@@ -327,15 +304,6 @@ const index = (props: Props) => {
                 </td>
               </tr>
           </table>
-            {/* <Block paddingBottom="20px">
-              <Pie args={jsonData[0]} />
-            </Block> */}
-            {/* <Block paddingBottom="20px">
-              <ApexCharts args={jsonData[0]} />
-            </Block> */}
-            {/* <Block paddingBottom="20px">
-              <LineChart args={jsonData[0]} />
-            </Block> */}
           </div>
         </Grid>
       </Container>
