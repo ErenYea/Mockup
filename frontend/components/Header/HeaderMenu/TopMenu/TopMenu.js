@@ -20,12 +20,7 @@ const menuItems = [
   // },
 ];
 
-type MenuProps = {
-  className?: string;
-  onClick?: () => void;
-};
-
-const TopMenu = ({ className, onClick }: MenuProps) => {
+const TopMenu = ({ className, onClick }) => {
   return (
     <Menu className={className}>
       {menuItems.map(item => (
