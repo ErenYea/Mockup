@@ -18,11 +18,6 @@ const menuItems = [
     label: "Worker Performance Metrics",
     path: "/workerperformance",
   },
-  // {
-  //   id: 4,
-  //   label: 'Integrations',
-  //   path: '/integrations',
-  // },
   {
     id: 4,
     label: "Workflow Optimizer",
@@ -32,39 +27,10 @@ const menuItems = [
     id: 5,
     label: "Demand Forecasting",
     path: "/demandforecasting",
-  },
-  // {
-  //   id: 6,
-  //   label: "Charts",
-  //   path: "/charts",
-  // },
-  // {
-  //   id: 7,
-  //   label: "UI Elements",
-  //   path: "/uielements",
-  // },
-  // {
-  //   id: 8,
-
-  // },
-  // {
-  //   id: 9,
-  //   label: "Profile",
-  //   path: "/profile",
-  // },
-  // {
-  //   id: 10,
-  //   label: "Settings",
-  //   path: "/settings",
-  // },
+  }
 ];
 
-type MenuProps = {
-  className?: string;
-  onClick?: () => void;
-};
-
-const MainMenu = ({ className, onClick }: MenuProps) => {
+const MainMenu = ({ className, onClick }) => {
   return (
     <Menu className={className}>
       {menuItems.map((item) => (

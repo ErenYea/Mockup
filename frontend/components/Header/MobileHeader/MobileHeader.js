@@ -11,31 +11,24 @@ import SvgIcon from '../../UiElements/SvgIcon/SvgIcon';
 import TopMenu from '../HeaderMenu/TopMenu/TopMenu';
 import MainMenu from '../HeaderMenu/MainMenu/MainMenu';
 import AvatarMenu from '../HeaderMenu/AvatarMenu/AvatarMenu';
-import {
-	useThemeSwitcherCtx,
-	THEME,
-} from '../../../contexts/theme/theme.provider';
+import { useThemeSwitcherCtx, THEME } from '../../../contexts/theme/theme.provider';
 import { useCartState } from '../../../contexts/cart/cart.provider';
-import HeaderWrapper, {
-	PageTitle,
-	TopMenuWrapper,
-} from './MobileHeader.styled';
+import HeaderWrapper, { PageTitle, TopMenuWrapper } from './MobileHeader.styled';
 
-const MobileHeader: React.FC<{}> = () => {
+const MobileHeader = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [menu, setMenu] = useState('main');
 	const { pathname } = useRouter();
 	const { theme } = useThemeSwitcherCtx();
 	const cartItems = useCartState('cartItems');
 
-	let pageName: React.ReactNode = pathname.split('/').slice(1, 2);
+	let pageName = pathname.split('/').slice(1, 2);
 	let titleColor = '#000000';
 	if (theme === THEME.dark) {
 		titleColor = '#ffffff';
 	}
 
-	pageName =
-		pathname !== '/' && pathname !== '/_error' ? (
+	pageName = pathname !== '/' && pathname !== '/_error' ? (
 			<PageTitle $style={{ color: titleColor }}>{pageName}</PageTitle>
 		) : (
 			<Logo
