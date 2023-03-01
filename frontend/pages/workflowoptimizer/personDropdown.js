@@ -1,5 +1,4 @@
 import React from "react";
-// import person1 from "../static/person1.jpg"
 
 export default function PersonDropdown({ args }) {
   function refresh() {
@@ -8,7 +7,6 @@ export default function PersonDropdown({ args }) {
 
   return (
     <>
-      {/* <div className="flex justify-end"> */}
       <button
         id="dropdownHelperButton"
         data-dropdown-toggle="dropdownHelper"
@@ -32,7 +30,6 @@ export default function PersonDropdown({ args }) {
           ></path>
         </svg>
       </button>
-      {/* </div> */}
       <div
         id="dropdownHelper"
         class="w-fit hidden z-10 duration-50 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
@@ -47,7 +44,6 @@ export default function PersonDropdown({ args }) {
                 <div class="h-full">
                   <input
                     onClick={refresh}
-                    // checked="checked"
                     id="helper-radio-4"
                     name="helper-radio"
                     type="radio"
