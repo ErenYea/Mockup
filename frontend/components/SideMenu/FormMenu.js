@@ -7,42 +7,17 @@ import MenuWrapper, { Menu, MenuItem, MenuLink } from './SideMenu.styled';
 const menuItems = [
 	{
 		id: 1,
-		label: 'Calendar',
-		path: '/apps',
+		label: 'Formik Form',
+		path: '/forms',
 	},
 	{
 		id: 2,
-		label: 'To do',
-		path: '/apps/todo',
-	},
-	{
-		id: 3,
-		label: 'Firebase CRUD',
-		path: '/apps/firebase-crud',
-	},
-	{
-		id: 4,
-		label: 'Invoice',
-		path: '/apps/invoice',
-	},
-	{
-		id: 5,
-		label: 'Github',
-		path: '/apps/github',
-	},
-	{
-		id: 6,
-		label: 'Product hunt',
-		path: '/apps/product-hunt',
+		label: 'React Hook Form',
+		path: '/forms/hook-form',
 	},
 ];
 
-type MenuProps = {
-	className?: string;
-	onClick?: () => void;
-};
-
-const AppsMenu = ({ className = '', onClick }: MenuProps) => {
+const FormMenu = ({ className = '', onClick }) => {
 	const { pathname } = useRouter();
 	const newpathname = pathname.split('/').slice(2, 3);
 	const mainpath = `/${newpathname[0]}`;
@@ -71,4 +46,4 @@ const AppsMenu = ({ className = '', onClick }: MenuProps) => {
 	);
 };
 
-export default AppsMenu;
+export default FormMenu;

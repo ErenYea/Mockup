@@ -1,31 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { NextPage } from "next";
-import Head from "next/head";
-import { Grid, Cell } from "baseui/layout-grid";
-import { Block } from "baseui/block";
-import Container from "components/UiElements/Container/Container";
-import ChartMenu from "components/SideMenu/ChartMenu";
 import ApexChart from "components/UiElements/ApexChart/ApexChart";
 
-type Props = {
-  args: any;
-  sunroof: boolean;
-};
-const LineBarv2 = (props: any) => {
-  console.log(props);
+const LineBarv2 = (props) => {
 
-  // var x =props.args.slice(-1)[0] ; // the value of x can be changed as per your requirement
-  // var randomNumber = Math.floor(Math.random() * (x + 6 - x + 1) + x);
-  // temp.push(x)
-
-  // useEffect(()=>{
-
-  // })
   var x = props.args2.map(function (item, index) {
-    // In this case item correspond to currentValue of array a,
-    // using index to get value from array b
     return item - props.args[index];
   });
+
   const state = {
     series: [
       {
@@ -57,7 +38,6 @@ const LineBarv2 = (props: any) => {
           show: false,
         },
       },
-      //   colors: ["#ff0080", "#006ff3"],
       dataLabels: {
         enabled: true,
       },
@@ -68,11 +48,8 @@ const LineBarv2 = (props: any) => {
         text: "",
         align: "left",
       },
-      //   markers: {
-      //     size: 1,
-      //   },
+
       xaxis: {
-        // type: '',
         categories: [
           "Jan' 23",
           "Feb' 23",

@@ -7,57 +7,52 @@ import MenuWrapper, { Menu, MenuItem, MenuLink } from './SideMenu.styled';
 const menuItems = [
 	{
 		id: 1,
-		label: 'Line',
-		path: '/charts',
+		label: 'Badge',
+		path: '/uielements',
 	},
 	{
 		id: 2,
-		label: 'Area',
-		path: '/charts/area',
+		label: 'Page Title',
+		path: '/uielements/page-title',
 	},
 	{
 		id: 3,
-		label: 'Column',
-		path: '/charts/column',
+		label: 'Widget Card',
+		path: '/uielements/widget-card',
 	},
 	{
 		id: 4,
-		label: 'Bar',
-		path: '/charts/bar',
+		label: 'Carousel',
+		path: '/uielements/carousel',
 	},
 	{
 		id: 5,
-		label: 'Mixed',
-		path: '/charts/mixed',
+		label: 'Cart Product',
+		path: '/uielements/cart-product',
 	},
 	{
 		id: 6,
-		label: 'Pie',
-		path: '/charts/pie',
+		label: 'Instagram Card',
+		path: '/uielements/instagram-card',
 	},
 	{
 		id: 7,
-		label: 'Radar',
-		path: '/charts/radar',
+		label: 'Product Card',
+		path: '/uielements/product-card',
 	},
 	{
 		id: 8,
-		label: 'Product View',
-		path: '/charts/product-view',
+		label: 'Pricing Card',
+		path: '/uielements/pricing-card',
 	},
 	{
 		id: 9,
-		label: 'Cash Flow',
-		path: '/charts/cash-flow',
+		label: 'List Grid Card',
+		path: '/uielements/listgrid-card',
 	},
 ];
 
-type MenuProps = {
-	className?: string;
-	onClick?: () => void;
-};
-
-const ChartMenu = ({ className = '', onClick }: MenuProps) => {
+const UiElementsMenu = ({ className = '', onClick }) => {
 	const { pathname } = useRouter();
 	const newpathname = pathname.split('/').slice(2, 3);
 	const mainpath = `/${newpathname[0]}`;
@@ -86,4 +81,4 @@ const ChartMenu = ({ className = '', onClick }: MenuProps) => {
 	);
 };
 
-export default ChartMenu;
+export default UiElementsMenu;

@@ -7,22 +7,53 @@ import MenuWrapper, { Menu, MenuItem, MenuLink } from './SideMenu.styled';
 const menuItems = [
 	{
 		id: 1,
-		label: 'Formik Form',
-		path: '/forms',
+		label: 'Line',
+		path: '/charts',
 	},
 	{
 		id: 2,
-		label: 'React Hook Form',
-		path: '/forms/hook-form',
+		label: 'Area',
+		path: '/charts/area',
+	},
+	{
+		id: 3,
+		label: 'Column',
+		path: '/charts/column',
+	},
+	{
+		id: 4,
+		label: 'Bar',
+		path: '/charts/bar',
+	},
+	{
+		id: 5,
+		label: 'Mixed',
+		path: '/charts/mixed',
+	},
+	{
+		id: 6,
+		label: 'Pie',
+		path: '/charts/pie',
+	},
+	{
+		id: 7,
+		label: 'Radar',
+		path: '/charts/radar',
+	},
+	{
+		id: 8,
+		label: 'Product View',
+		path: '/charts/product-view',
+	},
+	{
+		id: 9,
+		label: 'Cash Flow',
+		path: '/charts/cash-flow',
 	},
 ];
 
-type MenuProps = {
-	className?: string;
-	onClick?: () => void;
-};
 
-const FormMenu = ({ className = '', onClick }: MenuProps) => {
+const ChartMenu = ({ className = '', onClick }) => {
 	const { pathname } = useRouter();
 	const newpathname = pathname.split('/').slice(2, 3);
 	const mainpath = `/${newpathname[0]}`;
@@ -51,4 +82,4 @@ const FormMenu = ({ className = '', onClick }: MenuProps) => {
 	);
 };
 
-export default FormMenu;
+export default ChartMenu;

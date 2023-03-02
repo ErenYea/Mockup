@@ -25,7 +25,7 @@ export const StyledTableHeadAlt = withStyle(StyledHeadCell, ({ $theme }) => ({
   ...$theme.typography.font250,
 }));
 
-export const StyledTableBodyCell = withStyle(StyledBodyCell, (props: any) => ({
+export const StyledTableBodyCell = withStyle(StyledBodyCell, (props) => ({
   display: 'inline-flex',
   alignItems: 'center',
   marginTop: '10px',

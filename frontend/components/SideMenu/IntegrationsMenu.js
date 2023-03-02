@@ -21,15 +21,10 @@ const menuItems = [
 	},
 ];
 
-type MenuProps = {
-	className?: string;
-	onClick: Function;
-};
-
-const IntegrationsMenu = ({ className = '', onClick }: MenuProps) => {
+const IntegrationsMenu = ({ className = '', onClick }) => {
 	const [activated, setActivated] = useState('all');
 
-	const handleMenu = (item: string) => {
+	const handleMenu = (item) => {
 		const label = item.toLowerCase();
 		setActivated(label);
 		onClick(label);

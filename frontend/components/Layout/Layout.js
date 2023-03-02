@@ -6,10 +6,7 @@ import AuthHeader from "components/Header/AuthHeader/AuthHeader";
 import AppWrapper, { ContentWrapper } from "./Layout.styled";
 import { useThemeSwitcherCtx, THEME } from "contexts/theme/theme.provider";
 
-const Layout: React.FunctionComponent<{ router?: any }> = ({
-  router,
-  children,
-}) => {
+const Layout = ({ router, children }) => {
   const pathname = router.pathname;
   const { theme } = useThemeSwitcherCtx();
   let layoutBg = "#ffffff";

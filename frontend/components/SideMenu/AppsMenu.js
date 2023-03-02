@@ -7,57 +7,37 @@ import MenuWrapper, { Menu, MenuItem, MenuLink } from './SideMenu.styled';
 const menuItems = [
 	{
 		id: 1,
-		label: 'Badge',
-		path: '/uielements',
+		label: 'Calendar',
+		path: '/apps',
 	},
 	{
 		id: 2,
-		label: 'Page Title',
-		path: '/uielements/page-title',
+		label: 'To do',
+		path: '/apps/todo',
 	},
 	{
 		id: 3,
-		label: 'Widget Card',
-		path: '/uielements/widget-card',
+		label: 'Firebase CRUD',
+		path: '/apps/firebase-crud',
 	},
 	{
 		id: 4,
-		label: 'Carousel',
-		path: '/uielements/carousel',
+		label: 'Invoice',
+		path: '/apps/invoice',
 	},
 	{
 		id: 5,
-		label: 'Cart Product',
-		path: '/uielements/cart-product',
+		label: 'Github',
+		path: '/apps/github',
 	},
 	{
 		id: 6,
-		label: 'Instagram Card',
-		path: '/uielements/instagram-card',
-	},
-	{
-		id: 7,
-		label: 'Product Card',
-		path: '/uielements/product-card',
-	},
-	{
-		id: 8,
-		label: 'Pricing Card',
-		path: '/uielements/pricing-card',
-	},
-	{
-		id: 9,
-		label: 'List Grid Card',
-		path: '/uielements/listgrid-card',
+		label: 'Product hunt',
+		path: '/apps/product-hunt',
 	},
 ];
 
-type MenuProps = {
-	className?: string;
-	onClick?: () => void;
-};
-
-const UiElementsMenu = ({ className = '', onClick }: MenuProps) => {
+const AppsMenu = ({ className = '', onClick }) => {
 	const { pathname } = useRouter();
 	const newpathname = pathname.split('/').slice(2, 3);
 	const mainpath = `/${newpathname[0]}`;
@@ -86,4 +66,4 @@ const UiElementsMenu = ({ className = '', onClick }: MenuProps) => {
 	);
 };
 
-export default UiElementsMenu;
+export default AppsMenu;

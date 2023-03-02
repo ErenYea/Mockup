@@ -27,12 +27,7 @@ const menuItems = [
 	},
 ];
 
-type MenuProps = {
-	className?: string;
-	onClick?: () => void;
-};
-
-const SettingsMenu = ({ className = '', onClick }: MenuProps) => {
+const SettingsMenu = ({ className = '', onClick }) => {
 	const { pathname } = useRouter();
 
 	return (

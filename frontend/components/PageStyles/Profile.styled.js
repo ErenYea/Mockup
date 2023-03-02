@@ -65,7 +65,7 @@ export const Menu = styled('ul', ({ $theme }) => ({
 	},
 }));
 
-export const MenuList = styled('li', (props: any) => ({
+export const MenuList = styled('li', (props) => ({
 	listStyle: 'none',
 	marginLeft: props.$theme.sizing.scale800,
 	marginRight: props.$theme.sizing.scale800,
