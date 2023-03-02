@@ -4,7 +4,7 @@ import { Block } from "baseui/block";
 import ApexChart from "components/UiElements/ApexChart/ApexChart";
 
 const Column = () => {
-  const [state, setState] = useState<any>({
+  const [state, setState] = useState({
     series: [
       {
         name: "Satisfaction Percentage",
