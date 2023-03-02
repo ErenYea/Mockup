@@ -1,27 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { NextPage } from "next";
-import Head from "next/head";
-import { Grid, Cell } from "baseui/layout-grid";
-import { Block } from "baseui/block";
-import Container from "components/UiElements/Container/Container";
-import ChartMenu from "components/SideMenu/ChartMenu";
+import React from "react";
 import ApexChart from "components/UiElements/ApexChart/ApexChart";
 
-type Props = {
-  args: any;
-  sunroof: boolean;
-};
 const LineBar = (props) => {
-  console.log(props);
-
-  // var x =props.args.slice(-1)[0] ; // the value of x can be changed as per your requirement
-  // var randomNumber = Math.floor(Math.random() * (x + 6 - x + 1) + x);
-  // temp.push(x)
-
-  // useEffect(()=>{
-
-  // })
-
+ 
   const state = {
     series: [
       {
@@ -45,7 +26,6 @@ const LineBar = (props) => {
           show: false,
         },
       },
-      //   colors: ["#ff0080", "#006ff3"],
       dataLabels: {
         enabled: true,
       },
@@ -56,11 +36,7 @@ const LineBar = (props) => {
         text: "",
         align: "left",
       },
-      //   markers: {
-      //     size: 1,
-      //   },
       xaxis: {
-        // type: '',
         categories: [
           "Jan 2023",
           "Feb 2023",

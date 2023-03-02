@@ -1,38 +1,26 @@
-import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import PageTitle from "components/UiElements/PageTitle/PageTitle";
-import ApexChart from "components/UiElements/ApexChart/ApexChart";
 import Head from "next/head";
 import LineBar from "./lineGraph";
 import CreateOrUpdateEvent from "./CreateOrUpdateEvent";
 import CalendarApp from "../../containers/Calendar/oem/newcalendar/index";
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  ModalButton,
-  SIZE,
-  ROLE,
-} from "baseui/modal";
+import { ModalButton } from "baseui/modal";
 import Container from "components/UiElements/Container/Container";
 import { Block } from "baseui/block";
 import LineBarv2 from "./lineGraphv2";
 
-type Props = {};
+const index = () => {
 
-const index = (props) => {
   const [event, setEvent] = useState(false);
   const [works, setWorks] = useState([]);
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [Workshop, setWorkshop] = useState<number>(0);
+  const [isOpen, setIsOpen] = useState(false);
+  const [Workshop, setWorkshop] = useState(0);
+
   function onSubmit(value: any) {
     setIsOpen(false);
-    console.log(value);
     setWorks([...works, value]);
   }
   const handleClick = () => {
-    console.log("hamza");
     setEvent(true);
     setIsOpen(true);
   };
@@ -41,13 +29,12 @@ const index = (props) => {
     setEvent(null);
   }
   function showInfoWorkshop() {
-    // (document.getElementById("dropdown") as HTMLInputElement).value
-    // var element: HTMLInputElement = document.getElementById("dropdown");
-    var value: number = parseInt(
-      (document.getElementById("dropdown2") as HTMLInputElement).value
+    var value = parseInt(
+      document.getElementById("dropdown2").value
     );
     setWorkshop(value);
   }
+  
   const jsonData = [
     {
       name: "Sean Davidson",
@@ -1753,7 +1740,7 @@ const index = (props) => {
   useEffect(() => {
     document
     .querySelectorAll(".rbc-btn-group")
-    .forEach((p: HTMLElement, i: number, arr: NodeListOf<HTMLElement>) => {
+    .forEach((p) => {
       p.style.display = "None";
     });
     document.getElementsByTagName("nav")[0].style.display = "None";
@@ -1773,24 +1760,18 @@ const index = (props) => {
   }, []);
 
   function showInfo() {
-    // (document.getElementById("dropdown") as HTMLInputElement).value
-    // var element: HTMLInputElement = document.getElementById("dropdown");
-    var value: number = parseInt(
-      (document.getElementById("dropdown") as HTMLInputElement).value
+    var value = parseInt(
+      document.getElementById("dropdown").value
     );
     setIndexModel(value);
   }
 
-  const [state2, setState2] = useState<any>({
+  const [state2, setState2] = useState({
     series: [
       {
         name: "High - 2020",
         data: [280, 290, 330, 360, 320, 320, 330],
       },
-      // {
-      //   name: "Low - 2020",
-      //   data: [12, 11, 14, 18, 17, 13, 13],
-      // },
     ],
     options: {
       chart: {
