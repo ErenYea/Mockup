@@ -1,41 +1,24 @@
 import React, { useEffect } from "react";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
-import { Textarea } from "baseui/textarea";
-import { Datepicker } from "baseui/datepicker";
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  ModalButton,
-  SIZE,
-  ROLE,
-} from "baseui/modal";
+import { Modal, ModalBody, ModalFooter, ModalButton, SIZE, ROLE } from "baseui/modal";
 import { data } from "containers/Calendar/oem/data";
 
-export default ({ onClose, isOpen, onSubmit, index }: any) => {
+export default ({ onClose, isOpen, onSubmit, index }) => {
   const [title, setTitle] = React.useState("");
   const [model, setModel] = React.useState("");
-  // const [person, setPerson] = React.useState(event.person ? event.person : "");
-  // const [slots, setSlots] = React.useState<any>([event.start, event.end]);
-  const [selectedData, setSelectedData] = React.useState<any>([]);
-  const [personSelect, setPersonSelect] = React.useState<any>("");
-  const [date, setDate] = React.useState<any>();
-  const [modalModal, setModalModal] = React.useState<any>([
-    "Ford",
-    "Nissan",
-    "Hyundai",
-    "Honda",
-    "Toyota",
-  ]);
-  const getthecar = (value: any) => {
+  const [selectedData, setSelectedData] = React.useState([]);
+  const [personSelect, setPersonSelect] = React.useState("");
+  const [date, setDate] = React.useState();
+  const [modalModal, setModalModal] = React.useState(["Ford", "Nissan", "Hyundai", "Honda", "Toyota" ]);
+
+  const getthecar = (value) => {
     return modalModal.filter(
       (item) => item.slice(0, 3).toLowerCase() == value
     )[0];
   };
 
-  function handleSubmit(e: any) {
+  function handleSubmit(e) {
     e.preventDefault();
     var workshop = selectedData.filter((item) => item.id == personSelect)[0];
     var carname = modalModal.filter(
@@ -74,29 +57,22 @@ export default ({ onClose, isOpen, onSubmit, index }: any) => {
       startdate: startdate.toDateString(),
       enddate: enddate.toDateString(),
     });
-    // onSubmit({ car: parseInt(title), model: carname, workshop });
+    
   }
-  // const
+  
   const modelHandler = () => {
-    // const value = (document.getElementById("models") as HTMLInputElement).value;
-    // console.log(value);
     const value = modalModal[index].slice(0, 3).toLowerCase();
     const filteredData = data;
 
-    console.log(filteredData);
-    filteredData.forEach(function (item: any) {
+    filteredData.forEach(function (item) {
       item.modaldata = Object.entries(item.modaldata)
-        .sort((a: any, b: any) => b[1].performance - a[1].performance)
+        .sort((a, b) => b[1].performance - a[1].performance)
         .reduce((obj, [key, value]) => {
           obj[key] = value;
           return obj;
         }, {});
     });
-
-    // filteredData.sort(
-    //   (a, b) => b.modaldata[value].performance - a.modaldata.toy.performance
-    // );
-    console.log(filteredData);
+    
     setSelectedData(filteredData);
     setModel(value);
   };
@@ -104,26 +80,14 @@ export default ({ onClose, isOpen, onSubmit, index }: any) => {
     modelHandler();
   });
   const personHandler = (e) => {
-    // if (e.target.querySelector("#name")) {
-    //   console.log(e.target.querySelector("#name").textContent);
-    // } else if (e.target.parentElement.querySelector("#name")) {
-    //   console.log(e.target.parentElement.querySelector("#name").textContent);
-    // } else {
-    //   console.log(
-    //     e.target.parentElement.parentElement.querySelector("#name").textContent
-    //   );
-    // }
+    
     const key = e.target.getAttribute("data-key");
-    console.log("key", key);
-    // console.log(document.querySelector(`main[data-key='${key}']`));
     if (document.querySelector(`div[data-key='${key}']`)) {
       document
         .querySelector(`div[data-key='${key}']`)
         .classList.add("bg-gray-900");
     }
     setPersonSelect(key);
-    console.log(e);
-    // .target.parentNode.querySelector("div")
   };
 
   return (
@@ -160,37 +124,8 @@ export default ({ onClose, isOpen, onSubmit, index }: any) => {
               id="models"
               value={modalModal[index]}
               type="text"
-              // onChange={(event) => setTitle(event.currentTarget.value)}
               disabled
             />
-            {/* <select
-                id="models"
-                onChange={modelHandler}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option selected={model != "" ? false : true} disabled>
-                  Choose a Model
-                </option>
-                {modalModal.map((item, index) => (
-                  <option
-                    key={index}
-                    value={item.slice(0, 3).toLowerCase()}
-                    selected={
-                      model != ""
-                        ? model == item.slice(0, 3).toLowerCase()
-                          ? true
-                          : false
-                        : false
-                    }
-                  >
-                    {item}
-                  </option>
-                ))}
-                {/* <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option> */}
-            {/* </select> */}
           </FormControl>
 
           <FormControl label="Select Workshop">
@@ -212,12 +147,6 @@ export default ({ onClose, isOpen, onSubmit, index }: any) => {
                             : "")
                         }
                       >
-                        {/* <img
-                          data-key={i.id}
-                          src={i.img}
-                          alt=""
-                          className="w-[130px] h-[100px] rounded"
-                        /> */}
                         <div
                           data-key={i.id}
                           id="name"
@@ -279,27 +208,12 @@ export default ({ onClose, isOpen, onSubmit, index }: any) => {
                       </div>
                     ))}
               </div>
-              {/* <select
-                disabled={model == ""}
-                id="persons"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option selected disabled>
-                  Choose a Person
-                </option>
-
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
-              </select> */}
             </>
           </FormControl>
           <FormControl label="Select Start Date">
             <Input
               type="date"
               id="starttime"
-              // format="yyyy-MM-dd"
               required
               value={date}
               onChange={(event) => setDate(event.currentTarget.value)}
