@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
@@ -7,8 +6,8 @@ import Container from 'components/UiElements/Container/Container';
 import ChartMenu from 'components/SideMenu/ChartMenu';
 import ApexChart from 'components/UiElements/ApexChart/ApexChart';
 
-const Chart: NextPage<{}> = () => {
-	const [state, setState] = useState<any>({
+const Chart = () => {
+	const [state, setState] = useState({
 		series: [
 			{
 				name: 'High - 2020',

@@ -1,17 +1,16 @@
 import React, { Fragment } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
 import { StyledTable, StyledBodyCell } from 'baseui/table-grid';
-import { StyledTableHeadAlt } from 'components/PageStyles/Apps.styled';
-import UiElementsMenu from 'components/SideMenu/UiElementsMenu';
-import Container from 'components/UiElements/Container/Container';
-import Product from 'components/UiElements/ProductCard/ProductCard';
+import { StyledTableHeadAlt } from '../../components/PageStyles/Apps.styled';
+import UiElementsMenu from '../../components/SideMenu/UiElementsMenu';
+import Product from '../../components/UiElements/CartProduct/CartProduct';
+import Container from '../../components/UiElements/Container/Container';
 
-import { productCardPropsData } from '../../data/uiElementsApiData';
+import { cartProductPropsData } from '../../data/uiElementsApiData';
 
-const ProductCard: NextPage<{}> = () => {
+const CartProduct = () => {
   return (
     <>
       <Head>
@@ -29,7 +28,6 @@ const ProductCard: NextPage<{}> = () => {
               <Block paddingTop={['10px', '15px', '30px', '0']}>
                 <Block
                   as="h2"
-                  paddingBottom="20px"
                   overrides={{
                     Block: {
                       style: ({ $theme }) => {
@@ -41,25 +39,23 @@ const ProductCard: NextPage<{}> = () => {
                     },
                   }}
                 >
-                  ProductCard
+                  CartProduct
                 </Block>
 
-                <Block paddingBottom="30px">
-                  <Grid gridColumns={12} gridGutters={0} gridMargins={0}>
-                    <Cell span={[12, 6, 4]}>
-                      <Product
-                        as="#"
-                        href="#"
-                        thumb={{
-                          src: `https://s3.amazonaws.com/redqteam.com/inst/shop/1.jpg`,
-                          width: 480,
-                          height: 480,
-                        }}
-                        title="Invertocat Mug"
-                        price="20"
-                      />
-                    </Cell>
-                  </Grid>
+                <Block paddingBottom="26px">
+                  <Product
+                    thumb={{
+                      src: `https://s3.amazonaws.com/redqteam.com/inst/shop/1.jpg`,
+                      width: 480,
+                      height: 480,
+                    }}
+                    title="Atom Coasters"
+                    price="15.00"
+                    quantity="Qty 3"
+                    color="Green"
+                    removable={true}
+                    hideBorderBottom={true}
+                  />
                 </Block>
 
                 <Block
@@ -93,7 +89,8 @@ const ProductCard: NextPage<{}> = () => {
                     },
                   }}
                 >
-                  To get a customized ProductCard, set alignItem prop.
+                  To get a customized CartProduct, just set
+                  hideBorderBottom/style.
                 </Block>
 
                 <Block
@@ -111,7 +108,7 @@ const ProductCard: NextPage<{}> = () => {
                     <StyledTableHeadAlt>Type</StyledTableHeadAlt>
                     <StyledTableHeadAlt>Default</StyledTableHeadAlt>
                     <StyledTableHeadAlt>Version</StyledTableHeadAlt>
-                    {productCardPropsData.map((item, index) => {
+                    {cartProductPropsData.map((item, index) => {
                       const striped = index % 2 === 0;
                       return (
                         <Fragment key={index}>
@@ -125,7 +122,7 @@ const ProductCard: NextPage<{}> = () => {
                             }}
                           ></StyledBodyCell>
                           <StyledBodyCell $striped={striped}>
-                            <code>{item.type}</code>
+                            {item.type}
                           </StyledBodyCell>
                           <StyledBodyCell $striped={striped}>
                             {item.default}
@@ -147,4 +144,4 @@ const ProductCard: NextPage<{}> = () => {
   );
 };
 
-export default ProductCard;
+export default CartProduct;

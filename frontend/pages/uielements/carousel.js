@@ -1,18 +1,16 @@
 import React, { Fragment } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
-import { IoMdCart } from 'react-icons/io';
 import { Block } from 'baseui/block';
 import { StyledTable, StyledBodyCell } from 'baseui/table-grid';
+import { Button } from 'baseui/button';
 import { StyledTableHeadAlt } from 'components/PageStyles/Apps.styled';
 import UiElementsMenu from 'components/SideMenu/UiElementsMenu';
 import Container from 'components/UiElements/Container/Container';
-import Card from 'components/UiElements/WidgetCard/WidgetCard';
+import Carousel from 'components/UiElements/Carousel/Carousel';
+import { carouselPropsData } from '../../data/uiElementsApiData';
 
-import { widgetCardPropsData } from '../../data/uiElementsApiData';
-
-const WidgetCard: NextPage<{}> = () => {
+const Apps = () => {
 	return (
 		<>
 			<Head>
@@ -42,22 +40,98 @@ const WidgetCard: NextPage<{}> = () => {
 										},
 									}}
 								>
-									Widget Card
+									Carousel
 								</Block>
 
 								<Block paddingBottom="50px">
-									<Card
-										style={{ maxWidth: '280px' }}
-										color="#0070F3"
-										title="198"
-										icon={<IoMdCart color="#ffffff" size="1.7em" />}
-										description="Pending Orders"
-										btntext="View report"
-										label="Total orders"
-										onClick={() =>
-											console.log('View report of pending orders.')
+									<Carousel
+										carouselSelector="example"
+										prevButton={
+											<Button
+												size="compact"
+												shape="pill"
+												overrides={{
+													BaseButton: {
+														style: ({ $theme }) => {
+															return { ...$theme.typography.font150 };
+														},
+													},
+												}}
+											>
+												Prev
+											</Button>
 										}
-									/>
+										nextButton={
+											<Button
+												size="compact"
+												shape="pill"
+												overrides={{
+													BaseButton: {
+														style: ({ $theme }) => {
+															return { ...$theme.typography.font150 };
+														},
+													},
+												}}
+											>
+												Next
+											</Button>
+										}
+									>
+										<Block
+											overrides={{
+												Block: {
+													style: ({ $theme }) => {
+														return {
+															display: 'flex',
+															alignItems: 'center',
+															justifyContent: 'center',
+															minHeight: '200px',
+															backgroundColor:
+																$theme.colors.backgroundSecondary,
+														};
+													},
+												},
+											}}
+										>
+											Slide 1
+										</Block>
+										<Block
+											overrides={{
+												Block: {
+													style: ({ $theme }) => {
+														return {
+															display: 'flex',
+															alignItems: 'center',
+															justifyContent: 'center',
+															minHeight: '200px',
+															backgroundColor:
+																$theme.colors.backgroundSecondary,
+														};
+													},
+												},
+											}}
+										>
+											Slide 2
+										</Block>
+										<Block
+											overrides={{
+												Block: {
+													style: ({ $theme }) => {
+														return {
+															display: 'flex',
+															alignItems: 'center',
+															justifyContent: 'center',
+															minHeight: '200px',
+															backgroundColor:
+																$theme.colors.backgroundSecondary,
+														};
+													},
+												},
+											}}
+										>
+											Slide 3
+										</Block>
+									</Carousel>
 								</Block>
 
 								<Block
@@ -91,7 +165,10 @@ const WidgetCard: NextPage<{}> = () => {
 										},
 									}}
 								>
-									To get a customized widget card, just set color/style.
+									To get a customized carousel, just set
+									options/controls/thumbs/bullets/numberOfBullets.{' '}
+									<strong>Note:</strong> It's requried some custom style to
+									match your design.
 								</Block>
 
 								<Block
@@ -109,16 +186,19 @@ const WidgetCard: NextPage<{}> = () => {
 										<StyledTableHeadAlt>Type</StyledTableHeadAlt>
 										<StyledTableHeadAlt>Default</StyledTableHeadAlt>
 										<StyledTableHeadAlt>Version</StyledTableHeadAlt>
-										{widgetCardPropsData.map((item, index) => {
+										{carouselPropsData.map((item, index) => {
 											const striped = index % 2 === 0;
 											return (
 												<Fragment key={index}>
 													<StyledBodyCell $striped={striped}>
 														{item.property}
 													</StyledBodyCell>
-													<StyledBodyCell $striped={striped}>
-														{item.description}
-													</StyledBodyCell>
+													<StyledBodyCell
+														$striped={striped}
+														dangerouslySetInnerHTML={{
+															__html: item.description,
+														}}
+													></StyledBodyCell>
 													<StyledBodyCell $striped={striped}>
 														{item.type}
 													</StyledBodyCell>
@@ -142,4 +222,4 @@ const WidgetCard: NextPage<{}> = () => {
 	);
 };
 
-export default WidgetCard;
+export default Apps;

@@ -1,24 +1,18 @@
-import React, { useState, Fragment } from 'react';
-import { NextPage } from 'next';
+import React, { Fragment } from 'react';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
+import { FiShoppingCart } from 'react-icons/fi';
 import { Block } from 'baseui/block';
 import { StyledTable, StyledBodyCell } from 'baseui/table-grid';
 import { StyledTableHeadAlt } from 'components/PageStyles/Apps.styled';
 import UiElementsMenu from 'components/SideMenu/UiElementsMenu';
+import Badge from 'components/UiElements/Badge/Badge';
 import Container from 'components/UiElements/Container/Container';
-import Pricing from 'components/UiElements/PricingCard/PricingCard';
+import { useThemeSwitcherCtx, THEME } from '../../contexts/theme/theme.provider';
+import { badgePropsData } from '../../data/uiElementsApiData';
 
-import { pricingCardPropsData } from '../../data/uiElementsApiData';
-
-const PricingCard: NextPage<{}> = () => {
-	const [loading, setLoading] = useState(false);
-	const handlePricingPlan = () => {
-		setLoading(true);
-		setTimeout(() => {
-			setLoading(false);
-		}, 600);
-	};
+const Apps = () => {
+	const { theme } = useThemeSwitcherCtx();
 
 	return (
 		<>
@@ -49,36 +43,48 @@ const PricingCard: NextPage<{}> = () => {
 										},
 									}}
 								>
-									PricingCard
+									Badge
 								</Block>
 
-								<Block paddingBottom="30px">
-									<Grid gridColumns={12} gridGutters={0} gridMargins={0}>
-										<Cell span={[12, 6]}>
-											<Pricing
-												title="Advance Pro Support"
-												type="Advance"
-												items={[
-													{
-														id: 1,
-														title: 'Access to MINST on spectrum',
-													},
-													{
-														id: 2,
-														title: 'Email support',
-													},
-													{
-														id: 3,
-														title: 'Support reply within 24hrs',
-													},
-												]}
-												price="$799"
-												btn="Get Started"
-												isLoading={loading}
-												onClick={handlePricingPlan}
+								<Block
+									paddingBottom="50px"
+									overrides={{
+										Block: {
+											style: { display: 'flex', alignItems: 'flex-end' },
+										},
+									}}
+								>
+									<Badge
+										icon={
+											<FiShoppingCart
+												size={'1.2rem'}
+												color={theme === THEME.light ? '#000000' : '#ffffff'}
 											/>
-										</Cell>
-									</Grid>
+										}
+										count={9}
+									/>
+									<Block paddingLeft="15px" paddingRight="15px"></Block>
+									<Badge
+										icon={
+											<FiShoppingCart
+												size={'1.6rem'}
+												color={theme === THEME.light ? '#000000' : '#ffffff'}
+											/>
+										}
+										count={99}
+										bgColor="#276EF1"
+									/>
+									<Block paddingLeft="15px" paddingRight="15px"></Block>
+									<Badge
+										icon={
+											<FiShoppingCart
+												size={'2rem'}
+												color={theme === THEME.light ? '#000000' : '#ffffff'}
+											/>
+										}
+										count={999}
+										bgColor="#3AA76D"
+									/>
 								</Block>
 
 								<Block
@@ -112,8 +118,7 @@ const PricingCard: NextPage<{}> = () => {
 										},
 									}}
 								>
-									To get a customized PricingCard, set custom style in style
-									prop.
+									To get a customized badge, just set color/bgColor/style.
 								</Block>
 
 								<Block
@@ -131,21 +136,18 @@ const PricingCard: NextPage<{}> = () => {
 										<StyledTableHeadAlt>Type</StyledTableHeadAlt>
 										<StyledTableHeadAlt>Default</StyledTableHeadAlt>
 										<StyledTableHeadAlt>Version</StyledTableHeadAlt>
-										{pricingCardPropsData.map((item, index) => {
+										{badgePropsData.map((item, index) => {
 											const striped = index % 2 === 0;
 											return (
 												<Fragment key={index}>
 													<StyledBodyCell $striped={striped}>
 														{item.property}
 													</StyledBodyCell>
-													<StyledBodyCell
-														$striped={striped}
-														dangerouslySetInnerHTML={{
-															__html: item.description,
-														}}
-													></StyledBodyCell>
 													<StyledBodyCell $striped={striped}>
-														<code>{item.type}</code>
+														{item.description}
+													</StyledBodyCell>
+													<StyledBodyCell $striped={striped}>
+														{item.type}
 													</StyledBodyCell>
 													<StyledBodyCell $striped={striped}>
 														{item.default}
@@ -167,4 +169,4 @@ const PricingCard: NextPage<{}> = () => {
 	);
 };
 
-export default PricingCard;
+export default Apps;

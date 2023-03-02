@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { FiPlus, FiCheck } from 'react-icons/fi';
@@ -13,7 +12,7 @@ import ListGrid from 'components/UiElements/ListGridCard/ListGridCard';
 
 import { listGridCardPropsData } from '../../data/uiElementsApiData';
 
-const ListGridCard: NextPage<{}> = () => {
+const ListGridCard = () => {
 	const [loading, setLoading] = useState(false);
 	const [installed, setInstalled] = useState(false);
 

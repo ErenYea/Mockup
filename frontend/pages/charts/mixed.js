@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
@@ -7,8 +6,8 @@ import Container from 'components/UiElements/Container/Container';
 import ChartMenu from 'components/SideMenu/ChartMenu';
 import ApexChart from 'components/UiElements/ApexChart/ApexChart';
 
-const Mixed: NextPage<{}> = () => {
-	const [state, setState] = useState<any>({
+const Mixed = () => {
+	const [state, setState] = useState({
 		series: [
 			{
 				name: 'Product A',
@@ -92,7 +91,7 @@ const Mixed: NextPage<{}> = () => {
 				shared: true,
 				intersect: false,
 				y: {
-					formatter: function(y: any) {
+					formatter: function(y) {
 						if (typeof y !== 'undefined') {
 							return y.toFixed(0) + ' Sales';
 						}

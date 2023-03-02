@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import { NextPage } from "next";
-import Head from "next/head";
 import { Grid, Cell } from "baseui/layout-grid";
 import { Block } from "baseui/block";
-import Container from "components/UiElements/Container/Container";
-import ChartMenu from "components/SideMenu/ChartMenu";
 import ApexChart from "components/UiElements/ApexChart/ApexChart";
-type Props = {};
-const Bar = (props: Props) => {
-  const [state, setState] = useState<any>({
+
+const Bar = () => {
+  const [state, setState] = useState({
     series: [
       {
         name: "Ford",
@@ -29,11 +25,7 @@ const Bar = (props: Props) => {
       {
         name: "Toyota",
         data: [9, 7, 5, 8, 6, 9, 4],
-      },
-      // {
-      //   name: "Reborn Kid",
-      //   data: [25, 12, 19, 32, 25, 24, 10],
-      // },
+      }
     ],
     options: {
       chart: {
@@ -95,17 +87,7 @@ const Bar = (props: Props) => {
 
   return (
     <>
-      {/* <Head>
-        <title>Chart | INST.</title>
-        <meta name="Description" content="Inst chart app" />
-      </Head> */}
-
-      {/* <Container> */}
-      {/* <Block paddingTop={["0", "0", "0", "40px"]}> */}
       <Grid gridColumns={12} gridGutters={0} gridMargins={0}>
-        {/* <Cell span={[12, 12, 3]}>
-            <ChartMenu />
-          </Cell> */}
         <Cell span={[12]}>
           <Block paddingTop={["10px", "15px", "30px", "0"]}>
             <ApexChart
@@ -117,8 +99,6 @@ const Bar = (props: Props) => {
           </Block>
         </Cell>
       </Grid>
-      {/* </Block> */}
-      {/* </Container> */}
     </>
   );
 };

@@ -1,11 +1,8 @@
 import React from "react";
 import ApexChart from "components/UiElements/ApexChart/ApexChart";
 
-type Props = {
-  args: number;
-};
-
-const gauge = (props: Props) => {
+const gauge = (props) => {
+  
   var options = {
     series: [props.args],
     chart: {
@@ -62,6 +59,7 @@ const gauge = (props: Props) => {
     },
     labels: ["Average Results"],
   };
+
   return (
     <div>
       <ApexChart

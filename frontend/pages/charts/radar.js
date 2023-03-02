@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
@@ -7,8 +6,8 @@ import Container from 'components/UiElements/Container/Container';
 import ChartMenu from 'components/SideMenu/ChartMenu';
 import ApexChart from 'components/UiElements/ApexChart/ApexChart';
 
-const Radar: NextPage<{}> = () => {
-	const [state, setState] = useState<any>({
+const Radar = () => {
+	const [state, setState] = useState({
 		series: [
 			{
 				name: 'Series 1',
@@ -46,7 +45,7 @@ const Radar: NextPage<{}> = () => {
 			},
 			tooltip: {
 				y: {
-					formatter: function(val: number) {
+					formatter: function(val) {
 						return val;
 					},
 				},
@@ -65,7 +64,7 @@ const Radar: NextPage<{}> = () => {
 			yaxis: {
 				tickAmount: 7,
 				labels: {
-					formatter: function(val: number, i: number) {
+					formatter: function(val, i) {
 						if (i % 2 === 0) {
 							return val;
 						} else {

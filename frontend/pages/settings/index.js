@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { NextPage } from 'next';
+import React from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { Grid, Cell } from 'baseui/layout-grid';
@@ -12,21 +11,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Container from 'components/UiElements/Container/Container';
 import SettingsMenu from 'components/SideMenu/SettingsMenu';
-import {
-  AvatarWrapper,
-  ButtonGroup,
-} from '../../components/PageStyles/Settings.styled';
+import { AvatarWrapper, ButtonGroup } from '../../components/PageStyles/Settings.styled';
 
 const AvatarWithNoSSR = dynamic(() => import('react-avatar-edit'), {
   ssr: false,
 });
-
-type FormData = {
-  avatar: string;
-  name: string;
-  username: string;
-  email: string;
-};
 
 const schema = yup.object().shape({
   name: yup
@@ -43,26 +32,22 @@ const schema = yup.object().shape({
     .email('Please enter a valid email'),
 });
 
-const Settings: NextPage<{}> = () => {
+const Settings = () => {
   const {
     register,
     setValue,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm({
     resolver: yupResolver(schema),
   });
 
-  // useEffect(() => {
-  // 	register({ name: 'avatar' });
-  // }, [register]);
-
-  const handleOnCrop = (img: string) => {
+  const handleOnCrop = (img) => {
     setValue('avatar', img);
   };
 
-  const handleBeforeFileLoad = (e: any) => {
+  const handleBeforeFileLoad = (e) => {
     if (e.target.files[0].size > 71680) {
       alert('File is too big!');
       e.target.value = '';

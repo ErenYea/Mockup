@@ -1,24 +1,17 @@
 import React, { Fragment } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
-import { FiShoppingCart } from 'react-icons/fi';
+import { IoMdCart } from 'react-icons/io';
 import { Block } from 'baseui/block';
 import { StyledTable, StyledBodyCell } from 'baseui/table-grid';
 import { StyledTableHeadAlt } from 'components/PageStyles/Apps.styled';
 import UiElementsMenu from 'components/SideMenu/UiElementsMenu';
-import Badge from 'components/UiElements/Badge/Badge';
 import Container from 'components/UiElements/Container/Container';
-import {
-	useThemeSwitcherCtx,
-	THEME,
-} from '../../contexts/theme/theme.provider';
+import Card from 'components/UiElements/WidgetCard/WidgetCard';
 
-import { badgePropsData } from '../../data/uiElementsApiData';
+import { widgetCardPropsData } from '../../data/uiElementsApiData';
 
-const Apps: NextPage<{}> = () => {
-	const { theme } = useThemeSwitcherCtx();
-
+const WidgetCard = () => {
 	return (
 		<>
 			<Head>
@@ -48,47 +41,21 @@ const Apps: NextPage<{}> = () => {
 										},
 									}}
 								>
-									Badge
+									Widget Card
 								</Block>
 
-								<Block
-									paddingBottom="50px"
-									overrides={{
-										Block: {
-											style: { display: 'flex', alignItems: 'flex-end' },
-										},
-									}}
-								>
-									<Badge
-										icon={
-											<FiShoppingCart
-												size={'1.2rem'}
-												color={theme === THEME.light ? '#000000' : '#ffffff'}
-											/>
+								<Block paddingBottom="50px">
+									<Card
+										style={{ maxWidth: '280px' }}
+										color="#0070F3"
+										title="198"
+										icon={<IoMdCart color="#ffffff" size="1.7em" />}
+										description="Pending Orders"
+										btntext="View report"
+										label="Total orders"
+										onClick={() =>
+											console.log('View report of pending orders.')
 										}
-										count={9}
-									/>
-									<Block paddingLeft="15px" paddingRight="15px"></Block>
-									<Badge
-										icon={
-											<FiShoppingCart
-												size={'1.6rem'}
-												color={theme === THEME.light ? '#000000' : '#ffffff'}
-											/>
-										}
-										count={99}
-										bgColor="#276EF1"
-									/>
-									<Block paddingLeft="15px" paddingRight="15px"></Block>
-									<Badge
-										icon={
-											<FiShoppingCart
-												size={'2rem'}
-												color={theme === THEME.light ? '#000000' : '#ffffff'}
-											/>
-										}
-										count={999}
-										bgColor="#3AA76D"
 									/>
 								</Block>
 
@@ -123,7 +90,7 @@ const Apps: NextPage<{}> = () => {
 										},
 									}}
 								>
-									To get a customized badge, just set color/bgColor/style.
+									To get a customized widget card, just set color/style.
 								</Block>
 
 								<Block
@@ -141,7 +108,7 @@ const Apps: NextPage<{}> = () => {
 										<StyledTableHeadAlt>Type</StyledTableHeadAlt>
 										<StyledTableHeadAlt>Default</StyledTableHeadAlt>
 										<StyledTableHeadAlt>Version</StyledTableHeadAlt>
-										{badgePropsData.map((item, index) => {
+										{widgetCardPropsData.map((item, index) => {
 											const striped = index % 2 === 0;
 											return (
 												<Fragment key={index}>
@@ -174,4 +141,4 @@ const Apps: NextPage<{}> = () => {
 	);
 };
 
-export default Apps;
+export default WidgetCard;

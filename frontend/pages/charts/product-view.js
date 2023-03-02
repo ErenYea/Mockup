@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
@@ -7,8 +6,8 @@ import Container from 'components/UiElements/Container/Container';
 import ChartMenu from 'components/SideMenu/ChartMenu';
 import ProductViews from 'containers/Widgets/ProductViews';
 
-const ProductView: NextPage<{}> = () => {
-	const [state, setState] = useState<any>({
+const ProductView = () => {
+	const [state, setState] = useState({
 		categories: [
 			'1',
 			'2',

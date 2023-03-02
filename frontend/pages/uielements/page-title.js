@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
@@ -8,10 +7,9 @@ import { StyledTableHeadAlt } from 'components/PageStyles/Apps.styled';
 import UiElementsMenu from 'components/SideMenu/UiElementsMenu';
 import Title from 'components/UiElements/PageTitle/PageTitle';
 import Container from 'components/UiElements/Container/Container';
-
 import { pageTitlePropsData } from '../../data/uiElementsApiData';
 
-const PageTitle: NextPage<{}> = () => {
+const PageTitle = () => {
 	return (
 		<>
 			<Head>

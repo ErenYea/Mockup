@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
@@ -10,10 +9,9 @@ import SettingsMenu from 'components/SideMenu/SettingsMenu';
 import SvgIcon from 'components/UiElements/SvgIcon/SvgIcon';
 import { TextButton } from 'components/PageStyles/Settings.styled';
 import { StyledTableHeadAlt } from 'components/PageStyles/Apps.styled';
-
 import billingPageData from '../../data/billingPage';
 
-const Billing: NextPage<{}> = () => {
+const Billing = () => {
 	return (
 		<>
 			<Head>

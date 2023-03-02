@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
@@ -8,12 +7,7 @@ import { Select } from 'baseui/select';
 import Container from 'components/UiElements/Container/Container';
 import SettingsMenu from 'components/SideMenu/SettingsMenu';
 import ListGridCard from 'components/UiElements/ListGridCard/ListGridCard';
-import {
-	Title,
-	Subtitle,
-	SpaceBetween,
-} from '../../components/PageStyles/Settings.styled';
-
+import { Title, Subtitle, SpaceBetween } from '../../components/PageStyles/Settings.styled';
 import applicationsPageData from '../../data/applicationsPage';
 
 const sortOptions = [
@@ -22,11 +16,11 @@ const sortOptions = [
 	{ label: 'Sort by C', value: 'c' },
 ];
 
-const Applications: NextPage<{}> = () => {
+const Applications = () => {
 	const { title, subtitle, applications } = applicationsPageData;
 	const [value, setValue] = useState([]);
 
-	const handleSort = (e: any) => {
+	const handleSort = (e) => {
 		setValue(e.value);
 	};
 
@@ -34,7 +28,7 @@ const Applications: NextPage<{}> = () => {
 		console.log('Remove all');
 	};
 
-	const handleRemoveApplication = (id: string) => {
+	const handleRemoveApplication = (id) => {
 		console.log('Remove', id);
 	};
 
@@ -106,7 +100,7 @@ const Applications: NextPage<{}> = () => {
 									</Button>
 								</SpaceBetween>
 
-								{applications.map((item: any) => (
+								{applications.map((item) => (
 									<SpaceBetween key={`application-key${item.id}`}>
 										<ListGridCard
 											variant="list"

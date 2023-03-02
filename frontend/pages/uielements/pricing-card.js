@@ -1,18 +1,24 @@
-import React, { Fragment } from 'react';
-import { NextPage } from 'next';
+import React, { useState, Fragment } from 'react';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
 import { StyledTable, StyledBodyCell } from 'baseui/table-grid';
-import { Button } from 'baseui/button';
 import { StyledTableHeadAlt } from 'components/PageStyles/Apps.styled';
 import UiElementsMenu from 'components/SideMenu/UiElementsMenu';
 import Container from 'components/UiElements/Container/Container';
-import Carousel from 'components/UiElements/Carousel/Carousel';
+import Pricing from 'components/UiElements/PricingCard/PricingCard';
 
-import { carouselPropsData } from '../../data/uiElementsApiData';
+import { pricingCardPropsData } from '../../data/uiElementsApiData';
 
-const Apps: NextPage<{}> = () => {
+const PricingCard = () => {
+	const [loading, setLoading] = useState(false);
+	const handlePricingPlan = () => {
+		setLoading(true);
+		setTimeout(() => {
+			setLoading(false);
+		}, 600);
+	};
+
 	return (
 		<>
 			<Head>
@@ -42,98 +48,36 @@ const Apps: NextPage<{}> = () => {
 										},
 									}}
 								>
-									Carousel
+									PricingCard
 								</Block>
 
-								<Block paddingBottom="50px">
-									<Carousel
-										carouselSelector="example"
-										prevButton={
-											<Button
-												size="compact"
-												shape="pill"
-												overrides={{
-													BaseButton: {
-														style: ({ $theme }) => {
-															return { ...$theme.typography.font150 };
-														},
+								<Block paddingBottom="30px">
+									<Grid gridColumns={12} gridGutters={0} gridMargins={0}>
+										<Cell span={[12, 6]}>
+											<Pricing
+												title="Advance Pro Support"
+												type="Advance"
+												items={[
+													{
+														id: 1,
+														title: 'Access to MINST on spectrum',
 													},
-												}}
-											>
-												Prev
-											</Button>
-										}
-										nextButton={
-											<Button
-												size="compact"
-												shape="pill"
-												overrides={{
-													BaseButton: {
-														style: ({ $theme }) => {
-															return { ...$theme.typography.font150 };
-														},
+													{
+														id: 2,
+														title: 'Email support',
 													},
-												}}
-											>
-												Next
-											</Button>
-										}
-									>
-										<Block
-											overrides={{
-												Block: {
-													style: ({ $theme }) => {
-														return {
-															display: 'flex',
-															alignItems: 'center',
-															justifyContent: 'center',
-															minHeight: '200px',
-															backgroundColor:
-																$theme.colors.backgroundSecondary,
-														};
+													{
+														id: 3,
+														title: 'Support reply within 24hrs',
 													},
-												},
-											}}
-										>
-											Slide 1
-										</Block>
-										<Block
-											overrides={{
-												Block: {
-													style: ({ $theme }) => {
-														return {
-															display: 'flex',
-															alignItems: 'center',
-															justifyContent: 'center',
-															minHeight: '200px',
-															backgroundColor:
-																$theme.colors.backgroundSecondary,
-														};
-													},
-												},
-											}}
-										>
-											Slide 2
-										</Block>
-										<Block
-											overrides={{
-												Block: {
-													style: ({ $theme }) => {
-														return {
-															display: 'flex',
-															alignItems: 'center',
-															justifyContent: 'center',
-															minHeight: '200px',
-															backgroundColor:
-																$theme.colors.backgroundSecondary,
-														};
-													},
-												},
-											}}
-										>
-											Slide 3
-										</Block>
-									</Carousel>
+												]}
+												price="$799"
+												btn="Get Started"
+												isLoading={loading}
+												onClick={handlePricingPlan}
+											/>
+										</Cell>
+									</Grid>
 								</Block>
 
 								<Block
@@ -167,10 +111,8 @@ const Apps: NextPage<{}> = () => {
 										},
 									}}
 								>
-									To get a customized carousel, just set
-									options/controls/thumbs/bullets/numberOfBullets.{' '}
-									<strong>Note:</strong> It's requried some custom style to
-									match your design.
+									To get a customized PricingCard, set custom style in style
+									prop.
 								</Block>
 
 								<Block
@@ -188,7 +130,7 @@ const Apps: NextPage<{}> = () => {
 										<StyledTableHeadAlt>Type</StyledTableHeadAlt>
 										<StyledTableHeadAlt>Default</StyledTableHeadAlt>
 										<StyledTableHeadAlt>Version</StyledTableHeadAlt>
-										{carouselPropsData.map((item, index) => {
+										{pricingCardPropsData.map((item, index) => {
 											const striped = index % 2 === 0;
 											return (
 												<Fragment key={index}>
@@ -202,7 +144,7 @@ const Apps: NextPage<{}> = () => {
 														}}
 													></StyledBodyCell>
 													<StyledBodyCell $striped={striped}>
-														{item.type}
+														<code>{item.type}</code>
 													</StyledBodyCell>
 													<StyledBodyCell $striped={striped}>
 														{item.default}
@@ -224,4 +166,4 @@ const Apps: NextPage<{}> = () => {
 	);
 };
 
-export default Apps;
+export default PricingCard;

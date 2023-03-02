@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
@@ -7,8 +6,8 @@ import Container from 'components/UiElements/Container/Container';
 import ChartMenu from 'components/SideMenu/ChartMenu';
 import CashFlowChart from 'containers/Widgets/CashFlow';
 
-const CashFlow: NextPage<{}> = () => {
-	const [state, setState] = useState<any>({
+const CashFlow = () => {
+	const [state, setState] = useState({
 		categories: [
 			'2017-01-01',
 			'2017-02-01',

@@ -1,17 +1,16 @@
 import React, { Fragment } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
 import { StyledTable, StyledBodyCell } from 'baseui/table-grid';
-import { StyledTableHeadAlt } from '../../components/PageStyles/Apps.styled';
-import UiElementsMenu from '../../components/SideMenu/UiElementsMenu';
-import Product from '../../components/UiElements/CartProduct/CartProduct';
-import Container from '../../components/UiElements/Container/Container';
+import { StyledTableHeadAlt } from 'components/PageStyles/Apps.styled';
+import UiElementsMenu from 'components/SideMenu/UiElementsMenu';
+import Container from 'components/UiElements/Container/Container';
+import Instagram from 'components/UiElements/InstagramCard/InstagramCard';
 
-import { cartProductPropsData } from '../../data/uiElementsApiData';
+import { instagramCardPropsData } from '../../data/uiElementsApiData';
 
-const CartProduct: NextPage<{}> = () => {
+const InstagramCard = () => {
   return (
     <>
       <Head>
@@ -29,6 +28,7 @@ const CartProduct: NextPage<{}> = () => {
               <Block paddingTop={['10px', '15px', '30px', '0']}>
                 <Block
                   as="h2"
+                  paddingBottom="20px"
                   overrides={{
                     Block: {
                       style: ({ $theme }) => {
@@ -40,22 +40,20 @@ const CartProduct: NextPage<{}> = () => {
                     },
                   }}
                 >
-                  CartProduct
+                  InstagramCard
                 </Block>
 
-                <Block paddingBottom="26px">
-                  <Product
-                    thumb={{
-                      src: `https://s3.amazonaws.com/redqteam.com/inst/shop/1.jpg`,
-                      width: 480,
-                      height: 480,
+                <Block paddingBottom="30px">
+                  <Instagram
+                    style={{ maxWidth: '320px' }}
+                    image={{
+                      src: `https://s3.amazonaws.com/redqteam.com/inst/post/1.jpg`,
+                      height: 600,
+                      width: 600,
                     }}
-                    title="Atom Coasters"
-                    price="15.00"
-                    quantity="Qty 3"
-                    color="Green"
-                    removable={true}
-                    hideBorderBottom={true}
+                    numberOflike={'130'}
+                    numberOfcomment={'30'}
+                    onClick={() => console.log('clicked')}
                   />
                 </Block>
 
@@ -90,8 +88,8 @@ const CartProduct: NextPage<{}> = () => {
                     },
                   }}
                 >
-                  To get a customized CartProduct, just set
-                  hideBorderBottom/style.
+                  To get a customized InstagramCard, set custom style in style
+                  prop.
                 </Block>
 
                 <Block
@@ -109,7 +107,7 @@ const CartProduct: NextPage<{}> = () => {
                     <StyledTableHeadAlt>Type</StyledTableHeadAlt>
                     <StyledTableHeadAlt>Default</StyledTableHeadAlt>
                     <StyledTableHeadAlt>Version</StyledTableHeadAlt>
-                    {cartProductPropsData.map((item, index) => {
+                    {instagramCardPropsData.map((item, index) => {
                       const striped = index % 2 === 0;
                       return (
                         <Fragment key={index}>
@@ -123,7 +121,7 @@ const CartProduct: NextPage<{}> = () => {
                             }}
                           ></StyledBodyCell>
                           <StyledBodyCell $striped={striped}>
-                            {item.type}
+                            <code>{item.type}</code>
                           </StyledBodyCell>
                           <StyledBodyCell $striped={striped}>
                             {item.default}
@@ -145,4 +143,4 @@ const CartProduct: NextPage<{}> = () => {
   );
 };
 
-export default CartProduct;
+export default InstagramCard;

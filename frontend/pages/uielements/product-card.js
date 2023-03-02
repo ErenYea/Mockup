@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
@@ -7,11 +6,11 @@ import { StyledTable, StyledBodyCell } from 'baseui/table-grid';
 import { StyledTableHeadAlt } from 'components/PageStyles/Apps.styled';
 import UiElementsMenu from 'components/SideMenu/UiElementsMenu';
 import Container from 'components/UiElements/Container/Container';
-import Instagram from 'components/UiElements/InstagramCard/InstagramCard';
+import Product from 'components/UiElements/ProductCard/ProductCard';
 
-import { instagramCardPropsData } from '../../data/uiElementsApiData';
+import { productCardPropsData } from '../../data/uiElementsApiData';
 
-const InstagramCard: NextPage<{}> = () => {
+const ProductCard = () => {
   return (
     <>
       <Head>
@@ -41,21 +40,25 @@ const InstagramCard: NextPage<{}> = () => {
                     },
                   }}
                 >
-                  InstagramCard
+                  ProductCard
                 </Block>
 
                 <Block paddingBottom="30px">
-                  <Instagram
-                    style={{ maxWidth: '320px' }}
-                    image={{
-                      src: `https://s3.amazonaws.com/redqteam.com/inst/post/1.jpg`,
-                      height: 600,
-                      width: 600,
-                    }}
-                    numberOflike={'130'}
-                    numberOfcomment={'30'}
-                    onClick={() => console.log('clicked')}
-                  />
+                  <Grid gridColumns={12} gridGutters={0} gridMargins={0}>
+                    <Cell span={[12, 6, 4]}>
+                      <Product
+                        as="#"
+                        href="#"
+                        thumb={{
+                          src: `https://s3.amazonaws.com/redqteam.com/inst/shop/1.jpg`,
+                          width: 480,
+                          height: 480,
+                        }}
+                        title="Invertocat Mug"
+                        price="20"
+                      />
+                    </Cell>
+                  </Grid>
                 </Block>
 
                 <Block
@@ -89,8 +92,7 @@ const InstagramCard: NextPage<{}> = () => {
                     },
                   }}
                 >
-                  To get a customized InstagramCard, set custom style in style
-                  prop.
+                  To get a customized ProductCard, set alignItem prop.
                 </Block>
 
                 <Block
@@ -108,7 +110,7 @@ const InstagramCard: NextPage<{}> = () => {
                     <StyledTableHeadAlt>Type</StyledTableHeadAlt>
                     <StyledTableHeadAlt>Default</StyledTableHeadAlt>
                     <StyledTableHeadAlt>Version</StyledTableHeadAlt>
-                    {instagramCardPropsData.map((item, index) => {
+                    {productCardPropsData.map((item, index) => {
                       const striped = index % 2 === 0;
                       return (
                         <Fragment key={index}>
@@ -144,4 +146,4 @@ const InstagramCard: NextPage<{}> = () => {
   );
 };
 
-export default InstagramCard;
+export default ProductCard;

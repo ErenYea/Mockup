@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { NextPage } from 'next';
+import React from 'react';
 import Head from 'next/head';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
@@ -13,11 +12,6 @@ import Container from 'components/UiElements/Container/Container';
 import SettingsMenu from 'components/SideMenu/SettingsMenu';
 import { ButtonGroup } from 'components/PageStyles/Settings.styled';
 
-type FormData = {
-  newPassword: string;
-  confirmPassword: string;
-};
-
 const schema = yup.object().shape({
   newPassword: yup.string().required('Password is required').max(20),
   confirmPassword: yup
@@ -26,7 +20,7 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('newPassword'), null], 'Passwords must be same'),
 });
 
-const Password: NextPage<{}> = () => {
+const Password = () => {
   const {
     register,
     handleSubmit,
