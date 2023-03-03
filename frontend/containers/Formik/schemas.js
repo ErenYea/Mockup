@@ -1,6 +1,6 @@
 import { FormDataSchema, FormUISchema } from './types';
 
-export const dataSchema: FormDataSchema = {
+export const dataSchema = {
   fields: {
     name: {
       type: 'text',
@@ -54,7 +54,7 @@ export const dataSchema: FormDataSchema = {
   },
 };
 
-export const uiSchema: FormUISchema = {
+export const uiSchema = {
   sections: [
     {
       title: 'Formik Form',

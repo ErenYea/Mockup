@@ -1,15 +1,6 @@
 import React, { useState } from "react";
 import ApexChart from "../../components/UiElements/ApexChart/ApexChart";
 
-type ProductViewsType = {
-  className?: string;
-  categories: string[];
-  products: number[];
-  views: number[];
-  height?: string;
-  title?: string;
-};
-
 const ProductViews = ({
   className,
   title,
@@ -17,7 +8,7 @@ const ProductViews = ({
   products,
   views,
   height = "247",
-}: ProductViewsType) => {
+}) => {
   const [chartOptions, setChartOptions] = useState({
     options: {
       chart: {

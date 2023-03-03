@@ -51,7 +51,7 @@ export const UserList = styled('div', {
 	overflow: 'auto',
 });
 
-export const UserListItem = styled('div', (props: any) => ({
+export const UserListItem = styled('div', (props) => ({
 	cursor: 'pointer',
 	padding: '15px 20px',
 	display: 'flex',

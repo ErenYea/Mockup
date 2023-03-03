@@ -8,18 +8,13 @@ import { Datepicker } from 'baseui/datepicker';
 import { Select } from 'baseui/select';
 import { FormField } from './types';
 
-interface Props {
-  name: string;
-  field: FormField;
-}
-
-export default function Field({ field, name }: Props) {
+export default function Field({ field, name }) {
   return (
     <FormikConsumer>
       {formikProps => {
         const { errors, touched, values } = formikProps;
-        const error: string | undefined = getIn(errors, name);
-        const isTouched: boolean = !!getIn(touched, name);
+        const error = getIn(errors, name);
+        const isTouched = !!getIn(touched, name);
         const value = getIn(values, name);
         return (
           <FieldSwitch
@@ -36,15 +31,6 @@ export default function Field({ field, name }: Props) {
   );
 }
 
-type FieldSwitchProps = {
-  name: string;
-  field: FormField;
-  hasError: boolean;
-  isValid: boolean;
-  value: any;
-  handleBlur: Function;
-  handleChange: Function;
-} & FormikProps<any>;
 
 function FieldSwitch({
   name,
@@ -53,7 +39,7 @@ function FieldSwitch({
   setFieldValue,
   setFieldTouched,
   value,
-}: FieldSwitchProps) {
+}) {
   const onBlur = () => setFieldTouched(name);
 
   switch (field.type) {
@@ -62,7 +48,7 @@ function FieldSwitch({
         <Input
           name={name}
           value={value}
-          onChange={(e: any) => setFieldValue(name, e.target.value)}
+          onChange={(e) => setFieldValue(name, e.target.value)}
           onBlur={onBlur}
           overrides={{
             InputContainer: {
@@ -80,7 +66,7 @@ function FieldSwitch({
         <Textarea
           name={name}
           value={value}
-          onChange={(e: any) => setFieldValue(name, e.target.value)}
+          onChange={(e) => setFieldValue(name, e.target.value)}
           onBlur={onBlur}
           overrides={{
             InputContainer: {
@@ -117,7 +103,7 @@ function FieldSwitch({
       return (
         <Checkbox
           checked={value}
-          onChange={(e: any) => setFieldValue(name, e.target.checked)}
+          onChange={(e) => setFieldValue(name, e.target.checked)}
           onBlur={onBlur}
         >
           {checkboxLabel}

@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import ApexChart from '../../components/UiElements/ApexChart/ApexChart';
 
-type ViewsType = {
-  className?: string;
-  totalView: number;
-};
-
-const Views = ({ className, totalView }: ViewsType) => {
+const Views = ({ className, totalView }) => {
   const [chartOptions, setChartOptions] = useState({
     options: {
       chart: {
@@ -51,7 +46,7 @@ const Views = ({ className, totalView }: ViewsType) => {
               color: '#000000',
               fontSize: '30px',
               show: true,
-              formatter: function(val: any) {
+              formatter: function(val) {
                 return parseInt(val);
               },
             },

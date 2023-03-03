@@ -6,14 +6,7 @@ import ChatSidebar from "./ChatSidebar/ChatSidebar";
 import ChatHeader from "./ChatHeader/ChatHeader";
 import ShowChats from "./ShowChats/ShowChats";
 import ChatInput from "./ChatInput/ChatInput";
-import Wrapper, {
-	Sidebar,
-	Message,
-	Header,
-	ArrowButton,
-	Body,
-	Footer,
-} from "./Chat.styled";
+import Wrapper, { Sidebar, Message, Header, ArrowButton, Body, Footer } from "./Chat.styled";
 
 const eliza = new Eliza();
 

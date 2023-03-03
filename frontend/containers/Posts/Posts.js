@@ -1,17 +1,6 @@
 import React, { useState } from 'react';
-import {
-  IoIosArrowBack,
-  IoIosArrowForward,
-  IoIosArrowDropleftCircle,
-  IoIosArrowDroprightCircle,
-} from 'react-icons/io';
-import {
-  FiHeart,
-  FiShare,
-  FiBookmark,
-  FiMessageCircle,
-  FiMoreHorizontal,
-} from 'react-icons/fi';
+import { IoIosArrowBack, IoIosArrowForward, IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from 'react-icons/io';
+import { FiHeart, FiShare, FiBookmark, FiMessageCircle, FiMoreHorizontal } from 'react-icons/fi';
 import { Row, Col } from 'react-flexbox-grid/dist/react-flexbox-grid';
 import { Block } from 'baseui/block';
 import { Modal } from 'baseui/modal';
@@ -23,48 +12,9 @@ import Carousel, { Slide } from '../../components/UiElements/Carousel/Carousel';
 import useDirection from '../../utils/useDirection';
 import Comment from './Comment';
 import { NextImage } from '../../components/UiElements/Image/Image';
-import Wrapper, {
-  PrevButton,
-  NextButton,
-  ContentWrapper,
-  Media,
-  Video,
-  Content,
-  Header,
-  AvatarWrapper,
-  FollowButton,
-  Name,
-  Dot,
-  Body,
-  CommentWrapper,
-  Footer,
-  SocialList,
-  ListItem,
-  ActivityInfo,
-  NumberOFLike,
-  PostTime,
-  MoreButton,
-} from './Posts.styled';
+import Wrapper, { PrevButton, NextButton, ContentWrapper, Media, Video, Content, Header, AvatarWrapper, FollowButton, Name, Dot, Body, CommentWrapper, Footer, SocialList, ListItem,ActivityInfo, NumberOFLike, PostTime, MoreButton } from './Posts.styled';
 
-type PostsProps = {
-  data: {
-    id: string;
-    type: string;
-    image: {
-      src: string;
-      height: number;
-      width: number;
-    };
-    numberOfView?: string;
-    numberOflike?: string;
-    numberOfcomment: string;
-    onClick?: () => void;
-  }[];
-  avatar: string;
-  username: string;
-};
-
-const Posts = ({ data, avatar, username }: PostsProps) => {
+const Posts = ({ data, avatar, username }) => {
   const [postLimit, setPostLimit] = useState(9);
   const [currentPost, setCurrentPost] = useState(1);
   const [visible, setVisible] = useState(false);
@@ -79,7 +29,7 @@ const Posts = ({ data, avatar, username }: PostsProps) => {
     }, 600);
   };
 
-  const handleModal = (id: number) => {
+  const handleModal = (id) => {
     setCurrentPost(id);
     setVisible(true);
   };
@@ -92,11 +42,11 @@ const Posts = ({ data, avatar, username }: PostsProps) => {
     setCurrentPost(currentPost + 1);
   };
 
-  const renderHtml = (data: string) => {
+  const renderHtml = (data) => {
     return { __html: data };
   };
 
-  let newData: any;
+  let newData
   data.forEach((item) => {
     if (parseInt(item.id) === currentPost) {
       newData = item;
@@ -226,7 +176,7 @@ const Posts = ({ data, avatar, username }: PostsProps) => {
                   prevButton={<IoIosArrowDropleftCircle />}
                   nextButton={<IoIosArrowDroprightCircle />}
                 >
-                  {newData?.gallery?.map((item: any) => (
+                  {newData?.gallery?.map((item) => (
                     <Slide key={`gallery-key${item.id}`}>
                       <NextImage
                         src={item.src}
@@ -256,7 +206,7 @@ const Posts = ({ data, avatar, username }: PostsProps) => {
               <Body>
                 <CommentWrapper>
                   {newData.comments !== undefined && newData.comments.length > 0
-                    ? newData.comments.map((item: any) => (
+                    ? newData.comments.map((item) => (
                         <Comment
                           key={`comment-key${item.id}`}
                           role={item.role}

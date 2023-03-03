@@ -1,32 +1,22 @@
 import React, { useState, useContext, Fragment } from 'react';
-import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Plus } from 'baseui/icon';
 import { Input } from 'baseui/input';
 import { Button } from 'baseui/button';
 import { TodoList } from './TodoList';
-import { TodoType } from './TodoType';
 import { AddListWrapper, AddButton } from './Todo.styled';
 import { TodoContext } from './TodoContext';
 import { Block } from 'baseui/block';
 
-/**
- * a little function to help us with reordering the result
- */
-const reorder = (
-  list: TodoType[],
-  startIndex: number,
-  endIndex: number
-): TodoType[] => {
+const reorder = ( list, startIndex, endIndex ) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
   return result;
 };
 
-/**
- * Add Todo Component
- */
-function AddTodo({ addTodo }: { addTodo: Function }) {
+
+function AddTodo({ addTodo }) {
   const [value, setValue] = React.useState('Hello');
   return (
     <Block
@@ -63,10 +53,10 @@ function AddTodo({ addTodo }: { addTodo: Function }) {
   );
 }
 
-function TodoApp({ status }: { status: string }) {
+function TodoApp({ status }) {
   const { todos, setTodos, addTodo } = useContext(TodoContext);
   const [showInput, setShowInput] = useState(false);
-  const onDragEnd = (result: DropResult): void => {
+  const onDragEnd = (result) => {
     if (!result.destination) {
       return;
     }
@@ -81,11 +71,11 @@ function TodoApp({ status }: { status: string }) {
     setTodos(todosOrder);
   };
 
-  let statusTodoList: TodoType[] = [];
+  let statusTodoList = [];
   if (status === 'all') {
     statusTodoList = todos;
   } else {
-    statusTodoList = todos.filter((todo: TodoType) => todo.status === status);
+    statusTodoList = todos.filter((todo) => todo.status === status);
   }
   return (
     <Fragment>

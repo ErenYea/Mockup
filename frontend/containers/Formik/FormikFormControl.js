@@ -3,13 +3,7 @@ import { Block } from 'baseui/block';
 import { FormControl } from 'baseui/form-control';
 import { getIn, FormikConsumer } from 'formik';
 
-interface Props {
-  name: string;
-  label?: string;
-  caption?: string;
-}
-
-export const FormikFormControl: React.FC<Props> = ({
+export const FormikFormControl = ({
   name,
   label,
   caption,
@@ -18,7 +12,7 @@ export const FormikFormControl: React.FC<Props> = ({
   return (
     <FormikConsumer>
       {({ errors, touched }) => {
-        const error: string | undefined = getIn(errors, name);
+        const error = getIn(errors, name);
         return (
           <Block marginBottom="30px">
             <FormControl label={label} caption={caption} error={error}>

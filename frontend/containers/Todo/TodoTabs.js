@@ -5,7 +5,7 @@ import { Button } from 'baseui/button';
 import { Block } from 'baseui/block';
 
 export default function TodoTab() {
-  const [status, setStatus] = useState<string>('all');
+  const [status, setStatus] = useState('all');
 
   return (
     <TodoProvider>

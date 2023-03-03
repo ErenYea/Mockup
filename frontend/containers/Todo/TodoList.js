@@ -1,15 +1,14 @@
 import React, { Fragment } from "react";
 import Todo from "./TodoItem";
-import { TodoType } from "./TodoType";
 
-export const TodoList = ({ todos }: { todos: TodoType[] }) => {
+export const TodoList = ({ todos }) => {
   return (
     <Fragment>
-      {todos.map((todo: TodoType, index: number) => (
+      {todos.map((todo, index) => (
         <Todo todo={todo} index={index} key={todo.id} />
       ))}
     </Fragment>
   );
 };
 
-React.memo<any>(TodoList);
+React.memo(TodoList);

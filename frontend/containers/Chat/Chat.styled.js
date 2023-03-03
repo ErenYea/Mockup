@@ -14,7 +14,7 @@ const Wrapper = styled('div', ({ $theme }) => ({
 	},
 }));
 
-export const Sidebar = styled('div', (props: any) => ({
+export const Sidebar = styled('div', (props) => ({
 	flexBasis: '280px',
 	padding: '20px',
 	backgroundColor: props.$theme.colors.backgroundSecondary,

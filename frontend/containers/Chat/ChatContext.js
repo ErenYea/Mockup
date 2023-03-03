@@ -1,17 +1,6 @@
 import React, { useState } from 'react';
 
-interface ContextProps {
-	user: {
-		id: string;
-		name: string;
-		image: string;
-		message: string;
-		isActive: boolean;
-	};
-	handleSelectedUser: Function;
-}
-
-export const ChatContext = React.createContext({} as ContextProps);
+export const ChatContext = React.createContext({});
 
 const ChatProvider = (props) => {
 	const [user, setUser] = useState<any>({

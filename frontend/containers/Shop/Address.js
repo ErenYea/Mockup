@@ -6,11 +6,7 @@ import { Button } from 'baseui/button';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  Header,
-  Title,
-  ButtonGroup,
-} from '../../components/PageStyles/Checkout.styled';
+import { Header, Title, ButtonGroup } from '../../components/PageStyles/Checkout.styled';
 
 const schema = yup.object().shape({
   name: yup

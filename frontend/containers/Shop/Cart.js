@@ -4,35 +4,15 @@ import { Block } from 'baseui/block';
 import { Button } from 'baseui/button';
 import CartProduct from '../../components/UiElements/CartProduct/CartProduct';
 import SvgIcon from '../../components/UiElements/SvgIcon/SvgIcon';
-import {
-  Header,
-  Title,
-  Price,
-  Message,
-  Strong,
-} from '../../components/PageStyles/Checkout.styled';
+import { Header, Title, Price, Message, Strong} from '../../components/PageStyles/Checkout.styled';
 import { calcCartItemsTotal } from '../../contexts/cart/cart.utils';
 import { useCartDispatch } from '../../contexts/cart/cart.provider';
 
-type CartType = {
-  products: {
-    id?: string;
-    thumbnail?: {
-      src: string;
-      height: number;
-      width: number;
-    };
-    name?: string;
-    quantity?: string;
-    price?: string;
-    color?: any;
-  }[];
-};
-
-const Cart = ({ products }: CartType) => {
+const Cart = ({ products }) => {
   const totalPrice = calcCartItemsTotal(products);
   const dispatch = useCartDispatch();
   const router = useRouter();
+  
   return (
     <>
       <Header>

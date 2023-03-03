@@ -1,13 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import ApexChart from "../../components/UiElements/ApexChart/ApexChart";
 
-type ProductsBarType = {
-  className?: string;
-  labels: string[];
-  products: number[];
-};
-
-const ProductsBar = ({ className, labels, products }: ProductsBarType) => {
+const ProductsBar = ({ className, labels, products }) => {
   const chartOptions = {
     options: {
       fill: {

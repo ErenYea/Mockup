@@ -1,31 +1,10 @@
 import React from 'react';
 import { Avatar } from 'baseui/avatar';
-import {
-  CommentCard,
-  CommentInfo,
-  CommentAuthor,
-  CommentTime,
-  Button,
-} from './Posts.styled';
+import { CommentCard, CommentInfo, CommentAuthor, CommentTime, Button } from './Posts.styled';
 
-type CommentProps = {
-  role: 'author' | 'user';
-  avatar: string;
-  name: string;
-  content: string;
-  handleLike?: () => void;
-  handleReply?: () => void;
-};
-
-const Comment = ({
-  role,
-  avatar,
-  name,
-  content,
-  handleLike,
-  handleReply,
-}: CommentProps) => {
-  const renderHtml = (data: string) => {
+const Comment = ({ role, avatar, name, content, handleLike, handleReply }) => {
+  
+  const renderHtml = (data) => {
     return { __html: data };
   };
 

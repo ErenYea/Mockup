@@ -1,6 +1,6 @@
 import { styled } from 'baseui';
 
-const Response = styled('div', (props: any) => ({
+const Response = styled('div', (props) => ({
   display: 'inlineFlex',
   alignSelf: props.$authorType === 'author' ? 'flex-end' : 'flex-start',
   backgroundColor: props.$theme.colors.backgroundTertiary,

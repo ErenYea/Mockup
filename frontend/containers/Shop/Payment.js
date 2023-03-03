@@ -9,7 +9,7 @@ const Payment = () => {
   const [loading, setLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('paypal');
 
-  const handlePayment = (type: string) => {
+  const handlePayment = (type) => {
     setLoading(true);
     setPaymentMethod(type);
 

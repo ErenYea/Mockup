@@ -1,21 +1,7 @@
 import React, { useState } from 'react';
 import ApexChart from '../../components/UiElements/ApexChart/ApexChart';
 
-type CashFlowType = {
-  className?: string;
-  categories: string[];
-  cash: number[];
-  height?: string;
-  title?: string;
-};
-
-const CashFlow = ({
-  className,
-  title,
-  categories,
-  cash,
-  height = '251',
-}: CashFlowType) => {
+const CashFlow = ({ className, title, categories, cash, height = '251' }) => {
   const [chartOptions, setChartOptions] = useState({
     options: {
       title: {

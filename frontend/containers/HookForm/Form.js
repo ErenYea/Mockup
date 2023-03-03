@@ -10,9 +10,7 @@ import { Button } from 'baseui/button';
 import { Block } from 'baseui/block';
 import { useForm, Controller } from 'react-hook-form';
 
-type Props = any;
-
-const HookForm: React.FC<Props> = () => {
+const HookForm = () => {
   const {
     control,
     register,

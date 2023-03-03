@@ -1,18 +1,7 @@
 import React, { useState, useContext } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { ChatContext } from "../ChatContext";
-import {
-	Icon,
-	SearchInput,
-	Input,
-	UserList,
-	UserListItem,
-	UserListItemImage,
-	UserListItemInfo,
-	UserName,
-	UserMessage,
-} from "./ChatSidebar.styled";
-// demo data
+import { Icon, SearchInput, Input, UserList, UserListItem, UserListItemImage, UserListItemInfo, UserName, UserMessage } from "./ChatSidebar.styled";
 import { chatData } from "../../../data/chatApp";
 
 const ChatSidebar = ({ setToggleSidebar, resetChat }) => {

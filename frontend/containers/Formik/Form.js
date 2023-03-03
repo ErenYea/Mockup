@@ -7,14 +7,7 @@ import Field from './Field';
 import { FormDataSchema, FormUISchema, FormField } from './types';
 import { dataSchema, uiSchema } from './schemas';
 
-interface FormProps {
-  initialValues: { [key: string]: any };
-  dataSchema: FormDataSchema;
-  uiSchema: FormUISchema;
-  onSubmit: (values: any) => void;
-}
-
-function Form({ initialValues, dataSchema, uiSchema, onSubmit }: FormProps) {
+function Form({ initialValues, dataSchema, uiSchema, onSubmit }) {
   const { fields: fieldsData } = dataSchema;
   const { sections } = uiSchema;
   return (
@@ -68,9 +61,6 @@ function Form({ initialValues, dataSchema, uiSchema, onSubmit }: FormProps) {
 function validateDataSchema({
   values,
   dataSchema,
-}: {
-  values: any;
-  dataSchema: FormDataSchema;
 }) {
   const { fields } = dataSchema;
   let errors = {};
@@ -98,10 +88,7 @@ function validateDataSchema({
 const areFieldConditionsFulfilled = ({
   values,
   field,
-}: {
-  values: any;
-  field: FormField;
-}): boolean => {
+}) => {
   const { condition } = field;
   if (!condition || condition.rules.length === 0) {
     return true;
@@ -130,11 +117,7 @@ const getFieldValue = ({
   name,
   field,
   values,
-}: {
-  name: string;
-  field: FormField;
-  values: any;
-}): any => {
+}) => {
   if (values[name] === undefined) {
     return undefined;
   }

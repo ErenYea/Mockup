@@ -3,13 +3,7 @@ import { IoIosSend } from 'react-icons/io';
 import { Input } from 'baseui/input';
 import Wrapper, { Send } from './ChatInput.styled';
 
-type PropsType = {
-  value: string;
-  onChange: (e) => void;
-  onSubmit?: (e) => void;
-};
-
-const ChatInput: React.FC<PropsType> = ({ value, onChange, onSubmit }) => {
+const ChatInput = ({ value, onChange, onSubmit }) => {
   return (
     <Wrapper onSubmit={onSubmit}>
       <Input

@@ -15,17 +15,10 @@ import {
   RemoveButton,
 } from './Todo.styled';
 
-/**
- * Update Todo Component
- */
 function UpdateTodo({
   todoItem,
   updateTodo,
   setShowInput,
-}: {
-  todoItem: TodoType;
-  updateTodo: Function;
-  setShowInput: any;
 }) {
   const [value, setValue] = React.useState(todoItem.content);
   const updateTodoItem = () => {
@@ -72,11 +65,11 @@ function UpdateTodo({
   );
 }
 
-function Todo({ todo, index }: { todo: TodoType; index: number }) {
+function Todo({ todo, index }) {
   const { updateTodo, removeTodo } = useContext(TodoContext);
   const [showInput, setShowInput] = useState(false);
   const checked = todo.status === 'done' ? true : false;
-  const updateTodoStatus = (status: boolean) => {
+  const updateTodoStatus = (status) => {
     const todoStatus = {
       ...todo,
       status: status === true ? 'done' : 'pending',

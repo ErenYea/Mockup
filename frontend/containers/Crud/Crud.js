@@ -5,24 +5,17 @@ import { Button } from 'baseui/button';
 import Loader from '../../components/UiElements/Loader/Loader';
 import Toaster from '../../components/UiElements/Toaster/Toaster';
 import AddEditModal from './AddEdit';
-import {
-  getDocuments,
-  addDocument,
-  updateDocument,
-  deleteDocument,
-  addCollectionAndDocuments,
-} from '../../firebase/service';
+import { getDocuments, addDocument, updateDocument, deleteDocument, addCollectionAndDocuments } from '../../firebase/service';
 import demoData from './demo.data';
 import { getTimeStamp } from '../../firebase/initialize';
 import CrudTable from './CrudTable';
+
 const statusOptions = [
   { label: 'Draft', id: 'draft' },
   { label: 'Publish', id: 'publish' },
 ];
-
 const TITLE = 'Firebase CRUD';
-const SUB_TITLE =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod';
+const SUB_TITLE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod';
 const FirebaseCRUD = () => {
   let toastKey;
   const [articles, setArticles] = useState([]);
@@ -45,7 +38,7 @@ const FirebaseCRUD = () => {
     try {
       setLoading(true);
       const data = await getDocuments('articles');
-      //for demo only
+      
       if (!data.length) {
         addCollectionAndDocuments(
           'articles',
@@ -84,7 +77,7 @@ const FirebaseCRUD = () => {
     });
   };
 
-  const handleDeleteArticle = async (id: string) => {
+  const handleDeleteArticle = async (id) => {
     if (id) {
       try {
         const deleted = await deleteDocument('articles', id);
@@ -103,7 +96,7 @@ const FirebaseCRUD = () => {
     }
   };
 
-  const handleUpdateArticle = async (item: any) => {
+  const handleUpdateArticle = async (item) => {
     setVisible(true);
     setEditState(true);
     const index = statusOptions.findIndex(option => option.id === item.status);
@@ -118,8 +111,8 @@ const FirebaseCRUD = () => {
     });
   };
 
-  const handleOnChange = (name: string) => (e: any) => {
-    let value: any;
+  const handleOnChange = (name) => (e) => {
+    let value
     if (name === 'status') {
       value = e.value;
     } else {
