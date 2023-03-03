@@ -1,44 +1,21 @@
 import React, { useEffect } from "react";
 import moment from "moment";
-import { Calendar, Views, momentLocalizer } from "react-big-calendar";
-// import { events } from "./data";
-import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
-
-import { addDays } from "date-fns";
-
+import { Calendar, momentLocalizer } from "react-big-calendar";
 import CreateOrUpdateEvent from "./CreateOrUpdateEvent";
-import MonthModal from "./MonthModal";
-import { Cell, Grid } from "baseui/layout-grid";
-const localizer: any = momentLocalizer(moment);
 
-const DragAndDropCalendar = withDragAndDrop(Calendar);
-type Props = {
-  events: Array<Object>;
-  view: any;
-  setView: any;
-  state: any;
-  setState: any;
-  date: any;
-  setDate: any;
-};
+const localizer = momentLocalizer(moment);
 
 function CalendarApp(props) {
   const [onNavigate, setOnNavigate] = React.useState(null);
-  // const [events, setEvents] = useState<any>([]);
-  // const [view, setView] = React.useState("week");
-  // const [date, setDate] = React.useState(new Date());
   const [count, setCount] = React.useState(0);
-
   const handleView = (newview) => {
-    // setDate(date);
-    console.log("hamza");
-    console.log("view", newview);
     props?.setView(newview);
   };
   const [isOpen, setIsOpen] = React.useState(false);
   const [actionType, setActionType] = React.useState("create");
   const [event, setEvent] = React.useState(null);
   const [monthevent, setMonthEvent] = React.useState([]);
+
   const eventPropGetter = (event) => {
     const style = {
       backgroundColor: event.color,
@@ -54,9 +31,6 @@ function CalendarApp(props) {
     };
   };
 
-  // const [state, setState] = React.useState({
-  //   events: [],
-  // });
   const getDate = async () => {
     if (props?.state?.events.length == 0) {
       const response = await fetch("https://MongooseAPI.erenyea.repl.co/get");
@@ -75,6 +49,7 @@ function CalendarApp(props) {
       }
     }
   };
+
   const getMonth = async () => {
     if (monthevent.length == 0) {
       const response = await fetch(
@@ -95,13 +70,14 @@ function CalendarApp(props) {
       }
     }
   };
-  const updateCalendar = (event: any) => {
+
+  const updateCalendar = (event) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify(event);
 
-    var requestOptions: any = {
+    var requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: raw,
@@ -110,27 +86,19 @@ function CalendarApp(props) {
 
     fetch("https://MongooseAPI.erenyea.repl.co/update", requestOptions)
       .then((response) => response.json())
-      .then((result) => console.log(result))
+      .then((result) => console.log(''))
       .catch((error) => console.log("error", error));
   };
+
   const handleNavigate = (date, view) => {
-    console.log("navigate", date, view);
     props?.setDate(date);
     props?.setView(view);
   };
 
-  // console.log("state", props.events);
-  function moveEvent({
-    event,
-    start,
-    end,
-    isAllDay: droppedOnAllDaySlot,
-  }: any) {
+  function moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
     const { events } = props.state;
-
     const idx = events.indexOf(event);
     let allDay = event?.allDay;
-
     if (!event?.allDay && droppedOnAllDaySlot) {
       allDay = true;
     } else if (event?.allDay && !droppedOnAllDaySlot) {
@@ -138,7 +106,6 @@ function CalendarApp(props) {
     }
 
     const updatedEvent = { ...event, start, end, allDay };
-
     const nextEvents = [...events];
     nextEvents.splice(idx, 1, updatedEvent);
 
@@ -146,11 +113,9 @@ function CalendarApp(props) {
       ...props.state,
       events: nextEvents,
     });
-
-    // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
   }
 
-  function resizeEvent({ event, start, end }: any) {
+  function resizeEvent({ event, start, end }) {
     const { events } = props.state;
 
     const nextEvents = events.map((existingEvent) => {
@@ -164,15 +129,15 @@ function CalendarApp(props) {
       events: nextEvents,
     });
 
-    //alert(`${event.title} was resized to ${start}-${end}`)
   }
-  const sendEvent = async (event: any) => {
+
+  const sendEvent = async (event) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify(event);
 
-    var requestOptions: any = {
+    var requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: raw,
@@ -187,10 +152,8 @@ function CalendarApp(props) {
     return data;
   };
 
-  async function newEvent(event: any) {
-    // let idList = state.events.map((a) => a.id);
-    // let newId = Math.max(...idList) + 1;
-    console.log("event", event);
+  async function newEvent(event) {
+
     var starttime = parseInt(event?.starttime.split(":")[0]);
     var starttimeminute = parseInt(event?.starttime.split(":")[1]);
     var endtime = parseInt(event?.endtime.split(":")[0]);
@@ -213,18 +176,15 @@ function CalendarApp(props) {
     );
     var title = `Sunroof fitment for ${event?.work} (No. of Jobs= ${event?.title})`;
     let hour = {
-      // id: newId,
       title: title,
       cars: event?.title,
       workshop: event?.workshop,
       model: event?.work,
-      // allDay: event.slots.length == 1,
-
       start: newstartdate,
       end: newenddate,
       color: event?.color,
     };
-    console.log(hour);
+    
     const response = await sendEvent(hour);
     if (response.success == true) {
       props?.setState({
@@ -237,7 +197,8 @@ function CalendarApp(props) {
 
     return;
   }
-  function updateEvent(event: any) {
+
+  function updateEvent(event) {
     var start = event?.slots.length == 1 ? event?.start : event?.slots[0];
     var end = event?.slots.length == 1 ? event.end : event?.slots[1];
     var starttime = parseInt(event?.starttime.split(":")[0]);
@@ -276,10 +237,10 @@ function CalendarApp(props) {
     return;
   }
 
-  function onSubmit(value: any) {
+  function onSubmit(value) {
     setIsOpen(false);
     setEvent(null);
-    console.log(value);
+    
     if (actionType === "create") {
       newEvent(value);
     }
@@ -287,7 +248,8 @@ function CalendarApp(props) {
       updateEvent(value);
     }
   }
-  function onSelectEvent(selectedEvent: any) {
+
+  function onSelectEvent(selectedEvent) {
     var sendevent = selectedEvent;
     sendevent.starttime = `${
       sendevent.start.getHours().toString().length == 1
@@ -307,20 +269,23 @@ function CalendarApp(props) {
         ? "0" + sendevent.end.getMinutes().toString()
         : sendevent.end.getMinutes().toString()
     }`;
-    console.log("selectedEvent", sendevent);
+    
     setIsOpen(true);
     setEvent(sendevent);
     setActionType("update");
   }
-  function onSelectSlot(selectedSlot: any) {
+
+  function onSelectSlot(selectedSlot) {
     setEvent(selectedSlot);
     setActionType("create");
     setIsOpen(true);
   }
+
   function close() {
     setIsOpen(false);
     setEvent(null);
   }
+
   const today = new Date();
   useEffect(() => {
     if (props?.view == "month") {
@@ -329,6 +294,7 @@ function CalendarApp(props) {
       getDate();
     }
   }, [props?.view]);
+
   useEffect(() => {
     function getElementByXpath(path) {
       return document.evaluate(
@@ -343,35 +309,23 @@ function CalendarApp(props) {
     console.log(props?.view);
     console.log("data", props?.date);
     if (props?.view == "week") {
-      var ele = getElementByXpath(
-        `//div[@data-baseweb="block"]//button[contains(text(),'Back')]`
-      ) as HTMLButtonElement;
+      var ele = getElementByXpath(`//div[@data-baseweb="block"]//button[contains(text(),'Back')]`)
       ele.disabled = false;
-      var ele = getElementByXpath(
-        `//div[@data-baseweb="block"]//button[contains(text(),'Next')]`
-      ) as HTMLButtonElement;
+      var ele = getElementByXpath(`//div[@data-baseweb="block"]//button[contains(text(),'Next')]`)
       ele.disabled = false;
     } else {
       if (count == 0) {
-        var ele = getElementByXpath(
-          `//div[@data-baseweb="block"]//button[contains(text(),'Back')]`
-        ) as HTMLButtonElement;
+        var ele = getElementByXpath(`//div[@data-baseweb="block"]//button[contains(text(),'Back')]`)
         ele.disabled = true;
       } else {
-        var ele = getElementByXpath(
-          `//div[@data-baseweb="block"]//button[contains(text(),'Back')]`
-        ) as HTMLButtonElement;
+        var ele = getElementByXpath(`//div[@data-baseweb="block"]//button[contains(text(),'Back')]`)
         ele.disabled = false;
       }
       if (count == 2) {
-        var ele = getElementByXpath(
-          `//div[@data-baseweb="block"]//button[contains(text(),'Next')]`
-        ) as HTMLButtonElement;
+        var ele = getElementByXpath(`//div[@data-baseweb="block"]//button[contains(text(),'Next')]`)
         ele.disabled = true;
       } else {
-        var ele = getElementByXpath(
-          `//div[@data-baseweb="block"]//button[contains(text(),'Next')]`
-        ) as HTMLButtonElement;
+        var ele = getElementByXpath(`//div[@data-baseweb="block"]//button[contains(text(),'Next')]`)
         ele.disabled = false;
       }
       if (props.date.getMonth() == new Date().getMonth()) {
@@ -384,15 +338,9 @@ function CalendarApp(props) {
         setCount(2);
       }
     }
-    // if (date.getMonth() == new Date().getMonth() + 3) {
-    //   setCount(3);
-    // }
+
   }, [props?.view, props?.date, count]);
-  // useEffect(() => {
-  //   setOnNavigate((date, view, action) => {
-  //     console.log("onNavigate", date, view, action);
-  //   });
-  // }, []);
+
   return (
     <>
       {props?.view == "month" ? (
@@ -401,31 +349,20 @@ function CalendarApp(props) {
           selectable={props?.view == "month" ? false : true}
           localizer={localizer}
           events={props?.view == "month" ? monthevent : props?.state?.events}
-          // onEventDrop={moveEvent}
-          // onEventResize={resizeEvent}
           onSelectSlot={props?.view == "month" ? null : onSelectSlot}
           onSelectEvent={props?.view == "month" ? null : onSelectEvent}
           onDragStart={console.log}
-          // defaultView={Views.Month}
           showMultiDayTimes={true}
           showNavigation={true}
           eventPropGetter={eventPropGetter}
           defaultDate={today}
-          // view={"agenda"}
           startAccessor="start"
-          // components={{
-          //   month: { header: CustomHeader },
-          //   week: { header: CustomHeader },
-          // }}
           endAccessor="end"
           view={props?.view}
           views={["month", "week"]}
           date={props?.date}
           onNavigate={handleNavigate}
           onView={handleView}
-          // date={
-          //   new Date(today.getFullYear(), today.getMonth(), today.getDate() - 2)
-          // }
           timeslots={15}
           step={1}
           min={
@@ -445,7 +382,6 @@ function CalendarApp(props) {
               15
             )
           }
-          // defaultView="week"
         />
       ) : (
         <>
@@ -454,31 +390,18 @@ function CalendarApp(props) {
             selectable={props?.view == "month" ? false : true}
             localizer={localizer}
             events={props?.view == "month" ? monthevent : props?.state?.events}
-            // onEventDrop={moveEvent}
-            // onEventResize={resizeEvent}
             onSelectSlot={props?.view == "month" ? null : onSelectSlot}
             onSelectEvent={props?.view == "month" ? null : null}
-            // onDragStart={console.log}
-            // defaultView={Views.Month}
             showMultiDayTimes={true}
             showNavigation={true}
             eventPropGetter={eventPropGetter}
-            // defaultDate={today}
-            // view={"agenda"}
             startAccessor="start"
-            // components={{
-            //   month: { header: CustomHeader },
-            //   week: { header: CustomHeader },
-            // }}
             endAccessor="end"
             view={props?.view}
             views={["month", "week"]}
             date={props?.date}
             onNavigate={handleNavigate}
             onView={handleView}
-            // date={
-            //   new Date(today.getFullYear(), today.getMonth(), today.getDate() - 2)
-            // }
             timeslots={15}
             step={1}
             min={
@@ -498,8 +421,6 @@ function CalendarApp(props) {
                 15
               )
             }
-
-            // defaultView="week"
           />
         </>
       )}
@@ -511,7 +432,7 @@ function CalendarApp(props) {
             isOpen={isOpen}
             event={event}
             type={actionType}
-            onSubmit={(value: any) => onSubmit(value)}
+            onSubmit={(value) => onSubmit(value)}
           />
         ) : (
           ""

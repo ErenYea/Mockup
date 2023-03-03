@@ -1,32 +1,22 @@
 import React, { useEffect } from "react";
 import moment from "moment";
 import { Calendar, Views, momentLocalizer } from "react-big-calendar";
-// import { events } from "../../data";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
-
-import { addDays } from "date-fns";
-
 import CreateOrUpdateEvent from "../../CreateOrUpdateEvent";
-const localizer: any = momentLocalizer(moment);
 
+const localizer = momentLocalizer(moment);
 const DragAndDropCalendar = withDragAndDrop(Calendar);
-type Props = {
-  events: Array<Object>;
-};
 
 function CalendarApp(props) {
-  // const [events, setEvents] = useState<any>([]);
   const [isOpen, setIsOpen] = React.useState(false);
   const [actionType, setActionType] = React.useState("create");
   const [event, setEvent] = React.useState(null);
+  const [state, setState] = React.useState({ events: [] });
 
-  const [state, setState] = React.useState({
-    events: [],
-  });
   const getDate = async () => {
     const response = await fetch("https://MongooseAPI.erenyea.repl.co/get");
     const post = await response.json();
-    console.log(post);
+    
     if (post.success === true) {
       const senddata = post.data.map((i) => {
         var d = i;
@@ -38,13 +28,12 @@ function CalendarApp(props) {
       setState({ events: senddata });
     }
   };
-  const updateCalendar = (event: any) => {
+
+  const updateCalendar = (event) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-
     var raw = JSON.stringify(event);
-
-    var requestOptions: any = {
+    var requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: raw,
@@ -53,19 +42,12 @@ function CalendarApp(props) {
 
     fetch("https://MongooseAPI.erenyea.repl.co/update", requestOptions)
       .then((response) => response.json())
-      .then((result) => console.log(result))
+      .then((result) => console.log(''))
       .catch((error) => console.log("error", error));
   };
 
-  // console.log("state", props.events);
-  function moveEvent({
-    event,
-    start,
-    end,
-    isAllDay: droppedOnAllDaySlot,
-  }: any) {
+  function moveEvent({ event, start,  end, isAllDay: droppedOnAllDaySlot }) {
     const { events } = state;
-
     const idx = events.indexOf(event);
     let allDay = event?.allDay;
 
@@ -76,7 +58,6 @@ function CalendarApp(props) {
     }
 
     const updatedEvent = { ...event, start, end, allDay };
-
     const nextEvents = [...events];
     nextEvents.splice(idx, 1, updatedEvent);
 
@@ -85,10 +66,9 @@ function CalendarApp(props) {
       events: nextEvents,
     });
 
-    // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
   }
 
-  function resizeEvent({ event, start, end }: any) {
+  function resizeEvent({ event, start, end }) {
     const { events } = state;
 
     const nextEvents = events.map((existingEvent) => {
@@ -102,15 +82,15 @@ function CalendarApp(props) {
       events: nextEvents,
     });
 
-    //alert(`${event.title} was resized to ${start}-${end}`)
   }
-  const sendEvent = (event: any) => {
+
+  const sendEvent = (event) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify(event);
 
-    var requestOptions: any = {
+    var requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: raw,
@@ -119,14 +99,11 @@ function CalendarApp(props) {
 
     fetch("https://MongooseAPI.erenyea.repl.co/post", requestOptions)
       .then((response) => response.json())
-      .then((result) => console.log(result))
+      .then((result) => console.log(''))
       .catch((error) => console.log("error", error));
   };
 
-  function newEvent(event: any) {
-    // let idList = state.events.map((a) => a.id);
-    // let newId = Math.max(...idList) + 1;
-    console.log("event", event);
+  function newEvent(event) {
     var starttime = parseInt(event?.starttime.split(":")[0]);
     var starttimeminute = parseInt(event?.starttime.split(":")[1]);
     var endtime = parseInt(event?.endtime.split(":")[0]);
@@ -148,12 +125,9 @@ function CalendarApp(props) {
       endtimeminute
     );
     let hour = {
-      // id: newId,
       title: event?.title,
       person: event?.person,
       model: event?.model,
-      // allDay: event.slots.length == 1,
-
       start: newstartdate,
       end: newenddate,
     };
@@ -165,7 +139,8 @@ function CalendarApp(props) {
 
     return;
   }
-  function updateEvent(event: any) {
+
+  function updateEvent(event) {
     var start = event?.slots.length == 1 ? event?.start : event?.slots[0];
     var end = event?.slots.length == 1 ? event?.end : event?.slots[1];
     var starttime = parseInt(event?.starttime.split(":")[0]);
@@ -204,10 +179,10 @@ function CalendarApp(props) {
     return;
   }
 
-  function onSubmit(value: any) {
+  function onSubmit(value) {
     setIsOpen(false);
     setEvent(null);
-    console.log(value);
+    
     if (actionType === "create") {
       newEvent(value);
     }
@@ -215,7 +190,8 @@ function CalendarApp(props) {
       updateEvent(value);
     }
   }
-  function onSelectEvent(selectedEvent: any) {
+
+  function onSelectEvent(selectedEvent) {
     var sendevent = selectedEvent;
     sendevent.starttime = `${
       sendevent.start.getHours().toString().length == 1
@@ -235,37 +211,35 @@ function CalendarApp(props) {
         ? "0" + sendevent.end.getMinutes().toString()
         : sendevent.end.getMinutes().toString()
     }`;
-    console.log("selectedEvent", sendevent);
+
     setIsOpen(true);
     setEvent(sendevent);
     setActionType("update");
   }
-  function onSelectSlot(selectedSlot: any) {
+
+  function onSelectSlot(selectedSlot) {
     setEvent(selectedSlot);
     setActionType("create");
     setIsOpen(true);
   }
+
   function close() {
     setIsOpen(false);
     setEvent(null);
   }
+
   const today = new Date();
   useEffect(() => {
     getDate();
   }, []);
-  console.log(props.calendarData);
+  
   return (
     <>
-      {/* resizable */}
       <DragAndDropCalendar
         popup
-        // selectable
         localizer={localizer}
         events={props?.calendarData}
         onEventDrop={moveEvent}
-        // onEventResize={resizeEvent}
-        // onSelectSlot={onSelectSlot}
-        // onSelectEvent={onSelectEvent}
         onDragStart={console.log}
         defaultView={Views.Month}
         defaultDate={props?.args}
@@ -284,7 +258,6 @@ function CalendarApp(props) {
           )
         }
         className="!h-[500px]"
-        // defaultView="week"
       />
       {event && (
         <CreateOrUpdateEvent
@@ -292,7 +265,7 @@ function CalendarApp(props) {
           isOpen={isOpen}
           event={event}
           type={actionType}
-          onSubmit={(value: any) => onSubmit(value)}
+          onSubmit={(value) => onSubmit(value)}
         />
       )}
     </>

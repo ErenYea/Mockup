@@ -1,49 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
-import { Textarea } from "baseui/textarea";
-import { Datepicker } from "baseui/datepicker";
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  ModalButton,
-  SIZE,
-  ROLE,
-} from "baseui/modal";
+import { Modal, ModalBody, ModalFooter, ModalButton, SIZE, ROLE } from "baseui/modal";
 import { data } from "./data";
-type Props = {};
 
-const MonthModal = ({ onClose, isOpen, onSubmit, event }: any) => {
-  const [time, setTime] = useState<any>([]);
+const MonthModal = ({ onClose, isOpen, onSubmit, event }) => {
+  const [time, setTime] = useState([]);
   const [title, setTitle] = React.useState(event.title ? event.title : "");
   const [model, setModel] = React.useState(event.model ? event.model : "");
-  // const [person, setPerson] = React.useState(event.person ? event.person : "");
-  const [slots, setSlots] = React.useState<any>([event.start, event.end]);
-  const [selectedData, setSelectedData] = React.useState<any>([]);
-  const [personSelect, setPersonSelect] = React.useState<any>(
-    event.person ? event.person : ""
-  );
+  const [slots, setSlots] = React.useState([event.start, event.end]);
+  const [selectedData, setSelectedData] = React.useState([]);
+  const [personSelect, setPersonSelect] = React.useState( event.person ? event.person : "" );
+  const [modalModal, setModalModal] = React.useState([ "Ford Motors", "Nissan", "Hyundai", "Honda", "Toyota" ]);
 
-  const [modalModal, setModalModal] = React.useState<any>([
-    "Ford Motors",
-    "Nissan",
-    "Hyundai",
-    "Honda",
-    "Toyota",
-  ]);
-  const getthecar = (value: any) => {
+  const getthecar = (value) => {
     return modalModal.filter(
       (item) => item.slice(0, 3).toLowerCase() == value
     )[0];
   };
-  const [starttime, setStartTime] = React.useState<any>(
-    event.starttime ? event.starttime : ""
-  );
-  const [endtime, setEndTime] = React.useState<any>(
-    event.endtime ? event.endtime : ""
-  );
+
+  const [starttime, setStartTime] = React.useState( event.starttime ? event.starttime : "" );
+  const [endtime, setEndTime] = React.useState( event.endtime ? event.endtime : "" );
+
   const fillTime = () => {
     var timetofill = [];
     for (var i = 8; i < 18; i++) {
@@ -56,10 +34,10 @@ const MonthModal = ({ onClose, isOpen, onSubmit, event }: any) => {
       }
     }
     timetofill.push("18:00");
-    console.log(timetofill);
     setTime(timetofill);
   };
-  function handleSubmit(e: any) {
+
+  function handleSubmit(e) {
     e.preventDefault();
     var sl = slots;
     var da = sl[1];
@@ -73,45 +51,29 @@ const MonthModal = ({ onClose, isOpen, onSubmit, event }: any) => {
     sl[1] = da.setDate(da.getDate() - 1);
     onSubmit({ ...event, title, model, person, sl, starttime, endtime });
   }
-  // const
+  
   const modelHandler = () => {
-    const value = (document.getElementById("models") as HTMLInputElement).value;
-    console.log(value);
+    const value = document.getElementById("models").value;
     const filteredData = data;
     filteredData.sort(
       (a, b) => b.modaldata[value].performance - a.modaldata[value].performance
     );
     setSelectedData(filteredData);
-
     setModel(value);
   };
+
   const personHandler = (e) => {
-    // if (e.target.querySelector("#name")) {
-    //   console.log(e.target.querySelector("#name").textContent);
-    // } else if (e.target.parentElement.querySelector("#name")) {
-    //   console.log(e.target.parentElement.querySelector("#name").textContent);
-    // } else {
-    //   console.log(
-    //     e.target.parentElement.parentElement.querySelector("#name").textContent
-    //   );
-    // }
     const key = e.target.getAttribute("data-key");
-    console.log("key", key);
-    // console.log(document.querySelector(`main[data-key='${key}']`));
     if (document.querySelector(`main[data-key='${key}']`)) {
       document
         .querySelector(`main[data-key='${key}']`)
         .classList.add("bg-gray-900");
     }
     setPersonSelect(key);
-    console.log(e);
-    // .target.parentNode.querySelector("div")
   };
+
   const handleStarttime = (event) => {
-    console.log("personeselected", personSelect);
-    const value = (document.getElementById("timemodels") as HTMLInputElement)
-      .value;
-    console.log(value);
+    const value = document.getElementById("timemodels").value;
     var da = selectedData.filter((i) => {
       if (i.id == personSelect) {
         return true;
@@ -143,9 +105,11 @@ const MonthModal = ({ onClose, isOpen, onSubmit, event }: any) => {
     setEndTime(end);
     setStartTime(value);
   };
+
   useEffect(() => {
     fillTime();
   }, []);
+
   return (
     <Modal
       onClose={onClose}
@@ -164,7 +128,6 @@ const MonthModal = ({ onClose, isOpen, onSubmit, event }: any) => {
       }}
     >
       <form onSubmit={handleSubmit}>
-        {/* <ModalHeader>Hello world</ModalHeader> */}
         <ModalBody>
           <FormControl label="Set Title">
             <Input
@@ -210,16 +173,8 @@ const MonthModal = ({ onClose, isOpen, onSubmit, event }: any) => {
                 {model == "" ? (
                   ""
                 ) : event.person ? (
-                  <main
-                    // key={ind}
-                    // onClick={(e) => personHandler(e)}
-                    // data-key={i.id}
-                    className={
-                      "flex w-[130px] flex-col border border-gray-900 rounded items-center hover:bg-gray-900  hover:cursor-pointer active:bg-gray-900"
-                    }
-                  >
+                  <main className={"flex w-[130px] flex-col border border-gray-900 rounded items-center hover:bg-gray-900  hover:cursor-pointer active:bg-gray-900"}>
                     <img
-                      // data-key={i.id}
                       src={
                         data.filter(
                           (item) =>
@@ -230,7 +185,6 @@ const MonthModal = ({ onClose, isOpen, onSubmit, event }: any) => {
                       className="w-[130px] h-[100px] rounded"
                     />
                     <div
-                      // data-key={i.id}
                       id="name"
                       className=" text-purple-600 text-bold text-lg"
                     >
@@ -241,23 +195,11 @@ const MonthModal = ({ onClose, isOpen, onSubmit, event }: any) => {
                         )[0].name
                       }
                     </div>
-                    <div
-                      className=" text-red-600 text-base h-[24px]"
-                      // ddata-key={i.id}
-                    ></div>
-                    <div
-                      className="flex flex-col items-center border-gray-400"
-                      // data-key={i.id}
-                    >
-                      <div
-                        className="text-white text-[14px] text-center"
-                        // data-key={i.id}
-                      >
+                    <div className=" text-red-600 text-base h-[24px]"></div>
+                    <div className="flex flex-col items-center border-gray-400">
+                      <div className="text-white text-[14px] text-center">
                         Performance:{" "}
-                        <span
-                          className=" text-yellow-300 text-center w-full"
-                          // data-key={i.id}
-                        >
+                        <span className=" text-yellow-300 text-center w-full">
                           {
                             data.filter(
                               (item) =>
@@ -269,14 +211,9 @@ const MonthModal = ({ onClose, isOpen, onSubmit, event }: any) => {
                         </span>
                       </div>
                       <div
-                        className="text-white text-[14px] text-center"
-                        // data-key={i.id}
-                      >
+                        className="text-white text-[14px] text-center" >
                         Time to Completion:{" "}
-                        <span
-                          className=" text-yellow-300 text-center w-full"
-                          // data-key={i.id}
-                        >
+                        <span className=" text-yellow-300 text-center w-full">
                           {
                             data.filter(
                               (item) =>
@@ -287,15 +224,9 @@ const MonthModal = ({ onClose, isOpen, onSubmit, event }: any) => {
                           min
                         </span>
                       </div>
-                      <div
-                        className="text-white text-[14px] text-center"
-                        // data-key={i.id}
-                      >
+                      <div className="text-white text-[14px] text-center">
                         Workload:{" "}
-                        <span
-                          className=" text-yellow-300 text-center w-full"
-                          // data-key={i.id}
-                        >
+                        <span className=" text-yellow-300 text-center w-full">
                           {
                             data.filter(
                               (item) =>
@@ -424,7 +355,6 @@ const MonthModal = ({ onClose, isOpen, onSubmit, event }: any) => {
               id="endtime"
               value={endtime}
               disabled
-              // onChange={(event) => setEndTime(event.currentTarget.value)}
               placeholder={"00:00"}
               required
             />
