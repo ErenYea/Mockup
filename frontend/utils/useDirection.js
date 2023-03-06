@@ -5,7 +5,7 @@ export default function useDirection() {
 
   useEffect(() => {
     const body = document.getElementsByTagName('body')[0];
-    const bodyDir: any = body.getAttribute('dir');
+    const bodyDir = body.getAttribute('dir');
     setDirection(bodyDir);
   }, []);
 
