@@ -1,6 +1,6 @@
 import { styled } from 'baseui';
 
-const Wrapper = styled('figure', (props: any) => ({
+const Wrapper = styled('figure', (props) => ({
   position: 'relative',
   cursor: props.$cursor ? 'pointer' : 'default',
 }));

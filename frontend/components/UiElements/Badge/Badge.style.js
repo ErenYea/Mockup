@@ -6,7 +6,7 @@ const Wrapper = styled('a', {
   display: 'inline-flex',
 });
 
-export const Count = styled('span', (props: any) => ({
+export const Count = styled('span', (props) => ({
   position: 'absolute',
   top: '-8px',
   right: '-14px',

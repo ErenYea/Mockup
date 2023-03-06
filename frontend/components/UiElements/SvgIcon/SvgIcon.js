@@ -1,11 +1,6 @@
 import React from 'react';
 
-type SvgIconProps = {
-  src: string;
-  style?: React.CSSProperties;
-};
-
-const SvgIcon = ({ src, style }: SvgIconProps) => {
+const SvgIcon = ({ src, style }) => {
   return (
     <span
       style={style}

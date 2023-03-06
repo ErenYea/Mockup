@@ -1,44 +1,8 @@
 import React from 'react';
 import { NextImage } from '../Image/Image';
-import Wrapper, {
-  Image,
-  Content,
-  Header,
-  Title,
-  Price,
-  Quantity,
-  Footer,
-  Color,
-  Button,
-} from './CartProduct.styled';
+import Wrapper, { Image, Content, Header, Title, Price, Quantity, Footer, Color, Button } from './CartProduct.styled';
 
-type CartProductType = {
-  thumb?: {
-    src: string;
-    height: number;
-    width: number;
-  };
-  title?: string;
-  quantity?: string;
-  price?: string;
-  color?: string;
-  removable?: boolean;
-  hideBorderBottom?: boolean;
-  onClick?: () => void;
-  style?: React.CSSProperties;
-};
-
-const CartProduct = ({
-  thumb,
-  title,
-  quantity,
-  price,
-  color,
-  onClick,
-  removable,
-  hideBorderBottom,
-  style,
-}: CartProductType) => {
+const CartProduct = ({ thumb, title, quantity, price, color, onClick, removable, hideBorderBottom, style }) => {
   return (
     <Wrapper $hideBorderBottom={hideBorderBottom} style={{ style }}>
       <Image>

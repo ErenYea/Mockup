@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { toaster } from 'baseui/toast';
 import { Block } from 'baseui/block';
 import { Button } from 'baseui/button';
-import Loader from '../../components/UiElements/Loader/Loader';
+import Loader from '../../components/UiElements/Loader/Loader.js';
 import Toaster from '../../components/UiElements/Toaster/Toaster';
 import AddEditModal from './AddEdit';
 import { getDocuments, addDocument, updateDocument, deleteDocument, addCollectionAndDocuments } from '../../firebase/service';

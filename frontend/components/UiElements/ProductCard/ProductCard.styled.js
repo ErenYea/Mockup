@@ -1,6 +1,6 @@
 import { styled } from 'baseui';
 
-export const Product = styled('a', (props: any) => ({
+export const Product = styled('a', (props) => ({
   display: 'block',
   minHeight: '200px',
   textAlign: props.$alignItem ? props.alignItem : 'center',

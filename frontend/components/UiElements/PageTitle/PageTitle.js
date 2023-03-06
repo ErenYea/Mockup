@@ -2,14 +2,7 @@ import React from "react";
 import Container from "../Container/Container";
 import Section, { Title, Subtitle, Backdrop } from "./PageTitle.styled";
 
-type PageTitleProps = {
-  title: string | undefined;
-  subtitle?: string;
-  backdrop?: boolean;
-  bgColor?: string;
-};
-
-const PageTitle = ({ title, subtitle, backdrop, bgColor }: PageTitleProps) => {
+const PageTitle = ({ title, subtitle, backdrop, bgColor }) => {
   return (
     <Section style={{ backgroundColor: bgColor }}>
       <Container>

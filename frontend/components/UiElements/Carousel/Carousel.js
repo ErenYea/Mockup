@@ -2,31 +2,8 @@ import React, { useEffect } from 'react';
 import Glide from '@glidejs/glide';
 import Wrapper, { DefaultBtn, BulletButton } from './Carousel.styled';
 
-type CarouselProps = {
-  className?: string;
-  children: React.ReactNode;
-  options?: object;
-  controls?: boolean;
-  bullets?: boolean;
-  thumbs?: any;
-  numberOfBullets?: any;
-  prevButton?: React.ReactNode;
-  nextButton?: React.ReactNode;
-  carouselSelector: string;
-};
+const Carousel = ({ className, children, options, controls, prevButton, nextButton, bullets, thumbs, numberOfBullets, carouselSelector }) => {
 
-const Carousel = ({
-  className,
-  children,
-  options,
-  controls,
-  prevButton,
-  nextButton,
-  bullets,
-  thumbs,
-  numberOfBullets,
-  carouselSelector,
-}: CarouselProps) => {
   const addAllClasses = ['glide'];
   if (className) {
     addAllClasses.push(className);
@@ -81,7 +58,7 @@ const Carousel = ({
 
       {bullets !== true && thumbs && thumbs.length > 0 && (
         <div className="glide__bullets" data-glide-el="controls[nav]">
-          {thumbs.map((item: any, index: number) => (
+          {thumbs.map((item, index) => (
             <div
               key={index}
               className="glide__thumb"
@@ -96,7 +73,7 @@ const Carousel = ({
   );
 };
 
-const Slide: React.FunctionComponent<{}> = ({ children }) => {
+const Slide = ({ children }) => {
   return <Wrapper className="glide__slide">{children}</Wrapper>;
 };
 

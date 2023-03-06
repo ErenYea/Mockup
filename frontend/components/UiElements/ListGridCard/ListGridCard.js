@@ -1,41 +1,8 @@
 import React from 'react';
-import Wrapper, {
-  Image,
-  Content,
-  Title,
-  TitleLink,
-  Paragraph,
-  Link,
-  Img,
-} from './ListGridCard.styled';
+import Wrapper, { Image, Content, Title, TitleLink, Paragraph, Link, Img } from './ListGridCard.styled';
 
-type ListGridCardType = {
-  thumb?: string;
-  thumbWidth?: string;
-  thumbHeight?: string;
-  title?: string;
-  description?: string;
-  author?: string;
-  authorUrl?: string;
-  btn?: React.ReactNode;
-  variant?: 'grid' | 'list';
-  style?: React.CSSProperties;
-  websiteUrl?: string;
-};
+const ListGridCard = ({ thumb, thumbWidth, thumbHeight, title, description, author, authorUrl, btn, variant = 'list', style, websiteUrl }) => {
 
-const ListGridCard = ({
-  thumb,
-  thumbWidth,
-  thumbHeight,
-  title,
-  description,
-  author,
-  authorUrl,
-  btn,
-  variant = 'list',
-  style,
-  websiteUrl,
-}: ListGridCardType) => {
   const addClasses = [];
   if (variant === 'list') {
     addClasses.push('listgrid-card');

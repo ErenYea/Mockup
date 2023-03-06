@@ -12,7 +12,7 @@ export const Content = styled('div', ({ $theme }) => ({
   padding: $theme.sizing.scale700,
 }));
 
-export const Icon = styled('div', (props: any) => ({
+export const Icon = styled('div', (props) => ({
   width: '50px',
   height: '50px',
   borderRadius: '50%',
@@ -40,7 +40,7 @@ export const Action = styled('div', ({ $theme }) => ({
   borderTop: `1px dashed ${$theme.colors.borderOpaque}`,
 }));
 
-export const Button = styled('button', (props: any) => ({
+export const Button = styled('button', (props) => ({
   color: props.$color ? props.$color : '#FF0080',
   border: 0,
   boxShadow: 'none',

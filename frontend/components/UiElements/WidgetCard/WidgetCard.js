@@ -1,35 +1,7 @@
 import React from 'react';
-import Wrapper, {
-  Content,
-  Icon,
-  Info,
-  Title,
-  Action,
-  Button,
-  Label,
-} from './WidgetCard.styled';
+import Wrapper, { Content, Icon, Info, Title, Action, Button, Label } from './WidgetCard.styled';
 
-type WidgetCardType = {
-  icon?: React.ReactNode;
-  color?: string;
-  title?: string;
-  description?: string;
-  btntext?: string;
-  label?: string;
-  onClick?: () => void;
-  style?: React.CSSProperties;
-};
-
-const WidgetCard = ({
-  icon,
-  color,
-  title,
-  description,
-  btntext,
-  label,
-  onClick,
-  style,
-}: WidgetCardType) => {
+const WidgetCard = ({ icon, color, title, description, btntext, label, onClick, style }) => {
   return (
     <Wrapper style={style}>
       <Content>

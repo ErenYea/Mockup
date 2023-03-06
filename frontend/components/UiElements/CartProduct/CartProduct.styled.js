@@ -1,6 +1,6 @@
 import { styled } from 'baseui';
 
-const Wrapper = styled('div', (props: any) => ({
+const Wrapper = styled('div', (props) => ({
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'space-between',

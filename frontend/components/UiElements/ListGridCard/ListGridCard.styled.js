@@ -1,6 +1,6 @@
 import { styled } from 'baseui';
 
-const Wrapper = styled('div', (props: any) => ({
+const Wrapper = styled('div', (props) => ({
   display: 'flex',
   alignItems: props.$variant === 'list' ? 'center' : 'flex-start',
   flexDirection: props.$variant === 'grid' ? 'column' : 'row',
@@ -9,7 +9,7 @@ const Wrapper = styled('div', (props: any) => ({
   overflow: 'hidden',
 }));
 
-export const Image = styled('div', (props: any) => ({
+export const Image = styled('div', (props) => ({
   minWidth: props.$variant === 'list' ? '41px' : '100%',
   marginLeft: props.$variant === 'list' ? '20px' : '0',
   marginRight: props.$variant === 'list' ? '20px' : '0',
@@ -17,13 +17,13 @@ export const Image = styled('div', (props: any) => ({
   height: props.$thumbHeight ? props.$thumbHeight : 'auto',
 }));
 
-export const Img = styled('img', (props: any) => ({
+export const Img = styled('img', (props) => ({
   width: props.$thumbWidth ? props.$thumbWidth : 'auto',
 }));
 
 export const Content = styled('div', {});
 
-export const Title = styled('h3', (props: any) => ({
+export const Title = styled('h3', (props) => ({
   fontWeight: 500,
   color: props.$theme.colors.primary,
   fontSize: props.$variant === 'list' ? '14px' : '18px',
@@ -40,7 +40,7 @@ export const TitleLink = styled('a', {
   },
 });
 
-export const Paragraph = styled('p', (props: any) => ({
+export const Paragraph = styled('p', (props) => ({
   ...props.$theme.typography.font200,
   color: props.$theme.colors.contentSecondary,
   marginBottom: props.$variant === 'grid' ? '20px' : '0',

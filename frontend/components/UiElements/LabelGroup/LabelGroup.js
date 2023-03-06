@@ -1,16 +1,7 @@
 import React from 'react';
 import Wrapper, { LabelButton, Indicator } from './LabelGroup.styled';
 
-type LabelGroup = {
-  items: {
-    color?: string;
-    label?: string;
-  }[];
-  style?: React.CSSProperties;
-  onClick?: () => void;
-};
-
-const LabelGroup = ({ items, style, onClick }: LabelGroup) => {
+const LabelGroup = ({ items, style, onClick }) => {
   return (
     <Wrapper style={style}>
       {items.map(item => (

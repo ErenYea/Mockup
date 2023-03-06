@@ -1,42 +1,9 @@
 import React from 'react';
-import {
-  IoIosImages,
-  IoIosVideocam,
-  IoIosPlay,
-  IoIosHeart,
-  IoIosChatbubbles,
-} from 'react-icons/io';
+import { IoIosImages, IoIosVideocam, IoIosPlay, IoIosHeart, IoIosChatbubbles } from 'react-icons/io';
 import { NextImage } from '../Image/Image';
-import Wrapper, {
-  Caption,
-  TopRight,
-  List,
-  ListItem,
-} from './InstagramCard.styled';
+import Wrapper, { Caption, TopRight, List, ListItem } from './InstagramCard.styled';
 
-type InstagramCardProps = {
-  type?: string;
-  image: {
-    src: string;
-    height: number;
-    width: number;
-  };
-  numberOfView?: string;
-  numberOflike?: string;
-  numberOfcomment?: string;
-  onClick?: () => void;
-  style?: React.CSSProperties;
-};
-
-const InstagramCard = ({
-  type,
-  image,
-  numberOfView,
-  numberOfcomment,
-  numberOflike,
-  onClick,
-  style,
-}: InstagramCardProps) => {
+const InstagramCard = ({ type, image, numberOfView, numberOfcomment, numberOflike, onClick, style }) => {
   return (
     <Wrapper onClick={onClick} $cursor={onClick && onClick} style={style}>
       <NextImage

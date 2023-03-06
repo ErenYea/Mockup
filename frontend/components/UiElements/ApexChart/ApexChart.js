@@ -4,11 +4,8 @@ const ChartWithNoSSR = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 });
 
-type ApexChartType = {
-  [props: string]: any;
-};
 
-const ApexChart = (props: ApexChartType) => {
+const ApexChart = (props) => {
   return <ChartWithNoSSR {...props} />;
 };
 

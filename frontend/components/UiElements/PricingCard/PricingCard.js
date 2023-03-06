@@ -2,39 +2,9 @@ import React from 'react';
 import { Tag } from 'baseui/tag';
 import { Button } from 'baseui/button';
 import { FiCheck } from 'react-icons/fi';
-import CardWrapper, {
-	CardHeader,
-	Title,
-	Tags,
-	CardBody,
-	ListItemLabel,
-	CardFooter,
-	Price,
-	PlanText,
-} from './PricingCard.styled';
+import CardWrapper, { CardHeader, Title, Tags, CardBody, ListItemLabel, CardFooter, Price, PlanText } from './PricingCard.styled';
 
-type PricingCardProps = {
-	title: string;
-	type: string;
-	items?: {
-		id: string | number;
-		title: string;
-	}[];
-	price: string | number;
-	btn: string;
-	isLoading?: boolean;
-	onClick(event: React.MouseEvent<HTMLButtonElement>): void;
-};
-
-const PricingCard = ({
-	title,
-	type,
-	items,
-	price,
-	btn,
-	isLoading,
-	onClick,
-}: PricingCardProps) => {
+const PricingCard = ({ title, type, items, price, btn, isLoading, onClick }) => {
 	const planType = type.toLowerCase();
 	let tag;
 

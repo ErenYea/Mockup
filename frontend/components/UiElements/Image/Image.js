@@ -32,13 +32,6 @@ export const NextImage = ({
   style,
   width,
   height,
-}: {
-  src?: string | [string];
-  alt?: string;
-  className?: string;
-  style?: any;
-  width: number;
-  height: number;
 }) => {
   return (
     <Image
@@ -60,13 +53,6 @@ export const ReactImage = ({
   alt = 'placeholder',
   className,
   style,
-}: {
-  src?: string | [string];
-  alt?: string;
-  className?: string;
-  style?: any;
-  width?: number;
-  height?: number;
 }) => {
   return (
     <Img

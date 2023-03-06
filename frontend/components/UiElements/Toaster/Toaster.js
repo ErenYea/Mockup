@@ -1,5 +1,5 @@
 import React from 'react';
-import { toaster, ToasterContainer } from 'baseui/toast';
+import { ToasterContainer } from 'baseui/toast';
 
 const Toaster = ({ toastKey }) => {
   return (

@@ -1,11 +1,7 @@
 import React from 'react';
 import NotFoundWrapper, { Title } from './NotFound.styled';
 
-type NotFoundProps = {
-  title?: string;
-};
-
-const NotFound = ({ title }: NotFoundProps) => {
+const NotFound = ({ title }) => {
   return (
     <NotFoundWrapper>
       <Title>{title ? title : 'Page not found 😔'}</Title>
