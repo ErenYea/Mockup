@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export const ChatContext = React.createContext({});
 
 const ChatProvider = (props) => {
-  const [user, setUser] =
-    useState <
-    any >
-    {
-      id: '1',
-      name: 'Brian Smith',
-      image: 'https://uifaces.co/our-content/donated/xZ4wg2Xj.jpg',
-      message: 'Nice to meet you!',
-      isActive: true,
-    };
+  const [user, setUser] = React.useState({
+    id: '1',
+    name: 'Brian Smith',
+    image: 'https://uifaces.co/our-content/donated/xZ4wg2Xj.jpg',
+    message: 'Nice to meet you!',
+    isActive: true,
+  });
 
   const handleSelectedUser = (data) => {
     setUser(data);
