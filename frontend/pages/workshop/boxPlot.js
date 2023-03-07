@@ -1,28 +1,23 @@
-import dynamic from "next/dynamic";
-import { func } from "prop-types";
-import { useState } from "react";
-// import ReactApexChart from "react-apexcharts";
-import ApexChart from "components/UiElements/ApexChart/ApexChart";
+import ApexChart from 'components/UiElements/ApexChart/ApexChart';
 
 export default function ApexCharts({ args }) {
-  // console.log(args?.boxPlotValue);
   const options = {
     chart: {
       id: args?.id,
-      type: "boxPlot",
+      type: 'boxPlot',
     },
     title: {
-      text: "",
-      align: "left",
+      text: '',
+      align: 'left',
     },
     xaxis: {
       title: {
-        text: "Models",
+        text: 'Models',
       },
     },
     yaxis: {
       title: {
-        text: "Minutes",
+        text: 'Minutes',
       },
     },
     plotOptions: {
@@ -31,8 +26,8 @@ export default function ApexCharts({ args }) {
       },
       boxPlot: {
         colors: {
-          upper: "#004899",
-          lower: "#004950",
+          upper: '#004899',
+          lower: '#004950',
         },
       },
     },

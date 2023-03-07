@@ -1,11 +1,6 @@
-import dynamic from 'next/dynamic';
-import { func } from 'prop-types';
-import { useState } from 'react';
-// import ReactApexChart from "react-apexcharts";
 import ApexChart from 'components/UiElements/ApexChart/ApexChart';
 
 export default function ApexCharts({ args }) {
-  // console.log(args.boxPlotValue);
   const options = {
     chart: {
       id: args?.id,
