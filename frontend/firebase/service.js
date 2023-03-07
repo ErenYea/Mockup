@@ -1,25 +1,25 @@
-import { db, getTimeStamp } from './initialize';
+import { db, getTimeStamp } from './initialize.js';
 
-export function convertCollectionsSnapshotToMap(snapshots: any) {
-  return snapshots.docs.reduce((accumulator: any, collection: any) => {
+export function convertCollectionsSnapshotToMap(snapshots) {
+  return snapshots.docs.reduce((accumulator, collection) => {
     accumulator[collection.id] = collection.data();
     return accumulator;
   }, {});
 }
 
-export async function getNewDocRef(collectionName: any) {
+export async function getNewDocRef(collectionName) {
   return await db.collection(collectionName).doc();
 }
 
-export async function addDocument(collectionName: any, documentData: any) {
+export async function addDocument(collectionName, documentData) {
   const data = { ...documentData, createdAt: getTimeStamp() };
   return await db
     .collection(collectionName)
     .add(data)
-    .then(docRef => docRef.id);
+    .then((docRef) => docRef.id);
 }
 
-export async function deleteDocument(collectionName: any, id: string) {
+export async function deleteDocument(collectionName, id) {
   return await db
     .collection(collectionName)
     .doc(id)
@@ -27,7 +27,7 @@ export async function deleteDocument(collectionName: any, id: string) {
     .then(() => id);
 }
 
-export async function updateDocument(collectionName: any, documentData: any) {
+export async function updateDocument(collectionName, documentData) {
   const data = { ...documentData, updatedAt: getTimeStamp() };
   return await db
     .collection(collectionName)
@@ -36,7 +36,7 @@ export async function updateDocument(collectionName: any, documentData: any) {
     .then(() => documentData.id);
 }
 
-export async function setDocument(collectionName: any, documentData: any) {
+export async function setDocument(collectionName, documentData) {
   const data = { ...documentData, updatedAt: getTimeStamp() };
   return await db
     .collection(collectionName)
@@ -45,35 +45,34 @@ export async function setDocument(collectionName: any, documentData: any) {
     .then(() => documentData.id);
 }
 
-export async function getDocuments(collectionName: string) {
+export async function getDocuments(collectionName) {
   return await db
     .collection(collectionName)
     .orderBy('createdAt', 'desc')
     .get()
-    .then(querySnapshot =>
-      querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))
+    .then((querySnapshot) =>
+      querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
     );
 }
-export async function getDocumentsByQuery(collectionName: any, query: any) {
+export async function getDocumentsByQuery(collectionName, query) {
   console.log(...query, collectionName, 'test');
 
   return await db
     .collection(collectionName)
-    // @ts-ignore
     .where(...query)
     .get()
-    .then((querySnapshot: any) =>
-      querySnapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }))
+    .then((querySnapshot) =>
+      querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
     );
 }
 
-export async function deleteDocuments(collectionName: any) {
+export async function deleteDocuments(collectionName) {
   const collectionRef = db.collection(collectionName);
   var batch = db.batch();
   await collectionRef
     .get()
-    .then(querySnapshot =>
-      querySnapshot.docs.map(doc => batch.delete(collectionRef.doc(doc.id)))
+    .then((querySnapshot) =>
+      querySnapshot.docs.map((doc) => batch.delete(collectionRef.doc(doc.id)))
     );
 
   return await batch.commit().then(() => {
@@ -82,12 +81,12 @@ export async function deleteDocuments(collectionName: any) {
 }
 
 export const addCollectionAndDocuments = async (
-  collectionKey: any,
-  objectsToAdd: any
+  collectionKey,
+  objectsToAdd
 ) => {
   const collectionRef = db.collection(collectionKey);
   const batch = db.batch();
-  objectsToAdd.forEach((obj: any) => {
+  objectsToAdd.forEach((obj) => {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });

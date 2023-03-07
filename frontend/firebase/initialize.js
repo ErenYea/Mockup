@@ -1,6 +1,6 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
-import config from "./config";
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import config from './config';
 
 /**
  * For SSR initialization needed with this check
@@ -8,16 +8,16 @@ import config from "./config";
  * otherwise it may give error
  */
 if (!firebase.apps.length) {
-	firebase.initializeApp(config);
+  firebase.initializeApp(config);
 } else {
-	firebase.app();
+  firebase.app();
 }
 
 /**
  * Get timestamp value from firestore
  */
 export const getTimeStamp = () => {
-	return firebase.firestore.FieldValue.serverTimestamp();
+  return firebase.firestore.FieldValue.serverTimestamp();
 };
 
 export const db = firebase.firestore();
