@@ -23,100 +23,105 @@ const index = () => {
 
   const getNoJobs = () => {
     var events = state?.events;
-    var today = date;
-    var currentdate = today.getDate();
-    var currentday = today.getDay();
+    var today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+    var currentdate = today.getUTCDate();
+    var currentday = today.getUTCDay();
     var newDate;
     var secondDate = null;
     if (currentday == 0) {
       newDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        currentdate + 6,
-        23,
-        59
-      );
-      secondDate = new Date(today.getFullYear(), today.getMonth(), currentdate);
-    } else if (currentday == 1) {
-      newDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        currentdate + 5,
-        23,
-        59
+        Date.UTC(
+          today.getUTCFullYear(),
+          today.getUTCMonth(),
+          currentdate + 6,
+          23,
+          59
+        )
       );
       secondDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        currentdate - 1
+        Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), currentdate)
+      );
+    } else if (currentday == 1) {
+      newDate = new Date(
+        Date.UTC(
+          today.getUTCFullYear(),
+          today.getUTCMonth(),
+          currentdate + 5,
+          23,
+          59
+        )
+      );
+      secondDate = new Date(
+        Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), currentdate - 1)
       );
     } else if (currentday == 2) {
       newDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        currentdate + 4,
-        23,
-        59
+        Date.UTC(
+          today.getUTCFullYear(),
+          today.getUTCMonth(),
+          currentdate + 4,
+          23,
+          59
+        )
       );
       secondDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        currentdate - 2
+        Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), currentdate - 2)
       );
     } else if (currentday == 3) {
       newDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        currentdate + 3,
-        23,
-        59
+        Date.UTC(
+          today.getUTCFullYear(),
+          today.getUTCMonth(),
+          currentdate + 3,
+          23,
+          59
+        )
       );
       secondDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        currentdate - 3
+        Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), currentdate - 3)
       );
     } else if (currentday == 4) {
       newDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        currentdate + 2,
-        23,
-        59
+        Date.UTC(
+          today.getUTCFullYear(),
+          today.getUTCMonth(),
+          currentdate + 2,
+          23,
+          59
+        )
       );
       secondDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        currentdate - 4
+        Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), currentdate - 4)
       );
     } else if (currentday == 5) {
       newDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        currentdate + 1,
-        23,
-        59
+        Date.UTC(
+          today.getUTCFullYear(),
+          today.getUTCMonth(),
+          currentdate + 1,
+          23,
+          59
+        )
       );
       secondDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        currentdate - 5
+        Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), currentdate - 5)
       );
     } else if (currentday == 6) {
       newDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        currentdate,
-        23,
-        59
+        Date.UTC(
+          today.getUTCFullYear(),
+          today.getUTCMonth(),
+          currentdate,
+          23,
+          59
+        )
       );
       secondDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        currentdate - 6
+        Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), currentdate - 6)
       );
     }
-    console.log('compariosn Date', secondDate, newDate);
+    console.log('comparison Date', secondDate, newDate);
     var totalJobs = events?.reduce((total, num) => {
       if (
         (new Date(num?.start) >= secondDate &&
@@ -146,36 +151,36 @@ const index = () => {
 
         if (
           new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate()
+            Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
           ).getTime() ==
             new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
+              Date.UTC(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              )
             ).getTime() ||
           (new Date(
-            end.getFullYear(),
-            end.getMonth(),
-            end.getDate()
+            Date.UTC(end.getFullYear(), end.getMonth(), end.getDate())
           ).getTime() >=
             new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
+              Date.UTC(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              )
             ).getTime() &&
             new Date(item.start) < newDate &&
             !(
               new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate()
+                Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
               ).getTime() >
               new Date(
-                secondDate.getFullYear(),
-                secondDate.getMonth(),
-                secondDate.getDate() + i
+                Date.UTC(
+                  secondDate.getFullYear(),
+                  secondDate.getMonth(),
+                  secondDate.getDate() + i
+                )
               ).getTime()
             ))
         ) {
@@ -190,36 +195,36 @@ const index = () => {
 
         if (
           new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate()
+            Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
           ).getTime() ==
             new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
+              Date.UTC(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              )
             ).getTime() ||
           (new Date(
-            end.getFullYear(),
-            end.getMonth(),
-            end.getDate()
+            Date.UTC(end.getFullYear(), end.getMonth(), end.getDate())
           ).getTime() >=
             new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
+              Date.UTC(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              )
             ).getTime() &&
             new Date(item.start) < newDate &&
             !(
               new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate()
+                Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
               ).getTime() >
               new Date(
-                secondDate.getFullYear(),
-                secondDate.getMonth(),
-                secondDate.getDate() + i
+                Date.UTC(
+                  secondDate.getFullYear(),
+                  secondDate.getMonth(),
+                  secondDate.getDate() + i
+                )
               ).getTime()
             ))
         ) {
@@ -234,36 +239,36 @@ const index = () => {
 
         if (
           new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate()
+            Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
           ).getTime() ==
             new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
+              Date.UTC(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              )
             ).getTime() ||
           (new Date(
-            end.getFullYear(),
-            end.getMonth(),
-            end.getDate()
+            Date.UTC(end.getFullYear(), end.getMonth(), end.getDate())
           ).getTime() >=
             new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
+              Date.UTC(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              )
             ).getTime() &&
             new Date(item.start) < newDate &&
             !(
               new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate()
+                Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
               ).getTime() >
               new Date(
-                secondDate.getFullYear(),
-                secondDate.getMonth(),
-                secondDate.getDate() + i
+                Date.UTC(
+                  secondDate.getFullYear(),
+                  secondDate.getMonth(),
+                  secondDate.getDate() + i
+                )
               ).getTime()
             ))
         ) {
@@ -278,36 +283,36 @@ const index = () => {
 
         if (
           new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate()
+            Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
           ).getTime() ==
             new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
+              Date.UTC(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              )
             ).getTime() ||
           (new Date(
-            end.getFullYear(),
-            end.getMonth(),
-            end.getDate()
+            Date.UTC(end.getFullYear(), end.getMonth(), end.getDate())
           ).getTime() >=
             new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
+              Date.UTC(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              )
             ).getTime() &&
             new Date(item.start) < newDate &&
             !(
               new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate()
+                Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
               ).getTime() >
               new Date(
-                secondDate.getFullYear(),
-                secondDate.getMonth(),
-                secondDate.getDate() + i
+                Date.UTC(
+                  secondDate.getFullYear(),
+                  secondDate.getMonth(),
+                  secondDate.getDate() + i
+                )
               ).getTime()
             ))
         ) {
@@ -322,36 +327,36 @@ const index = () => {
 
         if (
           new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate()
+            Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
           ).getTime() ==
             new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
+              Date.UTC(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              )
             ).getTime() ||
           (new Date(
-            end.getFullYear(),
-            end.getMonth(),
-            end.getDate()
+            Date.UTC(end.getFullYear(), end.getMonth(), end.getDate())
           ).getTime() >=
             new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
+              Date.UTC(
+                secondDate.getFullYear(),
+                secondDate.getMonth(),
+                secondDate.getDate() + i
+              )
             ).getTime() &&
             new Date(item.start) < newDate &&
             !(
               new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate()
+                Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
               ).getTime() >
               new Date(
-                secondDate.getFullYear(),
-                secondDate.getMonth(),
-                secondDate.getDate() + i
+                Date.UTC(
+                  secondDate.getFullYear(),
+                  secondDate.getMonth(),
+                  secondDate.getDate() + i
+                )
               ).getTime()
             ))
         ) {
@@ -390,7 +395,7 @@ const index = () => {
         secondDate.getMonth(),
         secondDate.getDate() + i
       );
-      alldate.push(curdate.toDateString());
+      alldate.push(curdate.toUTCString());
     }
 
     var aldata = [
