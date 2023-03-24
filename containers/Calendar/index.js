@@ -39,8 +39,8 @@ function CalendarApp(props) {
       if (post.success === true) {
         const senddata = post?.data?.map((i) => {
           var d = i;
-          d.start = new Date(i?.start);
-          d.end = new Date(i?.end);
+          d.start = moment.utc(i?.start).toDate();
+          d.end = moment.utc(i?.end).toDate();
           d.id = i?._id;
 
           return d;
@@ -60,8 +60,8 @@ function CalendarApp(props) {
       if (month?.success === true) {
         const senddata = month?.data?.map((i) => {
           var d = i;
-          d.start = new Date(i?.start);
-          d.end = new Date(i?.end);
+          d.start = moment.utc(i?.start).toDate();
+          d.end = moment.utc(i?.end).toDate();
           d.id = i?._id;
           d.title = i?.title + ': ' + i?.jobs.toString();
           return d;
@@ -158,20 +158,20 @@ function CalendarApp(props) {
     var endtimeminute = parseInt(event?.endtime.split(':')[1]);
     var start = event?.slots.length == 1 ? event?.start : event?.slots[0];
     var end = event?.slots.length == 1 ? event?.end : event?.slots[1];
-    var newstartdate = new Date(
-      start.getFullYear(),
-      start.getMonth(),
-      start.getDate(),
+    const newstartdate = new Date(Date.UTC(
+      start.getUTCFullYear(),
+      start.getUTCMonth(),
+      start.getUTCDate(),
       starttime,
       starttimeminute
-    );
-    var newenddate = new Date(
-      end.getFullYear(),
-      end.getMonth(),
-      end.getDate(),
+    ));
+    const newenddate = new Date(Date.UTC(
+      end.getUTCFullYear(),
+      end.getUTCMonth(),
+      end.getUTCDate(),
       endtime,
       endtimeminute
-    );
+    ));
     var title = `Sunroof fitment for ${event?.work} (No. of Jobs= ${event?.title})`;
     let hour = {
       title: title,
@@ -203,20 +203,20 @@ function CalendarApp(props) {
     var starttimeminute = parseInt(event?.starttime.split(':')[1]);
     var endtime = parseInt(event?.endtime.split(':')[0]);
     var endtimeminute = parseInt(event?.endtime.split(':')[1]);
-    var newstartdate = new Date(
-      start.getFullYear(),
-      start.getMonth(),
-      start.getDate(),
+    const newstartdate = new Date(Date.UTC(
+      start.getUTCFullYear(),
+      start.getUTCMonth(),
+      start.getUTCDate(),
       starttime,
       starttimeminute
-    );
-    var newenddate = new Date(
-      end.getFullYear(),
-      end.getMonth(),
-      end.getDate(),
+    ));
+    const newenddate = new Date(Date.UTC(
+      end.getUTCFullYear(),
+      end.getUTCMonth(),
+      end.getUTCDate(),
       endtime,
       endtimeminute
-    );
+    ));
     let updatedEvent = {
       id: event?.id,
       title: event?.title,
