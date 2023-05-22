@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import moment from 'moment';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
-import CreateOrUpdateEvent from './CreateOrUpdateEvent';
+import React, { useEffect } from "react";
+import moment from "moment";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import CreateOrUpdateEvent from "./CreateOrUpdateEvent";
 
 const localizer = momentLocalizer(moment);
 
@@ -12,19 +12,19 @@ function CalendarApp(props) {
     props?.setView(newview);
   };
   const [isOpen, setIsOpen] = React.useState(false);
-  const [actionType, setActionType] = React.useState('create');
+  const [actionType, setActionType] = React.useState("create");
   const [event, setEvent] = React.useState(null);
   const [monthevent, setMonthEvent] = React.useState([]);
 
   const eventPropGetter = (event) => {
     const style = {
       backgroundColor: event.color,
-      borderRadius: '10px',
+      borderRadius: "10px",
       opacity: 0.8,
-      color: 'white',
-      weight: 'bold',
-      border: '0px',
-      display: 'block',
+      color: "white",
+      weight: "bold",
+      border: "0px",
+      display: "block",
     };
     return {
       style: style,
@@ -32,28 +32,40 @@ function CalendarApp(props) {
   };
 
   const getDate = async () => {
-    if (props?.state?.events.length == 0) {
-      const response = await fetch('https://MongooseAPI.erenyea.repl.co/get');
+    if (props?.state?.events.length === 0) {
+      const response = await fetch("https://MongooseAPI.erenyea.repl.co/get");
       const post = await response.json();
-      console.log(post);
+      console.log('POST', post);
       if (post.success === true) {
         const senddata = post?.data?.map((i) => {
           var d = i;
           d.start = new Date(i?.start);
           d.end = new Date(i?.end);
           d.id = i?._id;
-
+  
           return d;
         });
-        props?.setState({ events: senddata });
+        console.log('here', senddata)
+        // Filter out events outside the time range
+        const filteredData = senddata.filter((event) => {
+          const startHour = event.start.getHours();
+          const endHour = event.end.getHours();
+          const startDate = event.start.getDate();
+          const endDate = event.end.getDate();
+  
+          return startDate === endDate && startHour >= 8 && endHour < 18;
+        });
+  
+        console.log('filter', filteredData)
+  
+        props?.setState({ events: filteredData });
       }
     }
   };
-
   const getMonth = async () => {
     if (monthevent.length == 0) {
       const response = await fetch(
-        'https://MongooseAPI.erenyea.repl.co/getmonth'
+        "https://MongooseAPI.erenyea.repl.co/getmonth"
       );
       const month = await response.json();
       console.log(month);
@@ -63,7 +75,7 @@ function CalendarApp(props) {
           d.start = new Date(i?.start);
           d.end = new Date(i?.end);
           d.id = i?._id;
-          d.title = i?.title + ': ' + i?.jobs.toString();
+          d.title = i?.title + ": " + i?.jobs.toString();
           return d;
         });
         setMonthEvent(senddata);
@@ -73,21 +85,21 @@ function CalendarApp(props) {
 
   const updateCalendar = (event) => {
     var myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify(event);
 
     var requestOptions = {
-      method: 'POST',
+      method: "POST",
       headers: myHeaders,
       body: raw,
-      redirect: 'follow',
+      redirect: "follow",
     };
 
-    fetch('https://MongooseAPI.erenyea.repl.co/update', requestOptions)
+    fetch("https://MongooseAPI.erenyea.repl.co/update", requestOptions)
       .then((response) => response.json())
       .then((result) => console.log(''))
-      .catch((error) => console.log('error', error));
+      .catch((error) => console.log("error", error));
   };
 
   const handleNavigate = (date, view) => {
@@ -128,23 +140,24 @@ function CalendarApp(props) {
       ...props.state,
       events: nextEvents,
     });
+
   }
 
   const sendEvent = async (event) => {
     var myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify(event);
 
     var requestOptions = {
-      method: 'POST',
+      method: "POST",
       headers: myHeaders,
       body: raw,
-      redirect: 'follow',
+      redirect: "follow",
     };
 
     const response = await fetch(
-      'https://MongooseAPI.erenyea.repl.co/post',
+      "https://MongooseAPI.erenyea.repl.co/post",
       requestOptions
     );
     const data = await response.json();
@@ -152,10 +165,11 @@ function CalendarApp(props) {
   };
 
   async function newEvent(event) {
-    var starttime = parseInt(event?.starttime.split(':')[0]);
-    var starttimeminute = parseInt(event?.starttime.split(':')[1]);
-    var endtime = parseInt(event?.endtime.split(':')[0]);
-    var endtimeminute = parseInt(event?.endtime.split(':')[1]);
+
+    var starttime = parseInt(event?.starttime.split(":")[0]);
+    var starttimeminute = parseInt(event?.starttime.split(":")[1]);
+    var endtime = parseInt(event?.endtime.split(":")[0]);
+    var endtimeminute = parseInt(event?.endtime.split(":")[1]);
     var start = event?.slots.length == 1 ? event?.start : event?.slots[0];
     var end = event?.slots.length == 1 ? event?.end : event?.slots[1];
     var newstartdate = new Date(
@@ -182,7 +196,7 @@ function CalendarApp(props) {
       end: newenddate,
       color: event?.color,
     };
-
+    
     const response = await sendEvent(hour);
     if (response.success == true) {
       props?.setState({
@@ -199,10 +213,10 @@ function CalendarApp(props) {
   function updateEvent(event) {
     var start = event?.slots.length == 1 ? event?.start : event?.slots[0];
     var end = event?.slots.length == 1 ? event.end : event?.slots[1];
-    var starttime = parseInt(event?.starttime.split(':')[0]);
-    var starttimeminute = parseInt(event?.starttime.split(':')[1]);
-    var endtime = parseInt(event?.endtime.split(':')[0]);
-    var endtimeminute = parseInt(event?.endtime.split(':')[1]);
+    var starttime = parseInt(event?.starttime.split(":")[0]);
+    var starttimeminute = parseInt(event?.starttime.split(":")[1]);
+    var endtime = parseInt(event?.endtime.split(":")[0]);
+    var endtimeminute = parseInt(event?.endtime.split(":")[1]);
     var newstartdate = new Date(
       start.getFullYear(),
       start.getMonth(),
@@ -238,11 +252,11 @@ function CalendarApp(props) {
   function onSubmit(value) {
     setIsOpen(false);
     setEvent(null);
-
-    if (actionType === 'create') {
+    
+    if (actionType === "create") {
       newEvent(value);
     }
-    if (actionType === 'update') {
+    if (actionType === "update") {
       updateEvent(value);
     }
   }
@@ -251,31 +265,31 @@ function CalendarApp(props) {
     var sendevent = selectedEvent;
     sendevent.starttime = `${
       sendevent.start.getHours().toString().length == 1
-        ? '0' + sendevent.start.getHours().toString()
+        ? "0" + sendevent.start.getHours().toString()
         : sendevent.start.getHours().toString()
     }:${
       sendevent.start.getMinutes().toString().length == 1
-        ? '0' + sendevent.start.getMinutes().toString()
+        ? "0" + sendevent.start.getMinutes().toString()
         : sendevent.start.getMinutes().toString()
     }`;
     sendevent.endtime = `${
       sendevent.end.getHours().toString().length == 1
-        ? '0' + sendevent.end.getHours().toString()
+        ? "0" + sendevent.end.getHours().toString()
         : sendevent.end.getHours().toString()
     }:${
       sendevent.end.getMinutes().toString().length == 1
-        ? '0' + sendevent.end.getMinutes().toString()
+        ? "0" + sendevent.end.getMinutes().toString()
         : sendevent.end.getMinutes().toString()
     }`;
-
+    
     setIsOpen(true);
     setEvent(sendevent);
-    setActionType('update');
+    setActionType("update");
   }
 
   function onSelectSlot(selectedSlot) {
     setEvent(selectedSlot);
-    setActionType('create');
+    setActionType("create");
     setIsOpen(true);
   }
 
@@ -286,7 +300,7 @@ function CalendarApp(props) {
 
   const today = new Date();
   useEffect(() => {
-    if (props?.view == 'month') {
+    if (props?.view == "month") {
       getMonth();
     } else {
       getDate();
@@ -305,37 +319,25 @@ function CalendarApp(props) {
     }
 
     console.log(props?.view);
-    console.log('data', props?.date);
-    if (props?.view == 'week') {
-      var ele = getElementByXpath(
-        `//div[@data-baseweb="block"]//button[contains(text(),'Back')]`
-      );
+    console.log("data", props?.date);
+    if (props?.view == "week") {
+      var ele = getElementByXpath(`//div[@data-baseweb="block"]//button[contains(text(),'Back')]`)
       ele.disabled = false;
-      var ele = getElementByXpath(
-        `//div[@data-baseweb="block"]//button[contains(text(),'Next')]`
-      );
+      var ele = getElementByXpath(`//div[@data-baseweb="block"]//button[contains(text(),'Next')]`)
       ele.disabled = false;
     } else {
       if (count == 0) {
-        var ele = getElementByXpath(
-          `//div[@data-baseweb="block"]//button[contains(text(),'Back')]`
-        );
+        var ele = getElementByXpath(`//div[@data-baseweb="block"]//button[contains(text(),'Back')]`)
         ele.disabled = true;
       } else {
-        var ele = getElementByXpath(
-          `//div[@data-baseweb="block"]//button[contains(text(),'Back')]`
-        );
+        var ele = getElementByXpath(`//div[@data-baseweb="block"]//button[contains(text(),'Back')]`)
         ele.disabled = false;
       }
       if (count == 2) {
-        var ele = getElementByXpath(
-          `//div[@data-baseweb="block"]//button[contains(text(),'Next')]`
-        );
+        var ele = getElementByXpath(`//div[@data-baseweb="block"]//button[contains(text(),'Next')]`)
         ele.disabled = true;
       } else {
-        var ele = getElementByXpath(
-          `//div[@data-baseweb="block"]//button[contains(text(),'Next')]`
-        );
+        var ele = getElementByXpath(`//div[@data-baseweb="block"]//button[contains(text(),'Next')]`)
         ele.disabled = false;
       }
       if (props.date.getMonth() == new Date().getMonth()) {
@@ -348,18 +350,19 @@ function CalendarApp(props) {
         setCount(2);
       }
     }
+
   }, [props?.view, props?.date, count]);
 
   return (
     <>
-      {props?.view == 'month' ? (
+      {props?.view == "month" ? (
         <Calendar
           popup
-          selectable={props?.view == 'month' ? false : true}
+          selectable={props?.view == "month" ? false : true}
           localizer={localizer}
-          events={props?.view == 'month' ? monthevent : props?.state?.events}
-          onSelectSlot={props?.view == 'month' ? null : onSelectSlot}
-          onSelectEvent={props?.view == 'month' ? null : onSelectEvent}
+          events={props?.view == "month" ? monthevent : props?.state?.events}
+          onSelectSlot={props?.view == "month" ? null : onSelectSlot}
+          onSelectEvent={props?.view == "month" ? null : onSelectEvent}
           onDragStart={console.log}
           showMultiDayTimes={true}
           showNavigation={true}
@@ -368,7 +371,7 @@ function CalendarApp(props) {
           startAccessor="start"
           endAccessor="end"
           view={props?.view}
-          views={['month', 'week']}
+          views={["month", "week"]}
           date={props?.date}
           onNavigate={handleNavigate}
           onView={handleView}
@@ -396,18 +399,18 @@ function CalendarApp(props) {
         <>
           <Calendar
             popup
-            selectable={props?.view == 'month' ? false : true}
+            selectable={props?.view == "month" ? false : true}
             localizer={localizer}
-            events={props?.view == 'month' ? monthevent : props?.state?.events}
-            onSelectSlot={props?.view == 'month' ? null : onSelectSlot}
-            onSelectEvent={props?.view == 'month' ? null : null}
+            events={props?.view == "month" ? monthevent : props?.state?.events}
+            onSelectSlot={props?.view == "month" ? null : onSelectSlot}
+            onSelectEvent={props?.view == "month" ? null : null}
             showMultiDayTimes={true}
             showNavigation={true}
             eventPropGetter={eventPropGetter}
             startAccessor="start"
             endAccessor="end"
             view={props?.view}
-            views={['month', 'week']}
+            views={["month", "week"]}
             date={props?.date}
             onNavigate={handleNavigate}
             onView={handleView}
@@ -435,7 +438,7 @@ function CalendarApp(props) {
       )}
 
       {event &&
-        (props?.view == 'week' ? (
+        (props?.view == "week" ? (
           <CreateOrUpdateEvent
             onClose={close}
             isOpen={isOpen}
@@ -444,7 +447,7 @@ function CalendarApp(props) {
             onSubmit={(value) => onSubmit(value)}
           />
         ) : (
-          ''
+          ""
         ))}
     </>
   );
