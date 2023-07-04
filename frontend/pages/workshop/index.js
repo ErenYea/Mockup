@@ -160,7 +160,7 @@ const index = () => {
       </Head>
       <PageTitle title={'Workshop Floor'} subtitle={''} />
       <Container>
-        <Block paddingBottom="20px">
+        <Block paddingBottom="80px">
           <div className="flex m-4 font-display text-start  justify-center space-x-2 h-full w-full">
             <label
               className={`m-2 text-xl font-semibold ${
