@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
+import EmailProvider from "next-auth/providers/email"
 
 export const authOptions = {
     secret: process.env.AUTH_SECRET,
@@ -9,7 +10,11 @@ export const authOptions = {
         clientId: process.env.GOOGLE_ID,
         clientSecret: process.env.GOOGLE_SECRET,
         }),
-        // ...add more providers here
+        EmailProvider({
+            server: process.env.EMAIL_SERVER,
+            from: process.env.EMAIL_FROM,
+        })
+
     ],
     pages: {
         signIn: "/login",
