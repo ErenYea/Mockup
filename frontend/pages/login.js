@@ -18,10 +18,13 @@ function getData2() {
 const Login = ({ providers }) => {
   const router = useRouter();
   const [openTab, setOpenTab] = useState(1);
+  const [userType, setUserType] = useState('workshop')
 
   useEffect(() => {
-    console.log(providers)
-  }, [])
+    setUserType(router.query.type)
+    console.log(userType)
+  }, [userType])
+
   return (
     <>
       <Head>
@@ -37,39 +40,45 @@ const Login = ({ providers }) => {
                 <ul className="flex space-x-2 mt-5">
                   <li>
                     <a
-                      href="#"
-                      onClick={() => setOpenTab(1)}
+                      href='?type=workshop'
+                      
                       className={` ${
-                        openTab === 1
+                        userType === 'workshop'
                           ? 'bg-[#000000] text-white'
                           : 'bg-gray-400 font-black'
-                      } inline-block  px-4 py-2 text-white-600 rounded leading-2 `}
+                      } inline-block  px-4 py-2 text-white-600 rounded leading-2 cursor-pointer`}
                     >
                       Workshop
                     </a>
                   </li>
                   <li>
                     <a
-                      href="#"
-                      onClick={() => setOpenTab(2)}
+                      href='?type=oem'
+                      onClick={() => {
+                        sessionStorage.setItem('user', '1');
+                        sessionStorage.setItem('emailType', `${getData()}`);
+                      }}
                       className={` ${
-                        openTab === 2
-                          ? 'bg-[#000000] text-white '
+                        userType === 'oem'
+                          ? 'bg-[#000000] text-white'
                           : 'bg-gray-400 font-black'
-                      } inline-block px-4 py-2  text-white-600  rounded leading-2`}
+                      } inline-block px-4 py-2  text-white-600  rounded leading-2 cursor-pointer`}
                     >
                       Manufacturer/OEMs
                     </a>
                   </li>
                   <li>
                     <a
-                      href="#"
-                      onClick={() => setOpenTab(3)}
+                      href='?type=retailer'
+                      onClick={() => {
+                        sessionStorage.setItem('user', '1');
+                        sessionStorage.setItem('emailType', `${getData2()}`);
+                      }}
                       className={` ${
-                        openTab === 3
-                          ? 'bg-[#000000] text-white '
+                        userType === 'retailer'
+                          ? 'bg-[#000000] text-white'
                           : 'bg-gray-400 font-black'
-                      } inline-block px-4 py-2  text-white-600  rounded leading-2`}
+                      } inline-block px-4 py-2  text-white-600  rounded leading-2 cursor-pointer`}
                     >
                       Retailer/Dealership
                     </a>
@@ -360,8 +369,16 @@ export default Login;
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
   
+  const { type } = context.query;
+
   if (session) {
-    return { redirect: { destination: "/" } };
+    if (type === 'oem') {
+      return { redirect: { destination: "/oem" } };
+    } else if (type === 'retailer') {
+      return { redirect: { destination: "/retailer" } };
+    } else if (type === 'workshop') {
+      return { redirect: { destination: "/" } };
+    }
   }
 
   const providers = await getProviders();
