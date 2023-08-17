@@ -5,18 +5,14 @@ import { Avatar } from 'baseui/avatar';
 import { StatefulPopover } from 'baseui/popover';
 import ActiveLink from '../../../UiElements/NavLink/NavLink';
 import MenuWrapper, { MenuItem } from './AvatarMenu.styled';
+import { signOut } from "next-auth/react"
 
 const Menu = ({ onClick }) => {
   return (
     <MenuWrapper>
-      <li
-        onClick={() => {
-          sessionStorage.removeItem('user');
-          Router.push('/login');
-        }}
-      >
+      <li>
         <ActiveLink activeClassName="active" href="/login">
-          <MenuItem onClick={onClick}>Logout</MenuItem>
+          <MenuItem onClick={signOut}>Logout</MenuItem>
         </ActiveLink>
       </li>
     </MenuWrapper>

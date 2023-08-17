@@ -11,8 +11,11 @@ import HeaderWrapper, {
   NavLeft,
   NavRight,
 } from './DefaultHeader.styled';
+import { useSession } from "next-auth/react"
 
 const DefaultHeader = () => {
+  const { data: session } = useSession()
+
   return (
     <HeaderWrapper className="default">
       <Container>
@@ -20,7 +23,7 @@ const DefaultHeader = () => {
           <MenuRight className="top-bar flex justify-end ">
             <AvatarMenu
               name="Team Wings"
-              src={require('../../../assets/images/pic.jpg')}
+              src={session?.user?.image}
             />
           </MenuRight>
         </TopBar>
@@ -36,7 +39,7 @@ const DefaultHeader = () => {
               <NavRight className="cart-and-avatar">
                 <AvatarMenu
                   name="Team Wings"
-                  src={require('../../../assets/images/pic.jpg')}
+                  src={session?.user?.image}
                 />
               </NavRight>
             </StickyNav>

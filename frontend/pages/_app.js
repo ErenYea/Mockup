@@ -13,8 +13,9 @@ import 'react-flexbox-grid/dist/react-flexbox-grid.css';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'typeface-open-sans';
 import './workshop/workshopFloor.css';
+import { SessionProvider } from "next-auth/react"
 
-export default function CustomApp({ Component, pageProps }) {
+export default function CustomApp({ Component, pageProps: { session, ...pageProps } }) {
   const [theme, setTheme] = React.useState(THEME.dark);
   React.useEffect(() => {
     let SAVED_THEME = localStorage.getItem('theme');
@@ -25,22 +26,24 @@ export default function CustomApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <ThemeSwitcherProvider value={{ theme, setTheme }}>
-      <StyletronProvider value={styletron} debugAfterHydration>
-        <BaseProvider
-          theme={
-            theme === THEME.light
-              ? { ...LightTheme, direction: 'ltr' }
-              : { ...DarkTheme, direction: 'ltr' }
-          }
-        >
-          <CartProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </CartProvider>
-        </BaseProvider>
-      </StyletronProvider>
-    </ThemeSwitcherProvider>
+    <SessionProvider session={session}>
+      <ThemeSwitcherProvider value={{ theme, setTheme }}>
+        <StyletronProvider value={styletron} debugAfterHydration>
+          <BaseProvider
+            theme={
+              theme === THEME.light
+                ? { ...LightTheme, direction: 'ltr' }
+                : { ...DarkTheme, direction: 'ltr' }
+            }
+          >
+            <CartProvider>
+              <Layout>
+                  <Component {...pageProps} />
+              </Layout>
+            </CartProvider>
+          </BaseProvider>
+        </StyletronProvider>
+      </ThemeSwitcherProvider>
+    </SessionProvider>
   );
 }

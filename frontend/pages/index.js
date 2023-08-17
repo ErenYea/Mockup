@@ -14,11 +14,14 @@ import Bar from './charts/bar';
 import Column from './charts/column';
 import { useRouter } from 'next/router';
 import { datas } from '../containers/Dashboard/dashboard';
+import { useSession } from "next-auth/react"
 
 const Home = () => {
-  const [cond, setCond] = useState(false);
+  const [cond, setCond] = useState(true);
   const router = useRouter();
   const [data, setData] = useState(datas);
+
+  const { data: session } = useSession()
 
   if (!data) return null;
   const { productViews, recentApps, productsBar, cashFlow } = data;
@@ -306,7 +309,8 @@ const Home = () => {
   });
 
   useEffect(() => {
-    if (sessionStorage.getItem('user')) {
+    if (session) {
+      console.log(session.user)
       setCond(true);
     } else {
       router.push('/login');
