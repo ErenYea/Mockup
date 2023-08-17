@@ -10,11 +10,16 @@ import LineBar from '../../components/retailer/lineGraph';
 import CreateOrUpdateEvent from 'pages/oem/CreateOrUpdateEvent';
 import jsonData from './data.json';
 import data from './data2.json';
+import { useSession } from "next-auth/react"
+import { useRouter } from 'next/router';
 
 const index = () => {
   const [event, setEvent] = useState(false);
   const [works, setWorks] = useState([]);
   const [isOpen, setIsOpen] = React.useState(false);
+  const router = useRouter();
+  const { data: session } = useSession()
+
   function onSubmit(value) {
     setIsOpen(false);
     setWorks([...works, value]);
@@ -48,6 +53,11 @@ const index = () => {
   const [Workshop, setWorkshop] = useState(0);
 
   useEffect(() => {
+
+    if (!session) {
+      router.push('/login?type=retailer');
+    }
+
     document.querySelectorAll('.rbc-btn-group').forEach((p) => {
       p.style.display = 'None';
     });

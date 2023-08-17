@@ -309,9 +309,7 @@ const Home = () => {
   });
 
   useEffect(() => {
-    if (session) {
-      setCond(true);
-    } else {
+    if (!session) {
       router.push('/login?type=workshop');
     }
   }, []);
