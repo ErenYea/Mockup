@@ -22,7 +22,7 @@ const DefaultHeader = () => {
         <TopBar className="mx-[10px] w-full flex justify-end">
           <MenuRight className="top-bar flex justify-end ">
             <AvatarMenu
-              name="Team Wings"
+              name="A"
               src={session?.user?.image}
             />
           </MenuRight>
@@ -38,7 +38,7 @@ const DefaultHeader = () => {
               </NavLeft>
               <NavRight className="cart-and-avatar">
                 <AvatarMenu
-                  name="Team Wings"
+                  name="A"
                   src={session?.user?.image}
                 />
               </NavRight>
