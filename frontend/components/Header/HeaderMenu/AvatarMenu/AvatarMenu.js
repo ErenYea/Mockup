@@ -8,11 +8,17 @@ import MenuWrapper, { MenuItem } from './AvatarMenu.styled';
 import { signOut } from "next-auth/react"
 
 const Menu = ({ onClick }) => {
+
+  const handleSignOut = () => {
+    document.cookie = 'sessionToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+    signOut();
+  }
+
   return (
     <MenuWrapper>
       <li>
         <ActiveLink activeClassName="active" href="/login">
-          <MenuItem onClick={signOut}>Logout</MenuItem>
+          <MenuItem onClick={handleSignOut}>Logout</MenuItem>
         </ActiveLink>
       </li>
     </MenuWrapper>

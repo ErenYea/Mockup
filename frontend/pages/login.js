@@ -25,11 +25,6 @@ const Login = ({ providers }) => {
     setUserType(router.query.type);
   }, [router.query.type]);
 
-  // const handleTabClick = (tabIndex) => {
-  //   setOpenTab(tabIndex);
-  //   setIsSignUp(false); //s
-  // };
-
   const handleSignUpToggle = () => {
     setIsSignUp(!isSignUp);
   };
@@ -53,7 +48,7 @@ const Login = ({ providers }) => {
         });
   
         const result = await response.json();
-        console.log(result); // Handle response or error as needed
+        setIsSignUp(!isSignUp)
       } catch (error) {
         console.log('error', error);
       }
@@ -64,15 +59,22 @@ const Login = ({ providers }) => {
         const result = await response.json();
   
         if (result.success) {
-          // User data found, handle successful login
           console.log('User data:', result.data);
+          document.cookie = "sessionToken=mySessionTokenValue; path=/";
+
+          if (userType === 'oem') {
+            router.push('/oem')
+          } else if (userType === 'retailer') {
+            router.push('/retailer')
+          } else if (userType === 'workshop') {
+            router.push('/')
+          }
+
         } else {
           console.log('Login failed:', result.message);
-          // Handle login failure
         }
       } catch (error) {
         console.error('Fetch error:', error);
-        // Handle fetch error
       }
     }
   };
@@ -371,6 +373,7 @@ export default Login;
 
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
+  const sessionToken = context.req.headers.cookie?.split(';').find(cookie => cookie.trim().startsWith('sessionToken='));
   const { type } = context.query;
 
   const redirects = {
@@ -379,7 +382,7 @@ export async function getServerSideProps(context) {
     workshop: "/"
   };
 
-  if (session) {
+  if (session || sessionToken) {
     return { redirect: { destination: redirects[type] || "/" } };
   }
 
