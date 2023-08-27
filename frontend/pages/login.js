@@ -37,29 +37,32 @@ const Login = ({ providers }) => {
   
     if (isSignUp) {
       const userData = { username, password };
-  
-      try {
-        const response = await fetch('https://MongooseAPI.erenyea.repl.co/createUser', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(userData),
-        });
-  
-        const result = await response.json();
-        setIsSignUp(!isSignUp)
-      } catch (error) {
-        console.log('error', error);
+      
+      const response = await fetch('https://MongooseAPI.erenyea.repl.co/createUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        console.log('User created successfully:', result.data);
+        setIsSignUp(!isSignUp);
+        alert('User created successfully!');
+      } else {
+        console.log('User creation failed:', result.message);
+        alert('User creation failed: ' + result.message);
       }
+      
     } else {
       // Handle login logic
       try {
         const response = await fetch(`https://MongooseAPI.erenyea.repl.co/getUser?username=${username}&password=${password}`);
         const result = await response.json();
-  
-        if (result.success) {
-          console.log('User data:', result.data);
+
+        if (result.data) {
           document.cookie = "sessionToken=mySessionTokenValue; path=/";
 
           if (userType === 'oem') {
@@ -71,7 +74,7 @@ const Login = ({ providers }) => {
           }
 
         } else {
-          console.log('Login failed:', result.message);
+          alert('Invalid Username or password');
         }
       } catch (error) {
         console.error('Fetch error:', error);
@@ -86,7 +89,7 @@ const Login = ({ providers }) => {
         <meta name="Description" content="Login page" />
       </Head>
 
-      <Container>
+      <Container key={isSignUp}>
         <Block>
           <div className="mx-auto mt-16 bg-[#FFFFFF]">
             <div className="flex flex-col items-center justify-center max-w-screen">
