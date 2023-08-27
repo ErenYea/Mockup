@@ -6,8 +6,21 @@ import LineBarv2 from './lineGraphv2';
 import Head from 'next/head';
 import plotData from './data/plotData.json';
 import jsonData from './data/jsonData.json';
+import { useRouter } from 'next/router';
+import { useSession } from "next-auth/react"
+
 
 const index = () => {
+
+  const router = useRouter();
+  const { data: session } = useSession()
+
+  React.useEffect(() => {
+    if (!session) {
+      router.push('/login?type=workshop');
+    }
+  }, []);
+
   const salesData = [
     { name: 'Aluminum Wheels' },
     { name: 'Suspension kit' },

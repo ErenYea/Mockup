@@ -10,8 +10,14 @@ import {
   useThemeSwitcherCtx,
   THEME,
 } from '../../contexts/theme/theme.provider';
+import { useRouter } from 'next/router';
+import { useSession } from "next-auth/react"
 
 const index = () => {
+
+  const router = useRouter();
+  const { data: session } = useSession()
+  
   const timeSteps = [1500, 1000, 3000, 1500, 3000];
   var tasks = [
     { name: 'Ford F-150', order: 12, time: 2, resource: 'Sean Davidson' },
@@ -119,6 +125,9 @@ const index = () => {
     },
   ];
   useEffect(() => {
+    if (!session) {
+      router.push('/login?type=workshop');
+    }
     let cleanup = false;
     async function beginPage() {
       const text = 'Car Model: Likely Ford F-150';

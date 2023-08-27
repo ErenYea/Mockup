@@ -6,8 +6,15 @@ import { Grid } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
 import Head from 'next/head';
 import Bar from 'containers/Calendar/bar';
+import { useRouter } from 'next/router';
+import { useSession } from "next-auth/react"
+
 
 const index = () => {
+
+  const router = useRouter();
+  const { data: session } = useSession()
+
   const [state, setState] = useState({ events: [] });
   const [view, setView] = useState('month');
   const [date, setDate] = useState(new Date());
@@ -412,6 +419,12 @@ const index = () => {
     setRangeDate(alldate);
     setJobs(totalJobs);
   };
+
+  useEffect(() => {
+    if (!session) {
+      router.push('/login?type=workshop');
+    }
+  }, []);
 
   useEffect(() => {
     if (view == 'week') {

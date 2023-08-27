@@ -7,13 +7,24 @@ import { Block } from 'baseui/block';
 import InformationBox from './informationBox';
 import CalendarApp from '../../containers/Calendar/oem/newcalendar/index';
 import jsonData from './data.json';
+import { useRouter } from 'next/router';
+import { useSession } from "next-auth/react"
 
 const index = () => {
+
+  const router = useRouter();
+  const { data: session } = useSession()
+
   useEffect(() => {
+
+    if (!session) {
+      router.push('/login?type=workshop');
+    }
+
     document.querySelectorAll('.rbc-btn-group').forEach((p) => {
       p.style.display = 'None';
     });
-  });
+  }, []);
 
   const [Index, setIndex] = useState(0);
   function showInfo() {
