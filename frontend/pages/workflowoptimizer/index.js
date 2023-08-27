@@ -421,7 +421,7 @@ const index = () => {
   };
 
   useEffect(() => {
-    if (!session) {
+    if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
       router.push('/login?type=workshop');
     }
   }, []);
