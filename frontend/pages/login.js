@@ -8,11 +8,11 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "./api/auth/[...nextauth]";
 
 function getData() {
-  return document.getElementById('emailBrand').value;
+  return document.getElementById('username').value;
 }
 
 function getData2() {
-  return document.getElementById('emailBrand2').value;
+  return document.getElementById('username').value;
 }
 
 const Login = ({ providers }) => {
@@ -25,25 +25,58 @@ const Login = ({ providers }) => {
     setUserType(router.query.type);
   }, [router.query.type]);
 
-  const handleTabClick = (tabIndex) => {
-    setOpenTab(tabIndex);
-    setIsSignUp(false); // Reset to login mode when switching tabs
-  };
+  // const handleTabClick = (tabIndex) => {
+  //   setOpenTab(tabIndex);
+  //   setIsSignUp(false); //s
+  // };
 
   const handleSignUpToggle = () => {
     setIsSignUp(!isSignUp);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // Implement your login or signup logic here based on userType and isSignUp
+  
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+  
     if (isSignUp) {
-      // Handle signup logic
+      const userData = { username, password };
+  
+      try {
+        const response = await fetch('https://MongooseAPI.erenyea.repl.co/createUser', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+        });
+  
+        const result = await response.json();
+        console.log(result); // Handle response or error as needed
+      } catch (error) {
+        console.log('error', error);
+      }
     } else {
       // Handle login logic
+      try {
+        const response = await fetch(`https://MongooseAPI.erenyea.repl.co/getUser?username=${username}&password=${password}`);
+        const result = await response.json();
+  
+        if (result.success) {
+          // User data found, handle successful login
+          console.log('User data:', result.data);
+        } else {
+          console.log('Login failed:', result.message);
+          // Handle login failure
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+        // Handle fetch error
+      }
     }
   };
-
+    
   return (
     <>
       <Head>
@@ -55,7 +88,7 @@ const Login = ({ providers }) => {
         <Block>
           <div className="mx-auto mt-16 bg-[#FFFFFF]">
             <div className="flex flex-col items-center justify-center max-w-screen">
-              <div className="p-3 mt-12 bg-[#f6f6f6] border-b-2 w-5/6 items-center justify-center flex flex-col border-2 border-[#000000] rounded-xl">
+              <div className="p-3 mt-12 bg-[#f6f6f6] border-b-2 w-5/6 items-center justify-center flex flex-col border-2 EmailPasswordborder-[#000000] rounded-xl">
                 <ul className="flex space-x-2 mt-5">
                   <li>
                     <a
@@ -110,45 +143,31 @@ const Login = ({ providers }) => {
                         {isSignUp ? 'Sign Up' : 'Sign In'}
                       </h1>
 
-                      <form className="mt-6">
+                      <form className="mt-6" onSubmit={handleFormSubmit}>
                         <div className="mb-2">
-                          <label
-                            htmlFor="email"
-                            className="block text-sm  text-black leading-3 gap-1"
-                          >
-                            Email
+                          <label htmlFor="username" className="block text-sm leading-3 gap-1 text-black">
+                            Username
                           </label>
                           <input
-                            type="email"
-                            className=" block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            required
-                          />
-                        </div>
-                        <div className="mb-2">
-                          <label
-                            htmlFor="password"
-                            className="block text-sm  text-black"
-                          >
-                            Password
-                          </label>
-                          <input
-                            type="password"
+                            type="text"
+                            id="username"
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             required
                           />
                         </div>
-                        <a
-                          href="#"
-                          className="text-xs text-black hover:underline"
-                        >
-                          Forget Password?
-                        </a>
+                        <div className="mb-2">
+                          <label htmlFor="password" className="block text-sm text-black">
+                            Password
+                          </label>
+                          <input
+                            type="password"
+                            id="password"
+                            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            required
+                          />
+                        </div>
                         <div className="mt-6">
                           <button
-                            onClick={() => {
-                              sessionStorage.setItem('user', '1');
-                              router.push('/');
-                            }}
                             type="submit"
                             className="w-full px-4 py-2 ease-in  duration-30  bg-[#000000] tracking-wide text-white font-bold transition-colors0 transform  rounded-md hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-blue-600"
                           >
@@ -156,6 +175,7 @@ const Login = ({ providers }) => {
                           </button>
                         </div>
                       </form>
+
                       <div className="relative flex items-center justify-center w-full mt-6 border">
                         <div className="absolute px-5 bg-[#000000] text-white  w-fit rounded-xl">
                           Or
@@ -197,57 +217,39 @@ const Login = ({ providers }) => {
                         Sign in
                       </h1>
 
-                      <form
-                        className="mt-6"
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                          sessionStorage.setItem('user', '1');
-                          sessionStorage.setItem('emailType', `${getData()}`);
-                          router.push('/oem');
-                        }}
-                      >
+                      <form className="mt-6" onSubmit={handleFormSubmit}>
                         <div className="mb-2">
-                          <label
-                            htmlFor="email"
-                            className="block text-sm  leading-3 gap-1 text-black"
-                          >
-                            Email
+                          <label htmlFor="username" className="block text-sm leading-3 gap-1 text-black">
+                            Username
                           </label>
                           <input
-                            type="email"
-                            id="emailBrand"
-                            className=" block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            required
-                          />
-                        </div>
-                        <div className="mb-2">
-                          <label
-                            htmlFor="password"
-                            className="block text-sm  text-black"
-                          >
-                            Password
-                          </label>
-                          <input
-                            type="password"
+                            type="text"
+                            id="username"
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             required
                           />
                         </div>
-                        <a
-                          href="#"
-                          className="text-xs text-black hover:underline"
-                        >
-                          Forget Password?
-                        </a>
+                        <div className="mb-2">
+                          <label htmlFor="password" className="block text-sm text-black">
+                            Password
+                          </label>
+                          <input
+                            type="password"
+                            id="password"
+                            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            required
+                          />
+                        </div>
                         <div className="mt-6">
                           <button
                             type="submit"
-                            className="w-full px-4 py-2 ease-in  duration-30  bg-[#000000] tracking-wide text-white font-bold transition-colors0 transform  rounded-md hover:bg-gray-600 hover:text-white focus:outline-non"
+                            className="w-full px-4 py-2 ease-in  duration-30  bg-[#000000] tracking-wide text-white font-bold transition-colors0 transform  rounded-md hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-blue-600"
                           >
-                            Login
+                            {isSignUp ? 'Sign Up' : 'Login'}
                           </button>
                         </div>
                       </form>
+
                       <div className="relative flex items-center justify-center w-full mt-6 border">
                         <div className="absolute px-5 bg-[#000000] text-white  w-fit rounded-xl">
                           Or
@@ -289,57 +291,39 @@ const Login = ({ providers }) => {
                         Sign in
                       </h1>
 
-                      <form
-                        className="mt-6"
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                          sessionStorage.setItem('user', '1');
-                          sessionStorage.setItem('emailType', `${getData2()}`);
-                          router.push('/retailer');
-                        }}
-                      >
+                      <form className="mt-6" onSubmit={handleFormSubmit}>
                         <div className="mb-2">
-                          <label
-                            htmlFor="email"
-                            className="block text-sm  text-black leading-3 gap-1"
-                          >
-                            Email
+                          <label htmlFor="username" className="block text-sm leading-3 gap-1 text-black">
+                            Username
                           </label>
                           <input
-                            type="email"
-                            id="emailBrand2"
-                            className=" block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            required
-                          />
-                        </div>
-                        <div className="mb-2">
-                          <label
-                            htmlFor="password"
-                            className="block text-sm  text-black"
-                          >
-                            Password
-                          </label>
-                          <input
-                            type="password"
+                            type="text"
+                            id="username"
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             required
                           />
                         </div>
-                        <a
-                          href="#"
-                          className="text-xs text-black hover:underline"
-                        >
-                          Forget Password?
-                        </a>
+                        <div className="mb-2">
+                          <label htmlFor="password" className="block text-sm text-black">
+                            Password
+                          </label>
+                          <input
+                            type="password"
+                            id="password"
+                            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            required
+                          />
+                        </div>
                         <div className="mt-6">
                           <button
                             type="submit"
-                            className="w-full px-4 py-2 ease-in  duration-30  bg-[#000000] tracking-wide text-white font-bold transition-colors0 transform  rounded-md hover:bg-gray-600 hover:text-white focus:outline-non"
+                            className="w-full px-4 py-2 ease-in  duration-30  bg-[#000000] tracking-wide text-white font-bold transition-colors0 transform  rounded-md hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-blue-600"
                           >
-                            Login
+                            {isSignUp ? 'Sign Up' : 'Login'}
                           </button>
                         </div>
                       </form>
+
                       <div className="relative flex items-center justify-center w-full mt-6 border">
                         <div className="absolute px-5 bg-[#000000] text-white  w-fit rounded-xl">
                           Or
@@ -387,22 +371,19 @@ export default Login;
 
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
-  
   const { type } = context.query;
 
+  const redirects = {
+    oem: "/oem",
+    retailer: "/retailer",
+    workshop: "/"
+  };
+
   if (session) {
-    if (type === 'oem') {
-      return { redirect: { destination: "/oem" } };
-    } else if (type === 'retailer') {
-      return { redirect: { destination: "/retailer" } };
-    } else if (type === 'workshop') {
-      return { redirect: { destination: "/" } };
-    }
+    return { redirect: { destination: redirects[type] || "/" } };
   }
 
   const providers = await getProviders();
-  
-  return {
-    props: { providers: providers ?? [] },
-  }
+
+  return { props: { providers: providers ?? [] } };
 }

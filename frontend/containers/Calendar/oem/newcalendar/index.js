@@ -97,7 +97,6 @@ function CalendarApp(props) {
 
     fetch('https://MongooseAPI.erenyea.repl.co/post', requestOptions)
       .then((response) => response.json())
-      .then((result) => console.log(''))
       .catch((error) => console.log('error', error));
   };
 
