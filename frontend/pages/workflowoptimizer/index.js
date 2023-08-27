@@ -116,7 +116,7 @@ const index = () => {
         currentdate - 6
       );
     }
-    console.log('compariosn Date', secondDate, newDate);
+    console.log('comparison Date', secondDate, newDate);
     var totalJobs = events?.reduce((total, num) => {
       if (
         (new Date(num?.start) >= secondDate &&

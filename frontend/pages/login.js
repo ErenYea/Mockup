@@ -18,12 +18,31 @@ function getData2() {
 const Login = ({ providers }) => {
   const router = useRouter();
   const [openTab, setOpenTab] = useState(1);
-  const [userType, setUserType] = useState('workshop')
+  const [userType, setUserType] = useState('workshop');
+  const [isSignUp, setIsSignUp] = useState(false); 
 
   useEffect(() => {
-    setUserType(router.query.type)
-    console.log(userType)
-  }, [userType])
+    setUserType(router.query.type);
+  }, [router.query.type]);
+
+  const handleTabClick = (tabIndex) => {
+    setOpenTab(tabIndex);
+    setIsSignUp(false); // Reset to login mode when switching tabs
+  };
+
+  const handleSignUpToggle = () => {
+    setIsSignUp(!isSignUp);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    // Implement your login or signup logic here based on userType and isSignUp
+    if (isSignUp) {
+      // Handle signup logic
+    } else {
+      // Handle login logic
+    }
+  };
 
   return (
     <>
@@ -88,7 +107,7 @@ const Login = ({ providers }) => {
                   <div className="relative flex flex-col justify-center h-1/2 overflow-hidden">
                     <div className="w-full p-6 m-auto rounded-md shadow-xl lg:max-w-xl bg-[#f6f6f6]">
                       <h1 className="text-4xl font-bold text-center text-black ">
-                        Sign in
+                        {isSignUp ? 'Sign Up' : 'Sign In'}
                       </h1>
 
                       <form className="mt-6">
@@ -133,7 +152,7 @@ const Login = ({ providers }) => {
                             type="submit"
                             className="w-full px-4 py-2 ease-in  duration-30  bg-[#000000] tracking-wide text-white font-bold transition-colors0 transform  rounded-md hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-blue-600"
                           >
-                            Login
+                            {isSignUp ? 'Sign Up' : 'Login'}
                           </button>
                         </div>
                       </form>
@@ -158,15 +177,15 @@ const Login = ({ providers }) => {
                         </button>
                       </div>
 
-                      <p className="mt-8 text-xs font-light text-center text-white">
+                      <p className="mt-8 text-xs font-light text-center">
                         {' '}
-                        Don't have an account?{' '}
-                        <a
-                          href="#"
-                          className="font-medium text-originalColor hover:underline"
+                        {isSignUp ? 'Already have an account?' : 'Don\'t have an account?'}{' '}
+                        <p
+                          onClick={handleSignUpToggle}
+                          className="font-medium text-originalColor hover:underline cursor-pointer"
                         >
-                          Sign up
-                        </a>
+                          {isSignUp ? 'Login' : 'Sign Up'}
+                        </p>
                       </p>
                     </div>
                   </div>
@@ -250,15 +269,15 @@ const Login = ({ providers }) => {
                         </button>
                       </div>
 
-                      <p className="mt-8 text-xs font-light text-center text-white">
+                      <p className="mt-8 text-xs font-light text-center">
                         {' '}
-                        Don't have an account?{' '}
-                        <a
-                          href="#"
-                          className="font-medium text-originalColor hover:underline"
+                        {isSignUp ? 'Already have an account?' : 'Don\'t have an account?'}{' '}
+                        <p
+                          onClick={handleSignUpToggle}
+                          className="font-medium text-originalColor hover:underline cursor-pointer"
                         >
-                          Sign up
-                        </a>
+                          {isSignUp ? 'Login' : 'Sign Up'}
+                        </p>
                       </p>
                     </div>
                   </div>
@@ -266,7 +285,7 @@ const Login = ({ providers }) => {
                 <div className={openTab === 3 ? 'block w-full' : 'hidden'}>
                   <div className="relative flex flex-col justify-center h-1/2 overflow-hidden  ">
                     <div className="w-full p-6 m-auto rounded-md shadow-xl lg:max-w-xl bg-[#f6f6f6]">
-                      <h1 className="text-4xl font-bold text-center text-black ">
+                      <h1 className="text-4xl font-bold text-center text-black">
                         Sign in
                       </h1>
 
@@ -342,15 +361,15 @@ const Login = ({ providers }) => {
                         </button>
                       </div>
 
-                      <p className="mt-8 text-xs font-light text-center text-white">
+                      <p className="mt-8 text-xs font-light text-center">
                         {' '}
-                        Don't have an account?{' '}
-                        <a
-                          href="#"
-                          className="font-medium text-originalColor hover:underline"
+                        {isSignUp ? 'Already have an account?' : 'Don\'t have an account?'}{' '}
+                        <p
+                          onClick={handleSignUpToggle}
+                          className="font-medium text-originalColor hover:underline cursor-pointer"
                         >
-                          Sign up
-                        </a>
+                          {isSignUp ? 'Login' : 'Sign Up'}
+                        </p>
                       </p>
                     </div>
                   </div>
