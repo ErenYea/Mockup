@@ -15,6 +15,9 @@ const index = () => {
   const router = useRouter();
   const { data: session } = useSession()
 
+  const [years, setYears] = React.useState(['2021', '2022', '2023']);
+  const [selectedYear, setSelectedYear] = React.useState(2023);
+
   React.useEffect(() => {
     if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
       router.push('/login?type=workshop');
@@ -52,6 +55,11 @@ const index = () => {
     setBrandindex(valueBrand);
   }
 
+  const handleYearChange = (e) => {
+    const selectedYear = parseInt(e.target.value);
+    setSelectedYear(selectedYear);
+  };
+
   return (
     <>
       <Head>
@@ -62,7 +70,7 @@ const index = () => {
       <div className="w-full flex flex-col justify-center items-center mb-5 mt-5">
         <div>
           <h1 className="text-4xl font-black mb-4 ">
-            Forecasted sunroof market
+            Forecasted sunroof market
           </h1>
         </div>
         <LineBar
@@ -96,28 +104,44 @@ const index = () => {
           ]}
         />
       </div>
+      
       <div className="w-full flex justify-center items-center flex-row">
         <h1 className="text-4xl font-black mb-4 mt-10 ">
-          Projected installations per month
+          Projected installations per month
         </h1>
       </div>
-      <div className="w-full flex justify-center items-center flex-row">
-        <span className="mr-2 text-lg font-black">Select Month of 2023 </span>
+
+      <div className="w-full flex justify-center items-center flex-col lg:flex-row px-4">
+        <span className="mr-2 text-lg font-black">Select Year</span>
+        <select
+          id="yearDropdown"
+          className="w-full lg:w-1/4 p-2.5 text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
+          value={selectedYear}
+          onChange={handleYearChange}
+        >
+          {years.map((year) => (
+            <option key={year} value={year} className="font-bold">
+              {year}
+            </option>
+          ))}
+        </select>
+        
+        <span className="mx-4 text-lg font-black">Select Month:</span>
         <select
           id="dropdown"
+          key={selectedYear}
           onChange={showInfo}
-          className="w-1/4 p-2.5 text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
+          className="w-full lg:w-1/4 p-2.5 text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
         >
-          {jsonData.map((val, ind) => {
-            return (
-              <option value={ind} key={ind} className="font-bold">
-                {val.name}
-              </option>
-            );
-          })}
+          {jsonData[`${selectedYear}`].map((val, ind) => (
+            <option key={ind} value={ind} className="font-bold">
+              {val.name}
+            </option>
+          ))}
         </select>
       </div>
-      <ColumnChart args={jsonData[Index]} />
+
+      <ColumnChart args={jsonData[`${selectedYear}`][Index]} />
       <div className="flex flex-col h-[100px] justify-center rounded-lg items-center border-2 w-full ">
         <span className="text-4xl font-black z-10">
           Automotive Parts Projection
