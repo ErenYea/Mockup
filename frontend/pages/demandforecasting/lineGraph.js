@@ -1,6 +1,5 @@
 import React from 'react';
 import ApexChart from 'components/UiElements/ApexChart/ApexChart';
-import options from './data/lineGraphOptions.json';
 
 const LineBar = (props) => {
   const state = {
@@ -14,7 +13,67 @@ const LineBar = (props) => {
         data: props.argSecond,
       },
     ],
-    options,
+    options: {
+      "chart": {
+      "height": 420,
+      "type": "line",
+      "dropShadow": {
+      "enabled": true,
+      "color": "#000",
+      "top": 18,
+      "left": 7,
+      "blur": 10,
+      "opacity": 0.2
+      },
+      "toolbar": {
+      "show": false
+      }
+      },
+      "dataLabels": {
+      "enabled": true
+      },
+      "stroke": {
+      "curve": "smooth"
+      },
+      "title": {
+      "text": "",
+      "align": "left"
+      },
+      "xaxis": {
+      "categories": props.xLabels,
+      "title": {
+      "text": "Months"
+      }
+      },
+      "yaxis": {
+      "title": {
+      "text": "No of car units (with sunroofs)"
+      },
+      "labels": {
+      "show": true,
+      "align": "left",
+      "minWidth": 0,
+      "maxWidth": 360,
+      "style": {
+      "colors": [],
+      "fontSize": "12px",
+      "fontFamily": "Helvetica, Arial, sans-serif",
+      "fontWeight": 400,
+      "cssClass": "apexcharts-yaxis-label"
+      },
+      "offsetX": -5,
+      "offsetY": 10,
+      "rotate": 0
+      },
+      "min": 0,
+      "max": 150000
+      },
+      "legend": {
+      "position": "top",
+      "horizontalAlign": "right"
+      }
+    },
+
   };
 
   return (
