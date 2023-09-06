@@ -34,7 +34,7 @@ const Login = ({ providers }) => {
   
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-  
+
     if (isSignUp) {
       const userData = { username, password };
       
@@ -59,10 +59,11 @@ const Login = ({ providers }) => {
     } else {
       // Handle login logic
       try {
-        const response = await fetch(`https://MongooseAPI.erenyea.repl.co/getUser?username=${username}&password=${password}`);
+        const response = await fetch(`https://MongooseAPI.erenyea.repl.co/getUser?username=${username}&password=${password}&type=${userType}`);
         const result = await response.json();
 
-        if (result.data) {
+        if (result.data.length > 0) {
+
           document.cookie = "sessionToken=mySessionTokenValue; path=/";
 
           if (userType === 'oem') {
