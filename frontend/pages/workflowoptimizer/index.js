@@ -1,22 +1,20 @@
-import PageTitle from 'components/UiElements/PageTitle/PageTitle';
-import React, { useEffect, useState } from 'react';
-import Calendar from 'containers/Calendar';
-import Container from 'components/UiElements/Container/Container';
-import { Grid } from 'baseui/layout-grid';
-import { Block } from 'baseui/block';
-import Head from 'next/head';
-import Bar from 'containers/Calendar/bar';
-import { useRouter } from 'next/router';
-import { useSession } from "next-auth/react"
-
+import PageTitle from "components/UiElements/PageTitle/PageTitle";
+import React, { useEffect, useState } from "react";
+import Calendar from "containers/Calendar";
+import Container from "components/UiElements/Container/Container";
+import { Grid } from "baseui/layout-grid";
+import { Block } from "baseui/block";
+import Head from "next/head";
+import Bar from "containers/Calendar/bar";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const index = () => {
-
   const router = useRouter();
-  const { data: session } = useSession()
+  const { data: session } = useSession();
 
   const [state, setState] = useState({ events: [] });
-  const [view, setView] = useState('month');
+  const [view, setView] = useState("week");
   const [date, setDate] = useState(new Date());
   const [jobs, setJobs] = useState(0);
   const [Allcar, setAllcar] = useState([]);
@@ -123,7 +121,7 @@ const index = () => {
         currentdate - 6
       );
     }
-    console.log('comparison Date', secondDate, newDate);
+    console.log("comparison Date", secondDate, newDate);
     var totalJobs = events?.reduce((total, num) => {
       if (
         (new Date(num?.start) >= secondDate &&
@@ -135,11 +133,11 @@ const index = () => {
         return total;
       }
     }, 0);
-    var honda = events?.filter((item) => item?.model == 'Honda');
-    var nissan = events?.filter((item) => item?.model == 'Nissan');
-    var toyota = events?.filter((item) => item?.model == 'Toyota');
-    var hyundai = events?.filter((item) => item?.model == 'Hyundai');
-    var ford = events?.filter((item) => item?.model == 'Ford Motors');
+    var honda = events?.filter((item) => item?.model == "Honda");
+    var nissan = events?.filter((item) => item?.model == "Nissan");
+    var toyota = events?.filter((item) => item?.model == "Toyota");
+    var hyundai = events?.filter((item) => item?.model == "Hyundai");
+    var ford = events?.filter((item) => item?.model == "Ford Motors");
     var carshonda = [];
     var carsnis = [];
     var carstoy = [];
@@ -402,15 +400,15 @@ const index = () => {
 
     var aldata = [
       {
-        name: 'Sean Davidson',
+        name: "Sean Davidson",
         data: carsfro,
       },
       {
-        name: 'Dennis Ray',
+        name: "Dennis Ray",
         data: carshonda,
       },
       {
-        name: 'Gilbert Holland',
+        name: "Gilbert Holland",
         data: carshyu,
       },
     ];
@@ -419,15 +417,34 @@ const index = () => {
     setRangeDate(alldate);
     setJobs(totalJobs);
   };
-
   useEffect(() => {
-    if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
-      router.push('/login?type=workshop');
-    }
+    const getData = async () => {
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", "crosswing");
+
+      var requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+
+      const reponse = await fetch(
+        "http://127.0.0.1:5000/asc/job_schedular/getschedule",
+        requestOptions
+      );
+      const data = await reponse.json();
+      console.log("Schedular Data", data);
+    };
+    getData();
   }, []);
+  // useEffect(() => {
+  //   if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
+  //     router.push('/login?type=workshop');
+  //   }
+  // }, []);
 
   useEffect(() => {
-    if (view == 'week') {
+    if (view == "week") {
       getNoJobs();
     }
   }, [view, date, state?.events]);
@@ -437,10 +454,10 @@ const index = () => {
       <Head>
         <title>Dashboard | Workflow Optimizer</title>
       </Head>
-      <PageTitle title={'WorkFlow Optimizer'} subtitle={''} />
+      <PageTitle title={"WorkFlow Optimizer"} subtitle={""} />
 
       <Container>
-        {view == 'week' ? (
+        {view == "week" ? (
           <div className="flex items-center justify-center space-x-6">
             <div className="flex text-black items-center">
               <h3 className="text-xl text-black">WorkShop 1</h3>
@@ -460,22 +477,22 @@ const index = () => {
             </div>
           </div>
         ) : (
-          ''
+          ""
         )}
-        <Block paddingTop={['0', '0', '0', '40px']} className="w-full h-full">
+        <Block paddingTop={["0", "0", "0", "40px"]} className="w-full h-full">
           <Grid gridColumns={12} gridGutters={0} gridMargins={0} gridGaps={2}>
             <div className="flex flex-col items-center w-full h-full">
               <div className="flex  items-start mx-auto space-x-2 w-full h-full">
                 <Block
-                  paddingTop={['10px', '20px', '30px', '0']}
+                  paddingTop={["10px", "20px", "30px", "0"]}
                   minHeight="500px"
-                  className={'mx-2 w-full !h-full'}
+                  className={"mx-2 w-full !h-full"}
                   id="hamza"
                 >
                   <Calendar
                     className="w-full !h-[700px]"
-                    height={'700px'}
-                    style={{ height: '700px' }}
+                    height={"700px"}
+                    style={{ height: "700px" }}
                     view={view}
                     setView={setView}
                     state={state}
@@ -483,25 +500,25 @@ const index = () => {
                     date={date}
                     setDate={setDate}
                   />
-                  {view == 'week' ? (
+                  {view == "week" ? (
                     <div className="flex w-full h-full flex-col justify-center items-center mt-4">
                       <h3 className="text-3xl text-bold text-gray-900 decoration-sky-500/30  subpixel-antialiased font-black">
                         Weekly Outlook
                       </h3>
                       <div className="text-2xl text-bold text-gray-800">
-                        No. of Jobs this week:{' '}
+                        No. of Jobs this week:{" "}
                         <i className="font-black">{jobs}</i>
                       </div>
                       <div className="w-full ">
                         {Allcar.length > 0 && rangeDate.length > 0 ? (
                           <Bar args={Allcar} categories={rangeDate} />
                         ) : (
-                          ''
+                          ""
                         )}
                       </div>
                     </div>
                   ) : (
-                    ''
+                    ""
                   )}
                 </Block>
               </div>
