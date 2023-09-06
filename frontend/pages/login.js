@@ -92,23 +92,23 @@ const Login = ({ providers }) => {
       <Container key={isSignUp}>
         <Block>
           <div className="mx-auto mt-16 bg-[#FFFFFF]">
-            <div className="flex flex-col items-center justify-center max-w-screen">
-              <div className="p-3 mt-12 bg-[#f6f6f6] border-b-2 w-5/6 items-center justify-center flex flex-col border-2 EmailPasswordborder-[#000000] rounded-xl">
-                <ul className="flex space-x-2 mt-5">
-                  <li>
+            <div className="flex flex-col items-center justify-center max-w-screen h-1/2">
+              <div className="p-3 lg:mt-12 bg-[#f6f6f6] border-b-2 w-full lg:w-5/6 items-center justify-center flex flex-col border-2 EmailPasswordborder-[#000000] rounded-xl">
+                
+                <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mt-5 items-center justify-center">
+                  <li className='w-full'>
                     <a
                       href='?type=workshop'
-                      
                       className={` ${
                         userType === 'workshop'
                           ? 'bg-[#000000] text-white'
                           : 'bg-gray-400 font-black'
-                      } inline-block  px-4 py-2 text-white-600 rounded leading-2 cursor-pointer`}
+                      } inline-block w-full text-center px-4 py-2 text-white-600 rounded leading-2 cursor-pointer`}
                     >
                       Workshop
                     </a>
                   </li>
-                  <li>
+                  <li className='w-full'>
                     <a
                       href='?type=oem'
                       onClick={() => {
@@ -119,12 +119,12 @@ const Login = ({ providers }) => {
                         userType === 'oem'
                           ? 'bg-[#000000] text-white'
                           : 'bg-gray-400 font-black'
-                      } inline-block px-4 py-2  text-white-600  rounded leading-2 cursor-pointer`}
+                      } inline-block w-full text-center px-4 py-2 text-white-600 rounded leading-2 cursor-pointer`}
                     >
                       Manufacturer/OEMs
                     </a>
                   </li>
-                  <li>
+                  <li className='w-full'>
                     <a
                       href='?type=retailer'
                       onClick={() => {
@@ -135,7 +135,7 @@ const Login = ({ providers }) => {
                         userType === 'retailer'
                           ? 'bg-[#000000] text-white'
                           : 'bg-gray-400 font-black'
-                      } inline-block px-4 py-2  text-white-600  rounded leading-2 cursor-pointer`}
+                      } inline-block w-full text-center px-4 py-2 text-white-600 rounded leading-2 cursor-pointer`}
                     >
                       Retailer/Dealership
                     </a>
@@ -181,7 +181,7 @@ const Login = ({ providers }) => {
                         </div>
                       </form>
 
-                      <div className="relative flex items-center justify-center w-full mt-6 border">
+                      {/* <div className="relative flex items-center justify-center w-full mt-6 border">
                         <div className="absolute px-5 bg-[#000000] text-white  w-fit rounded-xl">
                           Or
                         </div>
@@ -211,7 +211,8 @@ const Login = ({ providers }) => {
                         >
                           {isSignUp ? 'Login' : 'Sign Up'}
                         </p>
-                      </p>
+                      </p> */}
+
                     </div>
                   </div>
                 </div>
@@ -255,7 +256,7 @@ const Login = ({ providers }) => {
                         </div>
                       </form>
 
-                      <div className="relative flex items-center justify-center w-full mt-6 border">
+                      {/* <div className="relative flex items-center justify-center w-full mt-6 border">
                         <div className="absolute px-5 bg-[#000000] text-white  w-fit rounded-xl">
                           Or
                         </div>
@@ -285,7 +286,8 @@ const Login = ({ providers }) => {
                         >
                           {isSignUp ? 'Login' : 'Sign Up'}
                         </p>
-                      </p>
+                      </p> */}
+
                     </div>
                   </div>
                 </div>
@@ -329,7 +331,7 @@ const Login = ({ providers }) => {
                         </div>
                       </form>
 
-                      <div className="relative flex items-center justify-center w-full mt-6 border">
+                      {/* <div className="relative flex items-center justify-center w-full mt-6 border">
                         <div className="absolute px-5 bg-[#000000] text-white  w-fit rounded-xl">
                           Or
                         </div>
@@ -359,7 +361,8 @@ const Login = ({ providers }) => {
                         >
                           {isSignUp ? 'Login' : 'Sign Up'}
                         </p>
-                      </p>
+                      </p> */}
+
                     </div>
                   </div>
                 </div>
