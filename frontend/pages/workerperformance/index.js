@@ -1,35 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import PageTitle from 'components/UiElements/PageTitle/PageTitle';
-import Container from 'components/UiElements/Container/Container';
-import ApexCharts from './boxPlot';
-import Head from 'next/head';
-import { Block } from 'baseui/block';
-import InformationBox from './informationBox';
-import CalendarApp from '../../containers/Calendar/oem/newcalendar/index';
-import jsonData from './data.json';
-import { useRouter } from 'next/router';
-import { useSession } from "next-auth/react"
+import React, { useEffect, useState } from "react";
+import PageTitle from "components/UiElements/PageTitle/PageTitle";
+import Container from "components/UiElements/Container/Container";
+import ApexCharts from "./boxPlot";
+import Head from "next/head";
+import { Block } from "baseui/block";
+import InformationBox from "./informationBox";
+import CalendarApp from "../../containers/Calendar/oem/newcalendar/index";
+import jsonData from "./data.json";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const index = () => {
-
   const router = useRouter();
-  const { data: session } = useSession()
+  const { data: session } = useSession();
 
   useEffect(() => {
+    // if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
+    //   router.push('/login?type=workshop');
+    // }
 
-    if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
-      router.push('/login?type=workshop');
-    }
-
-    document.querySelectorAll('.rbc-btn-group').forEach((p) => {
-      p.style.display = 'None';
+    document.querySelectorAll(".rbc-btn-group").forEach((p) => {
+      p.style.display = "None";
     });
   }, []);
 
   const [Index, setIndex] = useState(0);
   function showInfo() {
-    document.getElementById('dropdown').value;
-    var value = parseInt(document.getElementById('dropdown').value);
+    document.getElementById("dropdown").value;
+    var value = parseInt(document.getElementById("dropdown").value);
     setIndex(value);
   }
 
@@ -38,7 +36,7 @@ const index = () => {
       <Head>
         <title>Dashboard | Worker Performance Metrics</title>
       </Head>
-      <PageTitle title={'Worker Performance Metrics'} subtitle={''} />
+      <PageTitle title={"Worker Performance Metrics"} subtitle={""} />
       <Container>
         <Block paddingBottom="20px">
           <div className="flex m-4 font-display text-center justify-center space-x-2">
@@ -75,21 +73,21 @@ const index = () => {
           <div className="flex flex-col items-center justify-center mb-8">
             <h1 className="font-black text-4xl">Next 3 months Schedule </h1>
             <span className="font-black text-xl">
-              No. of Booked Jobs: {jsonData[Index]['calendar'].length}
+              No. of Booked Jobs: {jsonData[Index]["calendar"].length}
             </span>
           </div>
           <div className="flex flex-row justify-evenly items-start space-x-10 mb-10">
             <div className="w-1/3 ml-10 !h-[500px]">
               <CalendarApp
-                args={new Date('2023-02-01T00:00:00Z')}
-                calendarData={jsonData[Index]['calendar']}
+                args={new Date("2023-02-01T00:00:00Z")}
+                calendarData={jsonData[Index]["calendar"]}
                 className="!h-[400px]"
               />
             </div>
             <div className="w-1/3 !h-[500px]">
               <CalendarApp
-                args={new Date('2023-03-01T00:00:00Z')}
-                calendarData={jsonData[Index]['calendar']}
+                args={new Date("2023-03-01T00:00:00Z")}
+                calendarData={jsonData[Index]["calendar"]}
                 className="!h-[400px]"
               />
             </div>
@@ -97,8 +95,8 @@ const index = () => {
           <div className="flex flex-col justify-center items-center">
             <div className="w-1/3 !h-[500px]">
               <CalendarApp
-                args={new Date('2023-04-01T00:00:00Z')}
-                calendarData={jsonData[Index]['calendar']}
+                args={new Date("2023-04-01T00:00:00Z")}
+                calendarData={jsonData[Index]["calendar"]}
                 className="!h-[400px]"
               />
             </div>

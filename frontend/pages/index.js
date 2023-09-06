@@ -1,50 +1,50 @@
-import { Grid, Cell } from 'baseui/layout-grid';
-import { Block } from 'baseui/block';
-import { Card, StyledBody } from 'baseui/card';
-import Container from 'components/UiElements/Container/Container';
-import LabelGroup from 'components/UiElements/LabelGroup/LabelGroup';
-import ProductViews from 'containers/Widgets/ProductViews';
-import ProductsBar from 'containers/Widgets/ProductsBar';
-import CashFlow from 'containers/Widgets/CashFlow';
-import Head from 'next/head';
-import { useEffect, useState } from 'react';
-import ApexChart from 'components/UiElements/ApexChart/ApexChart';
-import Area from './charts/area';
-import Bar from './charts/bar';
-import Column from './charts/column';
-import { useRouter } from 'next/router';
-import { datas } from '../containers/Dashboard/dashboard';
-import { useSession } from "next-auth/react"
+import { Grid, Cell } from "baseui/layout-grid";
+import { Block } from "baseui/block";
+import { Card, StyledBody } from "baseui/card";
+import Container from "components/UiElements/Container/Container";
+import LabelGroup from "components/UiElements/LabelGroup/LabelGroup";
+import ProductViews from "containers/Widgets/ProductViews";
+import ProductsBar from "containers/Widgets/ProductsBar";
+import CashFlow from "containers/Widgets/CashFlow";
+import Head from "next/head";
+import { useEffect, useState } from "react";
+import ApexChart from "components/UiElements/ApexChart/ApexChart";
+import Area from "./charts/area";
+import Bar from "./charts/bar";
+import Column from "./charts/column";
+import { useRouter } from "next/router";
+import { datas } from "../containers/Dashboard/dashboard";
+import { useSession } from "next-auth/react";
 
 const Home = () => {
   const [cond, setCond] = useState(true);
   const router = useRouter();
   const [data, setData] = useState(datas);
 
-  const { data: session } = useSession()
+  const { data: session } = useSession();
 
   if (!data) return null;
   const { productViews, recentApps, productsBar, cashFlow } = data;
 
   const productsBarOptions = [
     {
-      color: '#FF0080',
+      color: "#FF0080",
       label: productsBar.labels[0],
     },
     {
-      color: '#7928CA',
+      color: "#7928CA",
       label: productsBar.labels[1],
     },
     {
-      color: '#B3536D',
+      color: "#B3536D",
       label: productsBar.labels[2],
     },
     {
-      color: '#B8B154',
+      color: "#B8B154",
       label: productsBar.labels[3],
     },
     {
-      color: '#43CA16',
+      color: "#43CA16",
       label: productsBar.labels[4],
     },
   ];
@@ -52,21 +52,21 @@ const Home = () => {
   const [state, setState] = useState({
     series: [
       {
-        name: 'Booked Jobs',
+        name: "Booked Jobs",
         data: [130, 140, 180, 210, 170, 180, 190],
       },
       {
-        name: 'Predicted Jobs',
+        name: "Predicted Jobs",
         data: [164, 193, 228, 248, 222, 206, 237],
       },
     ],
     options: {
       chart: {
         height: 420,
-        type: 'line',
+        type: "line",
         dropShadow: {
           enabled: true,
-          color: '#000',
+          color: "#000",
           top: 18,
           left: 7,
           blur: 10,
@@ -76,16 +76,16 @@ const Home = () => {
           show: false,
         },
       },
-      colors: ['#ff0080', '#006ff3'],
+      colors: ["#ff0080", "#006ff3"],
       dataLabels: {
         enabled: true,
       },
       stroke: {
-        curve: 'smooth',
+        curve: "smooth",
       },
       title: {
-        text: '',
-        align: 'left',
+        text: "",
+        align: "left",
       },
       markers: {
         size: 1,
@@ -102,19 +102,19 @@ const Home = () => {
           "Aug' 23",
         ],
         title: {
-          text: 'Months',
+          text: "Months",
         },
       },
       yaxis: {
         title: {
-          text: 'Jobs',
+          text: "Jobs",
         },
         min: 100,
         max: 300,
       },
       legend: {
-        position: 'top',
-        horizontalAlign: 'right',
+        position: "top",
+        horizontalAlign: "right",
         // floating: true,
         // offsetY: 25,
         // offsetX: 5,
@@ -125,17 +125,17 @@ const Home = () => {
   const [stateOne, setStateOne] = useState({
     series: [
       {
-        name: 'Man Hours per Job',
+        name: "Man Hours per Job",
         data: [8, 9, 11, 13, 14, 4, 3, 2, 4, 3, 4, 2],
       },
     ],
     options: {
       chart: {
         height: 420,
-        type: 'line',
+        type: "line",
         dropShadow: {
           enabled: true,
-          color: '#000',
+          color: "#000",
           top: 18,
           left: 7,
           blur: 10,
@@ -145,16 +145,16 @@ const Home = () => {
           show: false,
         },
       },
-      colors: ['#ff0080', '#006ff3'],
+      colors: ["#ff0080", "#006ff3"],
       dataLabels: {
         enabled: true,
       },
       stroke: {
-        curve: 'smooth',
+        curve: "smooth",
       },
       title: {
-        text: '',
-        align: 'left',
+        text: "",
+        align: "left",
       },
       markers: {
         size: 1,
@@ -175,12 +175,12 @@ const Home = () => {
           "Dec' 22",
         ],
         title: {
-          text: 'Months',
+          text: "Months",
         },
       },
       yaxis: {
         title: {
-          text: 'Man Hours per Job',
+          text: "Man Hours per Job",
         },
         min: 0,
         max: 20,
@@ -189,19 +189,19 @@ const Home = () => {
         xaxis: [
           {
             x: "Jun' 22",
-            borderColor: '#775DD0',
+            borderColor: "#775DD0",
             label: {
               style: {
-                color: '#000000',
+                color: "#000000",
               },
-              text: 'Solution Deployed',
+              text: "Solution Deployed",
             },
           },
         ],
       },
       legend: {
-        position: 'top',
-        horizontalAlign: 'right',
+        position: "top",
+        horizontalAlign: "right",
       },
     },
   });
@@ -209,7 +209,7 @@ const Home = () => {
   const [stateTwo, setStateTwo] = useState({
     series: [
       {
-        name: 'Loss Incured',
+        name: "Loss Incured",
         data: [
           84,
           25450,
@@ -229,10 +229,10 @@ const Home = () => {
     options: {
       chart: {
         height: 420,
-        type: 'line',
+        type: "line",
         dropShadow: {
           enabled: true,
-          color: '#000',
+          color: "#000",
           top: 18,
           left: 7,
           blur: 10,
@@ -242,16 +242,16 @@ const Home = () => {
           show: false,
         },
       },
-      colors: ['#0000FF'],
+      colors: ["#0000FF"],
       dataLabels: {
         enabled: true,
       },
       stroke: {
-        curve: 'smooth',
+        curve: "smooth",
       },
       title: {
-        text: '',
-        align: 'left',
+        text: "",
+        align: "left",
       },
       markers: {
         size: 1,
@@ -272,17 +272,17 @@ const Home = () => {
           "Dec' 22",
         ],
         title: {
-          text: 'Month',
+          text: "Month",
         },
       },
       yaxis: {
         labels: {
           formatter: function (val) {
-            return val + '$';
+            return val + "$";
           },
         },
         title: {
-          text: 'Loss Incured(CAD)',
+          text: "Loss Incured(CAD)",
         },
         min: 0,
         max: 50000,
@@ -291,28 +291,28 @@ const Home = () => {
         xaxis: [
           {
             x: "Jun' 22",
-            borderColor: '#775DD0',
+            borderColor: "#775DD0",
             label: {
               style: {
-                color: '#000000',
+                color: "#000000",
               },
-              text: 'Solution Deployed',
+              text: "Solution Deployed",
             },
           },
         ],
       },
       legend: {
-        position: 'top',
-        horizontalAlign: 'right',
+        position: "top",
+        horizontalAlign: "right",
       },
     },
   });
 
-  useEffect(() => {
-    if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
-      router.push('/login?type=workshop');
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
+  //     router.push('/login?type=workshop');
+  //   }
+  // }, []);
 
   if (cond) {
     return (
@@ -321,9 +321,9 @@ const Home = () => {
           <title>Dashboard | Portal</title>
         </Head>
         <Block
-          marginLeft={'-8px'}
-          marginRight={'-8px'}
-          paddingTop={['15px', '20px', '30px', '40px']}
+          marginLeft={"-8px"}
+          marginRight={"-8px"}
+          paddingTop={["15px", "20px", "30px", "40px"]}
         >
           <Grid gridColumns={12} gridGutters={0} gridMargins={0}>
             <Cell span={[12, 12, 6]}>
@@ -335,13 +335,13 @@ const Home = () => {
                       Root: {
                         style: ({ $theme }) => {
                           return {
-                            borderTopColor: 'transparent',
-                            borderRightColor: 'transparent',
-                            borderBottomColor: 'transparent',
-                            borderLeftColor: 'transparent',
+                            borderTopColor: "transparent",
+                            borderRightColor: "transparent",
+                            borderBottomColor: "transparent",
+                            borderLeftColor: "transparent",
                             boxShadow: $theme.lighting.shadow400,
-                            minHeight: '312px',
-                            marginBottom: '20px',
+                            minHeight: "312px",
+                            marginBottom: "20px",
                           };
                         },
                       },
@@ -349,14 +349,14 @@ const Home = () => {
                         style: ({ $theme }) => {
                           return {
                             ...$theme.typography.font250,
-                            position: 'absolute',
+                            position: "absolute",
                           };
                         },
                       },
                       Body: {
                         style: () => {
                           return {
-                            minHeight: '260px',
+                            minHeight: "260px",
                           };
                         },
                       },
@@ -383,13 +383,13 @@ const Home = () => {
                       Root: {
                         style: ({ $theme }) => {
                           return {
-                            borderTopColor: 'transparent',
-                            borderRightColor: 'transparent',
-                            borderBottomColor: 'transparent',
-                            borderLeftColor: 'transparent',
+                            borderTopColor: "transparent",
+                            borderRightColor: "transparent",
+                            borderBottomColor: "transparent",
+                            borderLeftColor: "transparent",
                             boxShadow: $theme.lighting.shadow400,
-                            minHeight: '312px',
-                            marginBottom: '20px',
+                            minHeight: "312px",
+                            marginBottom: "20px",
                           };
                         },
                       },
@@ -397,14 +397,14 @@ const Home = () => {
                         style: ({ $theme }) => {
                           return {
                             ...$theme.typography.font250,
-                            position: 'absolute',
+                            position: "absolute",
                           };
                         },
                       },
                       Body: {
                         style: () => {
                           return {
-                            minHeight: '260px',
+                            minHeight: "260px",
                           };
                         },
                       },
@@ -431,10 +431,10 @@ const Home = () => {
                     Root: {
                       style: ({ $theme }) => {
                         return {
-                          borderTopColor: 'transparent',
-                          borderRightColor: 'transparent',
-                          borderBottomColor: 'transparent',
-                          borderLeftColor: 'transparent',
+                          borderTopColor: "transparent",
+                          borderRightColor: "transparent",
+                          borderBottomColor: "transparent",
+                          borderLeftColor: "transparent",
                           boxShadow: $theme.lighting.shadow400,
                         };
                       },
@@ -449,7 +449,7 @@ const Home = () => {
                     Body: {
                       style: () => {
                         return {
-                          minHeight: '200px',
+                          minHeight: "200px",
                         };
                       },
                     },
@@ -471,10 +471,10 @@ const Home = () => {
                     Root: {
                       style: ({ $theme }) => {
                         return {
-                          borderTopColor: 'transparent',
-                          borderRightColor: 'transparent',
-                          borderBottomColor: 'transparent',
-                          borderLeftColor: 'transparent',
+                          borderTopColor: "transparent",
+                          borderRightColor: "transparent",
+                          borderBottomColor: "transparent",
+                          borderLeftColor: "transparent",
                           boxShadow: $theme.lighting.shadow400,
                         };
                       },
@@ -489,7 +489,7 @@ const Home = () => {
                     Body: {
                       style: () => {
                         return {
-                          minHeight: '200px',
+                          minHeight: "200px",
                         };
                       },
                     },
@@ -513,10 +513,10 @@ const Home = () => {
                   Root: {
                     style: ({ $theme }) => {
                       return {
-                        borderTopColor: 'transparent',
-                        borderRightColor: 'transparent',
-                        borderBottomColor: 'transparent',
-                        borderLeftColor: 'transparent',
+                        borderTopColor: "transparent",
+                        borderRightColor: "transparent",
+                        borderBottomColor: "transparent",
+                        borderLeftColor: "transparent",
                         boxShadow: $theme.lighting.shadow400,
                         marginBottom: $theme.sizing.scale700,
                       };
@@ -526,15 +526,15 @@ const Home = () => {
                     style: ({ $theme }) => {
                       return {
                         ...$theme.typography.font250,
-                        position: 'absolute',
+                        position: "absolute",
                       };
                     },
                   },
                   Body: {
                     style: () => {
                       return {
-                        minHeight: '372px',
-                        position: 'relative',
+                        minHeight: "372px",
+                        position: "relative",
                       };
                     },
                   },
@@ -548,9 +548,9 @@ const Home = () => {
                   />
                   <LabelGroup
                     style={{
-                      position: 'absolute',
-                      width: '100%',
-                      bottom: '-66px',
+                      position: "absolute",
+                      width: "100%",
+                      bottom: "-66px",
                     }}
                     items={productsBarOptions}
                   />
@@ -565,10 +565,10 @@ const Home = () => {
                   Root: {
                     style: ({ $theme }) => {
                       return {
-                        borderTopColor: 'transparent',
-                        borderRightColor: 'transparent',
-                        borderBottomColor: 'transparent',
-                        borderLeftColor: 'transparent',
+                        borderTopColor: "transparent",
+                        borderRightColor: "transparent",
+                        borderBottomColor: "transparent",
+                        borderLeftColor: "transparent",
                         boxShadow: $theme.lighting.shadow400,
                         marginBottom: $theme.sizing.scale700,
                       };
@@ -578,14 +578,14 @@ const Home = () => {
                     style: ({ $theme }) => {
                       return {
                         ...$theme.typography.font250,
-                        position: 'absolute',
+                        position: "absolute",
                       };
                     },
                   },
                   Contents: {
                     style: () => {
                       return {
-                        minHeight: '372px',
+                        minHeight: "372px",
                       };
                     },
                   },
@@ -606,10 +606,10 @@ const Home = () => {
                     Root: {
                       style: ({ $theme }) => {
                         return {
-                          borderTopColor: 'transparent',
-                          borderRightColor: 'transparent',
-                          borderBottomColor: 'transparent',
-                          borderLeftColor: 'transparent',
+                          borderTopColor: "transparent",
+                          borderRightColor: "transparent",
+                          borderBottomColor: "transparent",
+                          borderLeftColor: "transparent",
                           boxShadow: $theme.lighting.shadow400,
                         };
                       },
@@ -624,7 +624,7 @@ const Home = () => {
                     Body: {
                       style: () => {
                         return {
-                          minHeight: '200px',
+                          minHeight: "200px",
                         };
                       },
                     },
@@ -646,10 +646,10 @@ const Home = () => {
                     Root: {
                       style: ({ $theme }) => {
                         return {
-                          borderTopColor: 'transparent',
-                          borderRightColor: 'transparent',
-                          borderBottomColor: 'transparent',
-                          borderLeftColor: 'transparent',
+                          borderTopColor: "transparent",
+                          borderRightColor: "transparent",
+                          borderBottomColor: "transparent",
+                          borderLeftColor: "transparent",
                           boxShadow: $theme.lighting.shadow400,
                         };
                       },
@@ -664,7 +664,7 @@ const Home = () => {
                     Body: {
                       style: () => {
                         return {
-                          minHeight: '200px',
+                          minHeight: "200px",
                         };
                       },
                     },

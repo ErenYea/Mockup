@@ -1,156 +1,155 @@
-import React, { useEffect } from 'react';
-import PageTitle from 'components/UiElements/PageTitle/PageTitle';
-import Container from 'components/UiElements/Container/Container';
-import { Grid, Cell } from 'baseui/layout-grid';
-import { Block } from 'baseui/block';
-import DropdownComponent from './dropdown';
-import InformationBox from './informationBoxv2';
-import Head from 'next/head';
+import React, { useEffect } from "react";
+import PageTitle from "components/UiElements/PageTitle/PageTitle";
+import Container from "components/UiElements/Container/Container";
+import { Grid, Cell } from "baseui/layout-grid";
+import { Block } from "baseui/block";
+import DropdownComponent from "./dropdown";
+import InformationBox from "./informationBoxv2";
+import Head from "next/head";
 import {
   useThemeSwitcherCtx,
   THEME,
-} from '../../contexts/theme/theme.provider';
-import { useRouter } from 'next/router';
-import { useSession } from "next-auth/react"
+} from "../../contexts/theme/theme.provider";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const index = () => {
-
   const router = useRouter();
-  const { data: session } = useSession()
+  const { data: session } = useSession();
 
   const timeSteps = [1500, 1000, 3000, 1500, 3000];
   var tasks = [
-    { name: 'Ford F-150', order: 12, time: 2, resource: 'Sean Davidson' },
-    { name: 'Toyota RAV4', order: 9, time: 2, resource: 'Dennis Ray' },
-    { name: 'Honda CR-V', order: 7, time: 1, resource: 'Gilbert Holland' },
-    { name: 'Nissan Altima', order: 12, time: 2, resource: 'Sean Davidson' },
-    { name: 'Audi Q5', order: 10, time: 3, resource: 'Dennis Ray' },
-    { name: 'BMW X5', order: 11, time: 3, resource: 'Sean Davidson' },
-    { name: 'Kia Sportage', order: 13, time: 2, resource: 'Gilbert Holland' },
-    { name: 'Toyota Camry', order: 9, time: 2, resource: 'Dennis Ray' },
-    { name: 'Toyota Tacoma', order: 12, time: 3, resource: 'Gilbert Holland' },
-    { name: 'BMW X3', order: 8, time: 2, resource: 'Sean Davidson' },
-    { name: 'Lexus RX', order: 12, time: 3, resource: 'Dennis Ray' },
-    { name: 'Hyundai Santa Fe', order: 13, time: 3, resource: 'Dennis Ray' },
+    { name: "Ford F-150", order: 12, time: 2, resource: "Sean Davidson" },
+    { name: "Toyota RAV4", order: 9, time: 2, resource: "Dennis Ray" },
+    { name: "Honda CR-V", order: 7, time: 1, resource: "Gilbert Holland" },
+    { name: "Nissan Altima", order: 12, time: 2, resource: "Sean Davidson" },
+    { name: "Audi Q5", order: 10, time: 3, resource: "Dennis Ray" },
+    { name: "BMW X5", order: 11, time: 3, resource: "Sean Davidson" },
+    { name: "Kia Sportage", order: 13, time: 2, resource: "Gilbert Holland" },
+    { name: "Toyota Camry", order: 9, time: 2, resource: "Dennis Ray" },
+    { name: "Toyota Tacoma", order: 12, time: 3, resource: "Gilbert Holland" },
+    { name: "BMW X3", order: 8, time: 2, resource: "Sean Davidson" },
+    { name: "Lexus RX", order: 12, time: 3, resource: "Dennis Ray" },
+    { name: "Hyundai Santa Fe", order: 13, time: 3, resource: "Dennis Ray" },
     {
-      name: 'Subaru Forester',
+      name: "Subaru Forester",
       order: 11,
       time: 3,
-      resource: 'Gilbert Holland',
+      resource: "Gilbert Holland",
     },
   ];
   const jsonData = [
     {
-      name: 'Sean Davidson',
+      name: "Sean Davidson",
       performance: 0.92,
-      address: '1883 Venture Place, Alberta',
-      designation: 'Senior Technician',
+      address: "1883 Venture Place, Alberta",
+      designation: "Senior Technician",
       totalJobs: 579,
-      best: 'Ford F-150',
+      best: "Ford F-150",
       score: 91,
-      desc: 'Best and Outstanding Skills. Very Reliable',
+      desc: "Best and Outstanding Skills. Very Reliable",
       pieValue: [
-        ['Task', 'Hours per Day'],
-        ['Ford', 11],
-        ['Nissan', 2],
-        ['Hyundai', 2],
-        ['Honda', 2],
-        ['Toyota', 7],
+        ["Task", "Hours per Day"],
+        ["Ford", 11],
+        ["Nissan", 2],
+        ["Hyundai", 2],
+        ["Honda", 2],
+        ["Toyota", 7],
       ],
-      pic: '/images/image.jpg',
+      pic: "/images/image.jpg",
       boxPlotValue: [
-        { x: 'Ford', y: [54, 66, 69, 75, 88] },
-        { x: 'Nissan', y: [43, 65, 69, 76, 81] },
-        { x: 'Hyundai', y: [31, 39, 45, 51, 59] },
-        { x: 'Honda', y: [39, 46, 55, 65, 71] },
-        { x: 'Toyota', y: [29, 31, 35, 39, 44] },
+        { x: "Ford", y: [54, 66, 69, 75, 88] },
+        { x: "Nissan", y: [43, 65, 69, 76, 81] },
+        { x: "Hyundai", y: [31, 39, 45, 51, 59] },
+        { x: "Honda", y: [39, 46, 55, 65, 71] },
+        { x: "Toyota", y: [29, 31, 35, 39, 44] },
       ],
-      id: 'index1',
+      id: "index1",
     },
     {
-      name: 'Dennis Ray',
+      name: "Dennis Ray",
       performance: 0.83,
-      address: '4514 Carling Avenue, Ontario',
-      designation: 'Junior Technician',
+      address: "4514 Carling Avenue, Ontario",
+      designation: "Junior Technician",
       totalJobs: 312,
-      best: 'Ford F-100',
+      best: "Ford F-100",
       score: 82,
-      desc: 'Satisfactory Performance. Has outstanding handskills',
+      desc: "Satisfactory Performance. Has outstanding handskills",
       pieValue: [
-        ['Task', 'Hours per Day'],
-        ['Ford', 15],
-        ['Nissan', 3],
-        ['Hyundai', 14],
-        ['Honda', 1],
-        ['Toyota', 4],
+        ["Task", "Hours per Day"],
+        ["Ford", 15],
+        ["Nissan", 3],
+        ["Hyundai", 14],
+        ["Honda", 1],
+        ["Toyota", 4],
       ],
       pic:
-        'https://media.istockphoto.com/id/1300972574/photo/millennial-male-team-leader-organize-virtual-workshop-with-employees-online.jpg?s=612x612&w=0&k=20&c=uP9rKidKETywVil0dbvg_vAKyv2wjXMwWJDNPHzc_Ug=',
+        "https://media.istockphoto.com/id/1300972574/photo/millennial-male-team-leader-organize-virtual-workshop-with-employees-online.jpg?s=612x612&w=0&k=20&c=uP9rKidKETywVil0dbvg_vAKyv2wjXMwWJDNPHzc_Ug=",
       boxPlotValue: [
-        { x: 'Ford', y: [44, 56, 59, 65, 78] },
-        { x: 'Nissan', y: [33, 55, 59, 66, 71] },
-        { x: 'Hyundai', y: [21, 29, 35, 41, 49] },
-        { x: 'Honda', y: [29, 36, 45, 55, 61] },
-        { x: 'Toyota', y: [19, 21, 25, 29, 34] },
+        { x: "Ford", y: [44, 56, 59, 65, 78] },
+        { x: "Nissan", y: [33, 55, 59, 66, 71] },
+        { x: "Hyundai", y: [21, 29, 35, 41, 49] },
+        { x: "Honda", y: [29, 36, 45, 55, 61] },
+        { x: "Toyota", y: [19, 21, 25, 29, 34] },
       ],
-      id: 'index2',
+      id: "index2",
     },
     {
-      name: 'Gilbert Holland',
+      name: "Gilbert Holland",
       performance: 0.81,
-      address: '3807 rue Ontario Ouest, Quebec',
-      designation: 'Junior Technician',
+      address: "3807 rue Ontario Ouest, Quebec",
+      designation: "Junior Technician",
       totalJobs: 209,
-      best: 'Ford GT',
+      best: "Ford GT",
       score: 88,
-      desc: 'Eager to learn but still needs experience!',
+      desc: "Eager to learn but still needs experience!",
       pieValue: [
-        ['Task', 'Hours per Day'],
-        ['Ford', 4],
-        ['Nissan', 5],
-        ['Hyundai', 11],
-        ['Honda', 15],
-        ['Toyota', 17],
+        ["Task", "Hours per Day"],
+        ["Ford", 4],
+        ["Nissan", 5],
+        ["Hyundai", 11],
+        ["Honda", 15],
+        ["Toyota", 17],
       ],
       pic:
-        'https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?s=612x612&w=0&k=20&c=kPvoBm6qCYzQXMAn9JUtqLREXe9-PlZyMl9i-ibaVuY=',
+        "https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?s=612x612&w=0&k=20&c=kPvoBm6qCYzQXMAn9JUtqLREXe9-PlZyMl9i-ibaVuY=",
       boxPlotValue: [
-        { x: 'Ford', y: [53, 75, 79, 86, 91] },
-        { x: 'Nissan', y: [64, 76, 79, 75, 98] },
-        { x: 'Hyundai', y: [41, 49, 55, 61, 69] },
-        { x: 'Honda', y: [49, 56, 65, 75, 81] },
-        { x: 'Toyota', y: [39, 41, 45, 49, 54] },
+        { x: "Ford", y: [53, 75, 79, 86, 91] },
+        { x: "Nissan", y: [64, 76, 79, 75, 98] },
+        { x: "Hyundai", y: [41, 49, 55, 61, 69] },
+        { x: "Honda", y: [49, 56, 65, 75, 81] },
+        { x: "Toyota", y: [39, 41, 45, 49, 54] },
       ],
-      id: 'index3',
+      id: "index3",
     },
   ];
   useEffect(() => {
-    if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
-      router.push('/login?type=workshop');
-    }
+    // if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
+    //   router.push('/login?type=workshop');
+    // }
     let cleanup = false;
     async function beginPage() {
-      const text = 'Car Model: Likely Ford F-150';
-      var elements = document.getElementsByClassName('custom');
+      const text = "Car Model: Likely Ford F-150";
+      var elements = document.getElementsByClassName("custom");
       for (let index = 0; index < elements.length; index++) {
         const element = elements[index];
         element.getElementsByTagName(
-          'div'
+          "div"
         )[0].innerHTML = `<div class="lds-ring${timeSteps[index]} hideMe${timeSteps[index]} ml-1 -mt-0.5"><div></div><div></div><div></div><div></div></div><span class="ml-1 showMe${timeSteps[index]} text-xl font-black">&#10003;</span>`;
         element
-          .getElementsByTagName('span')[0]
-          .classList.add('text-2xl', 'font-black');
+          .getElementsByTagName("span")[0]
+          .classList.add("text-2xl", "font-black");
         await new Promise((r) => setTimeout(r, timeSteps[index]));
         if (index == 0) {
           try {
             document.getElementsByClassName(
-              'custom-text'
+              "custom-text"
             )[0].textContent = text;
           } catch {}
         }
         element
-          .getElementsByTagName('span')[0]
-          .classList.remove('text-2xl', 'font-black');
+          .getElementsByTagName("span")[0]
+          .classList.remove("text-2xl", "font-black");
       }
     }
     if (!cleanup) {
@@ -167,23 +166,23 @@ const index = () => {
       <Head>
         <title>Dashboard | Workshop Floor</title>
       </Head>
-      <PageTitle title={'Workshop Floor'} subtitle={''} />
+      <PageTitle title={"Workshop Floor"} subtitle={""} />
       <Container>
         <Block paddingBottom="80px">
           <div className="flex m-4 font-display text-start  justify-center space-x-2 h-full w-full">
             <label
               className={`m-2 text-xl font-semibold ${
-                theme === THEME.light ? 'text-black' : 'text-white'
+                theme === THEME.light ? "text-black" : "text-white"
               } leading-none`}
             >
               Select Workshop
             </label>
             <DropdownComponent
               args={[
-                'Workshop Area 1',
-                'Workshop Area 2',
-                'Workshop Area 3',
-                'Workshop Area 4',
+                "Workshop Area 1",
+                "Workshop Area 2",
+                "Workshop Area 3",
+                "Workshop Area 4",
               ]}
             />
           </div>
@@ -193,22 +192,27 @@ const index = () => {
             <div className="h-fit w-full">
               <div
                 className={`${
-                  theme === THEME.light ? 'bg-black' : 'bg-white'
+                  theme === THEME.light ? "bg-black" : "bg-white"
                 } w-full flex items-center justify-center rounded-lg`}
               >
-                <video
+                <img
+                  src="http://127.0.0.1:5001/video_feed"
+                  alt=""
+                  className=" rounded-lg w-[300px] h-[550px]"
+                />
+                {/* <video
                   src="/videos/video1.mp4"
                   loop
                   autoPlay
                   muted
                   controls={false}
                   className=" rounded-lg w-[300px] h-fit"
-                ></video>
+                ></video> */}
               </div>
               <div className=" mb-4 h-1/4">
                 <h1
                   className={`custom-text text-2xl mt-2 flex p-2 font-semibold underline ${
-                    theme === THEME.light ? 'text-black' : 'text-white'
+                    theme === THEME.light ? "text-black" : "text-white"
                   }`}
                 >
                   Car Model:
@@ -217,7 +221,7 @@ const index = () => {
                   <ul className={` list-disc ml-8 `}>
                     <li
                       className={`custom p-2 h-fit text-xl text-start ${
-                        theme === THEME.light ? 'text-black' : 'text-white'
+                        theme === THEME.light ? "text-black" : "text-white"
                       } flex`}
                     >
                       <span className="">Detecting Car Model</span>
@@ -225,7 +229,7 @@ const index = () => {
                     </li>
                     <li
                       className={`custom p-2 h-fit text-xl text-start ${
-                        theme === THEME.light ? 'text-black' : 'text-white'
+                        theme === THEME.light ? "text-black" : "text-white"
                       } flex`}
                     >
                       <span className="">Calculating template placement</span>
@@ -233,7 +237,7 @@ const index = () => {
                     </li>
                     <li
                       className={`custom p-2 h-fit  text-xl text-start ${
-                        theme === THEME.light ? 'text-black' : 'text-white'
+                        theme === THEME.light ? "text-black" : "text-white"
                       } flex`}
                     >
                       <span className="">Overlaying template placement</span>
@@ -241,7 +245,7 @@ const index = () => {
                     </li>
                     <li
                       className={`custom p-2 h-fit  text-xl text-start ${
-                        theme === THEME.light ? 'text-black' : 'text-white'
+                        theme === THEME.light ? "text-black" : "text-white"
                       } flex`}
                     >
                       <span className="">Fetching placement measurement</span>
@@ -249,7 +253,7 @@ const index = () => {
                     </li>
                     <li
                       className={`custom p-2 h-fit  text-xl text-start ${
-                        theme === THEME.light ? 'text-black' : 'text-white'
+                        theme === THEME.light ? "text-black" : "text-white"
                       } flex`}
                     >
                       <span className="">
