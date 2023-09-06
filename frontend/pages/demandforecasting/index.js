@@ -42,6 +42,7 @@ const index = () => {
   const [Index, setIndex] = React.useState(0);
   const [Categoryindex, setCategoryindex] = React.useState(0);
   const [Brandindex, setBrandindex] = React.useState(0);
+  const [iframe, setIframe] = React.useState(true)
 
   function showInfo() {
     var value = parseInt(document.getElementById('dropdown').value);
@@ -91,9 +92,9 @@ const index = () => {
       setSelectedArgSecond(argSecond.slice(-12));
       setSelectedXLabels(xLabels.slice(-12));
     } else if (filterValue === 'max') {
-      
-    } else {
-      // Handle other filter options if needed
+      setSelectedArgs(args);
+      setSelectedArgSecond(argSecond);
+      setSelectedXLabels(xLabels);
     }
   };
 
@@ -162,52 +163,65 @@ const index = () => {
       </div>
 
       <ColumnChart args={jsonData[`${selectedYear}`][Index]} />
-      <div className="flex flex-col h-[100px] justify-center rounded-lg items-center border-2 w-full ">
-        <span className="text-4xl font-black z-10">
+
+      <div className="flex flex-col h-[100px] justify-center rounded-lg items-center border-2 w-full">
+        <span className="text-4xl font-black">
           Automotive Parts Projection
         </span>
       </div>
-      <div className="w-full flex justify-center mt-10 flex-row  h-[150px]">
-        <div className="w-1/4 flex justify-end mr-2 h-fit items-center">
-          <span className="mr-2 text-lg font-black">Select Category </span>
-          <select
-            id="dropdownCategory"
-            className="w-1/2 p-2.5 text-md text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none "
-          >
-            {salesData.map((val, ind) => {
-              return (
-                <option value={ind} key={ind} className="font-bold text-md">
-                  {val.name}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        <div className="w-1/3">
-          <span className="mr-2 text-lg font-black">Select Manufacturers </span>
-          <select
-            id="dropdownBrand"
-            className="w-1/2 p-2.5 text-md text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none "
-          >
-            {brandData.map((val, ind) => {
-              return (
-                <option value={ind} key={ind} className="font-bold text-md">
-                  {val.name}
-                </option>
-              );
-            })}
-          </select>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2 text-lg"
-            onClick={CategorySelect}
-          >
-            Make Plot
-          </button>
-        </div>
-      </div>
-      <div className="w-full flex items-center justify-center">
-        <LineBarv2 args={plotData[0][`${Categoryindex}${Brandindex}`]} />
-      </div>
+
+      {
+        iframe ?
+          <div className='flex items-center justify-center w-full h-screen'>
+            <iframe src="http://owaisahmed2002.pythonanywhere.com/" title="Embedded Web Page" width="100%" height="100%" />
+          </div> 
+        :
+          <>
+            <div className="w-full flex justify-center mt-10 flex-row  h-[150px]">
+              <div className="w-1/4 flex justify-end mr-2 h-fit items-center">
+                <span className="mr-2 text-lg font-black">Select Category </span>
+                <select
+                  id="dropdownCategory"
+                  className="w-1/2 p-2.5 text-md text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none "
+                >
+                  {salesData.map((val, ind) => {
+                    return (
+                      <option value={ind} key={ind} className="font-bold text-md">
+                        {val.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className="w-1/3">
+                <span className="mr-2 text-lg font-black">Select Manufacturers </span>
+                <select
+                  id="dropdownBrand"
+                  className="w-1/2 p-2.5 text-md text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none "
+                >
+                  {brandData.map((val, ind) => {
+                    return (
+                      <option value={ind} key={ind} className="font-bold text-md">
+                        {val.name}
+                      </option>
+                    );
+                  })}
+                </select>
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2 text-lg"
+                  onClick={CategorySelect}
+                >
+                  Make Plot
+                </button>
+              </div>
+            </div>
+
+            <div className="w-full flex items-center justify-center">
+              <LineBarv2 args={plotData[0][`${Categoryindex}${Brandindex}`]} />
+            </div>
+          </>
+      }
+
     </>
   );
 };
