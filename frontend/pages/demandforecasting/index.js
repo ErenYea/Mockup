@@ -230,7 +230,7 @@ export default index;
 
 export async function getServerSideProps() {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/asc/demandforecasting/sunroof_forecast`);
+    const response = await fetch("http://127.0.0.1:5000/asc/demandforecasting/sunroof_forecast");
     const results = await response.json();
 
     const OEMCapacityArray = results.data.map(item => item.OEM_capacity);
