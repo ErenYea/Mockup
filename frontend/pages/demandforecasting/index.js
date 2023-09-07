@@ -9,8 +9,7 @@ import jsonData from './data/jsonData.json';
 import { useRouter } from 'next/router';
 import { useSession } from "next-auth/react"
 
-
-const index = () => {
+const index = ({ capacities, forecasts, dates }) => {
 
   const router = useRouter();
   const { data: session } = useSession()
@@ -61,13 +60,13 @@ const index = () => {
     setSelectedYear(selectedYear);
   };
 
-  const args = [40000, 45000, 120000, 100000, 105000, 110000, 95000, 95000, 45000, 55000, 35000, 30000]
-  const argSecond = [8500, 10800, 30000, 25000, 27000, 32000,  29000, 29500, 8000, 9500, 11000, 12000]
-  const xLabels = ['Sep 2022', 'Oct 2022', 'Nov 2022', 'Dec 2022', 'Jan 2023', 'Feb 2023', 'Mar 2023', 'Apr 2023', 'May 2023', 'Jun 2023', 'Jul 2023', 'Aug 2023'];
+  // const args = [40000, 45000, 120000, 100000, 105000, 110000, 95000, 95000, 45000, 55000, 35000, 30000]
+  // const argSecond = [8500, 10800, 30000, 25000, 27000, 32000, 29000, 29500, 8000, 9500, 11000, 12000]
+  // const xLabels = ['Sep 2022', 'Oct 2022', 'Nov 2022', 'Dec 2022', 'Jan 2023', 'Feb 2023', 'Mar 2023', 'Apr 2023', 'May 2023', 'Jun 2023', 'Jul 2023', 'Aug 2023'];
   
-  const [selectedXLabels, setSelectedXLabels] = React.useState(xLabels);
-  const [selectedArgs, setSelectedArgs] = React.useState(args)
-  const [selectedArgSecond, setSelectedArgSecond] = React.useState(argSecond)
+  const [selectedDates, setSelectedDates] = React.useState(dates);
+  const [selectedCapacities, setSelectedCapacities] = React.useState(capacities)
+  const [selectedForecasts, setSelectedForecasts] = React.useState(forecasts)
 
   const [selectedFilter, setSelectedFilter] = React.useState('12');
 
@@ -78,23 +77,24 @@ const index = () => {
 
     if (filterValue === '3') {
       // Show the last 3 values
-      setSelectedArgs(args.slice(-3));
-      setSelectedArgSecond(argSecond.slice(-3));
-      setSelectedXLabels(xLabels.slice(-3));
+      setSelectedCapacities(capacities.slice(-3));
+      setSelectedForecasts(forecasts.slice(-3));
+      setSelectedDates(dates.slice(-3));
     } else if (filterValue === '6') {
       // Show the last 6 values
-      setSelectedArgs(args.slice(-6));
-      setSelectedArgSecond(argSecond.slice(-6));
-      setSelectedXLabels(xLabels.slice(-6));
+      setSelectedCapacities(capacities.slice(-6));
+      setSelectedForecasts(forecasts.slice(-6));
+      setSelectedDates(dates.slice(-6));
     } else if (filterValue === '12') {
       // Show the last 12 values
-      setSelectedArgs(args.slice(-12));
-      setSelectedArgSecond(argSecond.slice(-12));
-      setSelectedXLabels(xLabels.slice(-12));
+      setSelectedCapacities(capacities.slice(-12));
+      setSelectedForecasts(forecasts.slice(-12));
+      setSelectedDates(dates.slice(-12));
     } else if (filterValue === 'max') {
-      setSelectedArgs(args);
-      setSelectedArgSecond(argSecond);
-      setSelectedXLabels(xLabels);
+      // Show all the values
+      setSelectedCapacities(capacities);
+      setSelectedForecasts(forecasts);
+      setSelectedDates(dates);
     }
   };
 
@@ -123,7 +123,7 @@ const index = () => {
           </select>
 
         </div>
-        <LineBar args={selectedArgs} argSecond={selectedArgSecond} xLabels={selectedXLabels} />
+        <LineBar args={selectedCapacities} argSecond={selectedForecasts} xLabels={selectedDates} />
       </div>
       
       <div className="w-full flex justify-center items-center flex-row">
@@ -227,3 +227,32 @@ const index = () => {
 };
 
 export default index;
+
+export async function getServerSideProps() {
+  try {
+    const response = await fetch(`${process.env.BASE_URL}/asc/demandforecasting/sunroof_forecast`);
+    const results = await response.json();
+
+    const OEMCapacityArray = results.data.map(item => item.OEM_capacity);
+    const dateArray = results.data.map(item => new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) );
+    const forecastArray = results.data.map(item => item.forecast);
+
+    return {
+      props: {
+        capacities: OEMCapacityArray,
+        forecasts: forecastArray,
+        dates: dateArray,
+      },
+    };
+  } catch (error) {
+    console.error('Request error:', error);
+
+    return {
+      props: {
+        capacities: [],
+        forecasts: [],
+        dates: [],
+      },
+    };
+  }
+}
