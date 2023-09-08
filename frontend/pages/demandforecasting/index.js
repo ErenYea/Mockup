@@ -9,7 +9,7 @@ import jsonData from './data/jsonData.json';
 import { useRouter } from 'next/router';
 import { useSession } from "next-auth/react"
 
-const index = ({ capacities, forecasts, dates }) => {
+const index = ({ }) => {
 
   const router = useRouter();
   const { data: session } = useSession()
@@ -60,9 +60,9 @@ const index = ({ capacities, forecasts, dates }) => {
     setSelectedYear(selectedYear);
   };
 
-  // const args = [40000, 45000, 120000, 100000, 105000, 110000, 95000, 95000, 45000, 55000, 35000, 30000]
-  // const argSecond = [8500, 10800, 30000, 25000, 27000, 32000, 29000, 29500, 8000, 9500, 11000, 12000]
-  // const xLabels = ['Sep 2022', 'Oct 2022', 'Nov 2022', 'Dec 2022', 'Jan 2023', 'Feb 2023', 'Mar 2023', 'Apr 2023', 'May 2023', 'Jun 2023', 'Jul 2023', 'Aug 2023'];
+  const capacities = [40000, 45000, 120000, 100000, 105000, 110000, 95000, 95000, 45000, 55000, 35000, 30000]
+  const forecasts = [8500, 10800, 30000, 25000, 27000, 32000, 29000, 29500, 8000, 9500, 11000, 12000]
+  const dates = ['Sep 2022', 'Oct 2022', 'Nov 2022', 'Dec 2022', 'Jan 2023', 'Feb 2023', 'Mar 2023', 'Apr 2023', 'May 2023', 'Jun 2023', 'Jul 2023', 'Aug 2023'];
   
   const [selectedDates, setSelectedDates] = React.useState(dates);
   const [selectedCapacities, setSelectedCapacities] = React.useState(capacities)
@@ -227,32 +227,3 @@ const index = ({ capacities, forecasts, dates }) => {
 };
 
 export default index;
-
-export async function getServerSideProps() {
-  try {
-    const response = await fetch(`${process.env.BASE_URL}/asc/demandforecasting/sunroof_forecast`);
-    const results = await response.json();
-
-    const OEMCapacityArray = results.data.map(item => item.OEM_capacity);
-    const dateArray = results.data.map(item => new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) );
-    const forecastArray = results.data.map(item => item.forecast);
-
-    return {
-      props: {
-        capacities: OEMCapacityArray,
-        forecasts: forecastArray,
-        dates: dateArray,
-      },
-    };
-  } catch (error) {
-    console.error('Request error:', error);
-
-    return {
-      props: {
-        capacities: [],
-        forecasts: [],
-        dates: [],
-      },
-    };
-  }
-}
