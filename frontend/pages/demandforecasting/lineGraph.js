@@ -72,8 +72,7 @@ const LineBar = (props) => {
       "position": "top",
       "horizontalAlign": "right"
       }
-    },
-
+    }
   };
 
   return (

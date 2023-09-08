@@ -5,17 +5,15 @@ import LineBar from './lineGraph';
 import LineBarv2 from './lineGraphv2';
 import Head from 'next/head';
 import plotData from './data/plotData.json';
-import jsonData from './data/jsonData.json';
 import { useRouter } from 'next/router';
 import { useSession } from "next-auth/react"
 
-const index = ({ capacities, forecasts, dates }) => {
+const index = ({ capacities, forecasts, dates, installations }) => {
 
   const router = useRouter();
   const { data: session } = useSession()
 
-  const [years, setYears] = React.useState(['2021', '2022', '2023']);
-  const [selectedYear, setSelectedYear] = React.useState(2023);
+  const [selectedYear, setSelectedYear] = React.useState(Object.keys(installations)[0]);
 
   React.useEffect(() => {
     if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
@@ -59,10 +57,6 @@ const index = ({ capacities, forecasts, dates }) => {
     const selectedYear = parseInt(e.target.value);
     setSelectedYear(selectedYear);
   };
-
-  // const args = [40000, 45000, 120000, 100000, 105000, 110000, 95000, 95000, 45000, 55000, 35000, 30000]
-  // const argSecond = [8500, 10800, 30000, 25000, 27000, 32000, 29000, 29500, 8000, 9500, 11000, 12000]
-  // const xLabels = ['Sep 2022', 'Oct 2022', 'Nov 2022', 'Dec 2022', 'Jan 2023', 'Feb 2023', 'Mar 2023', 'Apr 2023', 'May 2023', 'Jun 2023', 'Jul 2023', 'Aug 2023'];
   
   const [selectedDates, setSelectedDates] = React.useState(dates);
   const [selectedCapacities, setSelectedCapacities] = React.useState(capacities)
@@ -133,14 +127,14 @@ const index = ({ capacities, forecasts, dates }) => {
       </div>
 
       <div className="w-full flex justify-center items-center flex-col lg:flex-row px-4">
-        <span className="mr-2 text-lg font-black">Select Year</span>
+        <span className="mr-2 text-lg font-black">Select Year:</span>
         <select
           id="yearDropdown"
           className="w-full lg:w-1/4 p-2.5 text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
           value={selectedYear}
           onChange={handleYearChange}
         >
-          {years.map((year) => (
+          {Object.keys(installations).map((year) => (
             <option key={year} value={year} className="font-bold">
               {year}
             </option>
@@ -150,19 +144,19 @@ const index = ({ capacities, forecasts, dates }) => {
         <span className="mx-4 text-lg font-black">Select Month:</span>
         <select
           id="dropdown"
-          key={selectedYear}
           onChange={showInfo}
           className="w-full lg:w-1/4 p-2.5 text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
         >
-          {jsonData[`${selectedYear}`].map((val, ind) => (
+          {installations[selectedYear].slice().sort((a, b) => ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].indexOf(a.name) - ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].indexOf(b.name)).map((val, ind) => (
             <option key={ind} value={ind} className="font-bold">
               {val.name}
             </option>
           ))}
+
         </select>
       </div>
 
-      <ColumnChart args={jsonData[`${selectedYear}`][Index]} />
+      <ColumnChart args={installations[`${selectedYear}`][Index]} labels={["Ford", "Honda", "Hyundai", "Nissan", "Toyota"]} />
 
       <div className="flex flex-col h-[100px] justify-center rounded-lg items-center border-2 w-full">
         <span className="text-4xl font-black">
@@ -229,6 +223,7 @@ const index = ({ capacities, forecasts, dates }) => {
 export default index;
 
 export async function getServerSideProps() {
+
   try {
     const response = await fetch(`${process.env.BASE_URL}/asc/demandforecasting/sunroof_forecast`);
     const results = await response.json();
@@ -237,14 +232,23 @@ export async function getServerSideProps() {
     const dateArray = results.data.map(item => new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) );
     const forecastArray = results.data.map(item => item.forecast);
 
+
+    const installations = await fetch(`${process.env.BASE_URL}/asc/demandforecasting/projected_installations_per_month`);
+    const installationsResults = await installations.json();
+
+    const installationsData = installationsResults.data.reduce((acc, item) => ((acc[item.year] = (acc[item.year] || []).concat({ name: item.month, value: [item.ford_vehicles, item.honda_vehicles, item.hyundai_vehicles, item.nissan_vehicles, item.toyota_vehicles] })), acc), {});
+
     return {
       props: {
         capacities: OEMCapacityArray,
         forecasts: forecastArray,
         dates: dateArray,
+        installations: installationsData
       },
     };
-  } catch (error) {
+  }
+  
+  catch (error) {
     console.error('Request error:', error);
 
     return {
