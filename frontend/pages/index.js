@@ -16,17 +16,13 @@ import { datas } from '../containers/Dashboard/dashboard';
 
 const Home = () => {
 
-  const [data, setData] = useState(datas);
-  if (!data) return null;
-  const { productViews, recentApps, productsBar, cashFlow } = data;
-
   const [bookedJobs, setBookedJobs] = useState([])
   const [predictedJobs, setPredictedJobs] = useState([])
   const [months, setMonths] = useState([])
   const [jobsChartOptions, setJobsChartOptions] = useState([])
 
   useEffect(() => {
-    
+
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/jobs_per_month`)
       .then((res) => res.json())
       .then((res) => {
@@ -115,6 +111,10 @@ const Home = () => {
     })
 
   }, [bookedJobs, predictedJobs, months]);
+
+  const [data, setData] = useState(datas);
+  if (!data) return null;
+  const { productViews, recentApps, productsBar, cashFlow } = data;
 
   const productsBarOptions = [
     {
@@ -373,12 +373,16 @@ const Home = () => {
                   }}
                 >
                   <StyledBody>
-                    <ApexChart
-                      options={jobsChartOptions?.options}
-                      series={jobsChartOptions?.series}
-                      type="line"
-                      height={250}
-                    />
+                    {jobsChartOptions ? (
+                      <ApexChart
+                        options={jobsChartOptions.options}
+                        series={jobsChartOptions.series}
+                        type="line"
+                        height={250}
+                      />
+                    ) : (
+                      <> ... </>
+                    )}
                   </StyledBody>
                 </Card>
               </Cell>
