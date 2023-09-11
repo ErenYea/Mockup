@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.10",
+    "dotenv": "^16.3.1",
     "tailwind-scrollbar": "^2.1.0"
   }
 }

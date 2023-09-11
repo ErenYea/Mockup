@@ -22,12 +22,24 @@ const Home = ({ jobsResults }) => {
 
   if (!data) return null;
   const { productViews, recentApps, productsBar, cashFlow } = data;
-  
+
+  const [jobsPerMonth, setJobsPerMonth] = useState(null)
+  const [isLoading, setLoading] = useState(true)
+ 
   useEffect(() => {
-    if (document.cookie !== 'sessionToken=mySessionTokenValue') {
-      router.push('/login?type=workshop');
-    }
+    console.log(process.env, jobsResults)
+    fetch(`${process.env.BASE_URL}/asc/home/jobs_per_month`)
+      .then((res) => res.json())
+      .then((data) => {
+        setJobsPerMonth(data);
+        setLoading(false);
+        console.log(data); // Log the data here
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
   }, []);
+  
 
   // const [bookedJobs, setBookedJobs] = useState(bookedJobs)
   // const [predictedJobs, setPredictedJobs] = useState(predictedJobs)
@@ -700,15 +712,21 @@ const Home = ({ jobsResults }) => {
 
 export default Home;
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  
+  const sessionToken = context.req.headers.cookie?.split(';').find(cookie => cookie.trim().startsWith('sessionToken='));
+  
+  if (sessionToken) {
 
-  const jobsResponse = await fetch(`${process.env.BASE_URL}/asc/home/jobs_per_month`);
-  const jobsResults = await jobsResponse.json();
+    const jobsResponse = await fetch(`${process.env.BASE_URL}/asc/home/jobs_per_month`);
+    const jobsResults = await jobsResponse.json();
 
-  return {
-    props: {
-      jobsResults
-    },
-  };
-
+    return {
+      props: {
+        jobsResults: jobsResults.data
+      }
+    };
+  } else {
+    return { redirect: { destination: "/login?type=workshop" } };
+  }
 }
