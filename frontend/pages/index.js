@@ -48,6 +48,7 @@ const Home = () => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
+
   }, []);
 
   useEffect(() => {
@@ -373,8 +374,8 @@ const Home = () => {
                 >
                   <StyledBody>
                     <ApexChart
-                      options={jobsChartOptions.options}
-                      series={jobsChartOptions.series}
+                      options={jobsChartOptions?.options}
+                      series={jobsChartOptions?.series}
                       type="line"
                       height={250}
                     />
