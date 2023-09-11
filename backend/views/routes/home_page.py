@@ -73,6 +73,7 @@ def man_hours_utilized_send_data(data,cursor):
     g.db_connection.commit()
 
 @home_page_bp.route("/asc/home/jobs_per_month", methods=["POST", "GET"])
+@cross_origin()
 def jobs_per_month():
     cursor=g.db_cursor
     if request.method == "POST":

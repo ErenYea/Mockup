@@ -16,7 +16,7 @@ import { useRouter } from 'next/router';
 import { datas } from '../containers/Dashboard/dashboard';
 import { useSession } from "next-auth/react"
 
-const Home = () => {
+const Home = ({ jobsPerMonth }) => {
   const [cond, setCond] = useState(true);
   const router = useRouter();
   const [data, setData] = useState(datas);
@@ -25,6 +25,92 @@ const Home = () => {
 
   if (!data) return null;
   const { productViews, recentApps, productsBar, cashFlow } = data;
+  
+  useEffect(() => {
+    if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
+      router.push('/login?type=workshop');
+    }
+  }, []);
+
+  const [bookedJobs, setBookedJobs] = useState([])
+  const [predictedJobs, setPredictedJobs] = useState([])
+  const [months, setMonths] = useState([])
+  const [jobsChartOptions, setJobsChartOptions] = useState([])
+
+  useEffect(() => {
+    const bookedJobsArray = jobsPerMonth.map(item => item.booked_jobs);
+    const monthArray = jobsPerMonth.map(item => item.month);
+    const predictedJobsArray = jobsPerMonth.map(item => item.predicted_jobs);
+  
+    setBookedJobs(bookedJobsArray);
+    setPredictedJobs(predictedJobsArray);
+    setMonths(monthArray);
+  }, [jobsPerMonth]);
+  
+  useEffect(() => {
+
+    setJobsChartOptions({
+      series: [
+        {
+          name: 'Booked Jobs',
+          data: bookedJobs,
+        },
+        {
+          name: 'Predicted Jobs',
+          data: predictedJobs,
+        },
+      ],
+      options: {
+        chart: {
+          height: 420,
+          type: 'line',
+          dropShadow: {
+            enabled: true,
+            color: '#000',
+            top: 18,
+            left: 7,
+            blur: 10,
+            opacity: 0.2,
+          },
+          toolbar: {
+            show: false,
+          },
+        },
+        colors: ['#ff0080', '#006ff3'],
+        dataLabels: {
+          enabled: true,
+        },
+        stroke: {
+          curve: 'smooth',
+        },
+        title: {
+          text: '',
+          align: 'left',
+        },
+        markers: {
+          size: 1,
+        },
+        xaxis: {
+          categories: months,
+          title: {
+            text: 'Months',
+          },
+        },
+        yaxis: {
+          title: {
+            text: 'Jobs',
+          },
+          min: Math.floor((Math.min(Math.min(...bookedJobs), Math.min(...predictedJobs))-20)/ 10) * 10,
+          max: Math.ceil((Math.max(Math.max(...bookedJobs), Math.max(...predictedJobs))+20)/ 10) * 10
+        },
+        legend: {
+          position: 'top',
+          horizontalAlign: 'right',
+        },
+      },
+    })
+    
+  }, [bookedJobs, months, predictedJobs]);  
 
   const productsBarOptions = [
     {
@@ -48,79 +134,6 @@ const Home = () => {
       label: productsBar.labels[4],
     },
   ];
-
-  const [state, setState] = useState({
-    series: [
-      {
-        name: 'Booked Jobs',
-        data: [130, 140, 180, 210, 170, 180, 190],
-      },
-      {
-        name: 'Predicted Jobs',
-        data: [164, 193, 228, 248, 222, 206, 237],
-      },
-    ],
-    options: {
-      chart: {
-        height: 420,
-        type: 'line',
-        dropShadow: {
-          enabled: true,
-          color: '#000',
-          top: 18,
-          left: 7,
-          blur: 10,
-          opacity: 0.2,
-        },
-        toolbar: {
-          show: false,
-        },
-      },
-      colors: ['#ff0080', '#006ff3'],
-      dataLabels: {
-        enabled: true,
-      },
-      stroke: {
-        curve: 'smooth',
-      },
-      title: {
-        text: '',
-        align: 'left',
-      },
-      markers: {
-        size: 1,
-      },
-      xaxis: {
-        categories: [
-          // "Jan' 23",
-          "Feb' 23",
-          "Mar' 23",
-          "Apr' 23",
-          "May' 23",
-          "Jun' 23",
-          "Jul' 23",
-          "Aug' 23",
-        ],
-        title: {
-          text: 'Months',
-        },
-      },
-      yaxis: {
-        title: {
-          text: 'Jobs',
-        },
-        min: 100,
-        max: 300,
-      },
-      legend: {
-        position: 'top',
-        horizontalAlign: 'right',
-        // floating: true,
-        // offsetY: 25,
-        // offsetX: 5,
-      },
-    },
-  });
 
   const [stateOne, setStateOne] = useState({
     series: [
@@ -308,12 +321,6 @@ const Home = () => {
     },
   });
 
-  useEffect(() => {
-    if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
-      router.push('/login?type=workshop');
-    }
-  }, []);
-
   if (cond) {
     return (
       <Container>
@@ -364,8 +371,8 @@ const Home = () => {
                   >
                     <StyledBody>
                       <ApexChart
-                        options={state.options}
-                        series={state.series}
+                        options={jobsChartOptions.options}
+                        series={jobsChartOptions.series}
                         type="line"
                         height={250}
                       />
@@ -422,6 +429,7 @@ const Home = () => {
               </Grid>
             </Cell>
           </Grid>
+
           <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
             <Cell span={12}>
               <div className="cash-flow mt-5">
@@ -462,6 +470,7 @@ const Home = () => {
               </div>
             </Cell>
           </Grid>
+
           <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
             <Cell span={12}>
               <div className="cash-flow  mt-5 mb-5">
@@ -505,6 +514,7 @@ const Home = () => {
               </div>
             </Cell>
           </Grid>
+
           <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
             <Cell span={[12, 12, 6]}>
               <Card
@@ -597,6 +607,7 @@ const Home = () => {
               </Card>
             </Cell>
           </Grid>
+
           <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
             <Cell span={12}>
               <div className="cash-flow mt-5">
@@ -637,6 +648,7 @@ const Home = () => {
               </div>
             </Cell>
           </Grid>
+
           <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
             <Cell span={12}>
               <div className="cash-flow mt-5">
@@ -682,6 +694,7 @@ const Home = () => {
               </div>
             </Cell>
           </Grid>
+
         </Block>
       </Container>
     );
@@ -691,3 +704,27 @@ const Home = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps() {
+
+  try {
+    const jobsResponse = await fetch(`${process.env.BASE_URL}/asc/home/jobs_per_month`);
+    const jobsResults = await jobsResponse.json();
+
+    return {
+      props: {
+        jobsPerMonth: jobsResults.data
+      },
+    };
+  }
+  
+  catch (error) {
+    console.error('Request error:', error);
+
+    return {
+      props: {
+        jobsPerMonth: []
+      },
+    };
+  }
+}
