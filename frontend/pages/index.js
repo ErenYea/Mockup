@@ -12,14 +12,11 @@ import ApexChart from 'components/UiElements/ApexChart/ApexChart';
 import Area from './charts/area';
 import Bar from './charts/bar';
 import Column from './charts/column';
-import { useRouter } from 'next/router';
 import { datas } from '../containers/Dashboard/dashboard';
 
 const Home = () => {
-  
-  const router = useRouter();
-  const [data, setData] = useState(datas);
 
+  const [data, setData] = useState(datas);
   if (!data) return null;
   const { productViews, recentApps, productsBar, cashFlow } = data;
 

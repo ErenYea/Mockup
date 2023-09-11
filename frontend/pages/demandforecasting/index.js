@@ -1,23 +1,95 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PageTitle from 'components/UiElements/PageTitle/PageTitle';
 import ColumnChart from './columnChart';
 import LineBar from './lineGraph';
 import LineBarv2 from './lineGraphv2';
 import Head from 'next/head';
 import plotData from './data/plotData.json';
-import { useRouter } from 'next/router';
 
-const index = ({ capacities, forecasts, dates, installations }) => {
+const index = () => {
 
-  const router = useRouter();
-  
-  React.useEffect(() => {
-    if (document.cookie !== 'sessionToken=mySessionTokenValue') {
-      router.push('/login?type=workshop');
-    }
+  const [capacities, setCapacities] = useState([])
+  const [forecasts, setForecasts] = useState([])
+  const [dates, setDates] = useState([])
+  const [installations, setInstallations] = useState([])
+  const [selectedYear, setSelectedYear] = useState(null);
+
+  useEffect(() => {
+    
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/demandforecasting/sunroof_forecast`)
+      .then((res) => res.json())
+      .then((res) => {
+
+        const OEMCapacityArray = res.data.map(item => item.OEM_capacity);
+        const dateArray = res.data.map(item => new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) );
+        const forecastArray = res.data.map(item => item.forecast);
+        
+        setCapacities(OEMCapacityArray)
+        setForecasts(forecastArray)
+        setDates(dateArray)
+
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/demandforecasting/projected_installations_per_month`)
+    .then((res) => res.json())
+    .then((res) => {
+
+      const installationsData = res.data.reduce((acc, item) => ((acc[item.year] = (acc[item.year] || []).concat({ name: item.month, value: [item.ford_vehicles, item.honda_vehicles, item.hyundai_vehicles, item.nissan_vehicles, item.toyota_vehicles] })), acc), {});
+
+      setInstallations(installationsData)
+
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+
   }, []);
   
-  // const [selectedYear, setSelectedYear] = React.useState(Object.keys(installations)[0]);
+  const [selectedDates, setSelectedDates] = useState([]);
+  const [selectedCapacities, setSelectedCapacities] = useState([])
+  const [selectedForecasts, setSelectedForecasts] = useState([])
+  
+  useEffect(() => {
+
+    setSelectedCapacities(capacities)
+    setSelectedForecasts(forecasts)
+    setSelectedDates(dates)
+    setSelectedYear(Object.keys(installations)[0])
+
+  }, [capacities, forecasts, dates, installations]);
+  
+
+  const [selectedFilter, setSelectedFilter] = React.useState('12');
+  const handleFilterChange = (event) => {
+    const filterValue = event.target.value;
+
+    setSelectedFilter(filterValue);
+
+    if (filterValue === '3') {
+      // Show the last 3 values
+      setSelectedCapacities(capacities.slice(-3));
+      setSelectedForecasts(forecasts.slice(-3));
+      setSelectedDates(dates.slice(-3));
+    } else if (filterValue === '6') {
+      // Show the last 6 values
+      setSelectedCapacities(capacities.slice(-6));
+      setSelectedForecasts(forecasts.slice(-6));
+      setSelectedDates(dates.slice(-6));
+    } else if (filterValue === '12') {
+      // Show the last 12 values
+      setSelectedCapacities(capacities.slice(-12));
+      setSelectedForecasts(forecasts.slice(-12));
+      setSelectedDates(dates.slice(-12));
+    } else if (filterValue === 'max') {
+      // Show all the values
+      setSelectedCapacities(capacities);
+      setSelectedForecasts(forecasts);
+      setSelectedDates(dates);
+    }
+  };
 
   const salesData = [
     { name: 'Aluminum Wheels' },
@@ -54,40 +126,6 @@ const index = ({ capacities, forecasts, dates, installations }) => {
   const handleYearChange = (e) => {
     const selectedYear = parseInt(e.target.value);
     setSelectedYear(selectedYear);
-  };
-  
-  const [selectedDates, setSelectedDates] = React.useState(dates);
-  const [selectedCapacities, setSelectedCapacities] = React.useState(capacities)
-  const [selectedForecasts, setSelectedForecasts] = React.useState(forecasts)
-
-  const [selectedFilter, setSelectedFilter] = React.useState('12');
-
-  const handleFilterChange = (event) => {
-    const filterValue = event.target.value;
-
-    setSelectedFilter(filterValue);
-
-    if (filterValue === '3') {
-      // Show the last 3 values
-      setSelectedCapacities(capacities.slice(-3));
-      setSelectedForecasts(forecasts.slice(-3));
-      setSelectedDates(dates.slice(-3));
-    } else if (filterValue === '6') {
-      // Show the last 6 values
-      setSelectedCapacities(capacities.slice(-6));
-      setSelectedForecasts(forecasts.slice(-6));
-      setSelectedDates(dates.slice(-6));
-    } else if (filterValue === '12') {
-      // Show the last 12 values
-      setSelectedCapacities(capacities.slice(-12));
-      setSelectedForecasts(forecasts.slice(-12));
-      setSelectedDates(dates.slice(-12));
-    } else if (filterValue === 'max') {
-      // Show all the values
-      setSelectedCapacities(capacities);
-      setSelectedForecasts(forecasts);
-      setSelectedDates(dates);
-    }
   };
 
   return (
@@ -126,7 +164,7 @@ const index = ({ capacities, forecasts, dates, installations }) => {
 
       <div className="w-full flex justify-center items-center flex-col lg:flex-row px-4">
         <span className="mr-2 text-lg font-black">Select Year:</span>
-        {/* <select
+        <select
           id="yearDropdown"
           className="w-full lg:w-1/4 p-2.5 text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
           value={selectedYear}
@@ -137,7 +175,7 @@ const index = ({ capacities, forecasts, dates, installations }) => {
               {year}
             </option>
           ))}
-        </select> */}
+        </select>
         
         <span className="mx-4 text-lg font-black">Select Month:</span>
         <select
@@ -145,7 +183,7 @@ const index = ({ capacities, forecasts, dates, installations }) => {
           onChange={showInfo}
           className="w-full lg:w-1/4 p-2.5 text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
         >
-          {installations[selectedYear].slice().sort((a, b) => ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].indexOf(a.name) - ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].indexOf(b.name)).map((val, ind) => (
+          {installations[selectedYear]?.slice().sort((a, b) => ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].indexOf(a.name) - ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].indexOf(b.name)).map((val, ind) => (
             <option key={ind} value={ind} className="font-bold">
               {val.name}
             </option>
@@ -154,7 +192,7 @@ const index = ({ capacities, forecasts, dates, installations }) => {
         </select>
       </div>
 
-      <ColumnChart args={installations[`${selectedYear}`][Index]} labels={["Ford", "Honda", "Hyundai", "Nissan", "Toyota"]} />
+      <ColumnChart args={installations?.[`${selectedYear}`]?.[Index]} labels={["Ford", "Honda", "Hyundai", "Nissan", "Toyota"]} />
 
       <div className="flex flex-col h-[100px] justify-center rounded-lg items-center border-2 w-full">
         <span className="text-4xl font-black">
@@ -220,28 +258,42 @@ const index = ({ capacities, forecasts, dates, installations }) => {
 
 export default index;
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  
+  const sessionToken = context.req.headers.cookie?.split(';').find(cookie => cookie.trim().startsWith('sessionToken='));
+  
+  if (sessionToken) {
 
-  const response = await fetch(`${process.env.BASE_URL}/asc/demandforecasting/sunroof_forecast`);
-  const results = await response.json();
-
-  const OEMCapacityArray = results.data.map(item => item.OEM_capacity);
-  const dateArray = results.data.map(item => new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) );
-  const forecastArray = results.data.map(item => item.forecast);
-
-
-  const installations = await fetch(`${process.env.BASE_URL}/asc/demandforecasting/projected_installations_per_month`);
-  const installationsResults = await installations.json();
-
-  const installationsData = installationsResults.data.reduce((acc, item) => ((acc[item.year] = (acc[item.year] || []).concat({ name: item.month, value: [item.ford_vehicles, item.honda_vehicles, item.hyundai_vehicles, item.nissan_vehicles, item.toyota_vehicles] })), acc), {});
-
-  return {
-    props: {
-      capacities: OEMCapacityArray,
-      forecasts: forecastArray,
-      dates: dateArray,
-      installations: installationsData
-    },
-  };
-
+    return {
+      props: { }
+    };
+  } else {
+    return { redirect: { destination: "/login?type=workshop" } };
+  }
 }
+
+// export async function getServerSideProps() {
+
+//   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/demandforecasting/sunroof_forecast`);
+//   const results = await response.json();
+
+//   const OEMCapacityArray = results.data.map(item => item.OEM_capacity);
+//   const dateArray = results.data.map(item => new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) );
+//   const forecastArray = results.data.map(item => item.forecast);
+
+
+//   const installations = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/demandforecasting/projected_installations_per_month`);
+//   const installationsResults = await installations.json();
+
+//   const installationsData = installationsResults.data.reduce((acc, item) => ((acc[item.year] = (acc[item.year] || []).concat({ name: item.month, value: [item.ford_vehicles, item.honda_vehicles, item.hyundai_vehicles, item.nissan_vehicles, item.toyota_vehicles] })), acc), {});
+
+//   return {
+//     props: {
+//       capacities: OEMCapacityArray,
+//       forecasts: forecastArray,
+//       dates: dateArray,
+//       installations: installationsData
+//     },
+//   };
+
+// }

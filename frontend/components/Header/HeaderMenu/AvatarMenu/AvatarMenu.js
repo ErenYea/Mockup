@@ -4,19 +4,17 @@ import { Avatar } from 'baseui/avatar';
 import { StatefulPopover } from 'baseui/popover';
 import ActiveLink from '../../../UiElements/NavLink/NavLink';
 import MenuWrapper, { MenuItem } from './AvatarMenu.styled';
-import { signOut } from "next-auth/react"
 
 const Menu = () => {
 
   const handleSignOut = () => {
     document.cookie = 'sessionToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-    signOut();
   }
 
   return (
     <MenuWrapper>
       <li>
-        <ActiveLink activeClassName="active" href='/login'>
+        <ActiveLink activeClassName="active" href='/login?type=workshop'>
           <MenuItem onClick={handleSignOut}>Logout</MenuItem>
         </ActiveLink>
       </li>
