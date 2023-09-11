@@ -6,14 +6,8 @@ import { Grid } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
 import Head from 'next/head';
 import Bar from 'containers/Calendar/bar';
-import { useRouter } from 'next/router';
-import { useSession } from "next-auth/react"
-
 
 const index = () => {
-
-  const router = useRouter();
-  const { data: session } = useSession()
 
   const [state, setState] = useState({ events: [] });
   const [view, setView] = useState('month');
@@ -421,12 +415,6 @@ const index = () => {
   };
 
   useEffect(() => {
-    if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
-      router.push('/login?type=workshop');
-    }
-  }, []);
-
-  useEffect(() => {
     if (view == 'week') {
       getNoJobs();
     }
@@ -514,3 +502,18 @@ const index = () => {
 };
 
 export default index;
+
+export async function getServerSideProps(context) {
+  
+  const sessionToken = context.req.headers.cookie?.split(';').find(cookie => cookie.trim().startsWith('sessionToken='));
+  
+  if (sessionToken) {
+
+    return {
+      props: { }
+    };
+    
+  } else {
+    return { redirect: { destination: "/login?type=workshop" } };
+  }
+}

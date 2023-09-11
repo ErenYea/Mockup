@@ -714,6 +714,7 @@ export async function getServerSideProps(context) {
     return {
       props: { }
     };
+    
   } else {
     return { redirect: { destination: "/login?type=workshop" } };
   }

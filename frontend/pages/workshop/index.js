@@ -10,13 +10,8 @@ import {
   useThemeSwitcherCtx,
   THEME,
 } from '../../contexts/theme/theme.provider';
-import { useRouter } from 'next/router';
-import { useSession } from "next-auth/react"
 
 const index = () => {
-
-  const router = useRouter();
-  const { data: session } = useSession()
 
   const timeSteps = [1500, 1000, 3000, 1500, 3000];
   var tasks = [
@@ -125,9 +120,7 @@ const index = () => {
     },
   ];
   useEffect(() => {
-    if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
-      router.push('/login?type=workshop');
-    }
+
     let cleanup = false;
     async function beginPage() {
       const text = 'Car Model: Likely Ford F-150';
@@ -330,3 +323,18 @@ const index = () => {
 };
 
 export default index;
+
+export async function getServerSideProps(context) {
+  
+  const sessionToken = context.req.headers.cookie?.split(';').find(cookie => cookie.trim().startsWith('sessionToken='));
+  
+  if (sessionToken) {
+
+    return {
+      props: { }
+    };
+
+  } else {
+    return { redirect: { destination: "/login?type=workshop" } };
+  }
+}

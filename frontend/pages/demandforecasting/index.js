@@ -267,33 +267,8 @@ export async function getServerSideProps(context) {
     return {
       props: { }
     };
+    
   } else {
     return { redirect: { destination: "/login?type=workshop" } };
   }
 }
-
-// export async function getServerSideProps() {
-
-//   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/demandforecasting/sunroof_forecast`);
-//   const results = await response.json();
-
-//   const OEMCapacityArray = results.data.map(item => item.OEM_capacity);
-//   const dateArray = results.data.map(item => new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) );
-//   const forecastArray = results.data.map(item => item.forecast);
-
-
-//   const installations = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/demandforecasting/projected_installations_per_month`);
-//   const installationsResults = await installations.json();
-
-//   const installationsData = installationsResults.data.reduce((acc, item) => ((acc[item.year] = (acc[item.year] || []).concat({ name: item.month, value: [item.ford_vehicles, item.honda_vehicles, item.hyundai_vehicles, item.nissan_vehicles, item.toyota_vehicles] })), acc), {});
-
-//   return {
-//     props: {
-//       capacities: OEMCapacityArray,
-//       forecasts: forecastArray,
-//       dates: dateArray,
-//       installations: installationsData
-//     },
-//   };
-
-// }
