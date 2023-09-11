@@ -11,10 +11,8 @@ import HeaderWrapper, {
   NavLeft,
   NavRight,
 } from './DefaultHeader.styled';
-import { useSession } from "next-auth/react"
 
 const DefaultHeader = () => {
-  const { data: session } = useSession()
 
   return (
     <HeaderWrapper className="default">
@@ -23,7 +21,7 @@ const DefaultHeader = () => {
           <MenuRight className="top-bar flex justify-end ">
             <AvatarMenu
               name="A"
-              src={session?.user?.image}
+              src=''
             />
           </MenuRight>
         </TopBar>
@@ -39,7 +37,7 @@ const DefaultHeader = () => {
               <NavRight className="cart-and-avatar">
                 <AvatarMenu
                   name="A"
-                  src={session?.user?.image}
+                  src=''
                 />
               </NavRight>
             </StickyNav>

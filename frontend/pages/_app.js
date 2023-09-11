@@ -13,9 +13,8 @@ import 'react-flexbox-grid/dist/react-flexbox-grid.css';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'typeface-open-sans';
 import './workshop/workshopFloor.css';
-import { SessionProvider } from "next-auth/react"
 
-export default function CustomApp({ Component, pageProps: { session, ...pageProps } }) {
+export default function CustomApp({ Component }) {
   const [theme, setTheme] = React.useState(THEME.dark);
   React.useEffect(() => {
     let SAVED_THEME = localStorage.getItem('theme');
@@ -26,7 +25,6 @@ export default function CustomApp({ Component, pageProps: { session, ...pageProp
   }, []);
 
   return (
-    <SessionProvider session={session}>
       <ThemeSwitcherProvider value={{ theme, setTheme }}>
         <StyletronProvider value={styletron} debugAfterHydration>
           <BaseProvider
@@ -38,12 +36,11 @@ export default function CustomApp({ Component, pageProps: { session, ...pageProp
           >
             <CartProvider>
               <Layout>
-                  <Component {...pageProps} />
+                  <Component />
               </Layout>
             </CartProvider>
           </BaseProvider>
         </StyletronProvider>
       </ThemeSwitcherProvider>
-    </SessionProvider>
   );
 }

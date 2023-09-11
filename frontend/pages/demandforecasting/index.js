@@ -6,20 +6,18 @@ import LineBarv2 from './lineGraphv2';
 import Head from 'next/head';
 import plotData from './data/plotData.json';
 import { useRouter } from 'next/router';
-import { useSession } from "next-auth/react"
 
 const index = ({ capacities, forecasts, dates, installations }) => {
 
   const router = useRouter();
-  const { data: session } = useSession()
-
-  const [selectedYear, setSelectedYear] = React.useState(Object.keys(installations)[0]);
-
+  
   React.useEffect(() => {
-    if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
+    if (document.cookie !== 'sessionToken=mySessionTokenValue') {
       router.push('/login?type=workshop');
     }
   }, []);
+  
+  // const [selectedYear, setSelectedYear] = React.useState(Object.keys(installations)[0]);
 
   const salesData = [
     { name: 'Aluminum Wheels' },
@@ -128,7 +126,7 @@ const index = ({ capacities, forecasts, dates, installations }) => {
 
       <div className="w-full flex justify-center items-center flex-col lg:flex-row px-4">
         <span className="mr-2 text-lg font-black">Select Year:</span>
-        <select
+        {/* <select
           id="yearDropdown"
           className="w-full lg:w-1/4 p-2.5 text-gray-700 font-bold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
           value={selectedYear}
@@ -139,7 +137,7 @@ const index = ({ capacities, forecasts, dates, installations }) => {
               {year}
             </option>
           ))}
-        </select>
+        </select> */}
         
         <span className="mx-4 text-lg font-black">Select Month:</span>
         <select
@@ -224,39 +222,26 @@ export default index;
 
 export async function getServerSideProps() {
 
-  try {
-    const response = await fetch(`${process.env.BASE_URL}/asc/demandforecasting/sunroof_forecast`);
-    const results = await response.json();
+  const response = await fetch(`${process.env.BASE_URL}/asc/demandforecasting/sunroof_forecast`);
+  const results = await response.json();
 
-    const OEMCapacityArray = results.data.map(item => item.OEM_capacity);
-    const dateArray = results.data.map(item => new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) );
-    const forecastArray = results.data.map(item => item.forecast);
+  const OEMCapacityArray = results.data.map(item => item.OEM_capacity);
+  const dateArray = results.data.map(item => new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) );
+  const forecastArray = results.data.map(item => item.forecast);
 
 
-    const installations = await fetch(`${process.env.BASE_URL}/asc/demandforecasting/projected_installations_per_month`);
-    const installationsResults = await installations.json();
+  const installations = await fetch(`${process.env.BASE_URL}/asc/demandforecasting/projected_installations_per_month`);
+  const installationsResults = await installations.json();
 
-    const installationsData = installationsResults.data.reduce((acc, item) => ((acc[item.year] = (acc[item.year] || []).concat({ name: item.month, value: [item.ford_vehicles, item.honda_vehicles, item.hyundai_vehicles, item.nissan_vehicles, item.toyota_vehicles] })), acc), {});
+  const installationsData = installationsResults.data.reduce((acc, item) => ((acc[item.year] = (acc[item.year] || []).concat({ name: item.month, value: [item.ford_vehicles, item.honda_vehicles, item.hyundai_vehicles, item.nissan_vehicles, item.toyota_vehicles] })), acc), {});
 
-    return {
-      props: {
-        capacities: OEMCapacityArray,
-        forecasts: forecastArray,
-        dates: dateArray,
-        installations: installationsData
-      },
-    };
-  }
-  
-  catch (error) {
-    console.error('Request error:', error);
+  return {
+    props: {
+      capacities: OEMCapacityArray,
+      forecasts: forecastArray,
+      dates: dateArray,
+      installations: installationsData
+    },
+  };
 
-    return {
-      props: {
-        capacities: [],
-        forecasts: [],
-        dates: [],
-      },
-    };
-  }
 }

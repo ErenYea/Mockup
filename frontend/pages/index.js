@@ -14,103 +14,101 @@ import Bar from './charts/bar';
 import Column from './charts/column';
 import { useRouter } from 'next/router';
 import { datas } from '../containers/Dashboard/dashboard';
-import { useSession } from "next-auth/react"
 
-const Home = ({ jobsPerMonth }) => {
-  const [cond, setCond] = useState(true);
+const Home = ({ jobsResults }) => {
+  
   const router = useRouter();
   const [data, setData] = useState(datas);
-
-  const { data: session } = useSession()
 
   if (!data) return null;
   const { productViews, recentApps, productsBar, cashFlow } = data;
   
   useEffect(() => {
-    if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
+    if (document.cookie !== 'sessionToken=mySessionTokenValue') {
       router.push('/login?type=workshop');
     }
   }, []);
 
-  const [bookedJobs, setBookedJobs] = useState([])
-  const [predictedJobs, setPredictedJobs] = useState([])
-  const [months, setMonths] = useState([])
-  const [jobsChartOptions, setJobsChartOptions] = useState([])
+  // const [bookedJobs, setBookedJobs] = useState(bookedJobs)
+  // const [predictedJobs, setPredictedJobs] = useState(predictedJobs)
+  // const [months, setMonths] = useState(months)
+  // const [jobsChartOptions, setJobsChartOptions] = useState([])
 
-  useEffect(() => {
-    const bookedJobsArray = jobsPerMonth.map(item => item.booked_jobs);
-    const monthArray = jobsPerMonth.map(item => item.month);
-    const predictedJobsArray = jobsPerMonth.map(item => item.predicted_jobs);
+  // useEffect(() => {
+  //   console.log(jobsPerMonth)
+  //   const bookedJobsArray = jobsPerMonth.map(item => item.booked_jobs);
+  //   const monthArray = jobsPerMonth.map(item => item.month);
+  //   const predictedJobsArray = jobsPerMonth.map(item => item.predicted_jobs);
   
-    setBookedJobs(bookedJobsArray);
-    setPredictedJobs(predictedJobsArray);
-    setMonths(monthArray);
-  }, [jobsPerMonth]);
+  //   setBookedJobs(bookedJobsArray);
+  //   setPredictedJobs(predictedJobsArray);
+  //   setMonths(monthArray);
+  // }, []);
   
-  useEffect(() => {
+  // useEffect(() => {
 
-    setJobsChartOptions({
-      series: [
-        {
-          name: 'Booked Jobs',
-          data: bookedJobs,
-        },
-        {
-          name: 'Predicted Jobs',
-          data: predictedJobs,
-        },
-      ],
-      options: {
-        chart: {
-          height: 420,
-          type: 'line',
-          dropShadow: {
-            enabled: true,
-            color: '#000',
-            top: 18,
-            left: 7,
-            blur: 10,
-            opacity: 0.2,
-          },
-          toolbar: {
-            show: false,
-          },
-        },
-        colors: ['#ff0080', '#006ff3'],
-        dataLabels: {
-          enabled: true,
-        },
-        stroke: {
-          curve: 'smooth',
-        },
-        title: {
-          text: '',
-          align: 'left',
-        },
-        markers: {
-          size: 1,
-        },
-        xaxis: {
-          categories: months,
-          title: {
-            text: 'Months',
-          },
-        },
-        yaxis: {
-          title: {
-            text: 'Jobs',
-          },
-          min: Math.floor((Math.min(Math.min(...bookedJobs), Math.min(...predictedJobs))-20)/ 10) * 10,
-          max: Math.ceil((Math.max(Math.max(...bookedJobs), Math.max(...predictedJobs))+20)/ 10) * 10
-        },
-        legend: {
-          position: 'top',
-          horizontalAlign: 'right',
-        },
-      },
-    })
+  //   setJobsChartOptions({
+  //     series: [
+  //       {
+  //         name: 'Booked Jobs',
+  //         data: bookedJobs,
+  //       },
+  //       {
+  //         name: 'Predicted Jobs',
+  //         data: predictedJobs,
+  //       },
+  //     ],
+  //     options: {
+  //       chart: {
+  //         height: 420,
+  //         type: 'line',
+  //         dropShadow: {
+  //           enabled: true,
+  //           color: '#000',
+  //           top: 18,
+  //           left: 7,
+  //           blur: 10,
+  //           opacity: 0.2,
+  //         },
+  //         toolbar: {
+  //           show: false,
+  //         },
+  //       },
+  //       colors: ['#ff0080', '#006ff3'],
+  //       dataLabels: {
+  //         enabled: true,
+  //       },
+  //       stroke: {
+  //         curve: 'smooth',
+  //       },
+  //       title: {
+  //         text: '',
+  //         align: 'left',
+  //       },
+  //       markers: {
+  //         size: 1,
+  //       },
+  //       xaxis: {
+  //         categories: months,
+  //         title: {
+  //           text: 'Months',
+  //         },
+  //       },
+  //       yaxis: {
+  //         title: {
+  //           text: 'Jobs',
+  //         },
+  //         min: Math.floor((Math.min(Math.min(...bookedJobs), Math.min(...predictedJobs))-20)/ 10) * 10,
+  //         max: Math.ceil((Math.max(Math.max(...bookedJobs), Math.max(...predictedJobs))+20)/ 10) * 10
+  //       },
+  //       legend: {
+  //         position: 'top',
+  //         horizontalAlign: 'right',
+  //       },
+  //     },
+  //   })
     
-  }, [bookedJobs, months, predictedJobs]);  
+  // }, [bookedJobs, months, predictedJobs]);  
 
   const productsBarOptions = [
     {
@@ -321,120 +319,22 @@ const Home = ({ jobsPerMonth }) => {
     },
   });
 
-  if (cond) {
-    return (
-      <Container>
-        <Head>
-          <title>Dashboard | Portal</title>
-        </Head>
-        <Block
-          marginLeft={'-8px'}
-          marginRight={'-8px'}
-          paddingTop={['15px', '20px', '30px', '40px']}
-        >
-          <Grid gridColumns={12} gridGutters={0} gridMargins={0}>
-            <Cell span={[12, 12, 6]}>
-              <Grid gridGutters={16} gridMargins={0}>
-                <Cell span={12}>
-                  <Card
-                    title="Jobs per Month"
-                    overrides={{
-                      Root: {
-                        style: ({ $theme }) => {
-                          return {
-                            borderTopColor: 'transparent',
-                            borderRightColor: 'transparent',
-                            borderBottomColor: 'transparent',
-                            borderLeftColor: 'transparent',
-                            boxShadow: $theme.lighting.shadow400,
-                            minHeight: '312px',
-                            marginBottom: '20px',
-                          };
-                        },
-                      },
-                      Title: {
-                        style: ({ $theme }) => {
-                          return {
-                            ...$theme.typography.font250,
-                            position: 'absolute',
-                          };
-                        },
-                      },
-                      Body: {
-                        style: () => {
-                          return {
-                            minHeight: '260px',
-                          };
-                        },
-                      },
-                    }}
-                  >
-                    <StyledBody>
-                      <ApexChart
-                        options={jobsChartOptions.options}
-                        series={jobsChartOptions.series}
-                        type="line"
-                        height={250}
-                      />
-                    </StyledBody>
-                  </Card>
-                </Cell>
-              </Grid>
-            </Cell>
-            <Cell span={[12, 12, 6]}>
-              <Grid gridGutters={16} gridMargins={0}>
-                <Cell span={12}>
-                  <Card
-                    title="Upcoming Week Outlook"
-                    overrides={{
-                      Root: {
-                        style: ({ $theme }) => {
-                          return {
-                            borderTopColor: 'transparent',
-                            borderRightColor: 'transparent',
-                            borderBottomColor: 'transparent',
-                            borderLeftColor: 'transparent',
-                            boxShadow: $theme.lighting.shadow400,
-                            minHeight: '312px',
-                            marginBottom: '20px',
-                          };
-                        },
-                      },
-                      Title: {
-                        style: ({ $theme }) => {
-                          return {
-                            ...$theme.typography.font250,
-                            position: 'absolute',
-                          };
-                        },
-                      },
-                      Body: {
-                        style: () => {
-                          return {
-                            minHeight: '260px',
-                          };
-                        },
-                      },
-                    }}
-                  >
-                    <StyledBody>
-                      <ProductViews
-                        categories={productViews.categories}
-                        products={productViews.products}
-                        views={productViews.views}
-                      />
-                    </StyledBody>
-                  </Card>
-                </Cell>
-              </Grid>
-            </Cell>
-          </Grid>
-
-          <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
-            <Cell span={12}>
-              <div className="cash-flow mt-5">
+  return (
+    <Container>
+      <Head>
+        <title>Dashboard | Portal</title>
+      </Head>
+      <Block
+        marginLeft={'-8px'}
+        marginRight={'-8px'}
+        paddingTop={['15px', '20px', '30px', '40px']}
+      >
+        {/* <Grid gridColumns={12} gridGutters={0} gridMargins={0}>
+          <Cell span={[12, 12, 6]}>
+            <Grid gridGutters={16} gridMargins={0}>
+              <Cell span={12}>
                 <Card
-                  title="Predicted Incoming Jobs - Breakdown by Manufacturer"
+                  title="Jobs per Month"
                   overrides={{
                     Root: {
                       style: ({ $theme }) => {
@@ -444,6 +344,8 @@ const Home = ({ jobsPerMonth }) => {
                           borderBottomColor: 'transparent',
                           borderLeftColor: 'transparent',
                           boxShadow: $theme.lighting.shadow400,
+                          minHeight: '312px',
+                          marginBottom: '20px',
                         };
                       },
                     },
@@ -451,232 +353,14 @@ const Home = ({ jobsPerMonth }) => {
                       style: ({ $theme }) => {
                         return {
                           ...$theme.typography.font250,
+                          position: 'absolute',
                         };
                       },
                     },
                     Body: {
                       style: () => {
                         return {
-                          minHeight: '200px',
-                        };
-                      },
-                    },
-                  }}
-                >
-                  <StyledBody>
-                    <Bar />
-                  </StyledBody>
-                </Card>
-              </div>
-            </Cell>
-          </Grid>
-
-          <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
-            <Cell span={12}>
-              <div className="cash-flow  mt-5 mb-5">
-                <Card
-                  title="Production Variation"
-                  overrides={{
-                    Root: {
-                      style: ({ $theme }) => {
-                        return {
-                          borderTopColor: 'transparent',
-                          borderRightColor: 'transparent',
-                          borderBottomColor: 'transparent',
-                          borderLeftColor: 'transparent',
-                          boxShadow: $theme.lighting.shadow400,
-                        };
-                      },
-                    },
-                    Title: {
-                      style: ({ $theme }) => {
-                        return {
-                          ...$theme.typography.font250,
-                        };
-                      },
-                    },
-                    Body: {
-                      style: () => {
-                        return {
-                          minHeight: '200px',
-                        };
-                      },
-                    },
-                  }}
-                >
-                  <StyledBody>
-                    <CashFlow
-                      categories={cashFlow.categories}
-                      cash={cashFlow.cash}
-                    />
-                  </StyledBody>
-                </Card>
-              </div>
-            </Cell>
-          </Grid>
-
-          <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
-            <Cell span={[12, 12, 6]}>
-              <Card
-                title="Quality Control"
-                overrides={{
-                  Root: {
-                    style: ({ $theme }) => {
-                      return {
-                        borderTopColor: 'transparent',
-                        borderRightColor: 'transparent',
-                        borderBottomColor: 'transparent',
-                        borderLeftColor: 'transparent',
-                        boxShadow: $theme.lighting.shadow400,
-                        marginBottom: $theme.sizing.scale700,
-                      };
-                    },
-                  },
-                  Title: {
-                    style: ({ $theme }) => {
-                      return {
-                        ...$theme.typography.font250,
-                        position: 'absolute',
-                      };
-                    },
-                  },
-                  Body: {
-                    style: () => {
-                      return {
-                        minHeight: '372px',
-                        position: 'relative',
-                      };
-                    },
-                  },
-                }}
-              >
-                <StyledBody>
-                  <ProductsBar
-                    className="padding-control"
-                    labels={productsBar.labels}
-                    products={productsBar.products}
-                  />
-                  <LabelGroup
-                    style={{
-                      position: 'absolute',
-                      width: '100%',
-                      bottom: '-66px',
-                    }}
-                    items={productsBarOptions}
-                  />
-                </StyledBody>
-              </Card>
-            </Cell>
-
-            <Cell span={[12, 12, 6]}>
-              <Card
-                title="Customer Satisfaction"
-                overrides={{
-                  Root: {
-                    style: ({ $theme }) => {
-                      return {
-                        borderTopColor: 'transparent',
-                        borderRightColor: 'transparent',
-                        borderBottomColor: 'transparent',
-                        borderLeftColor: 'transparent',
-                        boxShadow: $theme.lighting.shadow400,
-                        marginBottom: $theme.sizing.scale700,
-                      };
-                    },
-                  },
-                  Title: {
-                    style: ({ $theme }) => {
-                      return {
-                        ...$theme.typography.font250,
-                        position: 'absolute',
-                      };
-                    },
-                  },
-                  Contents: {
-                    style: () => {
-                      return {
-                        minHeight: '372px',
-                      };
-                    },
-                  },
-                }}
-              >
-                <StyledBody>
-                  <Column />
-                </StyledBody>
-              </Card>
-            </Cell>
-          </Grid>
-
-          <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
-            <Cell span={12}>
-              <div className="cash-flow mt-5">
-                <Card
-                  title="Defect Losses"
-                  overrides={{
-                    Root: {
-                      style: ({ $theme }) => {
-                        return {
-                          borderTopColor: 'transparent',
-                          borderRightColor: 'transparent',
-                          borderBottomColor: 'transparent',
-                          borderLeftColor: 'transparent',
-                          boxShadow: $theme.lighting.shadow400,
-                        };
-                      },
-                    },
-                    Title: {
-                      style: ({ $theme }) => {
-                        return {
-                          ...$theme.typography.font250,
-                        };
-                      },
-                    },
-                    Body: {
-                      style: () => {
-                        return {
-                          minHeight: '200px',
-                        };
-                      },
-                    },
-                  }}
-                >
-                  <StyledBody>
-                    <Area />
-                  </StyledBody>
-                </Card>
-              </div>
-            </Cell>
-          </Grid>
-
-          <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
-            <Cell span={12}>
-              <div className="cash-flow mt-5">
-                <Card
-                  title="Man Hours Utilized"
-                  overrides={{
-                    Root: {
-                      style: ({ $theme }) => {
-                        return {
-                          borderTopColor: 'transparent',
-                          borderRightColor: 'transparent',
-                          borderBottomColor: 'transparent',
-                          borderLeftColor: 'transparent',
-                          boxShadow: $theme.lighting.shadow400,
-                        };
-                      },
-                    },
-                    Title: {
-                      style: ({ $theme }) => {
-                        return {
-                          ...$theme.typography.font250,
-                        };
-                      },
-                    },
-                    Body: {
-                      style: () => {
-                        return {
-                          minHeight: '200px',
+                          minHeight: '260px',
                         };
                       },
                     },
@@ -684,47 +368,347 @@ const Home = ({ jobsPerMonth }) => {
                 >
                   <StyledBody>
                     <ApexChart
-                      options={stateOne.options}
-                      series={stateOne.series}
+                      options={jobsChartOptions.options}
+                      series={jobsChartOptions.series}
                       type="line"
-                      height={500}
+                      height={250}
                     />
                   </StyledBody>
                 </Card>
-              </div>
-            </Cell>
-          </Grid>
+              </Cell>
+            </Grid>
+          </Cell>
+          <Cell span={[12, 12, 6]}>
+            <Grid gridGutters={16} gridMargins={0}>
+              <Cell span={12}>
+                <Card
+                  title="Upcoming Week Outlook"
+                  overrides={{
+                    Root: {
+                      style: ({ $theme }) => {
+                        return {
+                          borderTopColor: 'transparent',
+                          borderRightColor: 'transparent',
+                          borderBottomColor: 'transparent',
+                          borderLeftColor: 'transparent',
+                          boxShadow: $theme.lighting.shadow400,
+                          minHeight: '312px',
+                          marginBottom: '20px',
+                        };
+                      },
+                    },
+                    Title: {
+                      style: ({ $theme }) => {
+                        return {
+                          ...$theme.typography.font250,
+                          position: 'absolute',
+                        };
+                      },
+                    },
+                    Body: {
+                      style: () => {
+                        return {
+                          minHeight: '260px',
+                        };
+                      },
+                    },
+                  }}
+                >
+                  <StyledBody>
+                    <ProductViews
+                      categories={productViews.categories}
+                      products={productViews.products}
+                      views={productViews.views}
+                    />
+                  </StyledBody>
+                </Card>
+              </Cell>
+            </Grid>
+          </Cell>
+        </Grid> */}
 
-        </Block>
-      </Container>
-    );
-  } else {
-    return <></>;
-  }
+        <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+          <Cell span={12}>
+            <div className="cash-flow mt-5">
+              <Card
+                title="Predicted Incoming Jobs - Breakdown by Manufacturer"
+                overrides={{
+                  Root: {
+                    style: ({ $theme }) => {
+                      return {
+                        borderTopColor: 'transparent',
+                        borderRightColor: 'transparent',
+                        borderBottomColor: 'transparent',
+                        borderLeftColor: 'transparent',
+                        boxShadow: $theme.lighting.shadow400,
+                      };
+                    },
+                  },
+                  Title: {
+                    style: ({ $theme }) => {
+                      return {
+                        ...$theme.typography.font250,
+                      };
+                    },
+                  },
+                  Body: {
+                    style: () => {
+                      return {
+                        minHeight: '200px',
+                      };
+                    },
+                  },
+                }}
+              >
+                <StyledBody>
+                  <Bar />
+                </StyledBody>
+              </Card>
+            </div>
+          </Cell>
+        </Grid>
+
+        <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+          <Cell span={12}>
+            <div className="cash-flow  mt-5 mb-5">
+              <Card
+                title="Production Variation"
+                overrides={{
+                  Root: {
+                    style: ({ $theme }) => {
+                      return {
+                        borderTopColor: 'transparent',
+                        borderRightColor: 'transparent',
+                        borderBottomColor: 'transparent',
+                        borderLeftColor: 'transparent',
+                        boxShadow: $theme.lighting.shadow400,
+                      };
+                    },
+                  },
+                  Title: {
+                    style: ({ $theme }) => {
+                      return {
+                        ...$theme.typography.font250,
+                      };
+                    },
+                  },
+                  Body: {
+                    style: () => {
+                      return {
+                        minHeight: '200px',
+                      };
+                    },
+                  },
+                }}
+              >
+                <StyledBody>
+                  <CashFlow
+                    categories={cashFlow.categories}
+                    cash={cashFlow.cash}
+                  />
+                </StyledBody>
+              </Card>
+            </div>
+          </Cell>
+        </Grid>
+
+        <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+          <Cell span={[12, 12, 6]}>
+            <Card
+              title="Quality Control"
+              overrides={{
+                Root: {
+                  style: ({ $theme }) => {
+                    return {
+                      borderTopColor: 'transparent',
+                      borderRightColor: 'transparent',
+                      borderBottomColor: 'transparent',
+                      borderLeftColor: 'transparent',
+                      boxShadow: $theme.lighting.shadow400,
+                      marginBottom: $theme.sizing.scale700,
+                    };
+                  },
+                },
+                Title: {
+                  style: ({ $theme }) => {
+                    return {
+                      ...$theme.typography.font250,
+                      position: 'absolute',
+                    };
+                  },
+                },
+                Body: {
+                  style: () => {
+                    return {
+                      minHeight: '372px',
+                      position: 'relative',
+                    };
+                  },
+                },
+              }}
+            >
+              <StyledBody>
+                <ProductsBar
+                  className="padding-control"
+                  labels={productsBar.labels}
+                  products={productsBar.products}
+                />
+                <LabelGroup
+                  style={{
+                    position: 'absolute',
+                    width: '100%',
+                    bottom: '-66px',
+                  }}
+                  items={productsBarOptions}
+                />
+              </StyledBody>
+            </Card>
+          </Cell>
+
+          <Cell span={[12, 12, 6]}>
+            <Card
+              title="Customer Satisfaction"
+              overrides={{
+                Root: {
+                  style: ({ $theme }) => {
+                    return {
+                      borderTopColor: 'transparent',
+                      borderRightColor: 'transparent',
+                      borderBottomColor: 'transparent',
+                      borderLeftColor: 'transparent',
+                      boxShadow: $theme.lighting.shadow400,
+                      marginBottom: $theme.sizing.scale700,
+                    };
+                  },
+                },
+                Title: {
+                  style: ({ $theme }) => {
+                    return {
+                      ...$theme.typography.font250,
+                      position: 'absolute',
+                    };
+                  },
+                },
+                Contents: {
+                  style: () => {
+                    return {
+                      minHeight: '372px',
+                    };
+                  },
+                },
+              }}
+            >
+              <StyledBody>
+                <Column />
+              </StyledBody>
+            </Card>
+          </Cell>
+        </Grid>
+
+        <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+          <Cell span={12}>
+            <div className="cash-flow mt-5">
+              <Card
+                title="Defect Losses"
+                overrides={{
+                  Root: {
+                    style: ({ $theme }) => {
+                      return {
+                        borderTopColor: 'transparent',
+                        borderRightColor: 'transparent',
+                        borderBottomColor: 'transparent',
+                        borderLeftColor: 'transparent',
+                        boxShadow: $theme.lighting.shadow400,
+                      };
+                    },
+                  },
+                  Title: {
+                    style: ({ $theme }) => {
+                      return {
+                        ...$theme.typography.font250,
+                      };
+                    },
+                  },
+                  Body: {
+                    style: () => {
+                      return {
+                        minHeight: '200px',
+                      };
+                    },
+                  },
+                }}
+              >
+                <StyledBody>
+                  <Area />
+                </StyledBody>
+              </Card>
+            </div>
+          </Cell>
+        </Grid>
+
+        <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
+          <Cell span={12}>
+            <div className="cash-flow mt-5">
+              <Card
+                title="Man Hours Utilized"
+                overrides={{
+                  Root: {
+                    style: ({ $theme }) => {
+                      return {
+                        borderTopColor: 'transparent',
+                        borderRightColor: 'transparent',
+                        borderBottomColor: 'transparent',
+                        borderLeftColor: 'transparent',
+                        boxShadow: $theme.lighting.shadow400,
+                      };
+                    },
+                  },
+                  Title: {
+                    style: ({ $theme }) => {
+                      return {
+                        ...$theme.typography.font250,
+                      };
+                    },
+                  },
+                  Body: {
+                    style: () => {
+                      return {
+                        minHeight: '200px',
+                      };
+                    },
+                  },
+                }}
+              >
+                <StyledBody>
+                  <ApexChart
+                    options={stateOne.options}
+                    series={stateOne.series}
+                    type="line"
+                    height={500}
+                  />
+                </StyledBody>
+              </Card>
+            </div>
+          </Cell>
+        </Grid>
+
+      </Block>
+    </Container>
+  );
+  
 };
 
 export default Home;
 
 export async function getServerSideProps() {
 
-  try {
-    const jobsResponse = await fetch(`${process.env.BASE_URL}/asc/home/jobs_per_month`);
-    const jobsResults = await jobsResponse.json();
+  const jobsResponse = await fetch(`${process.env.BASE_URL}/asc/home/jobs_per_month`);
+  const jobsResults = await jobsResponse.json();
 
-    return {
-      props: {
-        jobsPerMonth: jobsResults.data
-      },
-    };
-  }
-  
-  catch (error) {
-    console.error('Request error:', error);
+  return {
+    props: {
+      jobsResults
+    },
+  };
 
-    return {
-      props: {
-        jobsPerMonth: []
-      },
-    };
-  }
 }
