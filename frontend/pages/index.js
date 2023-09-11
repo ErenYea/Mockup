@@ -15,7 +15,7 @@ import Column from './charts/column';
 import { useRouter } from 'next/router';
 import { datas } from '../containers/Dashboard/dashboard';
 
-const Home = ({ jobsResults }) => {
+const Home = () => {
   
   const router = useRouter();
   const [data, setData] = useState(datas);
@@ -23,104 +23,100 @@ const Home = ({ jobsResults }) => {
   if (!data) return null;
   const { productViews, recentApps, productsBar, cashFlow } = data;
 
-  const [jobsPerMonth, setJobsPerMonth] = useState(null)
-  const [isLoading, setLoading] = useState(true)
- 
+  const [bookedJobs, setBookedJobs] = useState([])
+  const [predictedJobs, setPredictedJobs] = useState([])
+  const [months, setMonths] = useState([])
+  const [jobsChartOptions, setJobsChartOptions] = useState([])
+
   useEffect(() => {
-    console.log(process.env, jobsResults)
-    fetch(`${process.env.BASE_URL}/asc/home/jobs_per_month`)
+    
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/jobs_per_month`)
       .then((res) => res.json())
-      .then((data) => {
-        setJobsPerMonth(data);
-        setLoading(false);
-        console.log(data); // Log the data here
+      .then((res) => {
+        const jobsPerMonth = res.data.sort((a, b) => {
+          const monthA = new Date(`20${a.month}`);
+          const monthB = new Date(`20${b.month}`);
+          return monthA - monthB;
+        });
+        
+        const bookedJobsArray = jobsPerMonth.map(item => item.booked_jobs);
+        const monthArray = jobsPerMonth.map(item => item.month);
+        const predictedJobsArray = jobsPerMonth.map(item => item.predicted_jobs);
+
+        setBookedJobs(bookedJobsArray);
+        setPredictedJobs(predictedJobsArray);
+        setMonths(monthArray);
+
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, []);
-  
 
-  // const [bookedJobs, setBookedJobs] = useState(bookedJobs)
-  // const [predictedJobs, setPredictedJobs] = useState(predictedJobs)
-  // const [months, setMonths] = useState(months)
-  // const [jobsChartOptions, setJobsChartOptions] = useState([])
+  useEffect(() => {
 
-  // useEffect(() => {
-  //   console.log(jobsPerMonth)
-  //   const bookedJobsArray = jobsPerMonth.map(item => item.booked_jobs);
-  //   const monthArray = jobsPerMonth.map(item => item.month);
-  //   const predictedJobsArray = jobsPerMonth.map(item => item.predicted_jobs);
-  
-  //   setBookedJobs(bookedJobsArray);
-  //   setPredictedJobs(predictedJobsArray);
-  //   setMonths(monthArray);
-  // }, []);
-  
-  // useEffect(() => {
+    setJobsChartOptions({
+      series: [
+        {
+          name: 'Booked Jobs',
+          data: bookedJobs,
+        },
+        {
+          name: 'Predicted Jobs',
+          data: predictedJobs,
+        },
+      ],
+      options: {
+        chart: {
+          height: 420,
+          type: 'line',
+          dropShadow: {
+            enabled: true,
+            color: '#000',
+            top: 18,
+            left: 7,
+            blur: 10,
+            opacity: 0.2,
+          },
+          toolbar: {
+            show: false,
+          },
+        },
+        colors: ['#ff0080', '#006ff3'],
+        dataLabels: {
+          enabled: true,
+        },
+        stroke: {
+          curve: 'smooth',
+        },
+        title: {
+          text: '',
+          align: 'left',
+        },
+        markers: {
+          size: 1,
+        },
+        xaxis: {
+          categories: months,
+          title: {
+            text: 'Months',
+          },
+        },
+        yaxis: {
+          title: {
+            text: 'Jobs',
+          },
+          min: Math.floor((Math.min(Math.min(...bookedJobs), Math.min(...predictedJobs))-20)/ 10) * 10,
+          max: Math.ceil((Math.max(Math.max(...bookedJobs), Math.max(...predictedJobs))+20)/ 10) * 10
+        },
+        legend: {
+          position: 'top',
+          horizontalAlign: 'right',
+        },
+      },
+    })
 
-  //   setJobsChartOptions({
-  //     series: [
-  //       {
-  //         name: 'Booked Jobs',
-  //         data: bookedJobs,
-  //       },
-  //       {
-  //         name: 'Predicted Jobs',
-  //         data: predictedJobs,
-  //       },
-  //     ],
-  //     options: {
-  //       chart: {
-  //         height: 420,
-  //         type: 'line',
-  //         dropShadow: {
-  //           enabled: true,
-  //           color: '#000',
-  //           top: 18,
-  //           left: 7,
-  //           blur: 10,
-  //           opacity: 0.2,
-  //         },
-  //         toolbar: {
-  //           show: false,
-  //         },
-  //       },
-  //       colors: ['#ff0080', '#006ff3'],
-  //       dataLabels: {
-  //         enabled: true,
-  //       },
-  //       stroke: {
-  //         curve: 'smooth',
-  //       },
-  //       title: {
-  //         text: '',
-  //         align: 'left',
-  //       },
-  //       markers: {
-  //         size: 1,
-  //       },
-  //       xaxis: {
-  //         categories: months,
-  //         title: {
-  //           text: 'Months',
-  //         },
-  //       },
-  //       yaxis: {
-  //         title: {
-  //           text: 'Jobs',
-  //         },
-  //         min: Math.floor((Math.min(Math.min(...bookedJobs), Math.min(...predictedJobs))-20)/ 10) * 10,
-  //         max: Math.ceil((Math.max(Math.max(...bookedJobs), Math.max(...predictedJobs))+20)/ 10) * 10
-  //       },
-  //       legend: {
-  //         position: 'top',
-  //         horizontalAlign: 'right',
-  //       },
-  //     },
-  //   })
-    
-  // }, [bookedJobs, months, predictedJobs]);  
+  }, [bookedJobs, predictedJobs, months]);
 
   const productsBarOptions = [
     {
@@ -341,7 +337,7 @@ const Home = ({ jobsResults }) => {
         marginRight={'-8px'}
         paddingTop={['15px', '20px', '30px', '40px']}
       >
-        {/* <Grid gridColumns={12} gridGutters={0} gridMargins={0}>
+        <Grid gridColumns={12} gridGutters={0} gridMargins={0}>
           <Cell span={[12, 12, 6]}>
             <Grid gridGutters={16} gridMargins={0}>
               <Cell span={12}>
@@ -437,7 +433,7 @@ const Home = ({ jobsResults }) => {
               </Cell>
             </Grid>
           </Cell>
-        </Grid> */}
+        </Grid>
 
         <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
           <Cell span={12}>
@@ -718,13 +714,8 @@ export async function getServerSideProps(context) {
   
   if (sessionToken) {
 
-    const jobsResponse = await fetch(`${process.env.BASE_URL}/asc/home/jobs_per_month`);
-    const jobsResults = await jobsResponse.json();
-
     return {
-      props: {
-        jobsResults: jobsResults.data
-      }
+      props: { }
     };
   } else {
     return { redirect: { destination: "/login?type=workshop" } };
