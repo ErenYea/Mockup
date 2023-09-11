@@ -71,7 +71,7 @@ const index = () => {
     } else {
       setIndex(0);
     }
-  }, [session]);
+  }, []);
 
   function showInfo() {
     var value = parseInt(document.getElementById('dropdown').value);
@@ -282,7 +282,7 @@ export async function getServerSideProps(context) {
     return {
       props: { }
     };
-    
+
   } else {
     return { redirect: { destination: "/login?type=oem" } };
   }
