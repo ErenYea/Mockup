@@ -19,7 +19,7 @@ const Home = () => {
   const [bookedJobs, setBookedJobs] = useState([])
   const [predictedJobs, setPredictedJobs] = useState([])
   const [months, setMonths] = useState([])
-  const [jobsChartOptions, setJobsChartOptions] = useState([])
+  const [jobsChartOptions, setJobsChartOptions] = useState(null)
   const [productViews, setProductViews] = useState(null)
 
   useEffect(() => {
@@ -365,52 +365,50 @@ const Home = () => {
           <Cell span={[12, 12, 6]}>
             <Grid gridGutters={16} gridMargins={0}>
               <Cell span={12}>
-                <Card
-                  title="Jobs per Month"
-                  overrides={{
-                    Root: {
-                      style: ({ $theme }) => {
-                        return {
-                          borderTopColor: 'transparent',
-                          borderRightColor: 'transparent',
-                          borderBottomColor: 'transparent',
-                          borderLeftColor: 'transparent',
-                          boxShadow: $theme.lighting.shadow400,
-                          minHeight: '312px',
-                          marginBottom: '20px',
-                        };
+                {jobsChartOptions && (
+                  <Card
+                    title="Jobs per Month"
+                    overrides={{
+                      Root: {
+                        style: ({ $theme }) => {
+                          return {
+                            borderTopColor: 'transparent',
+                            borderRightColor: 'transparent',
+                            borderBottomColor: 'transparent',
+                            borderLeftColor: 'transparent',
+                            boxShadow: $theme.lighting.shadow400,
+                            minHeight: '312px',
+                            marginBottom: '20px',
+                          };
+                        },
                       },
-                    },
-                    Title: {
-                      style: ({ $theme }) => {
-                        return {
-                          ...$theme.typography.font250,
-                          position: 'absolute',
-                        };
+                      Title: {
+                        style: ({ $theme }) => {
+                          return {
+                            ...$theme.typography.font250,
+                            position: 'absolute',
+                          };
+                        },
                       },
-                    },
-                    Body: {
-                      style: () => {
-                        return {
-                          minHeight: '260px',
-                        };
+                      Body: {
+                        style: () => {
+                          return {
+                            minHeight: '260px',
+                          };
+                        },
                       },
-                    },
-                  }}
-                >
-                  <StyledBody>
-                    {jobsChartOptions ? (
+                    }}
+                  >
+                    <StyledBody>
                       <ApexChart
                         options={jobsChartOptions.options}
                         series={jobsChartOptions.series}
                         type="line"
                         height={250}
                       />
-                    ) : (
-                      <> ... </>
-                    )}
-                  </StyledBody>
-                </Card>
+                    </StyledBody>
+                  </Card>
+                )}
               </Cell>
             </Grid>
           </Cell>
