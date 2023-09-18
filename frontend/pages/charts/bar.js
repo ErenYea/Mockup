@@ -3,30 +3,9 @@ import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
 import ApexChart from 'components/UiElements/ApexChart/ApexChart';
 
-const Bar = () => {
+const Bar = ( { series, categories } ) => {
   const [state, setState] = useState({
-    series: [
-      {
-        name: 'Ford',
-        data: [44, 55, 41, 37, 22, 43, 21],
-      },
-      {
-        name: 'Nissan',
-        data: [53, 32, 33, 52, 13, 43, 32],
-      },
-      {
-        name: 'Hyundai',
-        data: [12, 17, 11, 9, 15, 11, 20],
-      },
-      {
-        name: 'Honda',
-        data: [9, 7, 5, 8, 6, 9, 4],
-      },
-      {
-        name: 'Toyota',
-        data: [9, 7, 5, 8, 6, 9, 4],
-      },
-    ],
+    series,
     options: {
       chart: {
         type: 'rangeBar',
@@ -52,15 +31,7 @@ const Bar = () => {
         colors: ['#ffffff'],
       },
       xaxis: {
-        categories: [
-          "Jan' 23",
-          "Feb' 23",
-          "Mar' 23",
-          "Apr' 23",
-          "May' 23",
-          "Jun' 23",
-          "Jul' 23",
-        ],
+        categories,
         labels: {
           // formatter: function (val: number) {
           //   return val + "K";

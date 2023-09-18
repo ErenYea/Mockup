@@ -21,20 +21,25 @@ const Home = () => {
   const [months, setMonths] = useState([])
   const [jobsChartOptions, setJobsChartOptions] = useState(null)
   const [productViews, setProductViews] = useState(null)
+  const [incomingJobs, setIncomingJobs] = useState(null)
+  const [incomingJobsCategories, setIncomingJobsCategories] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [jobsPerMonthResponse, weeklyOutlookResponse] = await Promise.all([
+        const [jobsPerMonthResponse, weeklyOutlookResponse, incomingJobsResponse] = await Promise.all([
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/jobs_per_month`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/upcoming_weekly_outlook`),
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/predicted_incoming_jobs`)
         ]);
   
-        const [jobsPerMonthData, weeklyOutlookData] = await Promise.all([
+        const [jobsPerMonthData, weeklyOutlookData, incomingJobsData] = await Promise.all([
           jobsPerMonthResponse.json(),
           weeklyOutlookResponse.json(),
+          incomingJobsResponse.json()
         ]);
   
+
         const jobsPerMonth = jobsPerMonthData.data.sort((a, b) => {
           const monthA = new Date(`20${a.month}`);
           const monthB = new Date(`20${b.month}`);
@@ -49,6 +54,7 @@ const Home = () => {
         setPredictedJobs(predictedJobsArray);
         setMonths(monthArray);
         
+
         const products = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
           .map((day) => weeklyOutlookData.data.find((data) => data.day === day))
           .map((item) => ({
@@ -58,10 +64,30 @@ const Home = () => {
           }));
 
         setProductViews({
-          categories: products?.map((_, idx) => (idx + 1).toString()), // Convert index to string
+          categories: products?.map((_, idx) => (idx + 1).toString()),
           products: products?.map((item) => item.products),
           views: products?.map((item) => item.views),
         });
+
+        
+        const sortedData = incomingJobsData.data.slice().sort((a, b) => {
+          const dateA = new Date(a.date.replace("'", "-"));
+          const dateB = new Date(b.date.replace("'", "-"));
+          return dateA - dateB;
+        });
+
+        setIncomingJobsCategories(
+          sortedData.map(item => item.date)
+        )
+        
+        const jobsData = Object.keys(sortedData[0])
+          .filter(key => key !== "date")
+          .map(name => ({
+            name,
+            data: sortedData.map(item => item[name]),
+          }));
+
+        setIncomingJobs(jobsData)
           
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -134,9 +160,9 @@ const Home = () => {
         },
       },
     })
-    console.log(productViews)
+    console.log(incomingJobs, incomingJobsCategories)
 
-  }, [bookedJobs, predictedJobs, months, productViews]);
+  }, [bookedJobs, predictedJobs, months, productViews, incomingJobs, incomingJobsCategories]);
 
   const [data, setData] = useState(datas);
   if (!data) return null;
@@ -466,40 +492,42 @@ const Home = () => {
         <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
           <Cell span={12}>
             <div className="cash-flow mt-5">
-              <Card
-                title="Predicted Incoming Jobs - Breakdown by Manufacturer"
-                overrides={{
-                  Root: {
-                    style: ({ $theme }) => {
-                      return {
-                        borderTopColor: 'transparent',
-                        borderRightColor: 'transparent',
-                        borderBottomColor: 'transparent',
-                        borderLeftColor: 'transparent',
-                        boxShadow: $theme.lighting.shadow400,
-                      };
+              {incomingJobs && incomingJobsCategories && (
+                <Card
+                  title="Predicted Incoming Jobs - Breakdown by Manufacturer"
+                  overrides={{
+                    Root: {
+                      style: ({ $theme }) => {
+                        return {
+                          borderTopColor: 'transparent',
+                          borderRightColor: 'transparent',
+                          borderBottomColor: 'transparent',
+                          borderLeftColor: 'transparent',
+                          boxShadow: $theme.lighting.shadow400,
+                        };
+                      },
                     },
-                  },
-                  Title: {
-                    style: ({ $theme }) => {
-                      return {
-                        ...$theme.typography.font250,
-                      };
+                    Title: {
+                      style: ({ $theme }) => {
+                        return {
+                          ...$theme.typography.font250,
+                        };
+                      },
                     },
-                  },
-                  Body: {
-                    style: () => {
-                      return {
-                        minHeight: '200px',
-                      };
+                    Body: {
+                      style: () => {
+                        return {
+                          minHeight: '200px',
+                        };
+                      },
                     },
-                  },
-                }}
-              >
-                <StyledBody>
-                  <Bar />
-                </StyledBody>
-              </Card>
+                  }}
+                >
+                  <StyledBody>
+                    <Bar series={incomingJobs} categories={incomingJobsCategories} />
+                  </StyledBody>
+                </Card>
+              )}
             </div>
           </Cell>
         </Grid>
