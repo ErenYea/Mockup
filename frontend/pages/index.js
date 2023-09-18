@@ -20,32 +20,57 @@ const Home = () => {
   const [predictedJobs, setPredictedJobs] = useState([])
   const [months, setMonths] = useState([])
   const [jobsChartOptions, setJobsChartOptions] = useState([])
+  const [productViews, setProductViews] = useState(null)
 
   useEffect(() => {
-
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/jobs_per_month`)
-      .then((res) => res.json())
-      .then((res) => {
-        const jobsPerMonth = res.data.sort((a, b) => {
+    const fetchData = async () => {
+      try {
+        const [jobsPerMonthResponse, weeklyOutlookResponse] = await Promise.all([
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/jobs_per_month`),
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/upcoming_weekly_outlook`),
+        ]);
+  
+        const [jobsPerMonthData, weeklyOutlookData] = await Promise.all([
+          jobsPerMonthResponse.json(),
+          weeklyOutlookResponse.json(),
+        ]);
+  
+        const jobsPerMonth = jobsPerMonthData.data.sort((a, b) => {
           const monthA = new Date(`20${a.month}`);
           const monthB = new Date(`20${b.month}`);
           return monthA - monthB;
         });
-        
+  
         const bookedJobsArray = jobsPerMonth.map(item => item.booked_jobs);
         const monthArray = jobsPerMonth.map(item => item.month);
         const predictedJobsArray = jobsPerMonth.map(item => item.predicted_jobs);
-
+  
         setBookedJobs(bookedJobsArray);
         setPredictedJobs(predictedJobsArray);
         setMonths(monthArray);
+        
+        const products = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+          .map((day) => weeklyOutlookData.data.find((data) => data.day === day))
+          .map((item) => ({
+            category: item?.day,
+            products: item?.active_jobs || 0,
+            views: item?.pending_jobs || 0
+          }));
 
-      })
-      .catch((error) => {
+        setProductViews({
+          categories: products?.map((_, idx) => (idx + 1).toString()), // Convert index to string
+          products: products?.map((item) => item.products),
+          views: products?.map((item) => item.views),
+        });
+          
+      } catch (error) {
         console.error('Error fetching data:', error);
-      });
-
+      }
+    };
+  
+    fetchData();
   }, []);
+  
 
   useEffect(() => {
 
@@ -109,12 +134,13 @@ const Home = () => {
         },
       },
     })
+    console.log(productViews)
 
-  }, [bookedJobs, predictedJobs, months]);
+  }, [bookedJobs, predictedJobs, months, productViews]);
 
   const [data, setData] = useState(datas);
   if (!data) return null;
-  const { productViews, recentApps, productsBar, cashFlow } = data;
+  const { _, recentApps, productsBar, cashFlow } = data;
 
   const productsBarOptions = [
     {
@@ -391,47 +417,49 @@ const Home = () => {
           <Cell span={[12, 12, 6]}>
             <Grid gridGutters={16} gridMargins={0}>
               <Cell span={12}>
-                <Card
-                  title="Upcoming Week Outlook"
-                  overrides={{
-                    Root: {
-                      style: ({ $theme }) => {
-                        return {
-                          borderTopColor: 'transparent',
-                          borderRightColor: 'transparent',
-                          borderBottomColor: 'transparent',
-                          borderLeftColor: 'transparent',
-                          boxShadow: $theme.lighting.shadow400,
-                          minHeight: '312px',
-                          marginBottom: '20px',
-                        };
+                {productViews && 
+                  <Card
+                    title="Upcoming Week Outlook"
+                    overrides={{
+                      Root: {
+                        style: ({ $theme }) => {
+                          return {
+                            borderTopColor: 'transparent',
+                            borderRightColor: 'transparent',
+                            borderBottomColor: 'transparent',
+                            borderLeftColor: 'transparent',
+                            boxShadow: $theme.lighting.shadow400,
+                            minHeight: '312px',
+                            marginBottom: '20px',
+                          };
+                        },
                       },
-                    },
-                    Title: {
-                      style: ({ $theme }) => {
-                        return {
-                          ...$theme.typography.font250,
-                          position: 'absolute',
-                        };
+                      Title: {
+                        style: ({ $theme }) => {
+                          return {
+                            ...$theme.typography.font250,
+                            position: 'absolute',
+                          };
+                        },
                       },
-                    },
-                    Body: {
-                      style: () => {
-                        return {
-                          minHeight: '260px',
-                        };
+                      Body: {
+                        style: () => {
+                          return {
+                            minHeight: '260px',
+                          };
+                        },
                       },
-                    },
-                  }}
-                >
-                  <StyledBody>
-                    <ProductViews
-                      categories={productViews.categories}
-                      products={productViews.products}
-                      views={productViews.views}
-                    />
-                  </StyledBody>
-                </Card>
+                    }}
+                  >
+                    <StyledBody>
+                      <ProductViews
+                        categories={productViews.categories}
+                        products={productViews.products}
+                        views={productViews.views}
+                      />
+                    </StyledBody>
+                  </Card>
+                }
               </Cell>
             </Grid>
           </Cell>
