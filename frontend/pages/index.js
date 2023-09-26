@@ -12,7 +12,6 @@ import ApexChart from 'components/UiElements/ApexChart/ApexChart';
 import Area from './charts/area';
 import Bar from './charts/bar';
 import Column from './charts/column';
-import { datas } from '../containers/Dashboard/dashboard';
 
 const Home = () => {
 
@@ -27,12 +26,13 @@ const Home = () => {
   const [productsBar, setProductBars] = useState(null)
   const [customerSatisfaction, setCustomerSatisfaction] = useState(null)
   const [defectiveLoses, setDefectiveLoses] = useState(null)
-
+  const [manHoursUtilized, setManHoursUtilized] = useState(null)
+  const [manHoursChartOptions, setManHoursChartOptions] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [jobsPerMonthResponse, weeklyOutlookResponse, incomingJobsResponse, productVariationResponse, qualityControlResponse, customerSatisfactionResponse, defectiveLosesResponse ] = await Promise.all([
+        const [jobsPerMonthResponse, weeklyOutlookResponse, incomingJobsResponse, productVariationResponse, qualityControlResponse, customerSatisfactionResponse, defectiveLosesResponse, manHoursUtilizedResponse ] = await Promise.all([
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/jobs_per_month`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/upcoming_weekly_outlook`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/predicted_incoming_jobs`),
@@ -40,16 +40,18 @@ const Home = () => {
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/quality_control`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/customer_satisfaction`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/defect_loses`),
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/man_hours_utilized`),
         ]);
   
-        const [jobsPerMonthData, weeklyOutlookData, incomingJobsData, productVariationData, qualityControlData, customerSatisfactionData, defectiveLosesData] = await Promise.all([
+        const [jobsPerMonthData, weeklyOutlookData, incomingJobsData, productVariationData, qualityControlData, customerSatisfactionData, defectiveLosesData, manHoursUtilizedData] = await Promise.all([
           jobsPerMonthResponse.json(),
           weeklyOutlookResponse.json(),
           incomingJobsResponse.json(),
           productVariationResponse.json(),
           qualityControlResponse.json(),
           customerSatisfactionResponse.json(),
-          defectiveLosesResponse.json()
+          defectiveLosesResponse.json(),
+          manHoursUtilizedResponse.json()
         ]);
   
 
@@ -134,6 +136,11 @@ const Home = () => {
           defectiveLosesData.data.map(item => [new Date(item.date).getTime(), item.value] )
         )
 
+        //man hours utilized chart data
+        setManHoursUtilized({
+            categories: manHoursUtilizedData?.data.map(item => item.date),
+            values: manHoursUtilizedData?.data.map(item => item.value)
+        })
           
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -145,8 +152,79 @@ const Home = () => {
 
 
   useEffect(() => {
-    console.log('yes', defectiveLoses)
-  }, [defectiveLoses])
+    setManHoursChartOptions(
+      {
+        series: [
+          {
+            name: 'Man Hours per Job',
+            data: manHoursUtilized?.values,
+          },
+        ],
+        options: {
+          chart: {
+            height: 420,
+            type: 'line',
+            dropShadow: {
+              enabled: true,
+              color: '#000',
+              top: 18,
+              left: 7,
+              blur: 10,
+              opacity: 0.2,
+            },
+            toolbar: {
+              show: false,
+            },
+          },
+          colors: ['#ff0080', '#006ff3'],
+          dataLabels: {
+            enabled: true,
+          },
+          stroke: {
+            curve: 'smooth',
+          },
+          title: {
+            text: '',
+            align: 'left',
+          },
+          markers: {
+            size: 1,
+          },
+          xaxis: {
+            categories: manHoursUtilized?.categories,
+            title: {
+              text: 'Months',
+            },
+          },
+          yaxis: {
+            title: {
+              text: 'Man Hours per Job',
+            },
+            min: 0,
+            max: 20,
+          },
+          annotations: {
+            xaxis: [
+              {
+                x: "Jun' 22",
+                borderColor: '#775DD0',
+                label: {
+                  style: {
+                    color: '#000000',
+                  },
+                  text: 'Solution Deployed',
+                },
+              },
+            ],
+          },
+          legend: {
+            position: 'top',
+            horizontalAlign: 'right',
+          },
+        },
+      }
+    )
+  }, [manHoursUtilized])
   
 
   useEffect(() => {
@@ -212,11 +290,7 @@ const Home = () => {
       },
     })
 
-  }, [bookedJobs, predictedJobs, months, productViews, incomingJobs, incomingJobsCategories]);
-
-  const [data, setData] = useState(datas);
-  if (!data) return null;
-  const { _, recentApps } = data;
+  }, [bookedJobs, predictedJobs]);
 
   const productsBarOptions = [
     {
@@ -240,192 +314,6 @@ const Home = () => {
       label: productsBar?.labels[4],
     },
   ];
-
-  const [stateOne, setStateOne] = useState({
-    series: [
-      {
-        name: 'Man Hours per Job',
-        data: [8, 9, 11, 13, 14, 4, 3, 2, 4, 3, 4, 2],
-      },
-    ],
-    options: {
-      chart: {
-        height: 420,
-        type: 'line',
-        dropShadow: {
-          enabled: true,
-          color: '#000',
-          top: 18,
-          left: 7,
-          blur: 10,
-          opacity: 0.2,
-        },
-        toolbar: {
-          show: false,
-        },
-      },
-      colors: ['#ff0080', '#006ff3'],
-      dataLabels: {
-        enabled: true,
-      },
-      stroke: {
-        curve: 'smooth',
-      },
-      title: {
-        text: '',
-        align: 'left',
-      },
-      markers: {
-        size: 1,
-      },
-      xaxis: {
-        categories: [
-          "Jan' 22",
-          "Feb' 22",
-          "Mar' 22",
-          "Apr' 22",
-          "May' 22",
-          "Jun' 22",
-          "Jul' 22",
-          "Aug' 22",
-          "Sept' 22",
-          "Oct' 22",
-          "Nov' 22",
-          "Dec' 22",
-        ],
-        title: {
-          text: 'Months',
-        },
-      },
-      yaxis: {
-        title: {
-          text: 'Man Hours per Job',
-        },
-        min: 0,
-        max: 20,
-      },
-      annotations: {
-        xaxis: [
-          {
-            x: "Jun' 22",
-            borderColor: '#775DD0',
-            label: {
-              style: {
-                color: '#000000',
-              },
-              text: 'Solution Deployed',
-            },
-          },
-        ],
-      },
-      legend: {
-        position: 'top',
-        horizontalAlign: 'right',
-      },
-    },
-  });
-
-  const [stateTwo, setStateTwo] = useState({
-    series: [
-      {
-        name: 'Loss Incured',
-        data: [
-          84,
-          25450,
-          33040,
-          43250,
-          44000,
-          5600,
-          5300,
-          4200,
-          4000,
-          3400,
-          3200,
-          2600,
-        ],
-      },
-    ],
-    options: {
-      chart: {
-        height: 420,
-        type: 'line',
-        dropShadow: {
-          enabled: true,
-          color: '#000',
-          top: 18,
-          left: 7,
-          blur: 10,
-          opacity: 0.2,
-        },
-        toolbar: {
-          show: false,
-        },
-      },
-      colors: ['#0000FF'],
-      dataLabels: {
-        enabled: true,
-      },
-      stroke: {
-        curve: 'smooth',
-      },
-      title: {
-        text: '',
-        align: 'left',
-      },
-      markers: {
-        size: 1,
-      },
-      xaxis: {
-        categories: [
-          "Jan' 22",
-          "Feb' 22",
-          "Mar' 22",
-          "Apr' 22",
-          "May' 22",
-          "Jun' 22",
-          "Jul' 22",
-          "Aug' 22",
-          "Sept' 22",
-          "Oct' 22",
-          "Nov' 22",
-          "Dec' 22",
-        ],
-        title: {
-          text: 'Month',
-        },
-      },
-      yaxis: {
-        labels: {
-          formatter: function (val) {
-            return val + '$';
-          },
-        },
-        title: {
-          text: 'Loss Incured(CAD)',
-        },
-        min: 0,
-        max: 50000,
-      },
-      annotations: {
-        xaxis: [
-          {
-            x: "Jun' 22",
-            borderColor: '#775DD0',
-            label: {
-              style: {
-                color: '#000000',
-              },
-              text: 'Solution Deployed',
-            },
-          },
-        ],
-      },
-      legend: {
-        position: 'top',
-        horizontalAlign: 'right',
-      },
-    },
-  });
 
   return (
     <Container>
@@ -777,45 +665,49 @@ const Home = () => {
         <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
           <Cell span={12}>
             <div className="cash-flow mt-5">
-              <Card
-                title="Man Hours Utilized"
-                overrides={{
-                  Root: {
-                    style: ({ $theme }) => {
-                      return {
-                        borderTopColor: 'transparent',
-                        borderRightColor: 'transparent',
-                        borderBottomColor: 'transparent',
-                        borderLeftColor: 'transparent',
-                        boxShadow: $theme.lighting.shadow400,
-                      };
-                    },
-                  },
-                  Title: {
-                    style: ({ $theme }) => {
-                      return {
-                        ...$theme.typography.font250,
-                      };
-                    },
-                  },
-                  Body: {
-                    style: () => {
-                      return {
-                        minHeight: '200px',
-                      };
-                    },
-                  },
-                }}
-              >
-                <StyledBody>
-                  <ApexChart
-                    options={stateOne.options}
-                    series={stateOne.series}
-                    type="line"
-                    height={500}
-                  />
-                </StyledBody>
-              </Card>
+              {
+                manHoursChartOptions && (
+                  <Card
+                    title="Man Hours Utilized"
+                    overrides={{
+                      Root: {
+                        style: ({ $theme }) => {
+                          return {
+                            borderTopColor: 'transparent',
+                            borderRightColor: 'transparent',
+                            borderBottomColor: 'transparent',
+                            borderLeftColor: 'transparent',
+                            boxShadow: $theme.lighting.shadow400,
+                          };
+                        },
+                      },
+                      Title: {
+                        style: ({ $theme }) => {
+                          return {
+                            ...$theme.typography.font250,
+                          };
+                        },
+                      },
+                      Body: {
+                        style: () => {
+                          return {
+                            minHeight: '200px',
+                          };
+                        },
+                      },
+                    }}
+                  >
+                    <StyledBody>
+                      <ApexChart
+                        options={manHoursChartOptions.options}
+                        series={manHoursChartOptions.series}
+                        type="line"
+                        height={500}
+                      />
+                    </StyledBody>
+                  </Card>
+                )
+              }
             </div>
           </Cell>
         </Grid>
