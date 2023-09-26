@@ -23,20 +23,24 @@ const Home = () => {
   const [productViews, setProductViews] = useState(null)
   const [incomingJobs, setIncomingJobs] = useState(null)
   const [incomingJobsCategories, setIncomingJobsCategories] = useState(null)
+  const [cashFlow, setCashFlow] = useState(null)
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [jobsPerMonthResponse, weeklyOutlookResponse, incomingJobsResponse] = await Promise.all([
+        const [jobsPerMonthResponse, weeklyOutlookResponse, incomingJobsResponse, productVariationResponse] = await Promise.all([
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/jobs_per_month`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/upcoming_weekly_outlook`),
-          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/predicted_incoming_jobs`)
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/predicted_incoming_jobs`),
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/product_variation`)
         ]);
   
-        const [jobsPerMonthData, weeklyOutlookData, incomingJobsData] = await Promise.all([
+        const [jobsPerMonthData, weeklyOutlookData, incomingJobsData, productVariationData] = await Promise.all([
           jobsPerMonthResponse.json(),
           weeklyOutlookResponse.json(),
-          incomingJobsResponse.json()
+          incomingJobsResponse.json(),
+          productVariationResponse.json()
         ]);
   
 
@@ -88,6 +92,19 @@ const Home = () => {
           }));
 
         setIncomingJobs(jobsData)
+
+
+        //product variation chart data
+        const sortedProductVariations = productVariationData.data.sort((a, b) => {
+          const dateA = new Date(`20${a.date.split("'")[1]}-${a.date.split("'")[0].padStart(2, '0')}-01`);
+          const dateB = new Date(`20${b.date.split("'")[1]}-${b.date.split("'")[0].padStart(2, '0')}-01`);
+          return dateA - dateB;
+        });
+        const product_variation = {
+          categories: sortedProductVariations.map(item => item.date),
+          cash: sortedProductVariations.map(item => item.value)
+        }
+        setCashFlow(product_variation)
           
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -96,6 +113,11 @@ const Home = () => {
   
     fetchData();
   }, []);
+
+
+  useEffect(() => {
+    console.log('yes', cashFlow)
+  }, [cashFlow])
   
 
   useEffect(() => {
@@ -160,13 +182,12 @@ const Home = () => {
         },
       },
     })
-    console.log(incomingJobs, incomingJobsCategories)
 
   }, [bookedJobs, predictedJobs, months, productViews, incomingJobs, incomingJobsCategories]);
 
   const [data, setData] = useState(datas);
   if (!data) return null;
-  const { _, recentApps, productsBar, cashFlow } = data;
+  const { _, recentApps, productsBar } = data;
 
   const productsBarOptions = [
     {
@@ -535,43 +556,45 @@ const Home = () => {
         <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
           <Cell span={12}>
             <div className="cash-flow  mt-5 mb-5">
-              <Card
-                title="Production Variation"
-                overrides={{
-                  Root: {
-                    style: ({ $theme }) => {
-                      return {
-                        borderTopColor: 'transparent',
-                        borderRightColor: 'transparent',
-                        borderBottomColor: 'transparent',
-                        borderLeftColor: 'transparent',
-                        boxShadow: $theme.lighting.shadow400,
-                      };
+              { cashFlow && (
+                <Card
+                  title="Production Variation"
+                  overrides={{
+                    Root: {
+                      style: ({ $theme }) => {
+                        return {
+                          borderTopColor: 'transparent',
+                          borderRightColor: 'transparent',
+                          borderBottomColor: 'transparent',
+                          borderLeftColor: 'transparent',
+                          boxShadow: $theme.lighting.shadow400,
+                        };
+                      },
                     },
-                  },
-                  Title: {
-                    style: ({ $theme }) => {
-                      return {
-                        ...$theme.typography.font250,
-                      };
+                    Title: {
+                      style: ({ $theme }) => {
+                        return {
+                          ...$theme.typography.font250,
+                        };
+                      },
                     },
-                  },
-                  Body: {
-                    style: () => {
-                      return {
-                        minHeight: '200px',
-                      };
+                    Body: {
+                      style: () => {
+                        return {
+                          minHeight: '200px',
+                        };
+                      },
                     },
-                  },
-                }}
-              >
-                <StyledBody>
-                  <CashFlow
-                    categories={cashFlow.categories}
-                    cash={cashFlow.cash}
-                  />
-                </StyledBody>
-              </Card>
+                  }}
+                >
+                  <StyledBody>
+                    <CashFlow
+                      categories={cashFlow.categories}
+                      cash={cashFlow.cash}
+                    />
+                  </StyledBody>
+                </Card>
+              ) }
             </div>
           </Cell>
         </Grid>
