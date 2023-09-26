@@ -46,7 +46,7 @@ const Home = () => {
           incomingJobsResponse.json(),
           productVariationResponse.json(),
           qualityControlResponse.json(),
-          customerSatisfactionData.json()
+          customerSatisfactionResponse.json()
         ]);
   
 
@@ -122,8 +122,8 @@ const Home = () => {
 
         //customer satisfaction chart data
         setCustomerSatisfaction({
-          categories: customerSatisfactionData.data.map(item => item.year),
-          values: customerSatisfaction.data.map(item => item.value)
+          categories: customerSatisfactionData?.data.map(item => item.year),
+          values: customerSatisfactionData?.data.map(item => item.value)
         })
 
           
@@ -137,8 +137,8 @@ const Home = () => {
 
 
   useEffect(() => {
-    console.log('yes', productsBar)
-  }, [productsBar])
+    console.log('yes', customerSatisfaction)
+  }, [customerSatisfaction])
   
 
   useEffect(() => {
@@ -677,7 +677,7 @@ const Home = () => {
             }
           </Cell>
 
-          {/* <Cell span={[12, 12, 6]}>
+          <Cell span={[12, 12, 6]}>
             {
               customerSatisfaction && (
                 <Card
@@ -718,7 +718,7 @@ const Home = () => {
                 </Card>
               )
             }
-          </Cell> */}
+          </Cell>
         </Grid>
 
         <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
