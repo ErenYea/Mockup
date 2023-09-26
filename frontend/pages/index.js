@@ -24,23 +24,26 @@ const Home = () => {
   const [incomingJobs, setIncomingJobs] = useState(null)
   const [incomingJobsCategories, setIncomingJobsCategories] = useState(null)
   const [cashFlow, setCashFlow] = useState(null)
+  const [productsBar, setProductBars] = useState(null)
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [jobsPerMonthResponse, weeklyOutlookResponse, incomingJobsResponse, productVariationResponse] = await Promise.all([
+        const [jobsPerMonthResponse, weeklyOutlookResponse, incomingJobsResponse, productVariationResponse, qualityControlResponse] = await Promise.all([
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/jobs_per_month`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/upcoming_weekly_outlook`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/predicted_incoming_jobs`),
-          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/product_variation`)
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/product_variation`),
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/quality_control`)
         ]);
   
-        const [jobsPerMonthData, weeklyOutlookData, incomingJobsData, productVariationData] = await Promise.all([
+        const [jobsPerMonthData, weeklyOutlookData, incomingJobsData, productVariationData, qualityControlData] = await Promise.all([
           jobsPerMonthResponse.json(),
           weeklyOutlookResponse.json(),
           incomingJobsResponse.json(),
-          productVariationResponse.json()
+          productVariationResponse.json(),
+          qualityControlResponse.json()
         ]);
   
 
@@ -105,6 +108,15 @@ const Home = () => {
           cash: sortedProductVariations.map(item => item.value)
         }
         setCashFlow(product_variation)
+
+
+        //quality control chart data 
+        const result = {
+          labels: qualityControlData.data.map(item => item.vendor),
+          products: qualityControlData.data.map(item => item.value)
+        };
+        setProductBars(result)
+
           
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -116,8 +128,8 @@ const Home = () => {
 
 
   useEffect(() => {
-    console.log('yes', cashFlow)
-  }, [cashFlow])
+    console.log('yes', productsBar)
+  }, [productsBar])
   
 
   useEffect(() => {
@@ -187,28 +199,28 @@ const Home = () => {
 
   const [data, setData] = useState(datas);
   if (!data) return null;
-  const { _, recentApps, productsBar } = data;
+  const { _, recentApps } = data;
 
   const productsBarOptions = [
     {
       color: '#FF0080',
-      label: productsBar.labels[0],
+      label: productsBar?.labels[0],
     },
     {
       color: '#7928CA',
-      label: productsBar.labels[1],
+      label: productsBar?.labels[1],
     },
     {
       color: '#B3536D',
-      label: productsBar.labels[2],
+      label: productsBar?.labels[2],
     },
     {
       color: '#B8B154',
-      label: productsBar.labels[3],
+      label: productsBar?.labels[3],
     },
     {
       color: '#43CA16',
-      label: productsBar.labels[4],
+      label: productsBar?.labels[4],
     },
   ];
 
@@ -601,55 +613,59 @@ const Home = () => {
 
         <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
           <Cell span={[12, 12, 6]}>
-            <Card
-              title="Quality Control"
-              overrides={{
-                Root: {
-                  style: ({ $theme }) => {
-                    return {
-                      borderTopColor: 'transparent',
-                      borderRightColor: 'transparent',
-                      borderBottomColor: 'transparent',
-                      borderLeftColor: 'transparent',
-                      boxShadow: $theme.lighting.shadow400,
-                      marginBottom: $theme.sizing.scale700,
-                    };
-                  },
-                },
-                Title: {
-                  style: ({ $theme }) => {
-                    return {
-                      ...$theme.typography.font250,
-                      position: 'absolute',
-                    };
-                  },
-                },
-                Body: {
-                  style: () => {
-                    return {
-                      minHeight: '372px',
-                      position: 'relative',
-                    };
-                  },
-                },
-              }}
-            >
-              <StyledBody>
-                <ProductsBar
-                  className="padding-control"
-                  labels={productsBar.labels}
-                  products={productsBar.products}
-                />
-                <LabelGroup
-                  style={{
-                    position: 'absolute',
-                    width: '100%',
-                    bottom: '-66px',
+            {
+              productsBar && (
+                <Card
+                  title="Quality Control"
+                  overrides={{
+                    Root: {
+                      style: ({ $theme }) => {
+                        return {
+                          borderTopColor: 'transparent',
+                          borderRightColor: 'transparent',
+                          borderBottomColor: 'transparent',
+                          borderLeftColor: 'transparent',
+                          boxShadow: $theme.lighting.shadow400,
+                          marginBottom: $theme.sizing.scale700,
+                        };
+                      },
+                    },
+                    Title: {
+                      style: ({ $theme }) => {
+                        return {
+                          ...$theme.typography.font250,
+                          position: 'absolute',
+                        };
+                      },
+                    },
+                    Body: {
+                      style: () => {
+                        return {
+                          minHeight: '372px',
+                          position: 'relative',
+                        };
+                      },
+                    },
                   }}
-                  items={productsBarOptions}
-                />
-              </StyledBody>
-            </Card>
+                >
+                  <StyledBody>
+                    <ProductsBar
+                      className="padding-control"
+                      labels={productsBar.labels}
+                      products={productsBar.products}
+                    />
+                    <LabelGroup
+                      style={{
+                        position: 'absolute',
+                        width: '100%',
+                        bottom: '-66px',
+                      }}
+                      items={productsBarOptions}
+                    />
+                  </StyledBody>
+                </Card>
+              )
+            }
           </Cell>
 
           <Cell span={[12, 12, 6]}>
