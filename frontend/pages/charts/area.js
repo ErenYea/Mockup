@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
 import ApexChart from 'components/UiElements/ApexChart/ApexChart';
-import data from './data/area.json';
 
-const Area = () => {
+const Area = ({data}) => {
   const [state, setState] = useState({
     series: [{ name: 'Defective Losses', data }],
     options: {

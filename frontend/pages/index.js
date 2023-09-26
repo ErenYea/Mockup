@@ -26,27 +26,30 @@ const Home = () => {
   const [cashFlow, setCashFlow] = useState(null)
   const [productsBar, setProductBars] = useState(null)
   const [customerSatisfaction, setCustomerSatisfaction] = useState(null)
+  const [defectiveLoses, setDefectiveLoses] = useState(null)
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [jobsPerMonthResponse, weeklyOutlookResponse, incomingJobsResponse, productVariationResponse, qualityControlResponse, customerSatisfactionResponse] = await Promise.all([
+        const [jobsPerMonthResponse, weeklyOutlookResponse, incomingJobsResponse, productVariationResponse, qualityControlResponse, customerSatisfactionResponse, defectiveLosesResponse ] = await Promise.all([
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/jobs_per_month`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/upcoming_weekly_outlook`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/predicted_incoming_jobs`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/product_variation`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/quality_control`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/customer_satisfaction`),
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/defect_loses`),
         ]);
   
-        const [jobsPerMonthData, weeklyOutlookData, incomingJobsData, productVariationData, qualityControlData, customerSatisfactionData] = await Promise.all([
+        const [jobsPerMonthData, weeklyOutlookData, incomingJobsData, productVariationData, qualityControlData, customerSatisfactionData, defectiveLosesData] = await Promise.all([
           jobsPerMonthResponse.json(),
           weeklyOutlookResponse.json(),
           incomingJobsResponse.json(),
           productVariationResponse.json(),
           qualityControlResponse.json(),
-          customerSatisfactionResponse.json()
+          customerSatisfactionResponse.json(),
+          defectiveLosesResponse.json()
         ]);
   
 
@@ -126,6 +129,11 @@ const Home = () => {
           values: customerSatisfactionData?.data.map(item => item.value)
         })
 
+        //defective loses chart data
+        setDefectiveLoses(
+          defectiveLosesData.data.map(item => [new Date(item.date).getTime(), item.value] )
+        )
+
           
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -137,8 +145,8 @@ const Home = () => {
 
 
   useEffect(() => {
-    console.log('yes', customerSatisfaction)
-  }, [customerSatisfaction])
+    console.log('yes', defectiveLoses)
+  }, [defectiveLoses])
   
 
   useEffect(() => {
@@ -724,40 +732,44 @@ const Home = () => {
         <Grid gridColumns={12} gridGutters={16} gridMargins={0}>
           <Cell span={12}>
             <div className="cash-flow mt-5">
-              <Card
-                title="Defect Losses"
-                overrides={{
-                  Root: {
-                    style: ({ $theme }) => {
-                      return {
-                        borderTopColor: 'transparent',
-                        borderRightColor: 'transparent',
-                        borderBottomColor: 'transparent',
-                        borderLeftColor: 'transparent',
-                        boxShadow: $theme.lighting.shadow400,
-                      };
-                    },
-                  },
-                  Title: {
-                    style: ({ $theme }) => {
-                      return {
-                        ...$theme.typography.font250,
-                      };
-                    },
-                  },
-                  Body: {
-                    style: () => {
-                      return {
-                        minHeight: '200px',
-                      };
-                    },
-                  },
-                }}
-              >
-                <StyledBody>
-                  <Area />
-                </StyledBody>
-              </Card>
+              {
+                defectiveLoses && (
+                  <Card
+                    title="Defect Losses"
+                    overrides={{
+                      Root: {
+                        style: ({ $theme }) => {
+                          return {
+                            borderTopColor: 'transparent',
+                            borderRightColor: 'transparent',
+                            borderBottomColor: 'transparent',
+                            borderLeftColor: 'transparent',
+                            boxShadow: $theme.lighting.shadow400,
+                          };
+                        },
+                      },
+                      Title: {
+                        style: ({ $theme }) => {
+                          return {
+                            ...$theme.typography.font250,
+                          };
+                        },
+                      },
+                      Body: {
+                        style: () => {
+                          return {
+                            minHeight: '200px',
+                          };
+                        },
+                      },
+                    }}
+                  >
+                    <StyledBody>
+                      <Area data={defectiveLoses} />
+                    </StyledBody>
+                  </Card>
+                )
+              }
             </div>
           </Cell>
         </Grid>
