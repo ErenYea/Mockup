@@ -25,25 +25,28 @@ const Home = () => {
   const [incomingJobsCategories, setIncomingJobsCategories] = useState(null)
   const [cashFlow, setCashFlow] = useState(null)
   const [productsBar, setProductBars] = useState(null)
+  const [customerSatisfaction, setCustomerSatisfaction] = useState(null)
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [jobsPerMonthResponse, weeklyOutlookResponse, incomingJobsResponse, productVariationResponse, qualityControlResponse] = await Promise.all([
+        const [jobsPerMonthResponse, weeklyOutlookResponse, incomingJobsResponse, productVariationResponse, qualityControlResponse, customerSatisfactionResponse] = await Promise.all([
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/jobs_per_month`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/upcoming_weekly_outlook`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/predicted_incoming_jobs`),
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/product_variation`),
-          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/quality_control`)
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/quality_control`),
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/asc/home/customer_satisfaction`),
         ]);
   
-        const [jobsPerMonthData, weeklyOutlookData, incomingJobsData, productVariationData, qualityControlData] = await Promise.all([
+        const [jobsPerMonthData, weeklyOutlookData, incomingJobsData, productVariationData, qualityControlData, customerSatisfactionData] = await Promise.all([
           jobsPerMonthResponse.json(),
           weeklyOutlookResponse.json(),
           incomingJobsResponse.json(),
           productVariationResponse.json(),
-          qualityControlResponse.json()
+          qualityControlResponse.json(),
+          customerSatisfactionData.json()
         ]);
   
 
@@ -116,6 +119,12 @@ const Home = () => {
           products: qualityControlData.data.map(item => item.value)
         };
         setProductBars(result)
+
+        //customer satisfaction chart data
+        setCustomerSatisfaction({
+          categories: customerSatisfactionData.data.map(item => item.year),
+          values: customerSatisfaction.data.map(item => item.value)
+        })
 
           
       } catch (error) {
@@ -668,44 +677,48 @@ const Home = () => {
             }
           </Cell>
 
-          <Cell span={[12, 12, 6]}>
-            <Card
-              title="Customer Satisfaction"
-              overrides={{
-                Root: {
-                  style: ({ $theme }) => {
-                    return {
-                      borderTopColor: 'transparent',
-                      borderRightColor: 'transparent',
-                      borderBottomColor: 'transparent',
-                      borderLeftColor: 'transparent',
-                      boxShadow: $theme.lighting.shadow400,
-                      marginBottom: $theme.sizing.scale700,
-                    };
-                  },
-                },
-                Title: {
-                  style: ({ $theme }) => {
-                    return {
-                      ...$theme.typography.font250,
-                      position: 'absolute',
-                    };
-                  },
-                },
-                Contents: {
-                  style: () => {
-                    return {
-                      minHeight: '372px',
-                    };
-                  },
-                },
-              }}
-            >
-              <StyledBody>
-                <Column />
-              </StyledBody>
-            </Card>
-          </Cell>
+          {/* <Cell span={[12, 12, 6]}>
+            {
+              customerSatisfaction && (
+                <Card
+                  title="Customer Satisfaction"
+                  overrides={{
+                    Root: {
+                      style: ({ $theme }) => {
+                        return {
+                          borderTopColor: 'transparent',
+                          borderRightColor: 'transparent',
+                          borderBottomColor: 'transparent',
+                          borderLeftColor: 'transparent',
+                          boxShadow: $theme.lighting.shadow400,
+                          marginBottom: $theme.sizing.scale700,
+                        };
+                      },
+                    },
+                    Title: {
+                      style: ({ $theme }) => {
+                        return {
+                          ...$theme.typography.font250,
+                          position: 'absolute',
+                        };
+                      },
+                    },
+                    Contents: {
+                      style: () => {
+                        return {
+                          minHeight: '372px',
+                        };
+                      },
+                    },
+                  }}
+                >
+                  <StyledBody>
+                    <Column categories={customerSatisfaction.categories} values={customerSatisfaction.values} />
+                  </StyledBody>
+                </Card>
+              )
+            }
+          </Cell> */}
         </Grid>
 
         <Grid gridColumns={12} gridGutters={16} gridMargins={0}>

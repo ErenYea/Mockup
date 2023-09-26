@@ -3,12 +3,12 @@ import { Grid, Cell } from 'baseui/layout-grid';
 import { Block } from 'baseui/block';
 import ApexChart from 'components/UiElements/ApexChart/ApexChart';
 
-const Column = () => {
+const Column = ({categories, values}) => {
   const [state, setState] = useState({
     series: [
       {
         name: 'Satisfaction Percentage',
-        data: [91, 89, 92, 88, 93, 93, 94],
+        data: values,
       },
     ],
     options: {
@@ -43,7 +43,7 @@ const Column = () => {
         size: 1,
       },
       xaxis: {
-        categories: ['2018', '2019', '2020', '2021', '2022'],
+        categories: categories,
       },
       yaxis: {
         labels: {
