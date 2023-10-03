@@ -1,8 +1,6 @@
 from flask import Blueprint, request, jsonify
 from dotenv import load_dotenv
 from flask import g
-import os
-import json
 from datetime import datetime
 from datetime import date
 
