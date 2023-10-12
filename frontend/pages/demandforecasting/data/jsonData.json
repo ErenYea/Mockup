@@ -133,22 +133,6 @@
     {
       "name": "August",
       "value": [21, 34, 27, 20, 32]
-    },
-    {
-      "name": "September",
-      "value": [0, 0, 0, 0, 0]
-    },
-    {
-      "name": "October",
-      "value": [0, 0, 0, 0, 0]
-    },
-    {
-      "name": "November",
-      "value": [0, 0, 0, 0, 0]
-    },
-    {
-      "name": "December",
-      "value": [0, 0, 0, 0, 0]
     }
   ]
   
