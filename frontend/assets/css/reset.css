@@ -732,3 +732,41 @@ div[role="dialog"]
 .rbc-calendar {
   height: 700px;
 }
+
+
+.rbc-time-view
+.rbc-time-header
+.rbc-time-header-content
+.rbc-row
+.rbc-header:nth-child(1) {
+  display: none;
+}
+.rbc-time-view
+.rbc-time-header
+.rbc-time-header-content
+.rbc-row
+.rbc-header:nth-child(7) {
+  display: none;
+}
+.rbc-time-view
+.rbc-time-header
+.rbc-time-header-content
+.rbc-allday-cell
+.rbc-row-bg
+.rbc-day-bg:nth-child(1) {
+  display: none;
+}
+.rbc-time-view
+.rbc-time-header
+.rbc-time-header-content
+.rbc-allday-cell
+.rbc-row-bg
+.rbc-day-bg:nth-child(7) {
+  display: none;
+}
+.rbc-time-view > .rbc-time-content > .rbc-day-slot:nth-child(8) {
+  display: none;
+}
+.rbc-time-view > .rbc-time-content > .rbc-day-slot:nth-child(2) {
+  display: none;
+}

@@ -16,7 +16,7 @@ const index = () => {
   const { data: session } = useSession()
 
   const [state, setState] = useState({ events: [] });
-  const [view, setView] = useState('month');
+  const [view, setView] = useState('week');
   const [date, setDate] = useState(new Date());
   const [jobs, setJobs] = useState(0);
   const [Allcar, setAllcar] = useState([]);

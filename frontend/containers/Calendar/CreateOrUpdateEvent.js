@@ -127,7 +127,7 @@ export default ({ onClose, isOpen, onSubmit, event }) => {
       overrides={{
         Root: {
           style: {
-            zIndex: 99999,
+            zIndex: 1,
           },
         },
       }}
@@ -145,32 +145,33 @@ export default ({ onClose, isOpen, onSubmit, event }) => {
           </FormControl>
 
           <FormControl label="Select Model">
-            <>
-              <select
-                id="models"
-                onChange={modelHandler}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option selected={model != '' ? false : true} disabled>
-                  Choose a Model
-                </option>
-                {modalModal.map((item, index) => (
-                  <option
-                    key={index}
-                    value={item.slice(0, 3).toLowerCase()}
-                    selected={
-                      model != ''
-                        ? model == item.slice(0, 3).toLowerCase()
-                          ? true
-                          : false
+
+            <select
+              id="models"
+              onChange={modelHandler}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option selected={model != '' ? false : true} disabled>
+                Choose Model
+              </option>
+              {modalModal.map((item, index) => (
+                <option
+                  key={index}
+                  value={item.slice(0, 3).toLowerCase()}
+                  className='w-full'
+                  selected={
+                    model != ''
+                      ? model == item.slice(0, 3).toLowerCase()
+                        ? true
                         : false
-                    }
-                  >
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </>
+                      : false
+                  }
+                >
+                  {item}
+                </option>
+              ))}
+            </select>
+
           </FormControl>
 
           <FormControl label="Select WorkShop">
@@ -182,7 +183,7 @@ export default ({ onClose, isOpen, onSubmit, event }) => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
                 <option selected disabled>
-                  Choose a Workshop
+                  Choose Workshop
                 </option>
 
                 <option value="1">Workshop Floor 1</option>
@@ -210,7 +211,7 @@ export default ({ onClose, isOpen, onSubmit, event }) => {
                 disabled={workshop == '' ? true : false}
               >
                 <option selected={model != '' ? false : true} disabled>
-                  Choose a Start Time
+                  Choose Start Time
                 </option>
                 {time.map((item, index) => (
                   <option
@@ -235,7 +236,7 @@ export default ({ onClose, isOpen, onSubmit, event }) => {
                 disabled={workshop == '' ? true : false}
               >
                 <option selected={model != '' ? false : true} disabled>
-                  Choose a End Time
+                  Choose End Time
                 </option>
                 {time.map((item, index) => (
                   <option
