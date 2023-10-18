@@ -58,7 +58,7 @@ const Area = () => {
         },
         y: {
           formatter: function (val) {
-            return val + '$';
+            return '$ ' + val;
           },
         },
       },

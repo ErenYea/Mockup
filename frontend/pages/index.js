@@ -12,16 +12,11 @@ import ApexChart from 'components/UiElements/ApexChart/ApexChart';
 import Area from './charts/area';
 import Bar from './charts/bar';
 import Column from './charts/column';
-import { useRouter } from 'next/router';
 import { datas } from '../containers/Dashboard/dashboard';
-import { useSession } from "next-auth/react"
 
 const Home = () => {
   const [cond, setCond] = useState(true);
-  const router = useRouter();
   const [data, setData] = useState(datas);
-
-  const { data: session } = useSession()
 
   if (!data) return null;
   const { productViews, recentApps, productsBar, cashFlow } = data;
@@ -92,13 +87,13 @@ const Home = () => {
       },
       xaxis: {
         categories: [
-          "Feb' 23",
           "Mar' 23",
           "Apr' 23",
           "May' 23",
           "Jun' 23",
           "Jul' 23",
           "Aug' 23",
+          "Sep' 23"
         ],
         title: {
           text: 'Months',
@@ -125,7 +120,7 @@ const Home = () => {
     series: [
       {
         name: 'Man Hours per Job',
-        data: [8, 9, 11, 13, 14, 4, 3, 2, 4, 3, 4, 2],
+        data: [8, 9, 11, 13, 14, 4, 3, 2, 4, 3, 4, 2, 2, 4, 3, 2, 3, 2, 3, 1, 5],
       },
     ],
     options: {
@@ -168,10 +163,19 @@ const Home = () => {
           "Jun' 22",
           "Jul' 22",
           "Aug' 22",
-          "Sept' 22",
+          "Sep' 22",
           "Oct' 22",
           "Nov' 22",
           "Dec' 22",
+          "Jan' 23",
+          "Feb' 23",
+          "Mar' 23",
+          "Apr' 23",
+          "May' 23",
+          "Jun' 23",
+          "Jul' 23",
+          "Aug' 23",
+          "Sep' 23",
         ],
         title: {
           text: 'Months',
@@ -306,12 +310,6 @@ const Home = () => {
       },
     },
   });
-
-  useEffect(() => {
-    if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
-      router.push('/login?type=workshop');
-    }
-  }, []);
 
   if (cond) {
     return (
@@ -690,3 +688,19 @@ const Home = () => {
 };
 
 export default Home;
+
+
+export async function getServerSideProps(context) {
+  
+  const sessionToken = context.req.headers.cookie?.split(';').find(cookie => cookie.trim().startsWith('sessionToken='));
+  
+  if (sessionToken) {
+
+    return {
+      props: { }
+    };
+
+  } else {
+    return { redirect: { destination: "/login?type=workshop" } };
+  }
+}

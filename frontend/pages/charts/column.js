@@ -8,7 +8,7 @@ const Column = () => {
     series: [
       {
         name: 'Satisfaction Percentage',
-        data: [91, 89, 92, 88, 93, 93, 94],
+        data: [91, 89, 92, 88, 93],
       },
     ],
     options: {

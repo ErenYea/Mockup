@@ -283,6 +283,6 @@ export async function getServerSideProps(context) {
     };
 
   } else {
-    return { redirect: { destination: "/login?type=retailer" } };
+    return { redirect: { destination: "/login?type=oem" } };
   }
 }

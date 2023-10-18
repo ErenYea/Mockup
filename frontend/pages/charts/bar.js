@@ -8,23 +8,23 @@ const Bar = () => {
     series: [
       {
         name: 'Ford',
-        data: [44, 55, 41, 37, 22, 43, 21],
+        data: [44, 55, 41, 37, 22, 43, 21, 30, 26],
       },
       {
         name: 'Nissan',
-        data: [53, 32, 33, 52, 13, 43, 32],
+        data: [53, 32, 33, 52, 13, 43, 32, 21, 28],
       },
       {
         name: 'Hyundai',
-        data: [12, 17, 11, 9, 15, 11, 20],
+        data: [12, 17, 11, 9, 15, 11, 20, 12, 21],
       },
       {
         name: 'Honda',
-        data: [9, 7, 5, 8, 6, 9, 4],
+        data: [9, 7, 5, 8, 6, 9, 4, 7, 6],
       },
       {
         name: 'Toyota',
-        data: [9, 7, 5, 8, 6, 9, 4],
+        data: [9, 7, 5, 8, 6, 9, 4, 6, 7],
       },
     ],
     options: {
@@ -60,6 +60,8 @@ const Bar = () => {
           "May' 23",
           "Jun' 23",
           "Jul' 23",
+          "Aug' 23",
+          "Sep' 23",
         ],
         labels: {
           // formatter: function (val: number) {
