@@ -7,20 +7,10 @@ import { Block } from 'baseui/block';
 import InformationBox from './informationBox';
 import CalendarApp from '../../containers/Calendar/oem/newcalendar/index';
 import jsonData from './data.json';
-import { useRouter } from 'next/router';
-import { useSession } from "next-auth/react"
 
 const index = () => {
 
-  const router = useRouter();
-  const { data: session } = useSession()
-
   useEffect(() => {
-
-    if (!session && document.cookie !== 'sessionToken=mySessionTokenValue') {
-      router.push('/login?type=workshop');
-    }
-
     document.querySelectorAll('.rbc-btn-group').forEach((p) => {
       p.style.display = 'None';
     });
@@ -81,14 +71,14 @@ const index = () => {
           <div className="flex flex-row justify-evenly items-start space-x-10 mb-10">
             <div className="w-1/3 ml-10 !h-[500px]">
               <CalendarApp
-                args={new Date('2023-02-01T00:00:00Z')}
+                args={new Date('2023-11-01T00:00:00Z')}
                 calendarData={jsonData[Index]['calendar']}
                 className="!h-[400px]"
               />
             </div>
             <div className="w-1/3 !h-[500px]">
               <CalendarApp
-                args={new Date('2023-03-01T00:00:00Z')}
+                args={new Date('2023-12-01T00:00:00Z')}
                 calendarData={jsonData[Index]['calendar']}
                 className="!h-[400px]"
               />
@@ -97,7 +87,7 @@ const index = () => {
           <div className="flex flex-col justify-center items-center">
             <div className="w-1/3 !h-[500px]">
               <CalendarApp
-                args={new Date('2023-04-01T00:00:00Z')}
+                args={new Date('2024-01-01T00:00:00Z')}
                 calendarData={jsonData[Index]['calendar']}
                 className="!h-[400px]"
               />
@@ -110,3 +100,18 @@ const index = () => {
 };
 
 export default index;
+
+export async function getServerSideProps(context) {
+  
+  const sessionToken = context.req.headers.cookie?.split(';').find(cookie => cookie.trim().startsWith('sessionToken='));
+  
+  if (sessionToken) {
+
+    return {
+      props: { }
+    };
+
+  } else {
+    return { redirect: { destination: "/login?type=workshop" } };
+  }
+}
