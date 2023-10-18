@@ -50,6 +50,10 @@ const LineBarv2 = (props) => {
 
       xaxis: {
         categories: [
+          "Sep' 22",
+          "Oct' 22",
+          "Nov' 22",
+          "Dec' 22",
           "Jan' 23",
           "Feb' 23",
           "Mar' 23",
@@ -59,10 +63,6 @@ const LineBarv2 = (props) => {
           "Jul' 23",
           "Aug' 23",
           "Sept' 23",
-          "Oct' 23",
-          "Nov' 23",
-          "Dec' 23",
-          "Jan' 24",
         ],
         title: {
           text: 'Months',

@@ -37,6 +37,10 @@ const LineBar = (props) => {
       },
       xaxis: {
         categories: [
+          'Sep 2023',
+          'Oct 2023',
+          'Nov 2023',
+          'Dec 2024',
           'Jan 2023',
           'Feb 2023',
           'Mar 2023',
@@ -46,10 +50,6 @@ const LineBar = (props) => {
           'Jul 2023',
           'Aug 2023',
           'Sep 2023',
-          'Oct 2023',
-          'Nov 2023',
-          'Dec 2023',
-          'Jan 2024',
         ],
         title: {
           text: 'Months',
