@@ -10,19 +10,15 @@ import LineBar from '../../components/retailer/lineGraph';
 import CreateOrUpdateEvent from 'pages/oem/CreateOrUpdateEvent';
 import jsonData from './data.json';
 import data from './data2.json';
-import { useSession } from "next-auth/react"
-import { useRouter } from 'next/router';
 
 const index = () => {
   const [event, setEvent] = useState(false);
   const [works, setWorks] = useState([]);
   const [isOpen, setIsOpen] = React.useState(false);
-  const router = useRouter();
-  const { data: session } = useSession()
 
   function onSubmit(value) {
-    setIsOpen(false);
     setWorks([...works, value]);
+    setIsOpen(false);
   }
   const handleClick = () => {
     setEvent(true);
@@ -54,10 +50,6 @@ const index = () => {
 
   useEffect(() => {
 
-    if (!session) {
-      router.push('/login?type=retailer');
-    }
-
     document.querySelectorAll('.rbc-btn-group').forEach((p) => {
       p.style.display = 'None';
     });
@@ -74,7 +66,7 @@ const index = () => {
     } else if (sessionStorage.emailType.includes('ford')) {
       setIndex(0);
     } else {
-      setIndex(0);
+      setIndex(4);
     }
   }, []);
 
@@ -161,14 +153,14 @@ const index = () => {
         <div className="flex flex-row justify-evenly items-start space-x-10 mb-10">
           <div className="w-1/3 ml-10 !h-[500px]">
             <CalendarApp
-              args={new Date('2023-02-01T00:00:00Z')}
+              args={new Date('2023-11-01T00:00:00Z')}
               calendarData={jsonData[Workshop]['calendar']}
               className="!h-[400px]"
             />
           </div>
           <div className="w-1/3 !h-[500px]">
             <CalendarApp
-              args={new Date('2023-03-01T00:00:00Z')}
+              args={new Date('2023-12-01T00:00:00Z')}
               calendarData={jsonData[Workshop]['calendar']}
               className="!h-[400px]"
             />
@@ -177,7 +169,7 @@ const index = () => {
         <div className="flex flex-col justify-center items-center">
           <div className="w-1/3 !h-[500px]">
             <CalendarApp
-              args={new Date('2023-04-01T00:00:00Z')}
+              args={new Date('2024-01-01T00:00:00Z')}
               calendarData={jsonData[Workshop]['calendar']}
               className="!h-[400px]"
             />
@@ -276,3 +268,18 @@ const index = () => {
 };
 
 export default index;
+
+export async function getServerSideProps(context) {
+  
+  const sessionToken = context.req.headers.cookie?.split(';').find(cookie => cookie.trim().startsWith('sessionToken='));
+  
+  if (sessionToken) {
+
+    return {
+      props: { }
+    };
+
+  } else {
+    return { redirect: { destination: "/login?type=retailer" } };
+  }
+}

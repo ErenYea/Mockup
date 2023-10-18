@@ -65,6 +65,7 @@ const Login = ({ providers }) => {
         if (result.data.length > 0) {
 
           document.cookie = "sessionToken=mySessionTokenValue; path=/";
+          sessionStorage.setItem('emailType', username);
 
           if (userType === 'oem') {
             router.push('/oem')

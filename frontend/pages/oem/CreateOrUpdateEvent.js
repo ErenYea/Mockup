@@ -15,7 +15,7 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
   const [title, setTitle] = React.useState('');
   const [model, setModel] = React.useState('');
   const [selectedData, setSelectedData] = React.useState([]);
-  const [personSelect, setPersonSelect] = React.useState('');
+  const [personSelect, setPersonSelect] = React.useState(1);
   const [date, setDate] = React.useState();
   const [modalModal, setModalModal] = React.useState([
     'Ford',
@@ -24,6 +24,10 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
     'Honda',
     'Toyota',
   ]);
+
+  useEffect(() => {
+    console.log(personSelect)
+  }, [personSelect])
 
   const getthecar = (value) => {
     return modalModal.filter(
