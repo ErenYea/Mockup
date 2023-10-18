@@ -117,7 +117,7 @@ const index = () => {
         currentdate - 6
       );
     }
-    console.log('comparison Date', secondDate, newDate);
+
     var totalJobs = events?.reduce((total, num) => {
       if (
         (new Date(num?.start) >= secondDate &&
@@ -140,260 +140,48 @@ const index = () => {
     var carshyu = [];
     var carsfro = [];
     var alldate = [];
+
+    const carManufacturers = ['honda', 'nissan', 'toyota', 'hyundai', 'ford'];
+    const carsData = {
+      honda: carshonda,
+      nissan: carsnis,
+      toyota: carstoy,
+      hyundai: carshyu,
+      ford: carsfro,
+    };
+
     for (var i = 0; i < 7; i++) {
-      var hon = honda?.filter((item) => {
-        var date = new Date(item.start);
-        var end = new Date(item.end);
-
-        if (
-          new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate()
-          ).getTime() ==
-            new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
-            ).getTime() ||
-          (new Date(
-            end.getFullYear(),
-            end.getMonth(),
-            end.getDate()
-          ).getTime() >=
-            new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
-            ).getTime() &&
-            new Date(item.start) < newDate &&
-            !(
-              new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate()
-              ).getTime() >
-              new Date(
-                secondDate.getFullYear(),
-                secondDate.getMonth(),
-                secondDate.getDate() + i
-              ).getTime()
-            ))
-        ) {
-          return true;
-        } else {
-          return false;
+      carManufacturers.forEach((manufacturer) => {
+        const car = eval(manufacturer); // Use the manufacturer as a variable
+        const currentDate = new Date(secondDate.getFullYear(), secondDate.getMonth(), secondDate.getDate() + i);
+    
+        if (currentDate.getDay() !== 6 && currentDate.getDay() !== 0) {
+          const filtered = car?.filter((item) => {
+            const date = new Date(item.start);
+            const end = new Date(item.end);
+    
+            return (
+              new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() ===
+              new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()).getTime() ||
+              (new Date(end.getFullYear(), end.getMonth(), end.getDate()).getTime() >=
+                new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()).getTime() &&
+                new Date(item.start) < currentDate &&
+                !(new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() >
+                  new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()).getTime())
+              )
+            );
+          });
+    
+          carsData[manufacturer].push(filtered.length > 0 ? getRandomInt(3, 6) : 0);
         }
       });
-      var nis = nissan?.filter((item) => {
-        var date = new Date(item.start);
-        var end = new Date(item.end);
-
-        if (
-          new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate()
-          ).getTime() ==
-            new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
-            ).getTime() ||
-          (new Date(
-            end.getFullYear(),
-            end.getMonth(),
-            end.getDate()
-          ).getTime() >=
-            new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
-            ).getTime() &&
-            new Date(item.start) < newDate &&
-            !(
-              new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate()
-              ).getTime() >
-              new Date(
-                secondDate.getFullYear(),
-                secondDate.getMonth(),
-                secondDate.getDate() + i
-              ).getTime()
-            ))
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-      var toy = toyota?.filter((item) => {
-        var date = new Date(item.start);
-        var end = new Date(item.end);
-
-        if (
-          new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate()
-          ).getTime() ==
-            new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
-            ).getTime() ||
-          (new Date(
-            end.getFullYear(),
-            end.getMonth(),
-            end.getDate()
-          ).getTime() >=
-            new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
-            ).getTime() &&
-            new Date(item.start) < newDate &&
-            !(
-              new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate()
-              ).getTime() >
-              new Date(
-                secondDate.getFullYear(),
-                secondDate.getMonth(),
-                secondDate.getDate() + i
-              ).getTime()
-            ))
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-      var hyu = hyundai?.filter((item) => {
-        var date = new Date(item.start);
-        var end = new Date(item.end);
-
-        if (
-          new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate()
-          ).getTime() ==
-            new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
-            ).getTime() ||
-          (new Date(
-            end.getFullYear(),
-            end.getMonth(),
-            end.getDate()
-          ).getTime() >=
-            new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
-            ).getTime() &&
-            new Date(item.start) < newDate &&
-            !(
-              new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate()
-              ).getTime() >
-              new Date(
-                secondDate.getFullYear(),
-                secondDate.getMonth(),
-                secondDate.getDate() + i
-              ).getTime()
-            ))
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-      var fro = ford?.filter((item) => {
-        var date = new Date(item.start);
-        var end = new Date(item.end);
-
-        if (
-          new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate()
-          ).getTime() ==
-            new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
-            ).getTime() ||
-          (new Date(
-            end.getFullYear(),
-            end.getMonth(),
-            end.getDate()
-          ).getTime() >=
-            new Date(
-              secondDate.getFullYear(),
-              secondDate.getMonth(),
-              secondDate.getDate() + i
-            ).getTime() &&
-            new Date(item.start) < newDate &&
-            !(
-              new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate()
-              ).getTime() >
-              new Date(
-                secondDate.getFullYear(),
-                secondDate.getMonth(),
-                secondDate.getDate() + i
-              ).getTime()
-            ))
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-      if (hon.length > 0) {
-        carshonda.push(getRandomInt(3, 6));
-      } else {
-        carshonda.push(getRandomInt(3, 6));
+    
+      if (i !== 0 && i !== 6) {
+        const curdate = new Date(secondDate.getFullYear(), secondDate.getMonth(), secondDate.getDate() + i);
+        alldate.push(curdate.toDateString());
       }
-      if (nis.length > 0) {
-        carsnis.push(getRandomInt(3, 6));
-      } else {
-        carsnis.push(getRandomInt(3, 6));
-      }
-      if (toy.length > 0) {
-        carstoy.push(getRandomInt(3, 6));
-      } else {
-        carstoy.push(getRandomInt(3, 6));
-      }
-      if (hyu.length > 0) {
-        carshyu.push(getRandomInt(3, 6));
-      } else {
-        carshyu.push(getRandomInt(3, 6));
-      }
-      if (fro.length > 0) {
-        carsfro.push(getRandomInt(3, 6));
-      } else {
-        carsfro.push(getRandomInt(3, 6));
-      }
-      var curdate = new Date(
-        secondDate.getFullYear(),
-        secondDate.getMonth(),
-        secondDate.getDate() + i
-      );
-      alldate.push(curdate.toDateString());
-    }
-
+    }    
+    
     var aldata = [
       {
         name: 'Sean Davidson',
@@ -413,6 +201,10 @@ const index = () => {
     setRangeDate(alldate);
     setJobs(totalJobs);
   };
+
+  useEffect(() => {
+    console.log()
+  }, [rangeDate])
 
   useEffect(() => {
     if (view == 'week') {
