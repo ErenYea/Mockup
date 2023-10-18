@@ -49,9 +49,9 @@ const index = ({ }) => {
     setSelectedYear(selectedYear);
   };
 
-  const capacities = [40000, 45000, 120000, 100000, 105000, 110000, 95000, 95000, 45000, 55000, 35000, 30000]
-  const forecasts = [8500, 10800, 30000, 25000, 27000, 32000, 29000, 29500, 8000, 9500, 11000, 12000]
-  const dates = ['Sep 2022', 'Oct 2022', 'Nov 2022', 'Dec 2022', 'Jan 2023', 'Feb 2023', 'Mar 2023', 'Apr 2023', 'May 2023', 'Jun 2023', 'Jul 2023', 'Aug 2023'];
+  const capacities = [40000, 45000, 120000, 100000, 105000, 110000, 95000, 95000, 45000, 55000, 35000, 30000, 85683, 58009, 83048, 127130, 77763, 26707, 107629, 103743, 118366, 60519, 104174, 63648, 90000, 87050]
+  const forecasts = [8500, 10800, 30000, 25000, 27000, 32000, 29000, 29500, 8000, 9500, 11000, 12000, 18341, 12450, 22751, 29289, 10520, 9526, 17376, 24455, 13746, 14005, 24359, 6747, 17023, 19923]
+  const dates = ['Sep 2022', 'Oct 2022', 'Nov 2022', 'Dec 2022', 'Jan 2023', 'Feb 2023', 'Mar 2023', 'Apr 2023', 'May 2023', 'Jun 2023', 'Jul 2023', 'Aug 2023', 'Sep 2023', 'Oct 2023', 'Nov 2023', 'Dec 2023', 'Jan 2024', 'Feb 2024', 'Mar 2024', 'Apr 2024', 'May 2024', 'Jun 2024', 'Jul 2024', 'Aug 2024', 'Sep 2024', 'Oct 2024'];
   
   const [selectedDates, setSelectedDates] = React.useState(dates);
   const [selectedCapacities, setSelectedCapacities] = React.useState(capacities)
@@ -61,24 +61,37 @@ const index = ({ }) => {
 
   const handleFilterChange = (event) => {
     const filterValue = event.target.value;
-
+  
     setSelectedFilter(filterValue);
+    const currentIndex = dates.indexOf('Oct 2023');
 
     if (filterValue === '3') {
-      // Show the last 3 values
-      setSelectedCapacities(capacities.slice(-3));
-      setSelectedForecasts(forecasts.slice(-3));
-      setSelectedDates(dates.slice(-3));
+      // Show the last 3 months and the next 3 months (total 6 months)
+
+      const newSelectedDates = dates.slice(currentIndex - 3, currentIndex + 3);
+      const newSelectedCapacities = capacities.slice(currentIndex - 3, currentIndex + 3);
+      const newSelectedForecasts = forecasts.slice(currentIndex - 3, currentIndex + 3);
+      setSelectedCapacities(newSelectedCapacities);
+      setSelectedForecasts(newSelectedForecasts);
+      setSelectedDates(newSelectedDates);
     } else if (filterValue === '6') {
-      // Show the last 6 values
-      setSelectedCapacities(capacities.slice(-6));
-      setSelectedForecasts(forecasts.slice(-6));
-      setSelectedDates(dates.slice(-6));
+      // Show the last 6 months and the next 6 months (total 12 months)
+
+      const newSelectedDates = dates.slice(currentIndex - 6, currentIndex + 6);
+      const newSelectedCapacities = capacities.slice(currentIndex - 6, currentIndex + 6);
+      const newSelectedForecasts = forecasts.slice(currentIndex - 6, currentIndex + 6);
+      setSelectedCapacities(newSelectedCapacities);
+      setSelectedForecasts(newSelectedForecasts);
+      setSelectedDates(newSelectedDates);
     } else if (filterValue === '12') {
-      // Show the last 12 values
-      setSelectedCapacities(capacities.slice(-12));
-      setSelectedForecasts(forecasts.slice(-12));
-      setSelectedDates(dates.slice(-12));
+      // Show the last 12 months and the next 12 months (total 24 months)
+
+      const newSelectedDates = dates.slice(currentIndex - 12, currentIndex + 12);
+      const newSelectedCapacities = capacities.slice(currentIndex - 12, currentIndex + 12);
+      const newSelectedForecasts = forecasts.slice(currentIndex - 12, currentIndex + 12);
+      setSelectedCapacities(newSelectedCapacities);
+      setSelectedForecasts(newSelectedForecasts);
+      setSelectedDates(newSelectedDates);
     } else if (filterValue === 'max') {
       // Show all the values
       setSelectedCapacities(capacities);
@@ -86,7 +99,7 @@ const index = ({ }) => {
       setSelectedDates(dates);
     }
   };
-
+  
   return (
     <>
       <Head>
