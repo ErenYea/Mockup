@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Sticky from 'react-stickynode';
 import Container from '../../UiElements/Container/Container';
 import MainMenu from '../HeaderMenu/MainMenu/MainMenu';
@@ -15,6 +15,11 @@ import { useSession } from "next-auth/react"
 
 const DefaultHeader = () => {
   const { data: session } = useSession()
+  const [user, setUser] = useState('')
+
+  useEffect(() => {
+    setUser(sessionStorage.getItem('emailType'))
+  }, [])
 
   return (
     <HeaderWrapper className="default">
@@ -22,7 +27,7 @@ const DefaultHeader = () => {
         <TopBar className="mx-[10px] w-full flex justify-end">
           <MenuRight className="top-bar flex justify-end ">
             <AvatarMenu
-              name="A"
+              name={user}
               src={session?.user?.image}
             />
           </MenuRight>
