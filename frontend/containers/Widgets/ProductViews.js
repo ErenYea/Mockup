@@ -7,7 +7,7 @@ const ProductViews = ({
   categories,
   products,
   views,
-  height = '247',
+  height = '400',
 }) => {
   const [chartOptions, setChartOptions] = useState({
     options: {

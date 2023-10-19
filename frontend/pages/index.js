@@ -105,6 +105,9 @@ const Home = () => {
         },
         min: 100,
         max: 300,
+        labels: {
+          offsetX: -15,
+        },
       },
       legend: {
         position: 'top',
@@ -337,7 +340,7 @@ const Home = () => {
                             borderBottomColor: 'transparent',
                             borderLeftColor: 'transparent',
                             boxShadow: $theme.lighting.shadow400,
-                            minHeight: '312px',
+                            minHeight: '500px',
                             marginBottom: '20px',
                           };
                         },
@@ -353,7 +356,7 @@ const Home = () => {
                       Body: {
                         style: () => {
                           return {
-                            minHeight: '260px',
+                            minHeight: '450px',
                           };
                         },
                       },
@@ -364,7 +367,7 @@ const Home = () => {
                         options={state.options}
                         series={state.series}
                         type="line"
-                        height={250}
+                        height={450}
                       />
                     </StyledBody>
                   </Card>
@@ -385,8 +388,8 @@ const Home = () => {
                             borderBottomColor: 'transparent',
                             borderLeftColor: 'transparent',
                             boxShadow: $theme.lighting.shadow400,
-                            minHeight: '312px',
-                            marginBottom: '20px',
+                            minHeight: '500px',
+                            marginBottom: '20px'
                           };
                         },
                       },
@@ -394,14 +397,14 @@ const Home = () => {
                         style: ({ $theme }) => {
                           return {
                             ...$theme.typography.font250,
-                            position: 'absolute',
+                            marginBottom: '20px',
                           };
                         },
                       },
                       Body: {
                         style: () => {
                           return {
-                            minHeight: '260px',
+                            minHeight: '430px',
                           };
                         },
                       },

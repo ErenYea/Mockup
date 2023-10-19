@@ -53,15 +53,15 @@ const Bar = () => {
       },
       xaxis: {
         categories: [
-          "Jan' 23",
-          "Feb' 23",
-          "Mar' 23",
-          "Apr' 23",
-          "May' 23",
-          "Jun' 23",
-          "Jul' 23",
-          "Aug' 23",
-          "Sep' 23",
+          "Oct' 23",
+          "Nov' 23",
+          "Dec' 23",
+          "Jan' 24",
+          "Feb' 24",
+          "Mar' 24",
+          "Apr' 24",
+          "May' 24",
+          "Jun' 24",
         ],
         labels: {
           // formatter: function (val: number) {
@@ -96,7 +96,7 @@ const Bar = () => {
               options={state.options}
               series={state.series}
               type="bar"
-              height="420"
+              height="500"
             />
           </Block>
         </Cell>
