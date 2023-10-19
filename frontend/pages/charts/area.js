@@ -41,7 +41,7 @@ const Area = () => {
       annotations: {
         xaxis: [
           {
-            x: new Date('2022-06-02T00:00:00Z').getTime(),
+            x: new Date('2023-02-02T00:00:00Z').getTime(),
             borderColor: '#775DD0',
             label: {
               style: {

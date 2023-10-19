@@ -123,7 +123,7 @@ const Home = () => {
     series: [
       {
         name: 'Man Hours per Job',
-        data: [8, 9, 11, 13, 14, 4, 3, 2, 4, 3, 4, 2, 2, 4, 3, 2, 3, 2, 3, 1, 5],
+        data: [8, 9, 11, 13, 14, 14, 13, 12, 13, 13, 9, 12, 12, 11, 3, 2, 3, 2, 3, 1, 5],
       },
     ],
     options: {
@@ -194,7 +194,7 @@ const Home = () => {
       annotations: {
         xaxis: [
           {
-            x: "Jun' 22",
+            x: "Feb' 23",
             borderColor: '#775DD0',
             label: {
               style: {
