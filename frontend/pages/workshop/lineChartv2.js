@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'react-google-charts';
 
-const data = [
+const initialData = [
   ['x', 'Expected', 'Actual'],
   ['5', 100, 100],
-  ['10', 90, 95],
-  ['15', 80, 88],
-  ['20', 70, 79],
-  ['25', 60, 55],
-  ['30', 50, 52],
+  ['10', 90, null],
+  ['15', 80, null],
+  ['20', 70, null],
+  ['25', 60, null],
+  ['30', 50, null],
   ['35', 40, null],
   ['40', 30, null],
   ['45', 20, null],
@@ -20,7 +20,6 @@ export default function LineChartv2() {
     legend: { position: 'bottom' },
     hAxis: {
       title: 'Minutes',
-      // format: "yyyy-MM-dd",
     },
     vAxis: {
       title: 'Percent Job Completed',
@@ -30,14 +29,34 @@ export default function LineChartv2() {
     series: {
       1: { curveType: 'function' },
     },
-    // pointsVisible: true
   };
+
+  const [actualData, setActualData] = useState(initialData);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      // Update the "Actual" series data dynamically
+      setActualData((prevData) => {
+        const updatedData = [...prevData];
+        const currentPointIndex = updatedData.findIndex((row) => row[2] === null);
+        if (currentPointIndex !== -1) {
+          updatedData[currentPointIndex][2] = [100, 95, 88, 79, 55, 52][currentPointIndex - 1];
+        }
+        return updatedData;
+      });
+    }, 3000); // 2 seconds
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   return (
     <Chart
       chartType="LineChart"
       className="w-full rounded-lg"
       loader={<div>Loading Chart</div>}
-      data={data}
+      data={actualData}
       options={options}
       width="100%"
       height="300px"

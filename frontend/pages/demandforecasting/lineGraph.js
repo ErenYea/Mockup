@@ -14,66 +14,79 @@ const LineBar = (props) => {
       },
     ],
     options: {
-      "chart": {
-      "height": 420,
-      "type": "line",
-      "dropShadow": {
-      "enabled": true,
-      "color": "#000",
-      "top": 18,
-      "left": 7,
-      "blur": 10,
-      "opacity": 0.2
+      chart: {
+        height: 420,
+        type: 'line',
+        dropShadow: {
+          enabled: true,
+          color: '#000',
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2,
+        },
+        toolbar: {
+          show: false,
+        },
       },
-      "toolbar": {
-      "show": false
-      }
+      dataLabels: {
+        enabled: true,
       },
-      "dataLabels": {
-      "enabled": true
+      stroke: {
+        curve: 'smooth',
       },
-      "stroke": {
-      "curve": "smooth"
+      title: {
+        text: '',
+        align: 'left',
       },
-      "title": {
-      "text": "",
-      "align": "left"
+      xaxis: {
+        categories: props.xLabels,
+        title: {
+          text: 'Months',
+        },
       },
-      "xaxis": {
-      "categories": props.xLabels,
-      "title": {
-      "text": "Months"
-      }
+      yaxis: {
+        title: {
+          text: 'No of car units (with sunroofs)',
+        },
+        labels: {
+          show: true,
+          align: 'left',
+          minWidth: 0,
+          maxWidth: 360,
+          style: {
+            colors: [],
+            fontSize: '12px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 400,
+            cssClass: 'apexcharts-yaxis-label',
+          },
+          offsetX: -5,
+          offsetY: 10,
+          rotate: 0,
+        },
+        min: 0,
+        max: 150000,
       },
-      "yaxis": {
-      "title": {
-      "text": "No of car units (with sunroofs)"
+      legend: {
+        position: 'top',
+        horizontalAlign: 'right',
       },
-      "labels": {
-      "show": true,
-      "align": "left",
-      "minWidth": 0,
-      "maxWidth": 360,
-      "style": {
-      "colors": [],
-      "fontSize": "12px",
-      "fontFamily": "Helvetica, Arial, sans-serif",
-      "fontWeight": 400,
-      "cssClass": "apexcharts-yaxis-label"
+      annotations: {
+        xaxis: [
+          {
+            x: "Oct 2023",
+            borderColor: '#775DD0',
+            label: {
+              style: {
+                color: '#000000',
+              },
+              text: 'Forecast',
+            },
+          },
+        ],
       },
-      "offsetX": -5,
-      "offsetY": 10,
-      "rotate": 0
-      },
-      "min": 0,
-      "max": 150000
-      },
-      "legend": {
-      "position": "top",
-      "horizontalAlign": "right"
-      }
     },
-
   };
 
   return (

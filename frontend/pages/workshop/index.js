@@ -207,7 +207,7 @@ const index = () => {
               </div>
               <div className=" mb-4 h-1/4">
                 <h1
-                  className={`custom-text text-2xl mt-2 flex p-2 font-semibold underline ${
+                  className={`custom-text text-2xl mt-2 flex p-2 font-semibold ${
                     theme === THEME.light ? 'text-black' : 'text-white'
                   }`}
                 >
@@ -221,7 +221,7 @@ const index = () => {
                       } flex`}
                     >
                       <span className="">Detecting Car Model</span>
-                      <div className="flex"></div>
+                      <div className="flex text-blue-700"></div>
                     </li>
                     <li
                       className={`custom p-2 h-fit text-xl text-start ${
@@ -229,7 +229,7 @@ const index = () => {
                       } flex`}
                     >
                       <span className="">Calculating template placement</span>
-                      <div className="flex"></div>
+                      <div className="flex text-blue-700"></div>
                     </li>
                     <li
                       className={`custom p-2 h-fit  text-xl text-start ${
@@ -237,7 +237,7 @@ const index = () => {
                       } flex`}
                     >
                       <span className="">Overlaying template placement</span>
-                      <div className="flex"></div>
+                      <div className="flex text-blue-700"></div>
                     </li>
                     <li
                       className={`custom p-2 h-fit  text-xl text-start ${
@@ -245,7 +245,7 @@ const index = () => {
                       } flex`}
                     >
                       <span className="">Fetching placement measurement</span>
-                      <div className="flex"></div>
+                      <div className="flex text-blue-700"></div>
                     </li>
                     <li
                       className={`custom p-2 h-fit  text-xl text-start ${
@@ -255,7 +255,7 @@ const index = () => {
                       <span className="">
                         Overlaying template placement measurement
                       </span>
-                      <div className="flex"></div>
+                      <div className="flex text-blue-700"></div>
                     </li>
                   </ul>
                 </div>
