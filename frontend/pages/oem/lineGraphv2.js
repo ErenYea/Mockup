@@ -86,13 +86,13 @@ const LineBarv2 = (props) => {
       annotations: {
         xaxis: [
           {
-            x: 'Quarter 1, 2023',
+            x: "Oct' 23",
             borderColor: '#775DD0',
             label: {
               style: {
                 color: '#000000',
               },
-              text: 'Predictions',
+              text: 'Forecasts',
             },
           },
         ],
