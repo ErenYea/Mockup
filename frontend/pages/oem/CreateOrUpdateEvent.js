@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormControl } from 'baseui/form-control';
 import { Input } from 'baseui/input';
 import {
@@ -15,8 +15,9 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
   const [title, setTitle] = React.useState('');
   const [model, setModel] = React.useState('');
   const [selectedData, setSelectedData] = React.useState([]);
-  const [personSelect, setPersonSelect] = React.useState(1);
-  const [date, setDate] = React.useState();
+  const [selectedPerson, setSelectedPerson] = useState(null); // Track the selected person
+
+  const [date, setDate] = React.useState('');
   const [modalModal, setModalModal] = React.useState([
     'Ford',
     'Nissan',
@@ -26,21 +27,21 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
   ]);
 
   useEffect(() => {
-    console.log(personSelect)
-  }, [personSelect])
+    console.log(selectedPerson);
+  }, [selectedPerson]);
 
   const getthecar = (value) => {
     return modalModal.filter(
-      (item) => item.slice(0, 3).toLowerCase() == value
+      (item) => item.slice(0, 3).toLowerCase() === value
     )[0];
   };
 
   function handleSubmit(e) {
     e.preventDefault();
-    var workshop = selectedData.filter((item) => item.id == personSelect)[0];
-    var carname = modalModal.filter(
-      (item) => item.slice(0, 3).toLowerCase() == model
-    )[0];
+    var workshop = selectedData.find((item) => item.id === selectedPerson);
+    var carname = modalModal.find(
+      (item) => item.slice(0, 3).toLowerCase() === model
+    );
     var startdate = new Date(
       parseInt(date.slice(0, 4)),
       parseInt(date.slice(5, 7)),
@@ -92,25 +93,14 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
     setSelectedData(filteredData);
     setModel(value);
   };
+
   useEffect(() => {
     modelHandler();
   });
-  const personHandler = (e) => {
-    const key = e.target.getAttribute('data-key');
-    
-    // Remove the background color from the previously selected person
-    document.querySelectorAll('.person-element').forEach((element) => {
-      element.classList.remove('bg-gray-600');
-    });
-  
-    // Add the background color to the newly selected person
-    const selectedPersonElement = document.querySelector(`div[data-key='${key}']`);
-    if (selectedPersonElement) {
-      selectedPersonElement.classList.add('bg-gray-600');
-    }
-    
-    setPersonSelect(key);
-  };  
+
+  const personHandler = (personId) => {
+    setSelectedPerson(personId);
+  };
 
   return (
     <Modal
@@ -148,74 +138,38 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
           <FormControl label="Select Workshop">
             <>
               <div className="flex border rounded justify-center border-gray-800 h-[300px] w-full bg-white">
-                {model == ''
+                {model === ''
                   ? ''
                   : selectedData?.map((i, ind) => (
                       <div
                         key={ind}
-                        onClick={(e) => personHandler(e)}
-                        data-key={i.id}
-                        className={
-                          'flex w-full flex-col border border-gray-900 rounded items-center justify-center bg-gray-300 text-black hover:bg-gray-400  hover:cursor-pointer active:bg-gray-600' +
-                          (personSelect != ''
-                            ? personSelect == i.id
-                              ? 'bg-gray-600'
-                              : ''
-                            : '')
-                        }
+                        onClick={() => personHandler(i.id)}
+                        className={`flex w-full flex-col border border-gray-900 rounded items-center justify-center text-black hover:cursor-pointer ${
+                          selectedPerson === i.id ? 'bg-gray-400 hover:bg-gray-500' : 'bg-gray-100 hover:bg-gray-200'
+                        }`}
                       >
-                        <div
-                          data-key={i.id}
-                          id="name"
-                          className="  text-bold text-lg"
-                        >
-                          {i.name}
+                        <div className="text-bold text-lg">{i.name}</div>
+                        <div className="text-red-600 text-base h-[24px]">
+                          {ind === 0 ? 'Recommended*' : ''}
                         </div>
-                        <div
-                          className="text-red-600 text-base h-[24px]"
-                          ddata-key={i.id}
-                        >
-                          {ind == 0 ? 'Recommended*' : ''}
-                        </div>
-                        <div
-                          className="flex flex-col items-center border-gray-400"
-                          data-key={i.id}
-                        >
-                          <div
-                            className=" text-[14px] text-center"
-                            data-key={i.id}
-                          >
+                        <div className="flex flex-col items-center border-gray-400">
+                          <div className="text-[14px] text-center">
                             Performance:{' '}
-                            <span
-                              className="  text-center w-full"
-                              data-key={i.id}
-                            >
+                            <span className="text-center w-full">
                               {i.modaldata[model].performance}/10
                             </span>
                           </div>
-                          <div
-                            className=" text-[14px] text-center"
-                            data-key={i.id}
-                          >
+                          <div className="text-[14px] text-center">
                             Material Present:{' '}
-                            <span
-                              className="  text-center w-full"
-                              data-key={i.id}
-                            >
+                            <span className="text-center w-full">
                               {i.modaldata[model].material ? 'Yes' : 'No'}
                             </span>
                           </div>
-                          <div
-                            className=" text-[14px] text-center"
-                            data-key={i.id}
-                          >
+                          <div className="text-[14px] text-center">
                             Workload:{' '}
-                            <span
-                              className="  text-center w-full"
-                              data-key={i.id}
-                            >
+                            <span className="text-center w-full">
                               {i.workload} cars this week (
-                              {ind == 0
+                              {ind === 0
                                 ? getthecar(model) + ' only'
                                 : 'except ' + getthecar(model)}
                               )
@@ -238,9 +192,6 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          {/* <ModalButton type="button" onClick={onClose}>
-            Cancel
-          </ModalButton> */}
           <ModalButton>Okay</ModalButton>
         </ModalFooter>
       </form>
