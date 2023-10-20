@@ -97,13 +97,20 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
   });
   const personHandler = (e) => {
     const key = e.target.getAttribute('data-key');
-    if (document.querySelector(`div[data-key='${key}']`)) {
-      document
-        .querySelector(`div[data-key='${key}']`)
-        .classList.add('bg-gray-900');
+    
+    // Remove the background color from the previously selected person
+    document.querySelectorAll('.person-element').forEach((element) => {
+      element.classList.remove('bg-gray-600');
+    });
+  
+    // Add the background color to the newly selected person
+    const selectedPersonElement = document.querySelector(`div[data-key='${key}']`);
+    if (selectedPersonElement) {
+      selectedPersonElement.classList.add('bg-gray-600');
     }
+    
     setPersonSelect(key);
-  };
+  };  
 
   return (
     <Modal
@@ -140,7 +147,7 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
 
           <FormControl label="Select Workshop">
             <>
-              <div className="flex border rounded justify-center border-gray-800 h-[300px] w-full bg-gray-600">
+              <div className="flex border rounded justify-center border-gray-800 h-[300px] w-full bg-white">
                 {model == ''
                   ? ''
                   : selectedData?.map((i, ind) => (
@@ -149,10 +156,10 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
                         onClick={(e) => personHandler(e)}
                         data-key={i.id}
                         className={
-                          'flex w-[130px] flex-col border border-gray-900 rounded items-center  hover:bg-gray-900  hover:cursor-pointer active:bg-gray-900' +
+                          'flex w-full flex-col border border-gray-900 rounded items-center justify-center bg-gray-300 text-black hover:bg-gray-400  hover:cursor-pointer active:bg-gray-600' +
                           (personSelect != ''
                             ? personSelect == i.id
-                              ? 'bg-gray-900'
+                              ? 'bg-gray-600'
                               : ''
                             : '')
                         }
@@ -160,12 +167,12 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
                         <div
                           data-key={i.id}
                           id="name"
-                          className=" text-purple-600 text-bold text-lg"
+                          className="  text-bold text-lg"
                         >
                           {i.name}
                         </div>
                         <div
-                          className=" text-red-600 text-base h-[24px]"
+                          className="text-red-600 text-base h-[24px]"
                           ddata-key={i.id}
                         >
                           {ind == 0 ? 'Recommended*' : ''}
@@ -175,36 +182,36 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
                           data-key={i.id}
                         >
                           <div
-                            className="text-white text-[14px] text-center"
+                            className=" text-[14px] text-center"
                             data-key={i.id}
                           >
                             Performance:{' '}
                             <span
-                              className=" text-yellow-300 text-center w-full"
+                              className="  text-center w-full"
                               data-key={i.id}
                             >
                               {i.modaldata[model].performance}/10
                             </span>
                           </div>
                           <div
-                            className="text-white text-[14px] text-center"
+                            className=" text-[14px] text-center"
                             data-key={i.id}
                           >
                             Material Present:{' '}
                             <span
-                              className=" text-yellow-300 text-center w-full"
+                              className="  text-center w-full"
                               data-key={i.id}
                             >
                               {i.modaldata[model].material ? 'Yes' : 'No'}
                             </span>
                           </div>
                           <div
-                            className="text-white text-[14px] text-center"
+                            className=" text-[14px] text-center"
                             data-key={i.id}
                           >
                             Workload:{' '}
                             <span
-                              className=" text-yellow-300 text-center w-full"
+                              className="  text-center w-full"
                               data-key={i.id}
                             >
                               {i.workload} cars this week (
@@ -231,9 +238,9 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <ModalButton type="button" onClick={onClose}>
+          {/* <ModalButton type="button" onClick={onClose}>
             Cancel
-          </ModalButton>
+          </ModalButton> */}
           <ModalButton>Okay</ModalButton>
         </ModalFooter>
       </form>
