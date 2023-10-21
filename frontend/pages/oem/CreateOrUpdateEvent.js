@@ -71,7 +71,39 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
     onSubmit({
       car: parseInt(title),
       model: carname,
-      workshop,
+      workshop: workshop ? workshop : {
+        "id": "1",
+        "name": "WorkShop 1",
+        "img": "https://media.istockphoto.com/id/1300972574/photo/millennial-male-team-leader-organize-virtual-workshop-with-employees-online.jpg?s=612x612&w=0&k=20&c=uP9rKidKETywVil0dbvg_vAKyv2wjXMwWJDNPHzc_Ug=",
+        "modaldata": {
+            "toy": {
+                "performance": 9,
+                "time": 30,
+                "material": true
+            },
+            "hon": {
+                "performance": 9,
+                "time": 40,
+                "material": true
+            },
+            "nis": {
+                "performance": 8,
+                "time": 35,
+                "material": true
+            },
+            "hyu": {
+                "performance": 8,
+                "time": 40,
+                "material": true
+            },
+            "for": {
+                "performance": 8,
+                "time": 30,
+                "material": true
+            }
+        },
+        "workload": 15
+      },
       startdate: startdate.toDateString(),
       enddate: enddate.toDateString(),
     });
@@ -127,6 +159,7 @@ export default ({ onClose, isOpen, onSubmit, index }) => {
               value={title}
               type="number"
               onChange={(event) => setTitle(event.currentTarget.value)}
+              min={1}
               required
             />
           </FormControl>

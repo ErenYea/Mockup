@@ -37,7 +37,7 @@ const Layout = ({ router, children }) => {
         <Header />
       )}
 
-      <ContentWrapper className="!w-screen">{children}</ContentWrapper>
+      <ContentWrapper className="">{children}</ContentWrapper>
 
       {pathname === '/login' || pathname === '/signup' ? '' : <Footer />}
     </AppWrapper>
