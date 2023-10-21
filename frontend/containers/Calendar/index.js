@@ -410,7 +410,7 @@ function CalendarApp(props) {
             startAccessor="start"
             endAccessor="end"
             view={props?.view}
-            views={["month", "week"]}
+            views={["week"]}
             date={props?.date}
             onNavigate={handleNavigate}
             onView={handleView}
