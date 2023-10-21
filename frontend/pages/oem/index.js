@@ -204,7 +204,7 @@ const index = () => {
                   <div className="flex flex-col items-center border-gray-400">
                     <div className="text-black text-[14px] text-center">
                       Performance:{' '}
-                      <span className=" text-yellow-300 text-center w-full">
+                      <span className=" text-teal-700 text-center w-full">
                         {
                           i.workshop.modaldata[
                             i.model.slice(0, 3).toLowerCase()
@@ -215,7 +215,7 @@ const index = () => {
                     </div>
                     <div className="text-black text-[14px] text-center">
                       Material Present:{' '}
-                      <span className=" text-yellow-300 text-center w-full uppercase">
+                      <span className=" text-teal-700 text-center w-full uppercase">
                         {i.workshop.modaldata[i.model.slice(0, 3).toLowerCase()]
                           .material
                           ? 'Yes'
@@ -224,19 +224,19 @@ const index = () => {
                     </div>
                     <div className="text-black text-[14px] text-center">
                       Workload:{' '}
-                      <span className=" text-yellow-300 text-center w-full">
+                      <span className=" text-teal-700 text-center w-full">
                         {i.workshop.workload} cars this week
                       </span>
                     </div>
                     <div className="text-black text-[14px] text-center">
                       Start Date:{' '}
-                      <span className=" text-yellow-300 text-center w-full">
+                      <span className=" text-teal-700 text-center w-full">
                         {i.startdate}
                       </span>
                     </div>
                     <div className="text-black text-[14px] text-center">
                       End Date:{' '}
-                      <span className=" text-yellow-300 text-center w-full">
+                      <span className=" text-teal-700 text-center w-full">
                         {i.enddate}
                       </span>
                     </div>
@@ -245,11 +245,11 @@ const index = () => {
                 <div className="text-base p-2 border border-gray-700 rounded bg-white flex flex-col">
                   <div className="flex flex-col items-center">
                     <h3 className="text-bold text-lg capitalize">Car Model</h3>
-                    <div className=" text-red-600">{i.model}</div>
+                    <div className=" text-red-700">{i.model}</div>
                   </div>
                   <div className="flex flex-col items-center">
                     <h3 className="text-bold text-lg capitalize">Total Jobs</h3>
-                    <div className=" text-red-600">{i.car}</div>
+                    <div className=" text-red-700">{i.car}</div>
                   </div>
                 </div>
               </div>

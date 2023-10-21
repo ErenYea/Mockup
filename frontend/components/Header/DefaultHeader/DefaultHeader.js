@@ -43,7 +43,7 @@ const DefaultHeader = () => {
               </NavLeft>
               <NavRight className="cart-and-avatar">
                 <AvatarMenu
-                  name="A"
+                  name={user}
                   src={session?.user?.image}
                 />
               </NavRight>
