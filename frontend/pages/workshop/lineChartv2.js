@@ -4,11 +4,11 @@ import { Chart } from 'react-google-charts';
 const initialData = [
   ['x', 'Expected', 'Actual'],
   ['5', 100, 100],
-  ['10', 90, null],
-  ['15', 80, null],
-  ['20', 70, null],
-  ['25', 60, null],
-  ['30', 50, null],
+  ['10', 90, 95],
+  ['15', 80, 88],
+  ['20', 70, 79],
+  ['25', 60, 55],
+  ['30', 50, 52],
   ['35', 40, null],
   ['40', 30, null],
   ['45', 20, null],
@@ -33,23 +33,23 @@ export default function LineChartv2() {
 
   const [actualData, setActualData] = useState(initialData);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      // Update the "Actual" series data dynamically
-      setActualData((prevData) => {
-        const updatedData = [...prevData];
-        const currentPointIndex = updatedData.findIndex((row) => row[2] === null);
-        if (currentPointIndex !== -1) {
-          updatedData[currentPointIndex][2] = [100, 95, 88, 79, 55, 52][currentPointIndex - 1];
-        }
-        return updatedData;
-      });
-    }, 3000); // 2 seconds
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     // Update the "Actual" series data dynamically
+  //     setActualData((prevData) => {
+  //       const updatedData = [...prevData];
+  //       const currentPointIndex = updatedData.findIndex((row) => row[2] === null);
+  //       if (currentPointIndex !== -1) {
+  //         updatedData[currentPointIndex][2] = [100, 95, 88, 79, 55, 52][currentPointIndex - 1];
+  //       }
+  //       return updatedData;
+  //     });
+  //   }, 3000); // 2 seconds
 
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
 
   return (
     <Chart
